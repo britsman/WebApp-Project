@@ -1,0 +1,60 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    display: block;
+}
+
+#wrapper {
+    margin: 0px auto;
+    width: 60%;
+}
+
+#pageHeader {
+    border: solid 1px black;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    height: 100px;
+}
+
+#pageNav li {
+    list-style-type: none;
+    float: left;
+    width: 25%;
+    text-align: center;
+}
+
+#pageNav a {
+    text-decoration: none;
+}
+
+#pageNav a:hover {
+    text-decoration: underline;
+}
+
+#contentWrapper {
+    padding-top: 10px;
+    clear: both;
+}
+
+#pageContent {
+    border: solid 1px black;
+    width: 75%;
+    float: left;
+}
+
+#pageAside {
+    border: solid 1px black;
+    width: 24%;
+    float: right;
+}
+
+#pageFooter {
+    clear: both;
+    color: gray;
+    padding: 10px;
+    text-align: center;
+    font: 12px serif;
+}
