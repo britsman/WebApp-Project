@@ -26,7 +26,7 @@ public class Book extends Item implements Serializable{
     }
 
     public Book(String id, String title, List<Creator> creators, String publisher, 
-    int language,  int year, int pageNum, String genre, String image, String description, 
+    String language,  int year, int pageNum, String genre, String image, String description, 
     int quantity, int loan_period, int fee) {
         super(id, title, creators, language, year, genre, image,description, 
         quantity, loan_period, fee);

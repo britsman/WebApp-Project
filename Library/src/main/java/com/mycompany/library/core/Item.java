@@ -6,6 +6,7 @@ package com.mycompany.library.core;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
@@ -31,7 +32,7 @@ public class Item implements Serializable{
     @Id
     private String id;
     private String title;
-    @ManyToMany(mappedBy = "items")
+    @ManyToMany(mappedBy = "items", cascade=CascadeType.PERSIST)
     private List<Creator> creators;
     //Link to image file.
     private String image;
@@ -44,13 +45,13 @@ public class Item implements Serializable{
     private int fee;
     private int year;
     private String genre;
-    private int language;
+    private String language;
     private int quantity;
 
     public Item() {
     }
 
-    public Item(String id, String title, List<Creator> creators, int language,
+    public Item(String id, String title, List<Creator> creators, String language,
     int year, String genre, String image, String description, int quantity, 
     int loan_period, int fee) {
         this.id = id;
@@ -117,10 +118,10 @@ public class Item implements Serializable{
     public void setGenre(String genre) {
         this.genre = genre;
     }
-    public int getLanguage() {
+    public String getLanguage() {
         return language;
     }
-    public void setLanguage(int language) {
+    public void setLanguage(String language) {
         this.language = language;
     }
 

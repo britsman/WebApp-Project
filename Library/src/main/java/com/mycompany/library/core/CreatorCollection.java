@@ -14,15 +14,9 @@ import java.util.List;
  */
 public class CreatorCollection extends Controller<Creator, Long> {
     
-    private CreatorCollection(String puName){
+    public CreatorCollection(String puName){
         super(Creator.class, puName);
-        
     }
-    
-    public static CreatorCollection newInstance(String puName){
-        return new CreatorCollection(puName);
-    }
-    
     public List<Creator> getByName(String name) {
         List<Creator> found = new ArrayList<>();
         for (Creator c : getAll()) {
