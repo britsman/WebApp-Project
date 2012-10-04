@@ -5,6 +5,7 @@
 package com.mycompany.library.core;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
@@ -12,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -29,6 +31,8 @@ public class Item implements Serializable{
     @Id
     private String id;
     private String title;
+    @ManyToMany(mappedBy = "items")
+    private List<Creator> creators;
     //Link to image file.
     private String image;
     //Link to text file containing description.
@@ -42,6 +46,28 @@ public class Item implements Serializable{
     private String genre;
     private int language;
     private int quantity;
+
+    public Item() {
+    }
+
+    public Item(String id, String title, List<Creator> creators, int language,
+    int year, String genre, String image, String description, int quantity, 
+    int loan_period, int fee) {
+        this.id = id;
+        this.title = title;
+        this.creators = creators;
+        this.language = language;
+        this.year = year;
+        this.genre = genre;
+        this.image = image;
+        this.description = description;
+        this.quantity = quantity;
+        this.loan_period = loan_period;
+        this.fee = fee;
+        addItems();
+    }
+    
+    
 
     public String getId() {
         return id;
@@ -104,5 +130,21 @@ public class Item implements Serializable{
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public List<Creator> getCreators() {
+        return creators;
+    }
+
+    public void setCreators(List<Creator> creators) {
+        this.creators = creators;
+    }
+    private void addItems(){
+        for(int i = 0; i < this.creators.size(); i++){
+            List<Item> temp = this.creators.get(i).getItems();
+            temp.add(this);
+            this.creators.get(i).setItems(temp);
+            temp = null;
+        }
     }
 }

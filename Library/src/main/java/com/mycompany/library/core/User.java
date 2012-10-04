@@ -5,6 +5,7 @@
 package com.mycompany.library.core;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,11 +30,23 @@ public class User implements Serializable{
     private Double feesOwed;
     @OneToMany(mappedBy = "user")
     private List<BorrowedItem> borrowedItems;
-    @ManyToMany
+    @ManyToMany(mappedBy = "que")
     private List<ReservedItem> reservedItems;
     @ManyToMany
     private List<Item> bookmarkedItems;
 
+    public User() {
+    }
+    public User(String username, String password, String email, 
+    Double feesOwed) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.feesOwed = feesOwed;
+        this.borrowedItems = new ArrayList<>();
+        this.reservedItems = new ArrayList<>();
+        this.bookmarkedItems = new ArrayList<>();
+    }
     
 
     public Long getId() {

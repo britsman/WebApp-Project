@@ -5,6 +5,7 @@
 package com.mycompany.library.core;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,6 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class ReservedItem implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -27,8 +27,16 @@ public class ReservedItem implements Serializable {
     @OneToOne
     private Item item;   
     //Que of users waiting to borrow
-    @ManyToMany(mappedBy = "reservedItems")
+    @ManyToMany
     private List<User> que;
+    
+    public ReservedItem() {
+    }
+    public ReservedItem(Item item, User user) {
+        this.item = item;
+        this.que = new ArrayList<>();
+        reserve(user);
+    }
 
     public Item getItem() {
         return item;
@@ -52,5 +60,14 @@ public class ReservedItem implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    private void reserve(User user){
+        reserveItem(user);
+    }
+    public void reserveItem(User user){
+        this.que.add(user);
+        List <ReservedItem> temp = user.getReservedItems();
+        temp.add(this);
+        user.setReservedItems(temp);
     }
 }
