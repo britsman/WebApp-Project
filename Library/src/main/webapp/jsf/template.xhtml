@@ -9,6 +9,7 @@
         <link href="./../resources/css/template.css" rel="stylesheet" type="text/css" />
         <link href="./../resources/css/library.css" rel="stylesheet" type="text/css" />
         <link href="./../resources/css/login.css" rel="stylesheet" type="text/css" />
+        <link href="./../resources/css/admin.css" rel="stylesheet" type="text/css" />
         <title>Bibliotek</title>
     </h:head>
 
@@ -30,27 +31,33 @@
                     <ui:insert name="content">Content</ui:insert>
                 </section>
                 <aside id="pageAside">
-                    <header class="sidebarHeader">
-                        <h1>Snabbsök</h1>
-                    </header>
-                    <form>
-                        <input type="text" />
-                        <input type="submit" value="Sök"/>
-                    </form>
-                    <header class="sidebarHeader">
-                        <h1>Öppettider</h1>
-                    </header>
-                    <ul>
-                        <li>Mån - Fre 09:00 - 18:00</li>
-                        <li>Lördag 10:00 - 17:00</li>
-                        <li>Söndag 10:00 - 15:00</li>
-                    </ul>
-                    <header class="sidebarHeader">
-                        <h1>Information</h1>
-                    </header>
-                    <p>Adress</p>
-                    <p>Telefon</p>
-                    <p>email</p>
+                    <section class="pageAsideSection">
+                        <header class="sidebarHeader">
+                            <h1>Snabbsök</h1>
+                        </header>
+                        <form>
+                            <input type="text" />
+                            <input type="submit" value="Sök"/>
+                        </form>
+                    </section>
+                    <section class="pageAsideSection">
+                        <header class="sidebarHeader">
+                            <h1>Öppettider</h1>
+                        </header>
+                        <ul>
+                            <li><p>Mån - Fre 09:00 - 18:00</p></li>
+                            <li><p>Lördag 10:00 - 17:00</p></li>
+                            <li><p>Söndag 10:00 - 15:00</p></li>
+                        </ul>
+                    </section>
+                    <section class="pageAsideSection">
+                        <header class="sidebarHeader">
+                            <h1>Information</h1>
+                        </header>
+                        <p>Adress</p>
+                        <p>Telefon</p>
+                        <p>email</p>
+                    </section>
                 </aside>
             </section>
             <footer id="pageFooter">

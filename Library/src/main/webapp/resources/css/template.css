@@ -2,10 +2,15 @@
 * {
     padding: 0px;
     margin: 0px;
+    overflow: hidden;
 }
 
 body {
     display: block;
+}
+
+p {
+    font: 12px serif;
 }
 
 #wrapper {
@@ -49,7 +54,7 @@ body {
     border-left: solid 1px black;
     border-right: solid 1px black;
     border-bottom: solid 1px black;
-    width: 24%;
+    width: 25%;
     float: right;
 }
 
@@ -59,10 +64,7 @@ body {
     border-top: solid 1px black;
     font: 16px serif;
     margin-bottom: 5px;
-}
-
-#pageAside {
-    font: 14px serif;
+    padding: 5px;
 }
 
 #pageFooter {
@@ -71,4 +73,12 @@ body {
     padding: 10px;
     text-align: center;
     font: 12px serif;
+}
+
+.pageAsideSection {
+    margin-bottom: 10px;
+}
+
+.pageAsideSection p {
+    padding: 0px 5px;
 }

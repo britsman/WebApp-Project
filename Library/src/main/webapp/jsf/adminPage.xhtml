@@ -6,27 +6,60 @@
     <body>
         <ui:composition template="./template.xhtml">
             <ui:define name="content">
-                <header>
-                    <h1>Administratörsida</h1>
-                    <p>Hantera registrerade användare.</p>
-                </header>
-                <section id="handleUsersSection">
-                    
-                </section>
-                <section id="addUserSection">
-                    <header>
-                        <h1>Ny användare</h1>
-                        <p>Här kan man manuellt lägga till en ny användare.</p>
+                <section id="adminPage">
+                    <header id="adminPageHeader">
+                        <h1>Administratörsida</h1>
+                        <p>Hantera registrerade användare.</p>
                     </header>
-                    <form>
-                        <p>Användarnamn</p>
-                        <input type="text" />
-                        <p>email</p>
-                        <input type="text" />
-                        <p>Lösenord</p>
-                        <input type="password" />
-                        <input type="submit" />
-                    </form>
+                    <section id="handleUsersSection" class="adminSection">
+                        <header class="adminSectionHeader">
+                            <h1>Hantera användare</h1>
+                            <p>Här kan man manuellt hantera alla registrerade användare.</p>
+                        </header>
+                        <table border="1">
+                            <thead>
+                                <td>id</td>
+                                <td>användarnamn</td>
+                                <td>email</td>
+                                <td>lösenord</td>
+                            </thead>
+                            <tr>
+                                <td>1</td>
+                                <td>user1</td>
+                                <td>mail1@user.com</td>
+                                <td>password</td>
+                                <td><a href=" ">edit</a></td>
+                                <td><a href=" ">delete</a></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>user2</td>
+                                <td>mail2@user.com</td>
+                                <td>password</td>
+                                <td><a href=" ">edit</a></td>
+                                <td><a href=" ">delete</a></td>
+                            </tr>
+                        </table>
+                        <form>
+                            <input type="submit" value="Refresh" />
+                        </form>
+                    </section>
+                    <section id="addUserSection" class="adminSection">
+                        <header class="adminSectionHeader">
+                            <h1>Ny användare</h1>
+                            <p>Här kan man manuellt lägga till en ny användare.</p>
+                        </header>
+                        <form>
+                            <p>Användarnamn</p>
+                            <input type="text" />
+                            <p>email</p>
+                            <input type="text" />
+                            <p>Lösenord</p>
+                            <input type="password" />
+                            <br />
+                            <input type="submit" value="Lägg till" />
+                        </form>
+                    </section>
                 </section>
             </ui:define>
         </ui:composition>
