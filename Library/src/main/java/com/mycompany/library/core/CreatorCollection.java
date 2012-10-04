@@ -1,8 +1,5 @@
 package com.mycompany.library.core;
 
-
-import com.mycompany.library.core.Controller;
-import com.mycompany.library.core.Creator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +12,7 @@ import java.util.List;
  *
  * @author sjoholmf
  */
-public class CreatorCollection extends Controller<Creator, String> {
+public class CreatorCollection extends Controller<Creator, Long> {
     
     private CreatorCollection(String puName){
         super(Creator.class, puName);

@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author sjoholmf
  */
-public class UserRegistry extends Controller<User, String> {
+public class UserRegistry extends Controller<User, Long> {
     
     public UserRegistry(String puName){
         super(User.class, puName);
