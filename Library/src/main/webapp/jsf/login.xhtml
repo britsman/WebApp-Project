@@ -1,23 +1,48 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-
-    <body>
-
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" >
+    
+    <h:body>
         <ui:composition template="./template.xhtml">
-
             <ui:define name="content">
-                <form>
-                    <label>Användarnamn:</label>
-                    <input type="text" />
-                    <br />
-                    <label>Lösenord:</label>
-                    <input type="password" />
-                </form>
+                <section id="loginSection" class="loginRegisterSection">
+                    <header class="loginRegisterHeader">
+                        <h1>Logga in</h1>
+                        <p>Om du redan är registrerad så kan du skriva in ditt användarnamn och lösenord för att logga in.</p>
+                    </header>
+                    <form>
+                        <p>Användarnamn</p>
+                        <input type="text" />
+                        <p>Lösenord</p>
+                        <input type="password" />
+                        <br />
+                        <input type="submit" value="Logga in" />
+                    </form>
+                    <p>Om du har glömt ditt lösenord kan du klicka <a href=" ">här</a> för att få hjälp.</p>
+                </section>
+                <section id="registerSection" class="loginRegisterSection">
+                    <header class="loginRegisterHeader">
+                        <h1>Registrera dig</h1>
+                        <p>Om du inte är registrerad så måste du först fylla i formuläret nedan för att kunna logga in.</p>
+                    </header>
+                    <form>
+                        <form>
+                            <p>Användarnamn</p>
+                            <input type="text" />
+                            <p>email adress</p>
+                            <input type="text" />
+                            <p>Lösenord</p>
+                            <input type="password" />
+                            <p>Upprepa lösenord</p>
+                            <input type="password" />
+                            <br />
+                            <input type="submit" value="Registrera dig" />
+                        </form>
+                    </form>
+                </section>
             </ui:define>
-
         </ui:composition>
-
-    </body>
+    </h:body>
 </html>

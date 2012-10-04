@@ -1,0 +1,32 @@
+
+.loginRegisterSection {
+    padding: 5px;
+    width: 48%;
+}
+
+#loginSection {
+    float: left;
+}
+
+#registerSection {
+    border-left: solid 1px black;
+    float: right;
+}
+
+.loginRegisterHeader {
+    margin-bottom: 10px;
+}
+
+.loginRegisterHeader h1 {
+    font: 20px sans-serif;
+    margin-bottom: 5px;
+}
+
+.loginRegisterSection input {
+    margin-bottom: 10px;
+}
+
+
+.loginRegisterSection p {
+    font: 12px serif;
+}
