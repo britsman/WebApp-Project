@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
 
     <body>
         <ui:composition template="./template.xhtml">
@@ -49,16 +50,23 @@
                             <h1>Ny användare</h1>
                             <p>Här kan man manuellt lägga till en ny användare.</p>
                         </header>
-                        <form>
-                            <p>Användarnamn</p>
-                            <input type="text" />
-                            <p>email</p>
-                            <input type="text" />
-                            <p>Lösenord</p>
-                            <input type="password" />
+                        <h:form>
+                            <h:outputLabel for="username" value="Användarnamn:" />
                             <br />
-                            <input type="submit" value="Lägg till" />
-                        </form>
+                            <h:inputText id="name" />
+                            <br />
+                            <h:outputLabel for="email" value="email:" />
+                            <br />
+                            <h:inputText id="email" />
+                            <br />
+                            <h:outputLabel for="password" value="Lösenord:" />
+                            <br />
+                            <h:inputText id="password" />
+                            <br />
+                            <h:commandButton id="btnAdd" value="Lägg till" />
+                            <br />
+                            <h:messages showSummary="true" showDetail="false" />
+                        </h:form>
                     </section>
                 </section>
             </ui:define>
