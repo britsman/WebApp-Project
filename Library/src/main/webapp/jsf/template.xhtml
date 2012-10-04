@@ -6,21 +6,24 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./../resources/css/template.css" rel="stylesheet" type="text/css" />
         <link href="./../resources/css/library.css" rel="stylesheet" type="text/css" />
-        <title>Facelets Template</title>
+        <link href="./../resources/css/login.css" rel="stylesheet" type="text/css" />
+        <link href="./../resources/css/admin.css" rel="stylesheet" type="text/css" />
+        <title>Bibliotek</title>
     </h:head>
 
     <h:body>
         <section id="wrapper">
             <header id="pageHeader">
-                Header
+                <h1>Bibliotek</h1>
             </header>
             <nav id="pageNav">
                 <ul>
                     <li><a href="library.xhtml">Startsidan</a></li>
                     <li><a href="login.xhtml">Min sida</a></li>
                     <li><a href="http://www.google.com">Hitta böcker</a></li>
-                    <li><a href="">Frågor &amp; Svar</a></li>
+                    <li><a href="faqPage.xhtml">Frågor &amp; Svar</a></li>
                 </ul>
             </nav>
             <section id="contentWrapper">
@@ -28,11 +31,38 @@
                     <ui:insert name="content">Content</ui:insert>
                 </section>
                 <aside id="pageAside">
-                    Aside
+                    <section class="pageAsideSection">
+                        <header class="sidebarHeader">
+                            <h1>Snabbsök</h1>
+                        </header>
+                        <form>
+                            <input type="text" />
+                            <input type="submit" value="Sök"/>
+                        </form>
+                    </section>
+                    <section class="pageAsideSection">
+                        <header class="sidebarHeader">
+                            <h1>Öppettider</h1>
+                        </header>
+                        <ul>
+                            <li><p>Mån - Fre 09:00 - 18:00</p></li>
+                            <li><p>Lördag 10:00 - 17:00</p></li>
+                            <li><p>Söndag 10:00 - 15:00</p></li>
+                        </ul>
+                    </section>
+                    <section class="pageAsideSection">
+                        <header class="sidebarHeader">
+                            <h1>Information</h1>
+                        </header>
+                        <p>Adress</p>
+                        <p>Telefon</p>
+                        <p>email</p>
+                    </section>
                 </aside>
             </section>
             <footer id="pageFooter">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed egestas, risus quis porta feugiat, sapien augue vulputate metus, et bibendum eros turpis pulvinar lacus. In nec ullamcorper mauris. Quisque fermentum, sem vitae tempus dapibus, justo enim malesuada augue, sed congue nisl felis ac metus. Suspendisse tortor nisl, dapibus at ornare eu, vestibulum ut risus. In hac habitasse platea dictumst. Pellentesque nec enim vel orci pellentesque fermentum. Phasellus porta, lectus ac consectetur varius, nibh dolor tempor ipsum, at tincidunt justo lectus et velit.</p>
+                <p>Copyright &copy; Group 7 DIT126 HT 2012 (lol)</p>
             </footer>
         </section>
     </h:body>
