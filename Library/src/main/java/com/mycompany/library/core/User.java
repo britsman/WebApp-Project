@@ -4,18 +4,21 @@
  */
 package com.mycompany.library.core;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Eric
  */
 @Entity
-public class User { 
+public class User implements Serializable{ 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
@@ -24,8 +27,11 @@ public class User {
     private String password;
     private String email;
     private Double feesOwed;
+    @OneToMany(mappedBy = "user")
     private List<BorrowedItem> borrowedItems;
+    @ManyToMany
     private List<ReservedItem> reservedItems;
+    @ManyToMany
     private List<Item> bookmarkedItems;
 
     

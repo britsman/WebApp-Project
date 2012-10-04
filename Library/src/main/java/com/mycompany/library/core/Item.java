@@ -5,15 +5,25 @@
 package com.mycompany.library.core;
 
 import java.io.Serializable;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
 /**
  * Superclass for books, CD:S etc. Due to @MappedSuperclass, all attributes
  * that aren't unique to a certain type of item can be placed here.
  * @author Eric
  */
-@MappedSuperclass
+@Entity
+@Table(name="ITEMS")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="TYPE", discriminatorType=DiscriminatorType.STRING,length=20)
+@DiscriminatorValue("I")
 public class Item implements Serializable{
     //Unique identifier (stored as strings since ISBN contains '-' signs).
     @Id

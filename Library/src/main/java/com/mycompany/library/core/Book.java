@@ -4,17 +4,20 @@
  */
 package com.mycompany.library.core;
 
-import java.util.List;
+import java.io.Serializable;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  *
  * @author Eric
  */
 @Entity
-public class Book extends Item {
+@Table(name="BOOKS")
+@DiscriminatorValue("B")
+public class Book extends Item implements Serializable{
     private String publisher;
-    private List<Author> Authors;
 
     public String getPublisher() {
         return publisher;
@@ -22,13 +25,5 @@ public class Book extends Item {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
-    }
-
-    public List<Author> getAuthors() {
-        return Authors;
-    }
-
-    public void setAuthors(List<Author> Authors) {
-        this.Authors = Authors;
     }
 }
