@@ -6,6 +6,7 @@ package com.mycompany.library.core;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +28,18 @@ public class BorrowedItem implements Serializable{
     private @Temporal(javax.persistence.TemporalType.DATE) Date loanDate = new Date();
     @ManyToOne
     private User user;
+    private boolean collected;
 
+    public BorrowedItem() {
+    }
+
+    public BorrowedItem(Item item, User user) {
+        this.item = item;
+        this.user = user;
+        this.collected = false;
+        borrowItem();
+    }
+    
     public Item getItem() {
         return item;
     }
@@ -58,5 +70,18 @@ public class BorrowedItem implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean isCollected() {
+        return collected;
+    }
+
+    public void setCollected(boolean collected) {
+        this.collected = collected;
+    }
+    private void borrowItem(){
+        List<BorrowedItem> temp = this.user.getBorrowedItems();
+        temp.add(this);
+        this.user.setBorrowedItems(temp);
     }
 }

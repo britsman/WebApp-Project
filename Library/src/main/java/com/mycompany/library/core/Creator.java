@@ -5,6 +5,7 @@
 package com.mycompany.library.core;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,6 +28,14 @@ public class Creator implements Serializable{
     private String name;
     @ManyToMany
     private List<Item> items;
+
+    public Creator() {
+    }
+    public Creator(String name) {
+        this.name = name;
+        this.items = new ArrayList<>();
+    }
+
 
     public Long getId() {
         return id;
