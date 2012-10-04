@@ -13,10 +13,9 @@ import com.mycompany.library.core.ItemCollection;
 import com.mycompany.library.core.ReservedItem;
 import com.mycompany.library.core.User;
 import com.mycompany.library.core.UserRegistry;
+import com.mycompany.library.core.WebbLib;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import org.junit.Test;
 
 /**
@@ -24,13 +23,12 @@ import org.junit.Test;
  * @author user
  */
 public class TestLibrary {
-    /* Måste skappa en "main" singleton klass som håller instansen, ska fixa
-     * det när jag kommer hem.
+    
     @Test
     public void testAdd(){
-        ItemCollection items =;
-        UserRegistry users = ;
-        CreatorCollection creators =;
+        ItemCollection items = WebbLib.INSTANCE.getItems();
+        UserRegistry users = WebbLib.INSTANCE.getUsers();
+        CreatorCollection creators = WebbLib.INSTANCE.getCreators();
         List<Creator> temp = new ArrayList<>();
         Creator creator = new Creator("test");      
         temp.add(creator);
@@ -46,6 +44,5 @@ public class TestLibrary {
         user.getReservedItems().add(reserved);
         users.add(user);
     }
-    **/
 
 }

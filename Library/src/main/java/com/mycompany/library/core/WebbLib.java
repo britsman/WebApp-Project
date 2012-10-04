@@ -1,0 +1,34 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.library.core;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+/**
+ *
+ * @author user
+ */
+public enum WebbLib {
+
+    INSTANCE;
+    
+    private final EntityManagerFactory emr = Persistence.createEntityManagerFactory("lib_pu");
+    private final ItemCollection items = new ItemCollection ("lib_pu");
+    private final UserRegistry users = new  UserRegistry("lib_pu");
+    private final CreatorCollection creators = new CreatorCollection("lib_pu");
+
+    public ItemCollection getItems() {
+        return items;
+    }
+
+    public UserRegistry getUsers() {
+        return users;
+    }
+
+    public CreatorCollection getCreators() {
+        return creators;
+    }
+}
