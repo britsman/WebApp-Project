@@ -39,9 +39,9 @@ public class TestLibrary {
         creators.add(creator);
         ReservedItem reserved = new ReservedItem(item, user); 
         BorrowedItem borrowed = new BorrowedItem(item, user); 
-        user.getBookmarkedItems().add(item);
-        user.getBorrowedItems().add(borrowed);
-        user.getReservedItems().add(reserved);
+        user.setBookmarkedItems(item);
+        user.setBorrowedItems(borrowed);
+        user.setReservedItems(reserved);
         users.add(user);
     }
 

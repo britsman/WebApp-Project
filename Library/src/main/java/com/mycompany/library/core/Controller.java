@@ -6,9 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.TypedQuery;
+import org.eclipse.persistence.exceptions.DatabaseException;
 
 /**
  *
@@ -18,10 +17,6 @@ public class Controller<T, K> implements Serializable {
      
     private EntityManagerFactory emf;
     private Class<T> clazz;
-    
-    @Id
-    @GeneratedValue
-    private Long id;
     
     public Controller() {}
     
@@ -38,9 +33,14 @@ public class Controller<T, K> implements Serializable {
             em.getTransaction().begin();
             em.persist(t);
             em.getTransaction().commit();
-        } catch (Exception ex) {
+        } 
+        catch (DatabaseException db) {
+            update(t);
+        } 
+        catch (Exception ex) {
             System.err.println("Add exception: " + ex.getMessage());
-        } finally {
+        } 
+        finally {
             if (em != null) {
                 em.close();
             }

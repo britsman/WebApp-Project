@@ -7,6 +7,7 @@ package com.mycompany.library.core;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,9 +31,9 @@ public class User implements Serializable{
     private String password;
     private String email;
     private Double feesOwed;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
     private List<BorrowedItem> borrowedItems;
-    @ManyToMany(mappedBy = "que")
+    @ManyToMany(mappedBy = "que", cascade={CascadeType.PERSIST, CascadeType.MERGE})
     private List<ReservedItem> reservedItems;
     @ManyToMany
     private List<Item> bookmarkedItems;
@@ -94,24 +95,24 @@ public class User implements Serializable{
         return borrowedItems;
     }
 
-    public void setBorrowedItems(List<BorrowedItem> borrowedItems) {
-        this.borrowedItems = borrowedItems;
+    public void setBorrowedItems(BorrowedItem borrowedItem) {
+        this.borrowedItems.add(borrowedItem);
     }
 
     public List<ReservedItem> getReservedItems() {
         return reservedItems;
     }
 
-    public void setReservedItems(List<ReservedItem> reservedItems) {
-        this.reservedItems = reservedItems;
+    public void setReservedItems(ReservedItem reservedItem) {
+        this.reservedItems.add(reservedItem);
     }
 
     public List<Item> getBookmarkedItems() {
         return bookmarkedItems;
     }
 
-    public void setBookmarkedItems(List<Item> bookmarkedItems) {
-        this.bookmarkedItems = bookmarkedItems;
+    public void setBookmarkedItems(Item item) {
+        this.bookmarkedItems.add(item);
     }
     
     

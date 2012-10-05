@@ -7,6 +7,7 @@ package com.mycompany.library.core;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class ReservedItem implements Serializable {
     @OneToOne
     private Item item;   
     //Que of users waiting to borrow
-    @ManyToMany
+    @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
     private List<User> que;
     
     public ReservedItem() {
@@ -66,8 +67,6 @@ public class ReservedItem implements Serializable {
     }
     public void reserveItem(User user){
         this.que.add(user);
-        List <ReservedItem> temp = user.getReservedItems();
-        temp.add(this);
-        user.setReservedItems(temp);
+        user.setReservedItems(this);
     }
 }
