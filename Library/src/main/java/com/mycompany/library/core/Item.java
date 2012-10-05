@@ -43,7 +43,7 @@ public class Item implements Serializable{
     /*How much the "lateness" fee is increased by for each increment. varies
     between item types.**/
     private int fee;
-    private int year;
+    private int year_released;
     private String genre;
     private String language;
     private int quantity;
@@ -58,7 +58,7 @@ public class Item implements Serializable{
         this.title = title;
         this.creators = creators;
         this.language = language;
-        this.year = year;
+        this.year_released = year;
         this.genre = genre;
         this.image = image;
         this.description = description;
@@ -107,10 +107,10 @@ public class Item implements Serializable{
         this.fee = fee;
     }
     public int getYear() {
-        return year;
+        return year_released;
     }
     public void setYear(int year) {
-        this.year = year;
+        this.year_released = year;
     }
     public String getGenre() {
         return genre;
