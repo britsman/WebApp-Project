@@ -24,8 +24,8 @@ import org.junit.Test;
  * @author user
  */
 public class TestLibrary {
-    private String creatorName = "Author1";
-    private String itemId = "0975-532";
+    private String creatorName = "Author";
+    private String itemId = "0975-533";
     private String userName = "Eric";
     
     @Test
@@ -50,7 +50,7 @@ public class TestLibrary {
             items.update(item);
         }
     }
-    //@Test
+    @Test
     public void testAddUser(){
         UserRegistry users = WebbLib.INSTANCE.getUsers();
         User user = users.getByUsername(userName);
