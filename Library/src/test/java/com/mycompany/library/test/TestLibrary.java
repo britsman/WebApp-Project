@@ -25,7 +25,7 @@ import org.junit.Test;
  */
 public class TestLibrary {
     private String creatorName = "Author1";
-    private String itemId = "0975-533";
+    private String itemId = "0975-532";
     private String userName = "Eric";
     
     @Test
@@ -34,22 +34,23 @@ public class TestLibrary {
         CreatorCollection creators = WebbLib.INSTANCE.getCreators();
         List<Creator> temp = new ArrayList<>();
         Creator creator = creators.getByName(creatorName);
-        if(creator == null){
-            creator = new Creator(creatorName);
-        }
-        temp.add(creator);
         Item item = items.find(itemId);
-        if(item == null){
+        temp.add(creator);
+        if(item == null && creator == null){
+            creator = new Creator(creatorName);
+            temp.add(creator);
             item = new Book (itemId,"testbook", temp, "publisher", 
             "English", 2012, 200, "comedy", "img", "desc", 1, 7, 10);   
             items.add(item);
         }
-        else{
-            item.setCreators(temp);
+        else{        
+            temp.add(creator);
+            item = new Book (itemId,"testbook", temp, "publisher", 
+            "English", 2012, 200, "comedy", "img", "desc", 1, 7, 10);   
             items.update(item);
         }
     }
-    @Test
+    //@Test
     public void testAddUser(){
         UserRegistry users = WebbLib.INSTANCE.getUsers();
         User user = users.getByUsername(userName);
@@ -83,8 +84,6 @@ public class TestLibrary {
             users.add(user);
         }
         else{
-            System.out.println("\n" + borrowed.getUser() + "\n");
-            System.out.println("\n" + user.getBorrowedItems() + "\n");
             users.update(user);
         }
     }
