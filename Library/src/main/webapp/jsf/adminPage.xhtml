@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
         <ui:composition template="./template.xhtml">
@@ -17,33 +18,37 @@
                             <h1>Hantera användare</h1>
                             <p>Här kan man manuellt hantera alla registrerade användare.</p>
                         </header>
-                        <table border="1">
-                            <thead>
-                                <td>id</td>
-                                <td>användarnamn</td>
-                                <td>email</td>
-                                <td>lösenord</td>
-                            </thead>
-                            <tr>
-                                <td>1</td>
-                                <td>user1</td>
-                                <td>mail1@user.com</td>
-                                <td>password</td>
-                                <td><a href=" ">edit</a></td>
-                                <td><a href=" ">delete</a></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>user2</td>
-                                <td>mail2@user.com</td>
-                                <td>password</td>
-                                <td><a href=" ">edit</a></td>
-                                <td><a href=" ">delete</a></td>
-                            </tr>
-                        </table>
-                        <form>
-                            <input type="submit" value="Refresh" />
-                        </form>
+                        <h:form>
+                            <h:dataTable var="user" value="#{admin.allUsers}" border="1">
+                                <h:column>
+                                    <f:facet name="header">Id</f:facet>
+                                    <h:outputText id="id" value="#{user.id}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Username</f:facet>
+                                    <h:inputText id="username" value="#{user.username}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">EMail</f:facet>
+                                    <h:inputText id="email" value="#{user.email}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Password</f:facet>
+                                    <h:inputText id="password" value="#{user.password}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Fees owed</f:facet>
+                                    <h:inputText id="feesOwed" value="#{user.feesOwed}" />
+                                </h:column>
+                                <h:column>
+                                    <h:commandLink value="Edit" action="adminPage?faces-redirect=true"
+                                                   actionListener="#{admin.editUser(user.id, admin.username, admin.email, admin.password, admin.feesOwed)}" />
+                                </h:column>
+                                <h:column>
+                                    <h:commandLink value="Remove" action="adminPage?faces-redirect=true" actionListener="#{admin.removeUser(user.id)}" />
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
                     </section>
                     <section id="addUserSection" class="adminSection">
                         <header class="adminSectionHeader">
@@ -53,17 +58,21 @@
                         <h:form>
                             <h:outputLabel for="username" value="Användarnamn:" />
                             <br />
-                            <h:inputText id="name" />
+                            <h:inputText id="name" value="#{admin.username}"/>
                             <br />
                             <h:outputLabel for="email" value="email:" />
                             <br />
-                            <h:inputText id="email" />
+                            <h:inputText id="email" value="#{admin.email}"/>
                             <br />
                             <h:outputLabel for="password" value="Lösenord:" />
                             <br />
-                            <h:inputText id="password" />
+                            <h:inputText id="password" value="#{admin.password}" />
                             <br />
-                            <h:commandButton id="btnAdd" value="Lägg till" />
+                            <h:outputLabel for="feesOwed" value="Skuld:" />
+                            <br />
+                            <h:inputText id="feesOwed" value="#{admin.feesOwed}" />
+                            <br />
+                            <h:commandButton id="btnAdd" value="Lägg till" action="adminPage?faces-redirect=true" actionListener="#{admin.createUser()}" />
                             <br />
                             <h:messages showSummary="true" showDetail="false" />
                         </h:form>
