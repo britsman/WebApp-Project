@@ -19,6 +19,7 @@ public enum WebbLib {
     private final ItemCollection items = new ItemCollection ("lib_pu");
     private final UserRegistry users = new  UserRegistry("lib_pu");
     private final CreatorCollection creators = new CreatorCollection("lib_pu");
+    private final QueryProccessor queryProccessor = new QueryProccessor(emr);
 
     public ItemCollection getItems() {
         return items;
@@ -30,5 +31,13 @@ public enum WebbLib {
 
     public CreatorCollection getCreators() {
         return creators;
+    }
+
+    public EntityManagerFactory getEmr() {
+        return emr;
+    }
+
+    public QueryProccessor getQueryProccessor() {
+        return queryProccessor;
     }
 }

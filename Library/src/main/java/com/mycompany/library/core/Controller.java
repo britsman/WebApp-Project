@@ -34,9 +34,6 @@ public class Controller<T, K> implements Serializable {
             em.persist(t);
             em.getTransaction().commit();
         } 
-        catch (DatabaseException db) {
-            update(t);
-        } 
         catch (Exception ex) {
             System.err.println("Add exception: " + ex.getMessage());
         } 

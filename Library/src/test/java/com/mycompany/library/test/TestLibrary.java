@@ -10,6 +10,7 @@ import com.mycompany.library.core.Creator;
 import com.mycompany.library.core.CreatorCollection;
 import com.mycompany.library.core.Item;
 import com.mycompany.library.core.ItemCollection;
+import com.mycompany.library.core.QueryProccessor;
 import com.mycompany.library.core.ReservedItem;
 import com.mycompany.library.core.User;
 import com.mycompany.library.core.UserRegistry;
@@ -23,26 +24,68 @@ import org.junit.Test;
  * @author user
  */
 public class TestLibrary {
+    private String creatorName = "Author1";
+    private String itemId = "0975-533";
+    private String userName = "Eric";
     
     @Test
-    public void testAdd(){
+    public void testAddItem(){
         ItemCollection items = WebbLib.INSTANCE.getItems();
-        UserRegistry users = WebbLib.INSTANCE.getUsers();
         CreatorCollection creators = WebbLib.INSTANCE.getCreators();
         List<Creator> temp = new ArrayList<>();
-        Creator creator = new Creator("test");      
+        Creator creator = creators.getByName(creatorName);
+        if(creator == null){
+            creator = new Creator(creatorName);
+        }
         temp.add(creator);
-        Item item = new Book ("0975-532","testbook", temp, "publisher", 
-        "English", 2012, 200, "comedy", "img", "desc", 1, 7, 10);
-        User user = new User("Eric", "password","test@email", 0.0);
-        items.add(item);
-        creators.add(creator);
-        ReservedItem reserved = new ReservedItem(item, user); 
-        BorrowedItem borrowed = new BorrowedItem(item, user); 
-        user.setBookmarkedItems(item);
-        user.setBorrowedItems(borrowed);
-        user.setReservedItems(reserved);
-        users.add(user);
+        Item item = items.find(itemId);
+        if(item == null){
+            item = new Book (itemId,"testbook", temp, "publisher", 
+            "English", 2012, 200, "comedy", "img", "desc", 1, 7, 10);   
+            items.add(item);
+        }
+        else{
+            item.setCreators(temp);
+            items.update(item);
+        }
     }
-
+    @Test
+    public void testAddUser(){
+        UserRegistry users = WebbLib.INSTANCE.getUsers();
+        User user = users.getByUsername(userName);
+        if(user == null){
+            user = new User(userName, "password","test@email", 0.0);
+            persistUser(user, true);
+        }
+        else
+        {
+            persistUser(user, false);
+        }
+    }
+    private void persistUser(User user, boolean newUser){
+        UserRegistry users = WebbLib.INSTANCE.getUsers();
+        ItemCollection items = WebbLib.INSTANCE.getItems();
+        Item item = items.find(itemId);
+        user.setBookmarkedItems(item);
+        BorrowedItem borrowed = new BorrowedItem(item, user); 
+        /*
+        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
+        ReservedItem temp = q.findReservedItem(item);
+        System.out.println("!!!!!" + temp + "!!!!!");
+        if(temp != null){
+            temp.reserveItem(user);
+        }
+        else{
+            temp = new ReservedItem(item, user); 
+        }
+        **/
+        if(newUser){
+            users.add(user);
+        }
+        else{
+            System.out.println("\n" + borrowed.getUser() + "\n");
+            System.out.println("\n" + user.getBorrowedItems() + "\n");
+            users.update(user);
+        }
+    }
 }

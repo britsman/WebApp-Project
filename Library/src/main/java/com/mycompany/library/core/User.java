@@ -35,7 +35,7 @@ public class User implements Serializable{
     private List<BorrowedItem> borrowedItems;
     @ManyToMany(mappedBy = "que", cascade={CascadeType.PERSIST, CascadeType.MERGE})
     private List<ReservedItem> reservedItems;
-    @ManyToMany
+    @OneToMany
     private List<Item> bookmarkedItems;
 
     public User() {

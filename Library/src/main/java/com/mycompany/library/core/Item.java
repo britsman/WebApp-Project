@@ -138,7 +138,7 @@ public class Item implements Serializable{
     }
 
     public void setCreators(List<Creator> creators) {
-        this.creators = creators;
+        this.creators.addAll(creators);
     }
     private void addItems(){
         for(int i = 0; i < this.creators.size(); i++){
