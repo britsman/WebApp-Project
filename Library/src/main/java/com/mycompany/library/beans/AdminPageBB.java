@@ -23,6 +23,12 @@ public class AdminPageBB implements Serializable {
     private String password;
     private double feesOwed;
     
+    private Long editId;
+    private String editUsername;
+    private String editEmail;
+    private String editPassword;
+    private double editFeesOwed;
+    
     // Defaul constructor.
     public AdminPageBB() {}
     
@@ -44,15 +50,22 @@ public class AdminPageBB implements Serializable {
         library.getUsers().remove(id);
     }
     
+    public void prepareEdit(Long id, String username, String email, String password, double feesOwed) {
+        editId = id;
+        editUsername = username;
+        editEmail = email;
+        editPassword = password;
+        editFeesOwed = feesOwed;
+    }
+    
     // Edit an existing user.
-    public void editUser(Long id, String username, String email, String password, double feesOwed) {
-        User user = library.getUsers().find(id);
-        user.setUsername(username);
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setFeesOwed(feesOwed);
-        System.out.println("Username: " + user.getUsername() + "xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        library.getUsers().add(new User(username, password, email, feesOwed));
+    public void editUser() {
+        User user = library.getUsers().find(editId);
+        user.setUsername(editUsername);
+        user.setEmail(editEmail);
+        user.setPassword(editPassword);
+        user.setFeesOwed(editFeesOwed);
+        library.getUsers().update(user);
     }
     
     public String getUsername() {
@@ -85,5 +98,45 @@ public class AdminPageBB implements Serializable {
     
     public void setFeesOwed(double feesOwed) {
         this.feesOwed = feesOwed;
+    }
+
+    public Long getEditId() {
+        return editId;
+    }
+    
+    public void setEditId(Long editId) {
+        this.editId = editId;
+    }
+    
+    public String getEditUsername() {
+        return editUsername;
+    }
+
+    public void setEditUsername(String editUsername) {
+        this.editUsername = editUsername;
+    }
+
+    public String getEditEmail() {
+        return editEmail;
+    }
+
+    public void setEditEmail(String editEmail) {
+        this.editEmail = editEmail;
+    }
+
+    public String getEditPassword() {
+        return editPassword;
+    }
+
+    public void setEditPassword(String editPassword) {
+        this.editPassword = editPassword;
+    }
+
+    public double getEditFeesOwed() {
+        return editFeesOwed;
+    }
+
+    public void setEditFeesOwed(double editFeesOwed) {
+        this.editFeesOwed = editFeesOwed;
     }
 }
