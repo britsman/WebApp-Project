@@ -24,8 +24,8 @@ import org.junit.Test;
  * @author user
  */
 public class TestLibrary {
-    private String creatorName = "Author2";
-    private String itemId = "0975-533";
+    private String creatorName = "Author";
+    private String itemId = "0975-521";
     private String userName = "Eric";
     
     @Test
@@ -35,22 +35,29 @@ public class TestLibrary {
         List<Creator> temp = new ArrayList<>();
         Creator creator = creators.getByName(creatorName);
         Item item = items.find(itemId);
-        if(item == null && creator == null){
+        if (creator == null) {
             creator = new Creator(creatorName);
-            temp.add(creator);
-            item = new Book (itemId,"testbook", temp, "publisher", 
-            "English", 2012, 200, "comedy", "img", "desc", 1, 7, 10);   
-            items.add(item);
+            creators.add(creator);
         }
-        else{        
-            creator = new Creator(creatorName);
-            temp.add(creator);
-            item = new Book (itemId,"testbook", temp, "publisher", 
-            "English", 2012, 200, "comedy", "img", "desc", 1, 7, 10);   
+        temp.add(creator);
+        if(item == null){
+            Creator creator2 = new Creator("Author27");
+            creators.add(creator2);
+            temp.add(creator2);
+            item = new Book(itemId, "testbook", temp, "publisher",
+            "English", 2012, 200, "comedy", "img", "desc", 1, 7, 10);
+            items.add(item);
+            creators.update(creator);
+            creators.update(creator2);
+        }
+        else{
+            item.setCreators(temp);
+            creator.setItems(item);
             items.update(item);
+            creators.update(creator);
         }
     }
-    @Test
+    //@Test
     public void testAddUser(){
         UserRegistry users = WebbLib.INSTANCE.getUsers();
         User user = users.getByUsername(userName);

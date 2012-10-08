@@ -33,7 +33,7 @@ public class Item implements Serializable{
     @Id
     private String id;
     private String title;
-    @ManyToMany(mappedBy = "items", cascade={CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(mappedBy = "items")
     private List<Creator> creators;
     //Link to image file.
     private String image;
@@ -143,9 +143,7 @@ public class Item implements Serializable{
     }
     private void addItems(){
         for(int i = 0; i < this.creators.size(); i++){
-            List<Item> temp = new ArrayList<>();
-            temp.add(this);
-            this.creators.get(i).setItems(temp);
+            this.creators.get(i).setItems(this);
         }
     }
 }

@@ -27,7 +27,7 @@ public class Creator implements Serializable{
     /*Could be either person or a bandname, no need to divide into first/last 
      * name, just use whole name for string comparisons.*/
     private String name;
-    @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany
     private List<Item> items;
 
     public Creator() {
@@ -58,7 +58,7 @@ public class Creator implements Serializable{
         return items;
     }
 
-    public void setItems(List<Item> items) {
-        this.items.addAll(items);
+    public void setItems(Item item) {
+        this.items.add(item);
     }
 }
