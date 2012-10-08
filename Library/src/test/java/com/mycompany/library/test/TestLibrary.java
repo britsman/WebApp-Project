@@ -41,14 +41,10 @@ public class TestLibrary {
         }
         temp.add(creator);
         if(item == null){
-            Creator creator2 = new Creator("Author27");
-            creators.add(creator2);
-            temp.add(creator2);
             item = new Book(itemId, "testbook", temp, "publisher",
             "English", 2012, 200, "comedy", "img", "desc", 1, 7, 10);
             items.add(item);
             creators.update(creator);
-            creators.update(creator2);
         }
         else{
             item.setCreators(temp);
