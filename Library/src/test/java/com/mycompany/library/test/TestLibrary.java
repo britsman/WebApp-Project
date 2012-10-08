@@ -24,7 +24,7 @@ import org.junit.Test;
  * @author user
  */
 public class TestLibrary {
-    private String creatorName = "Author";
+    private String creatorName = "Author2";
     private String itemId = "0975-533";
     private String userName = "Eric";
     
@@ -43,6 +43,7 @@ public class TestLibrary {
             items.add(item);
         }
         else{        
+            creator = new Creator(creatorName);
             temp.add(creator);
             item = new Book (itemId,"testbook", temp, "publisher", 
             "English", 2012, 200, "comedy", "img", "desc", 1, 7, 10);   

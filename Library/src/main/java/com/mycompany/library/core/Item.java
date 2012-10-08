@@ -5,6 +5,7 @@
 package com.mycompany.library.core;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
@@ -142,10 +143,9 @@ public class Item implements Serializable{
     }
     private void addItems(){
         for(int i = 0; i < this.creators.size(); i++){
-            List<Item> temp = this.creators.get(i).getItems();
+            List<Item> temp = new ArrayList<>();
             temp.add(this);
             this.creators.get(i).setItems(temp);
-            temp = null;
         }
     }
 }

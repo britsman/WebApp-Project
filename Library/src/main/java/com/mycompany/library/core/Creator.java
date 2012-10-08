@@ -59,6 +59,6 @@ public class Creator implements Serializable{
     }
 
     public void setItems(List<Item> items) {
-        this.items = items;
+        this.items.addAll(items);
     }
 }
