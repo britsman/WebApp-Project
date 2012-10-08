@@ -35,7 +35,6 @@ public class TestLibrary {
         List<Creator> temp = new ArrayList<>();
         Creator creator = creators.getByName(creatorName);
         Item item = items.find(itemId);
-        temp.add(creator);
         if(item == null && creator == null){
             creator = new Creator(creatorName);
             temp.add(creator);
