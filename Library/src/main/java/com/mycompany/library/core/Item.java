@@ -33,7 +33,7 @@ public class Item implements Serializable{
     @Id
     private String id;
     private String title;
-    @ManyToMany(mappedBy = "items")
+    @ManyToMany(mappedBy = "items", cascade=CascadeType.MERGE)
     private List<Creator> creators;
     //Link to image file.
     private String image;

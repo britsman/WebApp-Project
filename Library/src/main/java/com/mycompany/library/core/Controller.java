@@ -62,12 +62,13 @@ public class Controller<T, K> implements Serializable {
         }
     }
 
-    public void update(T t) {
+    public T update(T t) {
         EntityManager em = null;
+        T t2 = null;
         try {
             em = emf.createEntityManager();
             em.getTransaction().begin();
-            em.merge(t);
+            t2 = em.merge(t);
             em.getTransaction().commit();
         } catch (Exception ex) {
             System.err.println("Add exception: " + ex.getMessage());
@@ -76,6 +77,7 @@ public class Controller<T, K> implements Serializable {
                 em.close();
             }
         }
+        return t2;
     }
 
     public T find(K id) {    

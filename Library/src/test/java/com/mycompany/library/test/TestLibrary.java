@@ -34,24 +34,13 @@ public class TestLibrary {
         CreatorCollection creators = WebbLib.INSTANCE.getCreators();
         List<Creator> temp = new ArrayList<>();
         Creator creator = creators.getByName(creatorName);
-        Item item = items.find(itemId);
         if (creator == null) {
             creator = new Creator(creatorName);
-            creators.add(creator);
         }
         temp.add(creator);
-        if(item == null){
-            item = new Book(itemId, "testbook", temp, "publisher",
-            "English", 2012, 200, "comedy", "img", "desc", 1, 7, 10);
-            items.add(item);
-            creators.update(creator);
-        }
-        else{
-            item.setCreators(temp);
-            creator.setItems(item);
-            items.update(item);
-            creators.update(creator);
-        }
+        Item item = new Book(itemId, "testbook", temp, "publisher",
+        "English", 2012, 200, "comedy", "img", "desc", 1, 7, 10);
+        item = items.update(item);
     }
     //@Test
     public void testAddUser(){
