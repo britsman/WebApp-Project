@@ -6,12 +6,47 @@
     <body>
         <ui:composition template="./template.xhtml">
             <ui:define name="content">
-                <header>
-                    <h1>Min sida</h1>
-                    <p>Information om ditt användarkonto.</p>
-                </header>
-                <section>
-                    
+                <section id="userPage">
+                    <nav id="userPageNav">
+                        <ul>
+                            <li><a href=" ">Profil</a></li>
+                            <li><a href=" ">Lånade böcker</a></li>
+                            <li><a href=" ">Favoriter</a></li>
+                        </ul>
+                    </nav>
+                    <header id="userPageHeader">
+                        <h1>Min sida</h1>
+                        <p>Information om ditt användarkonto.</p>
+                    </header>
+                    <section class="userPageSection">
+                        <section class="userPageSubSection">
+                            <header class="sectionHeader">
+                                <h1>Profil</h1>
+                                <p>Information om ditt användarkonto.</p>
+                            </header>
+                            <section>
+                                <p>Information</p>
+                            </section>
+                        </section>
+                        <section class="userPageSubSection">
+                            <header class="sectionHeader">
+                                <h1>Lånade böcker</h1>
+                                <p>Information om ditt användarkonto.</p>
+                            </header>
+                            <section>
+                                <p>Information</p>
+                            </section>
+                        </section>
+                        <section class="userPageSubSection">
+                            <header class="sectionHeader">
+                                <h1>Favoriter</h1>
+                                <p>Information om ditt användarkonto.</p>
+                            </header>
+                            <section>
+                                <p>Information</p>
+                            </section>
+                        </section>
+                    </section>
                 </section>
             </ui:define>
         </ui:composition>
