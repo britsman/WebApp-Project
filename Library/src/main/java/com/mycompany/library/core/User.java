@@ -31,6 +31,7 @@ public class User implements Serializable{
     private String password;
     private String email;
     private Double feesOwed;
+    private boolean isLibrarian;
     @OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
     private List<BorrowedItem> borrowedItems;
     @ManyToMany(mappedBy = "que", cascade=CascadeType.MERGE)
@@ -46,6 +47,7 @@ public class User implements Serializable{
         this.password = password;
         this.email = email;
         this.feesOwed = feesOwed;
+        this.isLibrarian = false;
         this.borrowedItems = new ArrayList<>();
         this.reservedItems = new ArrayList<>();
         this.bookmarkedItems = new ArrayList<>();
@@ -90,6 +92,16 @@ public class User implements Serializable{
     public void setFeesOwed(Double feesOwed) {
         this.feesOwed = feesOwed;
     }
+
+    public boolean isIsLibrarian() {
+        return isLibrarian;
+    }
+
+    public void setIsLibrarian(boolean isLibrarian) {
+        this.isLibrarian = isLibrarian;
+    }
+    
+    
 
     public List<BorrowedItem> getBorrowedItems() {
         return borrowedItems;

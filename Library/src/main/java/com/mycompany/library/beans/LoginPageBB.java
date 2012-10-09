@@ -20,15 +20,15 @@ import javax.inject.Named;
 @SessionScoped
 public class LoginPageBB implements Serializable {
 
-    private String user = "";
+    private String userName = "";
     private String password = "";
 
-    public String getUser() {
-        return user;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUserName(String user) {
+        this.userName = user;
     }
 
     public String getPassword() {

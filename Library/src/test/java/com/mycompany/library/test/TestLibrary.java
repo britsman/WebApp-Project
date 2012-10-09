@@ -25,7 +25,7 @@ import org.junit.Test;
  */
 public class TestLibrary {
     private String creatorName = "Author";
-    private String itemId = "0975-526";
+    private String itemId = "0975-528";
     private String userName = "Eric3";
     
     @Test
@@ -45,7 +45,7 @@ public class TestLibrary {
         }
         temp.add(creator);
         Item item = new Book(itemId, "testbook", temp, "publisher",
-        "English", 2012, 200, "comedy", "img", "desc", 1, 7, 10);
+        "English", 2012, 200, "comedy", "img", "desc", 5, 7, 10);
         item = items.update(item);
     }
     //@Test
