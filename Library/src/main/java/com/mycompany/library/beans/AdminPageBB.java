@@ -1,7 +1,6 @@
 package com.mycompany.library.beans;
 
 import com.mycompany.library.core.User;
-import com.mycompany.library.core.UserRegistry;
 import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.util.List;
@@ -77,7 +76,7 @@ public class AdminPageBB implements Serializable {
     }
     
     public String getEmail() {
-        return username;
+        return email;
     }
     
     public void setEmail(String email) {

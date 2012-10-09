@@ -8,10 +8,6 @@
     margin-bottom: 10px;
 }
 
-#adminPage input {
-    width: 75px;
-}
-
 #adminPage td {
     padding: 5px;
     font: 12px serif;
@@ -29,4 +25,9 @@
 
 .adminSectionHeader {
     margin-bottom: 10px;
+}
+
+#adminPage input {
+    margin-bottom: 5px;
+    padding: 2px;
 }
