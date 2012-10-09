@@ -6,7 +6,6 @@ package com.mycompany.library.core;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +26,7 @@ public class BorrowedItem implements Serializable{
     @ManyToOne
     private Item item;
     private @Temporal(javax.persistence.TemporalType.DATE) Date loanDate = new Date();
-    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade=CascadeType.MERGE)
     private User user;
     private boolean collected;
 

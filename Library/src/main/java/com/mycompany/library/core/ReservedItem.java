@@ -28,14 +28,15 @@ public class ReservedItem implements Serializable {
     @OneToOne
     private Item item;   
     //Que of users waiting to borrow
-    @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade=CascadeType.MERGE)
     private List<User> que;
     
     public ReservedItem() {
     }
     public ReservedItem(Item item, User user) {
-        this.item = item;
         this.que = new ArrayList<>();
+        this.que.add(user);
+        this.item = item;
         reserve(user);
     }
 
@@ -51,8 +52,8 @@ public class ReservedItem implements Serializable {
         return que;
     }
 
-    public void setQue(List<User> que) {
-        this.que = que;
+    public void setQue(User user) {
+        this.que.add(user);
     }
 
     public Long getId() {
@@ -62,11 +63,7 @@ public class ReservedItem implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    private void reserve(User user){
-        reserveItem(user);
-    }
-    public void reserveItem(User user){
-        this.que.add(user);
+    private void reserve(User user){ 
         user.setReservedItems(this);
     }
 }

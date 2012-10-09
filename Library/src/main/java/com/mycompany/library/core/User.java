@@ -33,7 +33,7 @@ public class User implements Serializable{
     private Double feesOwed;
     @OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
     private List<BorrowedItem> borrowedItems;
-    @ManyToMany(mappedBy = "que", cascade={CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(mappedBy = "que", cascade=CascadeType.MERGE)
     private List<ReservedItem> reservedItems;
     @OneToMany
     private List<Item> bookmarkedItems;

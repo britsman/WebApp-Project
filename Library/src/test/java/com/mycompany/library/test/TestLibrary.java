@@ -25,10 +25,16 @@ import org.junit.Test;
  */
 public class TestLibrary {
     private String creatorName = "Author";
-    private String itemId = "0975-521";
-    private String userName = "Eric";
+    private String itemId = "0975-526";
+    private String userName = "Eric3";
     
     @Test
+    public void orderedTest(){//Tests were being done async, causing bugs.
+        testAddItem();
+        testAddUser();
+    }
+    
+    //@Test
     public void testAddItem(){
         ItemCollection items = WebbLib.INSTANCE.getItems();
         CreatorCollection creators = WebbLib.INSTANCE.getCreators();
@@ -45,38 +51,25 @@ public class TestLibrary {
     //@Test
     public void testAddUser(){
         UserRegistry users = WebbLib.INSTANCE.getUsers();
+        ItemCollection items = WebbLib.INSTANCE.getItems();
+        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
         User user = users.getByUsername(userName);
         if(user == null){
             user = new User(userName, "password","test@email", 0.0);
-            persistUser(user, true);
         }
-        else
-        {
-            persistUser(user, false);
-        }
-    }
-    private void persistUser(User user, boolean newUser){
-        UserRegistry users = WebbLib.INSTANCE.getUsers();
-        ItemCollection items = WebbLib.INSTANCE.getItems();
         Item item = items.find(itemId);
         user.setBookmarkedItems(item);
-        BorrowedItem borrowed = new BorrowedItem(item, user); 
-        /*
-        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
-        ReservedItem temp = q.findReservedItem(item);
-        System.out.println("!!!!!" + temp + "!!!!!");
-        if(temp != null){
-            temp.reserveItem(user);
+        new BorrowedItem(item, user);  
+        ReservedItem reserve = q.findReservedItem(item);
+        if(reserve == null){
+            reserve = new ReservedItem(item, user); 
         }
         else{
-            temp = new ReservedItem(item, user); 
+            reserve.setQue(user);
+            user.setReservedItems(reserve);
         }
-        **/
-        if(newUser){
-            users.add(user);
-        }
-        else{
-            users.update(user);
-        }
+        user = users.update(user);
+        System.out.println("\n" + user.getReservedItems() + "\n");
+        System.out.println("\n" + user.getBorrowedItems() + "\n");
     }
 }
