@@ -15,8 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 /**
- * Superclass for authors, musicians, bands etc. Due to @MappedSuperclass, all 
- * attributes that aren't unique to a certain type of creator can be placed here.
  * @author Eric
  */
 @Entity

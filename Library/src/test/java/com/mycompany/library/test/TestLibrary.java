@@ -25,8 +25,8 @@ import org.junit.Test;
  */
 public class TestLibrary {
     private String creatorName = "Author";
-    private String itemId = "0975-528";
-    private String userName = "Eric3";
+    private String itemId = "0975-531";
+    private String userName = "Eric1";
     
     @Test
     public void orderedTest(){//Tests were being done async, causing bugs.
@@ -45,7 +45,7 @@ public class TestLibrary {
         }
         temp.add(creator);
         Item item = new Book(itemId, "testbook", temp, "publisher",
-        "English", 2012, 200, "comedy", "img", "desc", 5, 7, 10);
+        "English", 2012, 200, "comedy", "img", "desc", 1, 7, 10);
         item = items.update(item);
     }
     //@Test
@@ -64,12 +64,12 @@ public class TestLibrary {
         if(reserve == null){
             reserve = new ReservedItem(item, user); 
         }
-        else{
+        else if(!user.getReservedItems().contains(reserve)){
             reserve.setQue(user);
             user.setReservedItems(reserve);
         }
         user = users.update(user);
         System.out.println("\n" + user.getReservedItems() + "\n");
-        System.out.println("\n" + user.getBorrowedItems() + "\n");
+        System.out.println("\n" + reserve.getQue() + "\n");
     }
 }

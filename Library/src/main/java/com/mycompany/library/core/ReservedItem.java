@@ -8,11 +8,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -28,14 +31,15 @@ public class ReservedItem implements Serializable {
     @OneToOne
     private Item item;   
     //Que of users waiting to borrow
-    @ManyToMany(cascade=CascadeType.MERGE)
-    private List<User> que;
+    @Embedded
+    @ElementCollection
+    private List<QueElement> que;
     
     public ReservedItem() {
     }
     public ReservedItem(Item item, User user) {
         this.que = new ArrayList<>();
-        this.que.add(user);
+        this.que.add(new QueElement(1, user));
         this.item = item;
         reserve(user);
     }
@@ -48,12 +52,12 @@ public class ReservedItem implements Serializable {
         this.item = item;
     }
 
-    public List<User> getQue() {
+    public List<QueElement> getQue() {
         return que;
     }
 
     public void setQue(User user) {
-        this.que.add(user);
+        this.que.add(new QueElement((this.que.size()+1), user));
     }
 
     public Long getId() {

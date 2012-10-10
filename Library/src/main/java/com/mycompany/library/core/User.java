@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -34,7 +34,7 @@ public class User implements Serializable{
     private boolean isLibrarian;
     @OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
     private List<BorrowedItem> borrowedItems;
-    @ManyToMany(mappedBy = "que", cascade=CascadeType.MERGE)
+    @OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
     private List<ReservedItem> reservedItems;
     @OneToMany
     private List<Item> bookmarkedItems;

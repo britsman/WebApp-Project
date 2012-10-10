@@ -30,7 +30,7 @@ public class QueryProccessor {
             reserved = q.getSingleResult();
         }
         catch(Exception e){
-            e.printStackTrace();
+           // e.printStackTrace();
         }
         finally{
             if (em != null) {
