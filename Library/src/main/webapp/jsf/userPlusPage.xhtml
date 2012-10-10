@@ -8,26 +8,66 @@
     <body>
         <ui:composition template="./template.xhtml">
             <ui:define name="content">
-                <section>
+                <section id="userPlusPage">
                     <header>
                         <h1>Bibliotikariesida</h1>
                         <p>Hantera böcker.</p>
                     </header>
-                    <section>
+                    <section id="userPlusTableSection">
                         <header>
                             <h1>Hantera användare</h1>
-                            <p>Här kan man manuellt hantera alla registrerade användare.</p>
+                            <p>Här kan man manuellt hantera alla befintliga items.</p>
                         </header>
                         <h:form>
-                            <h:dataTable var="user" value="#{admin.allUsers}" border="1">
+                            <h:dataTable var="user" value="#{userPlus.all}" border="1">
                                 <h:column>
                                     <f:facet name="header">Id</f:facet>
-                                    <h:outputText id="id" value="#{user.id}" />
+                                    <h:outputText id="id" value="#{userPlus.id}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Title</f:facet>
+                                    <h:outputText id="title" value="#{userPlus.title}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Creators</f:facet>
+                                    <h:outputText id="creators" value="#{userPlus.creators}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Image</f:facet>
+                                    <h:outputText id="image" value="#{userPlus.image}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Description</f:facet>
+                                    <h:outputText id="description" value="#{userPlus.description}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Loan period</f:facet>
+                                    <h:outputText id="loan_period" value="#{userPlus.loan_period}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Fee</f:facet>
+                                    <h:outputText id="fee" value="#{userPlus.fee}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Year released</f:facet>
+                                    <h:outputText id="year_release" value="#{userPlus.year_release}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Genre</f:facet>
+                                    <h:outputText id="genre" value="#{userPlus.genre}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Language</f:facet>
+                                    <h:outputText id="language" value="#{userPlus.language}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Quantity</f:facet>
+                                    <h:outputText id="quantity" value="#{userPlus.quantity}" />
                                 </h:column>
                                 <h:column>
                                     <h:commandLink value="Edit"
-                                                   action="#{admin.allUsers}"
-                                                   actionListener="#{admin.allUsers}" />
+                                                   action="#{userPlus.all}"
+                                                   actionListener="#{userPlus.all}" />
                                 </h:column>
                                 <h:column>
                                     <h:commandLink value="Remove"
@@ -53,11 +93,29 @@
                             <p>Här kan man manuellt lägga till en ny användare.</p>
                         </header>
                         <h:form>
-                            <h:outputLabel for="username" value="Användarnamn:" /><br />
-                            <h:inputText id="username" value="#{admin.username}"/><br />
+                            <h:outputLabel for="title" value="Titel" /><br />
+                            <h:inputText id="title" value="#{userPlus.title}"/><br />
+                            <h:outputLabel for="creators" value="Skapare" /><br />
+                            <h:inputText id="creators" value="#{userPlus.creators}"/><br />
+                            <h:outputLabel for="image" value="Bild" /><br />
+                            <h:inputText id="image" value="#{userPlus.image}"/><br />
+                            <h:outputLabel for="description" value="Beskrivning" /><br />
+                            <h:inputText id="description" value="#{userPlus.description}"/><br />
+                            <h:outputLabel for="loan_period" value="Utlåningstid" /><br />
+                            <h:inputText id="loan_period" value="#{userPlus.loan_period}"/><br />
+                            <h:outputLabel for="fee" value="Skuld" /><br />
+                            <h:inputText id="fee" value="#{userPlus.fee}"/><br />
+                            <h:outputLabel for="year_release" value="Utgivningsår" /><br />
+                            <h:inputText id="year_release" value="#{userPlus.year_release}"/><br />
+                            <h:outputLabel for="genre" value="Genre" /><br />
+                            <h:inputText id="genre" value="#{userPlus.genre}"/><br />
+                            <h:outputLabel for="language" value="Språk" /><br />
+                            <h:inputText id="language" value="#{userPlus.language}"/><br />
+                            <h:outputLabel for="quantity" value="Kvantitet" /><br />
+                            <h:inputText id="quantity" value="#{userPlus.quantity}"/><br />
                             <h:commandButton id="btnAdd" value="Lägg till"
-                                             action="#{admin.allUsers}"
-                                             actionListener="#{admin.allUsers}" /><br />
+                                             action="#{userPlus.action}"
+                                             actionListener="#{userPlus.createItem}" /><br />
                             <h:messages showSummary="true" showDetail="false" />
                         </h:form>
                     </section>
