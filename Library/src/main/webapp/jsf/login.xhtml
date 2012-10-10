@@ -18,8 +18,13 @@
                         <p><h:inputText id="txtUser" value="#{login.userName}" /></p>
                         <p><h:messages errorStyle="color:red" /></p>
                         <p><h:outputLabel for="txtPassword" value="Lösenord" /></p>
-                        <p><h:inputSecret for="txtPassword" value="#{login.password}" /></p>
-                        <p><h:commandButton id="btnOK" value="OK" actionListener="#{validate.actionListener}"/></p>
+                        <p><h:inputSecret id="txtPassword" value="#{login.password}" /></p>
+                        <p><h:commandButton id="btnOK" value="OK" 
+                                            action="#{login.access()}"
+                                            actionListener="#{login.validateUser()}"/></p>
+                        <h:outputText id="txt" binding="#{login.txtOutput}" />
+                        <h:outputText id="txt123" value="#{userBean.loggedInUser}" />
+                        
 
                     </h:form>
                     <p>Om du har glömt ditt lösenord kan du klicka <a href=" ">här</a> för att få hjälp.</p>
@@ -28,6 +33,7 @@
                     <header class="loginRegisterHeader">
                         <h1>Registrera dig</h1>
                         <p>Om du inte är registrerad så måste du först fylla i formuläret nedan för att kunna logga in.</p>
+                         
                     </header>
                     <form>
                         <h:form >
@@ -42,7 +48,7 @@
                             <h:inputSecret value="#{register.confirmPassword}"/>
                             <p><h:messages errorStyle="color:red" /></p>
 
-                            <p><h:commandButton id="btnOK" value="OK" actionListener="#{validate.actionListener}"/></p>
+                            <p><h:commandButton id="btnOK" value="OK" actionListener="#{register.checkName()}"/></p>
 
                         </h:form>
 

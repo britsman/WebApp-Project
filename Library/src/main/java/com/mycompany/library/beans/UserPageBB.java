@@ -18,11 +18,26 @@ import javax.inject.Named;
 @SessionScoped
 public class UserPageBB implements Serializable {
     
+   
+    
     private WebbLib library;
     
     // Should probably be injected along with login
     // Or stored in http request session thingy
     private User user;
+    
+    public String getUsetName(){
+        return user.getUsername();
+    }
+    
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
     
     // Default constructor.
     public UserPageBB() {}
