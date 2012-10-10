@@ -1,19 +1,66 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <body>
         <ui:composition template="./template.xhtml">
             <ui:define name="content">
-                <header>
-                    <h1>Användare plus</h1>
-                    <p>Här kan man lägga till och ta bort böcker.</p>
-                </header>
                 <section>
-                    <form>
-                        
-                    </form>
+                    <header>
+                        <h1>Bibliotikariesida</h1>
+                        <p>Hantera böcker.</p>
+                    </header>
+                    <section>
+                        <header>
+                            <h1>Hantera användare</h1>
+                            <p>Här kan man manuellt hantera alla registrerade användare.</p>
+                        </header>
+                        <h:form>
+                            <h:dataTable var="user" value="#{admin.allUsers}" border="1">
+                                <h:column>
+                                    <f:facet name="header">Id</f:facet>
+                                    <h:outputText id="id" value="#{user.id}" />
+                                </h:column>
+                                <h:column>
+                                    <h:commandLink value="Edit"
+                                                   action="#{admin.allUsers}"
+                                                   actionListener="#{admin.allUsers}" />
+                                </h:column>
+                                <h:column>
+                                    <h:commandLink value="Remove"
+                                                   action="#{admin.allUsers}"
+                                                   actionListener="#{admin.allUsers}" />
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                        <section>
+                            <h:form>
+                                <h:outputLabel for="id" value="ID:" /><br />
+                                <h:inputText id="editId" disabled="true" value="#{admin.editId}"/><br />
+                                <h:commandButton id="btnEdit" value="Ändra"
+                                                 action="#{admin.allUsers}"
+                                                 actionListener="#{admin.allUsers}" /><br />
+                                <h:messages showSummary="true" showDetail="false" />
+                            </h:form>
+                        </section>
+                    </section>
+                    <section>
+                        <header>
+                            <h1>Ny användare</h1>
+                            <p>Här kan man manuellt lägga till en ny användare.</p>
+                        </header>
+                        <h:form>
+                            <h:outputLabel for="username" value="Användarnamn:" /><br />
+                            <h:inputText id="username" value="#{admin.username}"/><br />
+                            <h:commandButton id="btnAdd" value="Lägg till"
+                                             action="#{admin.allUsers}"
+                                             actionListener="#{admin.allUsers}" /><br />
+                            <h:messages showSummary="true" showDetail="false" />
+                        </h:form>
+                    </section>
                 </section>
             </ui:define>
         </ui:composition>

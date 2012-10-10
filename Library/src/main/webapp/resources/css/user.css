@@ -2,25 +2,8 @@
 #userPage {
     margin: 10px;
 }
-
-#userPageNav ul {
-    list-style-type: none;
-}
-
-#userPageNav li {
-    float: left;
-    width: 33%;
-}
-
-#userPageNav a {
-    text-decoration: none;
-}
-
-#userPageNav a:hover {
-    text-decoration: underline;
-}
-
 .userPageSubSection {
     border: solid 1px black;
     margin: 10px 0px;
+    padding: 5px;
 }
