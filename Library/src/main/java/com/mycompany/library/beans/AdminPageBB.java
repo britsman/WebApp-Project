@@ -21,6 +21,7 @@ public class AdminPageBB implements Serializable {
     private String email;
     private String password;
     private double feesOwed;
+    private boolean isLib;
     
     private Long editId;
     private String editUsername;
@@ -64,6 +65,12 @@ public class AdminPageBB implements Serializable {
         user.setEmail(editEmail);
         user.setPassword(editPassword);
         user.setFeesOwed(editFeesOwed);
+        library.getUsers().update(user);
+    }
+    
+    public void userPlus(Long editId){
+        User user = library.getUsers().find(editId);
+        user.setIsLibrarian(true);
         library.getUsers().update(user);
     }
     
@@ -138,4 +145,15 @@ public class AdminPageBB implements Serializable {
     public void setEditFeesOwed(double editFeesOwed) {
         this.editFeesOwed = editFeesOwed;
     }
+
+    public boolean isIsLib() {
+        return isLib;
+    }
+
+    public void setIsLib(boolean isLib) {
+        this.isLib = isLib;
+    }
+    
+    
+    
 }

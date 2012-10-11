@@ -41,6 +41,10 @@
                                     <h:outputText id="feesOwed" value="#{user.feesOwed}" />
                                 </h:column>
                                 <h:column>
+                                    <f:facet name="header">Is Librarian</f:facet>
+                                    <h:outputText id="isLibrarian" value="#{user.isLibrarian}" />
+                                </h:column>
+                                <h:column>
                                     <h:commandLink value="Edit"
                                                    action="adminPage?faces-redirect=true"
                                                    actionListener="#{admin.prepareEdit(user.id, user.username, user.email, user.password, user.feesOwed)}" />
@@ -49,6 +53,11 @@
                                     <h:commandLink value="Remove"
                                                    action="adminPage?faces-redirect=true"
                                                    actionListener="#{admin.removeUser(user.id)}" />
+                                </h:column>
+                                <h:column>
+                                    <h:commandLink value="Is Librarian"
+                                                   action="adminPage?faces-redirect=true"
+                                                   actionListener="#{admin.userPlus(user.id)}" />
                                 </h:column>
                             </h:dataTable>
                         </h:form>

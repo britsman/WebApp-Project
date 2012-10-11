@@ -79,6 +79,7 @@ public class LoginPageBB implements Serializable {
     
     
     public String access() {
+        System.out.println(isLibrarian);
         if (accessGranted == true && isLibrarian == true ) {
             return "userPlusPage?faces-redirect=true";
         }else if(accessGranted == true){
