@@ -32,12 +32,15 @@ public class LoginPageBB implements Serializable {
 
     @Inject
     private UserPageBB privateUserBean;
-    @NotNull
-    @Size(min = 1, max = 8, message = "Must use 1-8 chars")
+    @Inject
+    private TemplateBB loggedUser;
+    @Size(min = 1, message = "Obligatoriskt"  )
     private String userName;
+    @Size(min = 1, message = "Obligatoriskt")
     private String password;
     private UIOutput txtOutput;
-    private boolean AccessGranted = false;
+    private boolean accessGranted = false;
+    private boolean isLibrarian = false;
 
     public LoginPageBB() {
     }
@@ -46,11 +49,13 @@ public class LoginPageBB implements Serializable {
         UserRegistry users = WebbLib.INSTANCE.getUsers();
         User user = users.getByUsername(userName);
         if (user == null) {
-            AccessGranted = false;
+            accessGranted = false;
             txtOutput.setValue("Användare inte hittad!");
             password ="";
         } else {
+            txtOutput.setValue("Fel lösenord");
             validatePassword(user);
+            validateLibrarian(user);
             access();
         }
     }
@@ -59,16 +64,27 @@ public class LoginPageBB implements Serializable {
     public boolean validatePassword(User u){
         if(u.getPassword().equalsIgnoreCase(password)){
             privateUserBean.setUser(u);
-            AccessGranted = true;
+            loggedUser.setLoggedInUser(u);
+            accessGranted = true;
             return true;
         }
         return false;
     }
 
+    public void validateLibrarian(User u){   
+        if(u.isIsLibrarian())
+           isLibrarian = true;
+        
+    }
+    
+    
     public String access() {
-        if (AccessGranted == true) {
-            return "userPage?faces-redirect=true";
-        } else {
+        if (accessGranted == true && isLibrarian == true ) {
+            return "userPlusPage?faces-redirect=true";
+        }else if(accessGranted == true){
+            return"userPage?faces-redirect=true";
+        }
+        else {
             return null;
         }
     }

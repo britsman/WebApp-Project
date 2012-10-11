@@ -15,16 +15,17 @@
                     <h:form >
 
                         <p><h:outputLabel for="txtUser" value="Användare" /></p>
-                        <p><h:inputText id="txtUser" value="#{login.userName}" /></p>
-                        <p><h:messages errorStyle="color:red" /></p>
+                        <p><h:inputText id="txtUser" value="#{login.userName}" />  
+                            <h:message for="txtUser" showSummary="true" showDetail="false" style="color: red" /></p>
                         <p><h:outputLabel for="txtPassword" value="Lösenord" /></p>
-                        <p><h:inputSecret id="txtPassword" value="#{login.password}" /></p>
+                        <p><h:inputSecret id="txtPassword" value="#{login.password}" />
+                            <h:message for="txtPassword" showSummary="true" showDetail="false" style="color: red" /></p>
                         <p><h:commandButton id="btnOK" value="OK" 
                                             action="#{login.access()}"
                                             actionListener="#{login.validateUser()}"/></p>
-                        <h:outputText id="txt" binding="#{login.txtOutput}" />
-                        <h:outputText id="txt123" value="#{userBean.loggedInUser}" />
+                        <h:outputText style="color: red " binding="#{login.txtOutput}" />
                         
+
 
                     </h:form>
                     <p>Om du har glömt ditt lösenord kan du klicka <a href=" ">här</a> för att få hjälp.</p>
@@ -33,22 +34,23 @@
                     <header class="loginRegisterHeader">
                         <h1>Registrera dig</h1>
                         <p>Om du inte är registrerad så måste du först fylla i formuläret nedan för att kunna logga in.</p>
-                         
+
                     </header>
                     <form>
                         <h:form >
-                            
-                            <p>Användarnamn</p>
-                            <h:inputText id="txtUserreg" value="#{register.username}" />
-                            <p>email adress</p>
-                            <h:inputText id="txtEmail" value="#{register.email}"/>
-                            <p>Lösenord</p>
-                            <h:inputSecret value="#{register.password}"/>
-                            <p>Upprepa lösenord</p>
-                            <h:inputSecret value="#{register.confirmPassword}"/>
-                            <p><h:messages errorStyle="color:red" /></p>
-
-                            <p><h:commandButton id="btnOK" value="OK" actionListener="#{register.checkName()}"/></p>
+                            <p><h:outputLabel for="txtUserReg" value ="Användare"/></p>
+                            <p><h:inputText id="txtUserReg" value="#{register.username}" />
+                            <h:message for="txtUserReg" showSummary="true" showDetail="false" style="color: red" /></p>
+                            <p><h:outputLabel for="txtEmailReg" value ="Email"/></p>
+                            <p><h:inputText id="txtEmailReg" value="#{register.email}"/>
+                            <h:message for="txtEmailReg" showSummary="true" showDetail="false" style="color: red" /></p>
+                            <p><h:outputLabel for="txtPasswordReg" value ="Lösenord"/></p>
+                            <p><h:inputSecret id="txtPasswordReg" value="#{register.password}"/>
+                            <h:message for="txtPasswordReg" showSummary="true" showDetail="false" style="color: red" /></p>
+                            <p><h:outputLabel for="txtPasswordReg" value ="Upprepa lösenord"/></p>
+                            <p><h:inputSecret id="txtPasswordRegConfirm" value="#{register.confirmPassword}"/>
+                            <h:message for="txtPasswordRegConfirm" showSummary="true" showDetail="false" style="color: red" /></p>
+                            <p><h:commandButton id="btnOK" value="OK"  actionListener="#{register.registerUser()}" action ="#{register.access()}"/></p>
 
                         </h:form>
 

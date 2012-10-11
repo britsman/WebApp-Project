@@ -4,12 +4,17 @@
  */
 package com.mycompany.library.beans;
 
+import com.mycompany.library.core.User;
+import com.mycompany.library.core.UserRegistry;
+import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -17,11 +22,57 @@ import javax.inject.Named;
  */
 @Named("register")
 @SessionScoped
-public class RegisterPageBB implements Serializable{
-    private String username ="";
-    private String email="";
-    private String password="";
-    private String confirmPassword="";
+public class RegisterPageBB implements Serializable {
+
+    private static final WebbLib library = WebbLib.INSTANCE;
+    private UserRegistry users = library.getUsers();
+    @Inject
+    private UserPageBB privateUserBean;
+    @Inject
+    private TemplateBB loggedUser;
+    @Size(min = 1, message = "Obligatoriskt")
+    private String username = "";
+    @Size(min = 1, message = "Obligatoriskt")
+    private String email = "";
+    @Size(min = 1, message = "Obligatoriskt")
+    private String password = "";
+    @Size(min = 1, message = "Obligatoriskt")
+    private String confirmPassword = "";
+    private String redirect = null;
+
+    public RegisterPageBB() {
+    }
+
+    public void registerUser() {
+        if (checkUser()) {
+            if (checkPassword()) {
+                User newUser = new User(username, password, email, 0.0);
+                library.getUsers().add(newUser);
+                privateUserBean.setUser(newUser);
+                loggedUser.setLoggedInUser(newUser);
+                redirect = "userPage?faces-redirect=true";
+            }
+        }
+    }
+    
+    public String access(){
+        return redirect;
+    }
+
+    public boolean checkUser() {
+        if (users.getByUsername(username) == null) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkPassword() {
+        if (password.contentEquals(confirmPassword)) {
+            return true;
+        }
+        return false;
+
+    }
 
     public String getUsername() {
         return username;
@@ -54,5 +105,4 @@ public class RegisterPageBB implements Serializable{
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
-    
 }

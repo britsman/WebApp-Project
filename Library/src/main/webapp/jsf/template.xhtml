@@ -3,8 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html">
-
     <h:head>
+        <h:form>    
+            <p><h:outputText id="txtInloggad" value="#{template.loggedUser()}" /></p>
+            <p><h:commandLink id="linkLogOut" action="library?faces-redirect=true" actionListener="#{template.actionListener(e)}" style="color: blue"> Logga ut</h:commandLink> </p>
+        </h:form>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="./../resources/css/template.css" rel="stylesheet" type="text/css" />
         <link href="./../resources/css/library.css" rel="stylesheet" type="text/css" />
@@ -17,14 +20,14 @@
     <h:body>
         <section id="wrapper">
             <header id="pageHeader">
-                <h1>Bibliotek</h1>
+                <h1>Bibliotek</h1>                
             </header>
             <nav id="pageNav">
                 <ul>
                     <li><a href="library.xhtml">Startsidan</a></li>
                     <li><a href="login.xhtml">Min sida</a></li>
-                    <li><a href="http://www.google.com">Hitta böcker</a></li>
-                    <li><a href="faqPage.xhtml">Frågor &amp; Svar</a></li>
+                    <li><a href="findBook.xhtml">Hitta böcker</a></li>
+                    <li><a href="faqPage.xhtml">Frågor &amp; Svar</a></li>                    
                 </ul>
             </nav>
             <section id="contentWrapper">
