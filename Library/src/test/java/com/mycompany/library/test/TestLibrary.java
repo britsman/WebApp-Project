@@ -32,6 +32,7 @@ public class TestLibrary {
     public void orderedTest(){//Tests were being done async, causing bugs.
         testAddItem();
         testAddUser();
+        testSearch();
     }
     
     //@Test
@@ -71,5 +72,62 @@ public class TestLibrary {
         user = users.update(user);
         System.out.println("\n" + user.getReservedItems() + "\n");
         System.out.println("\n" + reserve.getQue() + "\n");
+    }
+    
+    public void testSearch(){
+        
+        List<Creator> cList = new ArrayList<>();
+        ItemCollection items = WebbLib.INSTANCE.getItems();
+        
+        Creator c1 = new Creator("Herman Melville");
+        cList.add(c1);
+        Item item1 = new Book("978-0140623178", "Moby Dick", cList, "Penguin",
+        "English", 1851, 544, "Horror", "img", "Tuff bok om valar och grejer, inte skriven av Jules Verne", 1, 7, 10);
+        items.update(item1);
+        
+        cList.clear();
+        Creator c2 = new Creator("Jules Verne");
+        cList.add(c2);
+        Item item2 = new Book("978-2080702999", "La tour du Monde en quatre-vingts jours", cList, "Flammarion", "French", 1873, 200,
+        "Adventure", "img", "Tuff bok, inte lika många valar dock.", 1, 7, 10);
+        items.update(item2);
+        
+        Item item3 = new Book("978-0486440880", "Journey to the Center of the Earth", cList, "Dover Thrift", "English", 1864, 200, 
+                "Adventure", "img", "Massa grejer i jorden", 0, 7, 10);
+        items.update(item3);
+        
+        //Här börjar sökningen
+        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
+        List<Item> foundItems = null;
+        
+        foundItems = q.searchItem(null, "Moby Dick", null, null, 0, 0, false, null, null);
+        System.out.println("Results for title Moby Dick: " + foundItems.get(0).getId());
+        System.out.println("Expected: " + item1.getId());
+        
+        foundItems = q.searchItem(null, null, "Jules Verne", null, 0, 0, false, null, null);
+        System.out.println("Results for title Jules Verne: " + foundItems.get(0).getId());
+        System.out.println("Expected: " + item1.getId() + " & " + item2.getId());
+        
+        foundItems= q.searchItem(null, null, null, "valar", 0, 0, false, null, null);
+        System.out.println("Böcker om valar: " + foundItems);
+        
+        foundItems= q.searchItem(null, null, null, "valar", 0, 0, true, null, null);
+        System.out.println("Böcker om valar i lager: " + foundItems);
+        
+        foundItems= q.searchItem(null, null, null, null, 1864, 1864, false, null, null);
+        System.out.println("Böcker skrivna 1864: " + foundItems);
+        
+        foundItems= q.searchItem(null, null, null, null, 1860, 0, false, null, null);
+        System.out.println("Böcker skrivna efter 1860: " + foundItems);
+        
+        foundItems= q.searchItem(null, null, null, null, 0, 1870, false, null, null);
+        System.out.println("Böcker skrivna före 1870: " + foundItems);
+        
+        foundItems = q.searchAll("Verne");
+        System.out.println("Antal resultat: " + foundItems.size());
+
+        
+        
+        
     }
 }
