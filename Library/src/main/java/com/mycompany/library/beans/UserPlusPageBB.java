@@ -3,9 +3,10 @@ package com.mycompany.library.beans;
 import com.mycompany.library.core.Creator;
 import com.mycompany.library.core.Item;
 import com.mycompany.library.core.WebbLib;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
@@ -13,8 +14,8 @@ import javax.inject.Named;
  * @author Fredrik
  */
 @Named("userPlus")
-@RequestScoped
-public class UserPlusPageBB {
+@SessionScoped
+public class UserPlusPageBB implements Serializable {
     
     private static final WebbLib library = WebbLib.INSTANCE;
     
@@ -30,6 +31,18 @@ public class UserPlusPageBB {
     private String language;
     private int quantity;
     
+    private String editId;
+    private String editTitle;
+    private String editCreators;
+    private String editImage;
+    private String editDescription;
+    private int editLoan_period;
+    private int editFee;
+    private int editYear_release;
+    private String editGenre;
+    private String editLanguage;
+    private int editQuantity;
+    
     // Default constructor.
     public UserPlusPageBB() {}
     
@@ -41,15 +54,50 @@ public class UserPlusPageBB {
         List<Creator> cs = new ArrayList<Creator>();
         String[] creatorStrings = this.creators.split(",");
         for (String s: creatorStrings) {
-            cs.add(new Creator(s));
+            Creator creator = new Creator(s);
+            cs.add(creator);
+            library.getCreators().add(creator);
         }
         library.getItems().add(new Item(id, title, cs, language, year_release,
                 genre, image, description, quantity, loan_period, fee));
     }
     
+    public void prepareEdit(String id, String title, String creators,
+            String image, String description, int loan_period, int fee,
+            int year_released, String genre, String language, int quantity) {
+        editId = id;
+        editTitle = title;
+        editCreators = creators;
+        editImage = image;
+        editDescription = description;
+        editLoan_period = loan_period;
+        editFee = fee;
+        editYear_release = year_released;
+        editGenre = genre;
+        editLanguage = language;
+        editQuantity = quantity;
+        System.out.println("Edit prepared");
+    }
+    
     public void updateItem(String id) {
         Item i = library.getItems().find(id);
-        
+        i.setTitle(editTitle);
+        List<Creator> cs = new ArrayList<Creator>();
+        String[] creatorStrings = this.editCreators.split(",");
+        for (String s: creatorStrings) {
+            Creator creator = new Creator(s);
+            cs.add(creator);
+            library.getCreators().add(creator);
+        }
+        i.setCreators(cs);
+        i.setImage(editImage);
+        i.setDescription(editDescription);
+        i.setLoan_period(editLoan_period);
+        i.setFee(editFee);
+        i.setYear(editYear_release);
+        i.setGenre(editGenre);
+        i.setLanguage(editLanguage);
+        i.setQuantity(editQuantity);
         library.getItems().update(i);
     }
     
@@ -147,5 +195,93 @@ public class UserPlusPageBB {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getEditId() {
+        return editId;
+    }
+
+    public void setEditId(String editId) {
+        this.editId = editId;
+    }
+
+    public String getEditTitle() {
+        return editTitle;
+    }
+
+    public void setEditTitle(String editTitle) {
+        this.editTitle = editTitle;
+    }
+
+    public String getEditCreators() {
+        return editCreators;
+    }
+
+    public void setEditCreators(String editCreators) {
+        this.editCreators = editCreators;
+    }
+
+    public String getEditImage() {
+        return editImage;
+    }
+
+    public void setEditImage(String editImage) {
+        this.editImage = editImage;
+    }
+
+    public String getEditDescription() {
+        return editDescription;
+    }
+
+    public void setEditDescription(String editDescription) {
+        this.editDescription = editDescription;
+    }
+
+    public int getEditLoan_period() {
+        return editLoan_period;
+    }
+
+    public void setEditLoan_period(int editLoan_period) {
+        this.editLoan_period = editLoan_period;
+    }
+
+    public int getEditFee() {
+        return editFee;
+    }
+
+    public void setEditFee(int eidtFee) {
+        this.editFee = eidtFee;
+    }
+
+    public int getEditYear_release() {
+        return editYear_release;
+    }
+
+    public void setEditYear_release(int editYear_release) {
+        this.editYear_release = editYear_release;
+    }
+
+    public String getEditGenre() {
+        return editGenre;
+    }
+
+    public void setEditGenre(String editGenre) {
+        this.editGenre = editGenre;
+    }
+
+    public String getEditLanguage() {
+        return editLanguage;
+    }
+
+    public void setEditLanguage(String editLanguage) {
+        this.editLanguage = editLanguage;
+    }
+
+    public int getEditQuantity() {
+        return editQuantity;
+    }
+
+    public void setEditQuantity(int editQuantity) {
+        this.editQuantity = editQuantity;
     }
 }

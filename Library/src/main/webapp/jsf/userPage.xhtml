@@ -2,50 +2,68 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html">
 
     <body>
         <ui:composition template="./template.xhtml">
             <ui:define name="content">
                 <section id="userPage">
-                    <nav id="userPageNav">
-                        <ul>
-                            <li><a href=" ">Profil</a></li>
-                            <li><a href=" ">Lånade böcker</a></li>
-                            <li><a href=" ">Favoriter</a></li>
-                        </ul>
-                    </nav>
                     <header id="userPageHeader">
                         <h1>Min sida</h1>
-                        <p>Information om ditt användarkonto.</p>
-                        <h:outputText id="txt123" value="#{userPage.usetName}" />
                     </header>
+                    <h:link outcome="userPlusPage" value="Hantera böcker" rendered="#{userPage.user.isLibrarian}" />
                     <section class="userPageSection">
                         <section class="userPageSubSection">
                             <header class="sectionHeader">
                                 <h1>Profil</h1>
-                                <p>Information om ditt användarkonto.</p>
                             </header>
                             <section>
-                                <p>Information</p>
+                                <p>Användarnamn: #{userPage.user.username}</p>
+                                <p>Email: #{userPage.user.email}</p>
+                                <p>Skuld: #{userPage.user.feesOwed} kr</p>
                             </section>
                         </section>
                         <section class="userPageSubSection">
                             <header class="sectionHeader">
                                 <h1>Lånade böcker</h1>
-                                <p>Information om ditt användarkonto.</p>
+                                <p>Dina lånade böcker.</p>
                             </header>
                             <section>
-                                <p>Information</p>
+                                <h:dataTable var="item" value="#{userPage.borrowedItems}" rendered="#{not empty userPage.borrowedItems}" border="1">
+                                    <h:column>
+                                        <f:facet name="header">Title</f:facet>
+                                        <h:outputText id="title" value="#{item.item.title}" />
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Title</f:facet>
+                                        <h:outputText id="creators" value="#{item.item.creators}" />
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Åter</f:facet>
+                                        <h:outputText id="loanDate" value="#{item.loanDate}" />
+                                    </h:column>
+                                </h:dataTable>
+                                <h:outputLabel rendered="#{empty userPage.borrowedItems}" value="Du har inga lånade böcker." />
                             </section>
                         </section>
                         <section class="userPageSubSection">
                             <header class="sectionHeader">
                                 <h1>Favoriter</h1>
-                                <p>Information om ditt användarkonto.</p>
+                                <p>Böcker i din favoritlista.</p>
                             </header>
                             <section>
-                                <p>Information</p>
+                                <h:dataTable var="item" value="#{userPage.favorites}" rendered="#{not empty userPage.favorites}" border="1">
+                                    <h:column>
+                                        <f:facet name="header">Title</f:facet>
+                                        <h:outputText id="title" value="#{item.title}" />
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Title</f:facet>
+                                        <h:outputText id="creators" value="#{item.creators}" />
+                                    </h:column>
+                                </h:dataTable>
+                                <h:outputLabel rendered="#{empty userPage.favorites}" value="Du har inte lagt till några böcker till din favoritlista." />
                             </section>
                         </section>
                     </section>
