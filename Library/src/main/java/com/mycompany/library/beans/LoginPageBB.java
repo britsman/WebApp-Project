@@ -80,10 +80,8 @@ public class LoginPageBB implements Serializable {
     
     public String access() {
         System.out.println(isLibrarian);
-        if (accessGranted == true && isLibrarian == true ) {
-            return "userPlusPage?faces-redirect=true";
-        }else if(accessGranted == true){
-            return"userPage?faces-redirect=true";
+        if (accessGranted == true) {
+             return"userPage?faces-redirect=true";
         }
         else {
             return null;
