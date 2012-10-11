@@ -4,10 +4,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html">
     <h:head>
-        <h:form>    
-            <p><h:outputText id="txtInloggad" value="#{template.loggedUser()}" /></p>
-            <p><h:commandLink id="linkLogOut" action="library?faces-redirect=true" actionListener="#{template.actionListener(e)}" style="color: blue"> Logga ut</h:commandLink> </p>
-        </h:form>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="./../resources/css/template.css" rel="stylesheet" type="text/css" />
         <link href="./../resources/css/library.css" rel="stylesheet" type="text/css" />
@@ -21,7 +18,13 @@
     <h:body>
         <section id="wrapper">
             <header id="pageHeader">
-                <h1>Bibliotek</h1>                
+                <h:form>    
+                    <p><h:outputText id="txtInloggad" value="#{template.loggedUser()}" /></p>
+                    <h1>Bibliotek</h1>
+                    <h:commandLink tabindex="6" id="linkLogOut" action="library?faces-redirect=true" actionListener="#{template.actionListener(e)}" style="color: blue"> Logga ut</h:commandLink>
+                    
+                </h:form>
+                                
             </header>
             <nav id="pageNav">
                 <ul>
