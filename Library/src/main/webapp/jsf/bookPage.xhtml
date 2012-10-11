@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
 
     <body>
         <ui:composition template="./template.xhtml">
@@ -10,20 +11,22 @@
                     <h1>Bokinformation</h1>
                 </header>
                 <section id="bookInformationSection">
-                    <p>#{Items.image}</p>
+                    <p>#{SingleItem.book.image}</p>
                     <!-- Have Image displayed on the left of text? maybe use table.-->
-                    <h5>#{Items.title}</h5>
+                    <h5>#{SingleItem.book.title}</h5>
                     <p>
-                        #{Items.authors}
-                        #{Items.publisher}
-                        #{Items.year_released}
-                        #{Items.genre}
-                        #{Items.language}
-                        #{Items.pageNum}
-                        #{Items.quantity}
+                        #{SingleItem.book.creators}
+                        #{SingleItem.book.publisher}
+                        #{SingleItem.book.year}
+                        #{SingleItem.book.genre}
+                        #{SingleItem.book.language}
+                        #{SingleItem.book.pageNum}
+                        #{SingleItem.book.quantity}
+                        <h:button onclick="#{SingleItem.action()}" value="Tillbaks 
+                        till listan"/>
                     </p>
                      <h6> Kort Besrivning</h6>
-                    <p>#{Items.description}</p>
+                    <p>#{Item.description}</p>
                 </section>
             </ui:define>
         </ui:composition>
