@@ -7,10 +7,23 @@
         <ui:composition template="./template.xhtml">
             <ui:define name="content">
                 <header id="bookInformationHeader">
-                    <h1>~Bok title~</h1>
+                    <h1>Bokinformation</h1>
                 </header>
                 <section id="bookInformationSection">
-                    <p>Information om en specifik bok/item som hämtats från databasen.</p>
+                    <p>#{Items.image}</p>
+                    <!-- Have Image displayed on the left of text? maybe use table.-->
+                    <h5>#{Items.title}</h5>
+                    <p>
+                        #{Items.authors}
+                        #{Items.publisher}
+                        #{Items.year_released}
+                        #{Items.genre}
+                        #{Items.language}
+                        #{Items.pageNum}
+                        #{Items.quantity}
+                    </p>
+                     <h6> Kort Besrivning</h6>
+                    <p>#{Items.description}</p>
                 </section>
             </ui:define>
         </ui:composition>
