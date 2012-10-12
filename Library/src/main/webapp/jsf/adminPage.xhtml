@@ -69,19 +69,23 @@
                         <section id="adminEditSection" class="adminSection">
                             <h:form>
                                 <h:outputLabel for="id" value="ID:" /><br />
-                                <h:inputText id="editId" disabled="true" value="#{admin.editId}"/><br />
+                                <h:inputText id="editId" disabled="true" value="#{admin.editId}"/>
+                                <h:message for="editId" showSummary="true" showDetail="false" /><br />
                                 <h:outputLabel for="username" value="Användarnamn:" /><br />
-                                <h:inputText id="editUsername" value="#{admin.editUsername}"/><br />
+                                <h:inputText id="editUsername" value="#{admin.editUsername}"/>
+                                <h:message for="editUsername" showSummary="true" showDetail="false" /><br />
                                 <h:outputLabel for="email" value="email:" /><br />
-                                <h:inputText id="editEmail" value="#{admin.editEmail}"/><br />
+                                <h:inputText id="editEmail" value="#{admin.editEmail}"/>
+                                <h:message for="editEmail" showSummary="true" showDetail="false" /><br />
                                 <h:outputLabel for="password" value="Lösenord:" /><br />
-                                <h:inputText id="editPassword" value="#{admin.editPassword}" /><br />
+                                <h:inputText id="editPassword" value="#{admin.editPassword}" />
+                                <h:message for="editPassword" showSummary="true" showDetail="false" /><br />
                                 <h:outputLabel for="feesOwed" value="Skuld:" /><br />
-                                <h:inputText id="editFeesOwed" value="#{admin.editFeesOwed}" /><br />
+                                <h:inputText id="editFeesOwed" value="#{admin.editFeesOwed}" />
+                                <h:message for="editFeesOwed" showSummary="true" showDetail="false" /><br />
                                 <h:commandButton id="btnEdit" value="Ändra"
                                                  action="adminPage?faces-redirect=true"
                                                  actionListener="#{admin.editUser()}" /><br />
-                                <h:messages showSummary="true" showDetail="false" />
                             </h:form>
                         </section>
                     </section>
@@ -91,27 +95,21 @@
                             <p>Här kan man manuellt lägga till en ny användare.</p>
                         </header>
                         <h:form>
-                            <h:outputLabel for="username" value="Användarnamn:" />
-                            <br />
+                            <h:outputLabel for="username" value="Användarnamn:" /><br />
                             <h:inputText id="username" value="#{admin.username}"/>
-                            <br />
-                            <h:outputLabel for="email" value="email:" />
-                            <br />
+                            <h:message for="username" showSummary="true" showDetail="false" /><br />
+                            <h:outputLabel for="email" value="email:" /><br />
                             <h:inputText id="email" value="#{admin.email}"/>
-                            <br />
-                            <h:outputLabel for="password" value="Lösenord:" />
-                            <br />
+                            <h:message for="email" showSummary="true" showDetail="false" /><br />
+                            <h:outputLabel for="password" value="Lösenord:" /><br />
                             <h:inputText id="password" value="#{admin.password}" />
-                            <br />
-                            <h:outputLabel for="feesOwed" value="Skuld:" />
-                            <br />
+                            <h:message for="password" showSummary="true" showDetail="false" /><br />
+                            <h:outputLabel for="feesOwed" value="Skuld:" /><br />
                             <h:inputText id="feesOwed" value="#{admin.feesOwed}" />
-                            <br />
+                            <h:message for="feesOwed" showSummary="true" showDetail="false" /><br />
                             <h:commandButton id="btnAdd" value="Lägg till"
                                              action="adminPage?faces-redirect=true"
-                                             actionListener="#{admin.createUser()}" />
-                            <br />
-                            <h:messages showSummary="true" showDetail="false" />
+                                             actionListener="#{admin.createUser()}" /><br />
                         </h:form>
                     </section>
                 </section>

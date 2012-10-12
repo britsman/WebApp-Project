@@ -3,30 +3,54 @@ package com.mycompany.library.beans;
 import com.mycompany.library.core.User;
 import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  * Backing bean for the adminPage.xhtml page.
  * @author estelius
  */
 @Named("admin")
-@RequestScoped
+@SessionScoped
 public class AdminPageBB implements Serializable {
     
     private UserRegistryBean urb;
     
+    @NotNull
+    @Size(min = 3, max = 8)
     private String username;
+    @NotNull
+    @Pattern(regexp = "^[_a-zA-Z0-9]+(\\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
+             message = "Provided email is not valid.")
     private String email;
+    @NotNull
+    @Size(min = 5, max = 20)
     private String password;
+    @NotNull
+    @DecimalMin(value = "0")
     private double feesOwed;
+    @NotNull
     private boolean isLib;
     
+    @NotNull
     private Long editId;
+    @NotNull
+    @Size(min = 3, max = 8)
     private String editUsername;
+    @NotNull
+    @Pattern(regexp = "^[_a-zA-Z0-9]+(\\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
+             message = "Provided email is not valid.")
     private String editEmail;
+    @NotNull
+    @Size(min = 5, max = 20)
     private String editPassword;
+    @NotNull
+    @DecimalMin(value = "0")
     private double editFeesOwed;
     
     // Defaul constructor.
