@@ -1,10 +1,10 @@
 package com.mycompany.library.beans;
 
 import com.mycompany.library.core.User;
-import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -12,10 +12,10 @@ import javax.inject.Named;
  * @author estelius
  */
 @Named("admin")
-@SessionScoped
+@RequestScoped
 public class AdminPageBB implements Serializable {
     
-    private static final WebbLib library = WebbLib.INSTANCE;
+    private UserRegistryBean urb;
     
     private String username;
     private String email;
@@ -32,22 +32,27 @@ public class AdminPageBB implements Serializable {
     // Defaul constructor.
     public AdminPageBB() {}
     
+    @Inject
+    public AdminPageBB(UserRegistryBean urb) {
+        this.urb = urb;
+    }
+    
     public String action() {
         return "adminPages?faces-redirect=true";
     }
     
     public List<User> getAllUsers() {
-        return library.getUsers().getAll();
+        return urb.getAll();
     }
     
     // Create and add a new user.
     public void createUser() {
-        library.getUsers().add(new User(username, password, email, feesOwed));
+        urb.add(new User(username, password, email, feesOwed));
     }
     
     // Remove an existing user.
     public void removeUser(Long id) {
-        library.getUsers().remove(id);
+        urb.remove(id);
     }
     
     public void prepareEdit(Long id, String username, String email, String password, double feesOwed) {
@@ -60,18 +65,18 @@ public class AdminPageBB implements Serializable {
     
     // Edit an existing user.
     public void editUser() {
-        User user = library.getUsers().find(editId);
+        User user = urb.find(editId);
         user.setUsername(editUsername);
         user.setEmail(editEmail);
         user.setPassword(editPassword);
         user.setFeesOwed(editFeesOwed);
-        library.getUsers().update(user);
+        urb.update(user);
     }
     
-    public void userPlus(Long editId){
-        User user = library.getUsers().find(editId);
-        user.setIsLibrarian(true);
-        library.getUsers().update(user);
+    public void userPlus(Long editId, boolean value){
+        User user = urb.find(editId);
+        user.setIsLibrarian(value);
+        urb.update(user);
     }
     
     public String getUsername() {
@@ -153,7 +158,4 @@ public class AdminPageBB implements Serializable {
     public void setIsLib(boolean isLib) {
         this.isLib = isLib;
     }
-    
-    
-    
 }

@@ -29,7 +29,7 @@
                                     <h:outputText id="username" value="#{user.username}" />
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header">EMail</f:facet>
+                                    <f:facet name="header">Email</f:facet>
                                     <h:outputText id="email" value="#{user.email}" />
                                 </h:column>
                                 <h:column>
@@ -56,8 +56,13 @@
                                 </h:column>
                                 <h:column>
                                     <h:commandLink value="Is Librarian"
+                                                   rendered="#{not user.isLibrarian}"
                                                    action="adminPage?faces-redirect=true"
-                                                   actionListener="#{admin.userPlus(user.id)}" />
+                                                   actionListener="#{admin.userPlus(user.id, true)}" />
+                                    <h:commandLink value="Isn't Librarian "
+                                                   rendered="#{user.isLibrarian}"
+                                                   action="adminPage?faces-redirect=true"
+                                                   actionListener="#{admin.userPlus(user.id, false)}" />
                                 </h:column>
                             </h:dataTable>
                         </h:form>
