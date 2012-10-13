@@ -4,6 +4,7 @@
  */
 package com.mycompany.library.core;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -31,7 +32,9 @@ public class QueryProccessor {
             reserved = q.getSingleResult();
         }
         catch(Exception e){
-           // e.printStackTrace();
+            //exception will always occur if the reserved item doesnt exist yet, 
+            //which is ok since it will be created when return value evaluates as null.
+           System.err.println("Query exception: " + e.getMessage());
         }
         finally{
             if (em != null) {
@@ -96,5 +99,46 @@ public class QueryProccessor {
         finally{
             return results;
         }
+    }
+    public List<String> getCreatorNames(Item item){
+        List<String> names = new ArrayList<>();
+        EntityManager em = emf.createEntityManager();
+        try {
+            String query = "SELECT c.name from Item i inner join i.creators c "+
+            "WHERE i= :item";
+            TypedQuery<String> q = em.createQuery(query, String.class);
+            q.setParameter("item", item);
+            names = q.getResultList();
+
+        } catch (Exception e) {
+            System.err.println("Query exception: " + e.getMessage());
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return names;
+    }
+    public int getQuePosition(User user, ReservedItem reservation){
+        int position = 0;
+        EntityManager em = emf.createEntityManager();
+        try {
+            String query = "select q.position from ReservedItem"+
+            " ri inner join ri.que q where ri= :reservation AND q.user = :user";
+            TypedQuery<Integer> q = em.createQuery(query, Integer.class);
+            q.setParameter("reservation", reservation);
+            q.setParameter("user", user);
+            position = q.getSingleResult();
+            
+        }
+        catch(Exception e){
+           System.err.println("Query exception: " + e.getMessage());
+        }
+        finally{
+            if (em != null) {
+                em.close();
+            }
+        }       
+        return position;
     }
 }

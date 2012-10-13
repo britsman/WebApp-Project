@@ -8,6 +8,8 @@
     <class>com.mycompany.library.core.Item</class>
     <class>com.mycompany.library.core.ReservedItem</class>
     <class>com.mycompany.library.core.User</class>
+    <class>com.mycompany.library.core.QueElement</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/LibDB"/>
       <property name="javax.persistence.jdbc.password" value="app"/>

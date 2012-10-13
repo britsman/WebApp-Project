@@ -8,13 +8,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -31,8 +30,9 @@ public class ReservedItem implements Serializable {
     @OneToOne
     private Item item;   
     //Que of users waiting to borrow
-    @Embedded
-    @ElementCollection
+    @OneToMany(cascade={CascadeType.MERGE, CascadeType.REMOVE}, 
+    fetch=FetchType.EAGER)
+    @JoinColumn(name="RESERVEDITEM_ID")
     private List<QueElement> que;
     
     public ReservedItem() {
@@ -69,5 +69,9 @@ public class ReservedItem implements Serializable {
     }
     private void reserve(User user){ 
         user.setReservedItems(this);
+    }
+    public int getQuePosition(User user){      
+        QueryProccessor qp = WebbLib.INSTANCE.getQueryProccessor();
+        return qp.getQuePosition(user, this);
     }
 }

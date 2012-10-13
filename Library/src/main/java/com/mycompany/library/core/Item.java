@@ -146,4 +146,8 @@ public class Item implements Serializable{
             this.creators.get(i).setItems(this);
         }
     }
+    public List<String> getCreatorNames(){
+        QueryProccessor qp = WebbLib.INSTANCE.getQueryProccessor();
+        return qp.getCreatorNames(this);
+    }
 }

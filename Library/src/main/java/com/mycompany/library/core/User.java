@@ -126,6 +126,4 @@ public class User implements Serializable{
     public void setBookmarkedItems(Item item) {
         this.bookmarkedItems.add(item);
     }
-    
-    
 }

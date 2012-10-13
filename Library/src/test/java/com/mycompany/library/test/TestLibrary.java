@@ -25,8 +25,8 @@ import org.junit.Test;
  */
 public class TestLibrary {
     private String creatorName = "Author";
-    private String itemId = "0975-531";
-    private String userName = "Eric1";
+    private String itemId = "0975-523";
+    private String userName = "Eric";
     
     @Test
     public void orderedTest(){//Tests were being done async, causing bugs.
@@ -34,8 +34,6 @@ public class TestLibrary {
         testAddUser();
         testSearch();
     }
-    
-    //@Test
     public void testAddItem(){
         ItemCollection items = WebbLib.INSTANCE.getItems();
         CreatorCollection creators = WebbLib.INSTANCE.getCreators();
@@ -48,8 +46,8 @@ public class TestLibrary {
         Item item = new Book(itemId, "testbook", temp, "publisher",
         "English", 2012, 200, "comedy", "img", "desc", 1, 7, 10);
         item = items.update(item);
+        System.out.println("\n" + item.getCreatorNames() + "\n");
     }
-    //@Test
     public void testAddUser(){
         UserRegistry users = WebbLib.INSTANCE.getUsers();
         ItemCollection items = WebbLib.INSTANCE.getItems();
@@ -70,32 +68,40 @@ public class TestLibrary {
             user.setReservedItems(reserve);
         }
         user = users.update(user);
-        System.out.println("\n" + user.getReservedItems() + "\n");
-        System.out.println("\n" + reserve.getQue() + "\n");
+        reserve = user.getReservedItems().get((user.getReservedItems().size()-1));
+        System.out.println("\n" + reserve.getQuePosition(user) + "\n");
     }
-    
     public void testSearch(){
+        CreatorCollection creators = WebbLib.INSTANCE.getCreators();
         
         List<Creator> cList = new ArrayList<>();
         ItemCollection items = WebbLib.INSTANCE.getItems();
         
-        Creator c1 = new Creator("Herman Melville");
+        Creator c1 = creators.getByName("Herman Melville");
+        if (c1 == null) {
+            c1 = new Creator("Herman Melville");
+        }
         cList.add(c1);
         Item item1 = new Book("978-0140623178", "Moby Dick", cList, "Penguin",
         "English", 1851, 544, "Horror", "img", "Tuff bok om valar och grejer, inte skriven av Jules Verne", 1, 7, 10);
-        items.update(item1);
+        item1 = items.update(item1);
         
-        cList.clear();
-        Creator c2 = new Creator("Jules Verne");
-        cList.add(c2);
+        c1 = creators.getByName("Jules Verne");
+        if (c1 == null) {
+            c1 = new Creator("Jules Verne");
+        }
+        cList.set(0, c1);
         Item item2 = new Book("978-2080702999", "La tour du Monde en quatre-vingts jours", cList, "Flammarion", "French", 1873, 200,
         "Adventure", "img", "Tuff bok, inte lika många valar dock.", 1, 7, 10);
-        items.update(item2);
+        item2 = items.update(item2);
+        
+        c1 = item2.getCreators().get(0);
+        cList.set(0, c1);
         
         Item item3 = new Book("978-0486440880", "Journey to the Center of the Earth", cList, "Dover Thrift", "English", 1864, 200, 
                 "Adventure", "img", "Massa grejer i jorden", 0, 7, 10);
-        items.update(item3);
-        
+       item3 = items.update(item3);
+       
         //Här börjar sökningen
         QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
         List<Item> foundItems = null;
@@ -105,8 +111,9 @@ public class TestLibrary {
         System.out.println("Expected: " + item1.getId());
         
         foundItems = q.searchItem(null, null, "Jules Verne", null, 0, 0, false, null, null);
-        System.out.println("Results for title Jules Verne: " + foundItems.get(0).getId());
-        System.out.println("Expected: " + item1.getId() + " & " + item2.getId());
+        System.out.println("Results for creator Jules Verne: " + foundItems.get(0).getId() + 
+        " & " + foundItems.get(1).getId());
+        System.out.println("Expected: " + item2.getId() + " & " + item3.getId());
         
         foundItems= q.searchItem(null, null, null, "valar", 0, 0, false, null, null);
         System.out.println("Böcker om valar: " + foundItems);
@@ -124,10 +131,7 @@ public class TestLibrary {
         System.out.println("Böcker skrivna före 1870: " + foundItems);
         
         foundItems = q.searchAll("Verne");
-        System.out.println("Antal resultat: " + foundItems.size());
-
-        
-        
+        System.out.println("Antal resultat: " + foundItems.size()); 
         
     }
 }

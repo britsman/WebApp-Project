@@ -5,14 +5,22 @@
 package com.mycompany.library.core;
 
 import java.io.Serializable;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author Eric
  */
-@Embeddable
+@Entity
+@Table(name="RESERVEDITEM_QUE")
 public class QueElement implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)        
+    Long id;
     private int position;
     private User user;
 
@@ -38,4 +46,13 @@ public class QueElement implements Serializable{
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
 }
