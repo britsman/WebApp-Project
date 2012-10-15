@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    
+    <body>
+        <ui:composition template="./template.xhtml">
+            <ui:define name="content">
+                <header id="findBookHeader">
+
+                    <h1>Hitta bok</h1>
+                    <p>Här kan du söka efter böcker eller andra items.</p>
+                </header>
+                <section id="findBookSection">
+                    <form>
+                        <p><h:inputText id="txtSearch" value="#{findBook.search}" />
+                            <h:commandButton id="btnOK" value="Sök" actionListener="#{findBook.actionListener}"/>                       
+                        </p>    
+
+                        <br><a id="displayAdvaced" href="javascript:toggle();"  >Avancerad sökning</a> </br>
+                        <script language="javascript"> 
+                            function toggle() {
+                                var settings = document.getElementById("searchForm");
+                                
+                                if(settings.style.display == "block") {
+                                    settings.style.display = "none";
+                                    
+                                }
+                                else {
+                                    settings.style.display = "block";
+                                    
+                                }
+                            } 
+                        </script>
+
+
+
+                        <div id="searchForm" style="display: none">
+                            <form>
+                                Sök på: 
+                                <br><input type="checkbox" name="vehicle" value="Car"> Titel </input>
+                                    <span style="padding-left:60px"><input type="checkbox" name="vehicle" value="Bike"> Författare </input></span></br>
+                                <br><input type="checkbox" name="vehicle" value="Car"> ID </input>
+                                    <span style="padding-left:60px"><input type="checkbox" name="vehicle" value="Car"> I lager </input></span></br>
+                                <h:outputLabel value="Sök på genre"  for="genreTable"/>
+                                <!-- <h:selectManyMenu id="genreTable"> </h:selectManyMenu> -->
+                                <br> <select id="genreTable" style="margin-bottom: 2em">   
+                                        <option>Alla</option>
+                                        <option>Antologier</option>
+                                        <option>Barn</option>
+                                        <option>Deckare &amp; kriminalromaner</option>
+                                        <option>Dramatik</option>
+                                        <option>Essäer &amp; Reportage</option>
+                                        <option>Fantasy</option>
+                                        <option>Historiska romaner</option>
+                                        <option>Klassiker</option>
+                                        <option>Modern &amp; samtida skönlitteratur</option>
+                                        <option>Poesi</option>
+                                        <option>Science fiction</option>
+                                        <option>Serier &amp; Grafiska romaner</option>
+                                        <option>Skräck- &amp; spökhistorier</option>
+                                        <option>Skönlitteratur</option>
+                                        <option>Thrillers</option>
+                                        <option>Äventyr</option>
+                                        <option>Övriga genrer</option>
+                                    </select></br>
+                                <br></br>
+                            </form>
+                        </div>      
+                    </form>
+                </section>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

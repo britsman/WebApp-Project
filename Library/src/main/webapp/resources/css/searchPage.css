@@ -1,0 +1,21 @@
+/* 
+    Document   : searchPage
+    Created on : Oct 14, 2012, 6:26:42 PM
+    Author     : Hannes
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+
+#searchForm{
+    display:none; 
+}
+
+h1 {
+    font-size: 60px;
+    font-weight: bold
+}
