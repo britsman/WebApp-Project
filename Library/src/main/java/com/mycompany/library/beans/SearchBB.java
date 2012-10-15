@@ -21,16 +21,22 @@ import javax.inject.Named;
 @Named("search")
 @SessionScoped
 public class SearchBB implements Serializable{
-    private String id,title,creator,description,language,genre;
+    private String id,title,creator,description,language,genre,type;
+    private String topSearch;
     private int fromYear,toYear;
     private boolean inStock;
     private List<Item> result;
     
     public SearchBB() {
+        
     }
     
     public void searchAll(){
         
+        QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
+        result = query.searchAll(topSearch);
+        
+        System.out.println(result);
     }
     
     public void searchAdvanced(String id, String title, String creator, String description, int fromYear, int toYear, boolean inStock, String language, String genre){
@@ -117,6 +123,22 @@ public class SearchBB implements Serializable{
 
     public void setResult(List<Item> result) {
         this.result = result;
+    }
+
+    public String getTopSearch() {
+        return topSearch;
+    }
+
+    public void setTopSearch(String topSearch) {
+        this.topSearch = topSearch;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
     
     
