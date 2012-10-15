@@ -3,9 +3,14 @@ package com.mycompany.library.beans;
 import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.Item;
 import com.mycompany.library.core.User;
-import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -17,9 +22,10 @@ import javax.inject.Named;
 @SessionScoped
 public class UserPageBB implements Serializable {
     
-    private WebbLib library;
-    
     private User user;
+
+    // Default constructor.
+    public UserPageBB() {}
     
     public String getUsetName(){
         return user.getUsername();
@@ -32,14 +38,6 @@ public class UserPageBB implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-    
-    
-    // Default constructor.
-    public UserPageBB() {}
-    
-    public UserPageBB(WebbLib library) {
-        this.library = library;
-    }
         
     public List<BorrowedItem> getBorrowedItems() {
         return user.getBorrowedItems();
@@ -47,5 +45,16 @@ public class UserPageBB implements Serializable {
     
     public List<Item> getFavorites() {
         return user.getBookmarkedItems();
+    }
+    
+    public String returnDate(Date loanDate, BorrowedItem item) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(loanDate);
+        calendar.add(Calendar.DATE, item.getItem().getLoan_period());
+        return formatDate(calendar.getTime());
+    }
+    
+    public String formatDate(Date date) {
+        return new SimpleDateFormat("yyyy-MM-dd").format(date);
     }
 }
