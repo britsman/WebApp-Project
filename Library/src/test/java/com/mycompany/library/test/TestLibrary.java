@@ -26,7 +26,7 @@ import org.junit.Test;
 public class TestLibrary {
     private String creatorName = "Author";
     private String itemId = "0975-523";
-    private String userName = "Eric";
+    private String userName = "Eric1";
     
     @Test
     public void orderedTest(){//Tests were being done async, causing bugs.

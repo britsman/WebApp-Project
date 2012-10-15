@@ -3,9 +3,15 @@ package com.mycompany.library.beans;
 import com.mycompany.library.core.User;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -20,6 +26,8 @@ import javax.validation.constraints.Size;
 public class AdminPageBB implements Serializable {
     
     private UserRegistryBean urb;
+    @Resource(name = "mail/gusbriter@student.gu.se")
+    private Session mailSession;
     
     @NotNull
     @Size(min = 3, max = 8)
@@ -181,5 +189,18 @@ public class AdminPageBB implements Serializable {
 
     public void setIsLib(boolean isLib) {
         this.isLib = isLib;
+    }
+    public void sendEmail() {
+        Message msg = new MimeMessage(mailSession);
+        mailSession.setDebug(true);
+        try {
+            msg.setSubject("Library Test");
+            msg.setRecipient(Message.RecipientType.TO, new InternetAddress("eric_britsman@hotmail.com"));
+            msg.setText("Test Email from Library");
+            Transport.send(msg);
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+        } 
     }
 }
