@@ -111,7 +111,10 @@
                                              action="adminPage?faces-redirect=true"
                                              actionListener="#{admin.createUser()}" /><br />
                         </h:form>
-                        <h:button value="send email" onclick="#{admin.sendEmail()}"/>
+                        <h:form>
+                        <h:commandButton value="send email" action="adminPage?faces-redirect=true"
+                        actionListener="#{admin.sendEmail()}" /><br />
+                        </h:form>
                     </section>
                 </section>
             </ui:define>

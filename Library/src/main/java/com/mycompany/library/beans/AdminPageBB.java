@@ -4,9 +4,11 @@ import com.mycompany.library.core.User;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.ejb.Asynchronous;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -190,6 +192,7 @@ public class AdminPageBB implements Serializable {
     public void setIsLib(boolean isLib) {
         this.isLib = isLib;
     }
+    @Asynchronous
     public void sendEmail() {
         Message msg = new MimeMessage(mailSession);
         mailSession.setDebug(true);
@@ -197,6 +200,8 @@ public class AdminPageBB implements Serializable {
             msg.setSubject("Library Test");
             msg.setRecipient(Message.RecipientType.TO, new InternetAddress("eric_britsman@hotmail.com"));
             msg.setFrom(new InternetAddress("Admin@Library.com", "Bibliotek Online"));
+            Address replyTo[] = { new InternetAddress("Admin@Library.com") }; // set here
+            msg.setReplyTo(replyTo); 
             msg.setText("Test Email from Library");
             Transport.send(msg);
         } 
