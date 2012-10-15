@@ -3,12 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html">
-    
+
     <body>
         <ui:composition template="./template.xhtml">
             <ui:define name="content">
                 <header id="findBookHeader">
-
+                    <br><h1><h:outputText value="#{search.genre}"/></h1></br>    
                     <h1>Hitta bok</h1>
                     <p>Här kan du söka efter böcker eller andra items.</p>
                 </header>
@@ -17,6 +17,7 @@
                         <p><h:inputText id="txtSearch" value="#{findBook.search}" />
                             <h:commandButton id="btnOK" value="Sök" actionListener="#{findBook.actionListener}"/>                       
                         </p>    
+                        
 
                         <br><a id="displayAdvaced" href="javascript:toggle();"  >Avancerad sökning</a> </br>
                         <script language="javascript"> 
@@ -34,19 +35,18 @@
                             } 
                         </script>
 
+                        <div id="searchForm" style="display: none;background-color: lightgoldenrodyellow">
+                            <div style="margin-left: 1em">
+                                <form>
+                                    <br>Sök genom att fylla i ett eller flera alternativ. </br>
+                                    <br><h:outputLabel for="srcAuthor" value="Författare/Utgivare"/></br>
+                                    <h:inputText id="srcAuthor"  style="margin-bottom: 0.5em" value="#{search.creator}" />
 
+                                    <br><h:outputLabel for="srcID" value="ISBN"/></br>
+                                    <h:inputText id="srcISBN"  style="margin-bottom: 0.5em" value="#{search.id}" />
 
-                        <div id="searchForm" style="display: none">
-                            <form>
-                                <br>Sök genom att fylla i ett eller flera alternativ. </br>
-                                <br><h:outputLabel for="srcAuthor" value="Författare"/></br>
-                                <h:inputText id="srcGenre" />
-                                
-                                <br><h:outputLabel for="srcID" value="ISBN"/></br>
-                                <h:inputText id="srcISBN" />
-                                
-                                <br><h:outputLabel for="genreTable" value="Genre"/></br>                               
-                                <select id="genreTable" style="margin-bottom: 2em">   
+                                    <br><h:outputLabel for="genreTable" value="Genre"/></br>                          
+                                    <select id="genreTable"  style="margin-bottom: 0.5em" onkeypress="#{search.genre}">   
                                         <option>Alla</option>
                                         <option>Antologier</option>
                                         <option>Barn</option>
@@ -66,11 +66,36 @@
                                         <option>Äventyr</option>
                                         <option>Övriga genrer</option>
                                     </select>
-                                <!-- <h:selectManyMenu id="genreTable"> </h:selectManyMenu> -->
-                                <br><h:commandButton value="Sök"/></br>
-                               
-                                <br></br>
-                            </form>
+
+                                    <br><h:outputLabel for="laguageTable" value="Språk"/></br>                          
+                                    <select id="languageTable" style="margin-bottom: 0.5em">   
+                                        <option>Alla</option>
+                                        <option>Svenska</option>
+                                        <option>Engelska</option>                                    
+                                        <option>Övriga</option>
+                                    </select>
+                                    <br><h:outputLabel for="typeTable" value="Typ"/></br>                          
+                                    <select id="typeTable" style="margin-bottom: 0.5em">   
+                                        <option>Alla</option>
+                                        <option>Bok</option>
+                                        <option>Cd</option>
+                                    </select>
+
+                                    <br><h:outputLabel for="srcFromYear" value="Från år"/><span style="padding-left: 40px"/><h:outputLabel for="srcToYear" value="Till år"/></br>
+                                    <h:inputText id="srcFromYear" size="5"/><span style="margin-bottom: 0.5em;padding-left: 30px"/><h:inputText id="srcToYear" size="5"/>
+
+                                    <br><h:outputLabel for="srcDescription" value="Fritext"/></br>
+                                    <h:inputTextarea style="margin-bottom: 0.5em"/>
+
+                                    <br><h:outputLabel for="srcCheckbox" value="Finns inne i lager" /></br>
+                                    <input id="srcCheckbox" type="checkbox" name="option1" value="srcInStock"/>
+
+
+
+
+                                    <br><h:commandButton style=" margin-top: 1em" value="Sök"/></br>
+                                </form>
+                            </div>
                         </div>      
                     </form>
                 </section>
