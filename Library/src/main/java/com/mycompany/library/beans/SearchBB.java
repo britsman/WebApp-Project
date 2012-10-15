@@ -12,8 +12,7 @@ import javax.inject.Named;
  * @author Hannes
  */
 
-@Named("search")
-@SessionScoped
+
 public class SearchBB {
     
 }

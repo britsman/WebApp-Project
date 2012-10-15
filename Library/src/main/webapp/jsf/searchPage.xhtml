@@ -38,14 +38,15 @@
 
                         <div id="searchForm" style="display: none">
                             <form>
-                                Sök på: 
-                                <br><input type="checkbox" name="vehicle" value="Car"> Titel </input>
-                                    <span style="padding-left:60px"><input type="checkbox" name="vehicle" value="Bike"> Författare </input></span></br>
-                                <br><input type="checkbox" name="vehicle" value="Car"> ID </input>
-                                    <span style="padding-left:60px"><input type="checkbox" name="vehicle" value="Car"> I lager </input></span></br>
-                                <h:outputLabel value="Sök på genre"  for="genreTable"/>
-                                <!-- <h:selectManyMenu id="genreTable"> </h:selectManyMenu> -->
-                                <br> <select id="genreTable" style="margin-bottom: 2em">   
+                                <br>Sök genom att fylla i ett eller flera alternativ. </br>
+                                <br><h:outputLabel for="srcAuthor" value="Författare"/></br>
+                                <h:inputText id="srcGenre" />
+                                
+                                <br><h:outputLabel for="srcID" value="ISBN"/></br>
+                                <h:inputText id="srcISBN" />
+                                
+                                <br><h:outputLabel for="genreTable" value="Genre"/></br>                               
+                                <select id="genreTable" style="margin-bottom: 2em">   
                                         <option>Alla</option>
                                         <option>Antologier</option>
                                         <option>Barn</option>
@@ -64,7 +65,10 @@
                                         <option>Thrillers</option>
                                         <option>Äventyr</option>
                                         <option>Övriga genrer</option>
-                                    </select></br>
+                                    </select>
+                                <!-- <h:selectManyMenu id="genreTable"> </h:selectManyMenu> -->
+                                <br><h:commandButton value="Sök"/></br>
+                               
                                 <br></br>
                             </form>
                         </div>      
