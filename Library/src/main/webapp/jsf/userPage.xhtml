@@ -36,12 +36,16 @@
                                         <h:outputText id="title" value="#{item.item.title}" />
                                     </h:column>
                                     <h:column>
-                                        <f:facet name="header">Title</f:facet>
+                                        <f:facet name="header">Author(s)</f:facet>
                                         <h:outputText id="creators" value="#{item.item.creators}" />
                                     </h:column>
                                     <h:column>
+                                        <f:facet name="header">Lånad</f:facet>
+                                        <h:outputText id="loanDate" value="#{userPage.formatDate(item.loanDate)}" />
+                                    </h:column>
+                                    <h:column>
                                         <f:facet name="header">Åter</f:facet>
-                                        <h:outputText id="loanDate" value="#{item.loanDate}" />
+                                        <h:outputText id="returnDate" value="#{userPage.returnDate(item.loanDate, item)}" />
                                     </h:column>
                                 </h:dataTable>
                                 <h:outputLabel rendered="#{empty userPage.borrowedItems}" value="Du har inga lånade böcker." />
@@ -59,7 +63,7 @@
                                         <h:outputText id="title" value="#{item.title}" />
                                     </h:column>
                                     <h:column>
-                                        <f:facet name="header">Title</f:facet>
+                                        <f:facet name="header">Author(s)</f:facet>
                                         <h:outputText id="creators" value="#{item.creators}" />
                                     </h:column>
                                 </h:dataTable>
