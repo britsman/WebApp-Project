@@ -196,6 +196,7 @@ public class AdminPageBB implements Serializable {
         try {
             msg.setSubject("Library Test");
             msg.setRecipient(Message.RecipientType.TO, new InternetAddress("eric_britsman@hotmail.com"));
+            msg.setFrom(new InternetAddress("Admin@Library.com", "Bibliotek Online"));
             msg.setText("Test Email from Library");
             Transport.send(msg);
         } 
