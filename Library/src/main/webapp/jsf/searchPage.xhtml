@@ -79,10 +79,10 @@
                                         <option>Alla</option>
                                         <option>Bok</option>
                                         <option>Cd</option>
-                                    </select>
+                                    </select> 
 
                                     <br><h:outputLabel for="srcFromYear" value="Från år"/><span style="padding-left: 40px"/><h:outputLabel for="srcToYear" value="Till år"/></br>
-                                    <h:inputText id="srcFromYear" size="5"/><span style="margin-bottom: 0.5em;padding-left: 30px"/><h:inputText id="srcToYear" size="5"/>
+                                    <h:inputText value="#{search.fromYear}" id="srcFromYear" size="5"/><span style="margin-bottom: 0.5em;padding-left: 30px"/><h:inputText value="#{search.toYear}" id="srcToYear" size="5"/>
 
                                     <br><h:outputLabel for="srcDescription" value="Fritext"/></br>
                                     <h:inputTextarea style="margin-bottom: 0.5em"/>
@@ -93,7 +93,7 @@
 
 
 
-                                    <br><h:commandButton style=" margin-top: 1em" value="Sök"/></br>
+                                    <br><h:commandButton style=" margin-top: 1em" value="Sök" /></br>
                                 </form>
                             </div>
                         </div>      

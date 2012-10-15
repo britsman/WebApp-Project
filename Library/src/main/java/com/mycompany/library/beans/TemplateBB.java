@@ -25,6 +25,7 @@ public class TemplateBB implements Serializable {
     @Inject
     private UserPageBB privateUserBean;
     private User loggedInUser=null;
+    private String logOutString;
     
 
     
@@ -41,9 +42,11 @@ public class TemplateBB implements Serializable {
     
     public String loggedUser(){        
         if(loggedInUser == null){
+            logOutString="";
             return "Ej inloggad";
         }
         else{
+            logOutString = "Logga ut";
             return ("Inloggad som "+loggedInUser.getUsername());
         }
     }
@@ -67,6 +70,16 @@ public class TemplateBB implements Serializable {
      public void actionListener(ActionEvent e) {
         logOut();
     }
+
+    public String getLogOutString() {
+        return logOutString;
+    }
+
+    public void setLogOutString(String logOutString) {
+        this.logOutString = logOutString;
+    }
+
+  
     
   
     

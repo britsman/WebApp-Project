@@ -5,6 +5,8 @@
 package com.mycompany.library.beans;
 
 import com.mycompany.library.core.Item;
+import com.mycompany.library.core.QueryProccessor;
+import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -19,7 +21,7 @@ import javax.inject.Named;
 @Named("search")
 @SessionScoped
 public class SearchBB implements Serializable{
-    private String id,title,creator,description,language,genre="BARN";
+    private String id,title,creator,description,language,genre;
     private int fromYear,toYear;
     private boolean inStock;
     private List<Item> result;
@@ -32,7 +34,9 @@ public class SearchBB implements Serializable{
     }
     
     public void searchAdvanced(String id, String title, String creator, String description, int fromYear, int toYear, boolean inStock, String language, String genre){
-        
+        QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
+        result = query.searchItem(id, title, creator, description, fromYear, toYear, inStock, language, genre);
+        System.out.println(result);
     }
 
     public String getId() {

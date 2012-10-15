@@ -21,7 +21,7 @@
                 <h:form>    
                     <p><h:outputText id="txtInloggad" value="#{template.loggedUser()}" /></p>
                     <h1>Bibliotek</h1>
-                    <h:commandLink tabindex="6" id="linkLogOut" action="library?faces-redirect=true" actionListener="#{template.actionListener(e)}" style="color: blue"> Logga ut</h:commandLink>
+                    <h:commandLink tabindex="6" id="linkLogOut" action="library?faces-redirect=true" actionListener="#{template.actionListener(e)}" style="color: blue" value="">#{template.logOutString}</h:commandLink>
                     
                 </h:form>
                                 
