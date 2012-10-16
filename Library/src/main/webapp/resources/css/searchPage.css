@@ -15,7 +15,24 @@ root {
     display:none; 
 }
 
-h1 {
-    font-size: 60px;
-    font-weight: bold
+.resultTable{
+     border:"0"; 
+     rendered:"#{not empty search.result}";
+     style:"max-height: 150px"; 
+     
 }
+
+.odd{
+    
+}
+.even{
+    background: #ECEDF4;
+   
+}
+
+.listItemTitle{
+    font-size: 34px;
+    font-weight: bold; 
+        
+}
+

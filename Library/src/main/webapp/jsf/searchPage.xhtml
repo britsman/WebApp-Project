@@ -4,34 +4,35 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
-
     <body>
+
+
         <ui:composition template="./template.xhtml">
             <ui:define name="content">
+
                 <header id="findBookHeader"> 
                     <h1>Hitta bok</h1>
-                    <p>Här kan du söka efter böcker eller andra items.</p>
+                    <p>Här kan du söka efter böcker, ljudböcker och filmer.</p>
                 </header>
                 <section id="findBookSection">
                     <h:form>
                         <p><h:inputText id="txtSearch" value="#{search.topSearch}" />
                             <h:commandButton id="btnOK" value="Sök" action="#{search.searchAll()}"/>                       
                         </p>    
-                        
-                        <br><h:outputLabel value="#{search.genre}"/></br>
-                        
-                        <br><a id="displayAdvaced" href="javascript:toggle();"  >Avancerad sökning</a> </br>
+
+                        <br><a id="displayAdvaced" href="javascript:toggle();" style="margin-bottom: 0.5em" >Avancerad sökning</a> </br>
+                        <!--Javascript for the advanced searchmenu-->
                         <script language="javascript"> 
                             function toggle() {
                                 var settings = document.getElementById("searchForm");
-                                
+                    
                                 if(settings.style.display == "block") {
                                     settings.style.display = "none";
-                                    
+                        
                                 }
                                 else {
                                     settings.style.display = "block";
-                                    
+                        
                                 }
                             } 
                         </script>
@@ -40,15 +41,18 @@
                             <div style="margin-left: 1em">
                                 <h:form>
                                     <br>Sök genom att fylla i ett eller flera alternativ. </br>
-                                    <br><h:outputLabel for="srcAuthor" value="Författare/Utgivare"/></br>
+                                    <br><h:outputLabel for="srcTitle" value="Titel"/></br>
+                                    <h:inputText id="srcTitle"  style="margin-bottom: 0.5em" value="#{search.title}" />
+                                    <br><h:outputLabel for="srcAuthor" value="Författare"/></br>
                                     <h:inputText id="srcAuthor"  style="margin-bottom: 0.5em" value="#{search.creator}" />
-
+                                    <br><h:outputLabel for="srcPublisher" value="Utgivare"/></br>
+                                    <h:inputText id="srcPublisher"  style="margin-bottom: 0.5em" value="#{search.publisher}" />
                                     <br><h:outputLabel for="srcISBN" value="ISBN"/></br>
                                     <h:inputText id="srcISBN"  style="margin-bottom: 0.5em" value="#{search.id}" />
 
                                     <br><h:outputLabel value="Genre"/></br>                          
                                     <h:selectOneMenu id="genreTable" value="#{search.genre}" style="margin-bottom: 0.5em">
-                                        <f:selectItem  itemLabel="Alla" itemValue="all" />
+                                        <f:selectItem  itemLabel="Alla" itemValue="" />
                                         <f:selectItem  itemLabel="Antologier" itemValue="Antologier" />
                                         <f:selectItem  itemLabel="Barn" itemValue="Barn" />
                                         <f:selectItem  itemLabel="Deckare &amp; kriminalromaner" itemValue="DeckareKriminal" />
@@ -70,19 +74,19 @@
 
                                     <br><h:outputLabel value="Språk"/></br> 
                                     <h:selectOneMenu id="laguageTable" value="#{search.language}" style="margin-bottom: 0.5em">
-                                        <f:selectItem itemLabel="Alla" itemValue="all"/>
+                                        <f:selectItem itemLabel="Alla" itemValue=""/>
                                         <f:selectItem itemLabel="Svenska" itemValue="swedish"/>
                                         <f:selectItem itemLabel="Engelska" itemValue="english"/>
                                     </h:selectOneMenu>
-                                    
+
                                     <br><h:outputLabel value="Typ"/></br>                          
                                     <h:selectOneMenu id="typeTable" value="#{search.type}" style="margin-bottom: 0.5em">
-                                        <f:selectItem itemLabel="Alla" itemValue="all"/>
+                                        <f:selectItem itemLabel="Alla" itemValue=""/>
                                         <f:selectItem itemLabel="Bok" itemValue="book"/>
                                         <f:selectItem itemLabel="Cd" itemValue="cd"/>
                                         <f:selectItem itemLabel="Film" itemValue="film"/>
                                     </h:selectOneMenu>
-                                    
+
                                     <br><h:outputLabel for="srcFromYear" value="Från år"/><span style="padding-left: 40px"/><h:outputLabel for="srcToYear" value="Till år"/></br>
                                     <h:inputText  id="srcFromYear" size="5"/><span style="margin-bottom: 0.5em;padding-left: 30px"/><h:inputText  id="srcToYear" size="5"/>
 
@@ -98,18 +102,17 @@
                         </div>      
                     </h:form>
                     <h:form>
-                        <h:dataTable var="item" value="#{search.result}" border="1" rendered="#{not empty search.result}" style="width: 100%">
-                            <h:column>
-                                <f:facet name="header"></f:facet>
-                                
+                        <h:head>
+                            <link href="./../resources/css/searchPage.css" rel="stylesheet" type="text/css" />
+                        </h:head>
+                        <h:dataTable id="resultTable" var="item" value="#{search.result}" rowClasses="even,odd">
+                            <h:column >                               
+                                <h:graphicImage value="/resources/img/defaultBook.png" width="60" height="50" />
                             </h:column>
                             <h:column>
-                                <f:facet name="header">Title</f:facet>
-                                <h:outputText id="title" value="#{item.title}" />
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Author(s)</f:facet>
-                                <h:outputText id="creators" value="#{item.creators}" />
+                                <h:commandLink id="listItemTitle" value="#{item.title}" style="color: black" action="bookPage?faces-redirect=true"/>
+                                <p><h:outputText id="creators" value="#{item.creators}"/></p>
+                                <h:outputText id="genre" value="#{item.genre}"/>                                
                             </h:column>
                         </h:dataTable>     
                     </h:form>

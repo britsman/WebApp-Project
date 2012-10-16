@@ -17,42 +17,54 @@ import javax.inject.Named;
  *
  * @author Hannes
  */
-
 @Named("search")
 @SessionScoped
-public class SearchBB implements Serializable{
-    private String id=null,title=null,creator=null,publisher=null,description=null,language,genre,type;
-    private String topSearch=null;
-    private int fromYear = 0,toYear =0;
-    private boolean inStock = true;
+public class SearchBB implements Serializable {
+
+    private String id, title, creator, publisher, description, language, genre,type;
+    private String topSearch;
+    private int fromYear, toYear;
+    private boolean inStock;
     private List<Item> result;
-    
+
     public SearchBB() {
-        
     }
-    
-    public void searchAll(){     
+
+    public void searchAll() {
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
-        if(topSearch!=""){
-        result = query.searchAll(topSearch);
+        if (topSearch != "") {
+            result = query.searchAll(topSearch);
         }
-     }
-    
-    
-    
-    public void searchAdvanced(){
+    }
+
+    public void searchAdvanced() {
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
-        if(id=="")id=null;
-        if(title=="")title=null;
-        if(creator=="")creator=null;
-        if(description=="")description=null;
-        
+//        if(id=="")id=null;
+//        if(title=="")title=null;
+//        if(creator=="")creator=null;
+//        if(description=="")description=null;
+//        
         genre=null;
         language=null;
         type=null;
-        publisher=null;
         result = query.searchItem(id, title, creator, publisher, description, fromYear, toYear, inStock, language, genre);
-        System.out.println("DETTA ÄR INNE I ADVANCED först genre"+genre+" sen sprak"+language+" sen typ "+type);
+
+    }
+
+    public List<Item> getResult() {
+        return result;
+    }
+
+    public void setResult(List<Item> result) {
+        this.result = result;
+    }
+
+    public String getTopSearch() {
+        return topSearch;
+    }
+
+    public void setTopSearch(String topSearch) {
+        this.topSearch = topSearch;
     }
 
     public String getId() {
@@ -60,7 +72,11 @@ public class SearchBB implements Serializable{
     }
 
     public void setId(String id) {
-        this.id = id;
+        if (id.isEmpty()) {
+            this.id = null;
+        } else {
+            this.id =id;
+        }
     }
 
     public String getTitle() {
@@ -68,7 +84,11 @@ public class SearchBB implements Serializable{
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        if (title.isEmpty()) {
+            this.title = null;
+        } else {
+            this.title =title;
+        }
     }
 
     public String getCreator() {
@@ -76,7 +96,23 @@ public class SearchBB implements Serializable{
     }
 
     public void setCreator(String creator) {
-        this.creator = creator;
+        if (creator.isEmpty()) {
+            this.creator = null;
+        } else {
+            this.creator = creator;
+        }
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        if (publisher.isEmpty()) {
+            this.publisher = null;
+        } else {
+            this.publisher = publisher;
+        }
     }
 
     public String getDescription() {
@@ -84,23 +120,11 @@ public class SearchBB implements Serializable{
     }
 
     public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
+        if (description.isEmpty()) {
+            this.description = null;
+        } else {
+            this.description = description;
+        }
     }
 
     public int getFromYear() {
@@ -127,20 +151,24 @@ public class SearchBB implements Serializable{
         this.inStock = inStock;
     }
 
-    public List<Item> getResult() {
-        return result;
+    public String getLanguage() {
+        return language;
     }
 
-    public void setResult(List<Item> result) {
-        this.result = result;
+    public void setLanguage(String language) {
+        
+            this.language = language;
+        
     }
 
-    public String getTopSearch() {
-        return topSearch;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setTopSearch(String topSearch) {
-        this.topSearch = topSearch;
+    public void setGenre(String genre) {
+        
+            this.genre = genre;
+        
     }
 
     public String getType() {
@@ -150,7 +178,5 @@ public class SearchBB implements Serializable{
     public void setType(String type) {
         this.type = type;
     }
-    
-    
     
 }
