@@ -30,25 +30,29 @@
                                 <p>Dina lånade böcker.</p>
                             </header>
                             <section>
-                                <h:dataTable var="item" value="#{userPage.borrowedItems}" rendered="#{not empty userPage.borrowedItems}" border="1">
-                                    <h:column>
-                                        <f:facet name="header">Title</f:facet>
-                                        <h:outputText id="title" value="#{item.item.title}" />
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">Author(s)</f:facet>
-                                        <h:outputText id="creators" value="#{item.item.creators}" />
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">Lånad</f:facet>
-                                        <h:outputText id="loanDate" value="#{userPage.formatDate(item.loanDate)}" />
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">Åter</f:facet>
-                                        <h:outputText id="returnDate" value="#{userPage.returnDate(item.loanDate, item)}" />
-                                    </h:column>
-                                </h:dataTable>
-                                <h:outputLabel rendered="#{empty userPage.borrowedItems}" value="Du har inga lånade böcker." />
+                                <h:form>
+                                    <h:dataTable var="item" value="#{userPage.borrowedItems}" rendered="#{not empty userPage.borrowedItems}" border="1">
+                                        <h:column>
+                                            <f:facet name="header">Title</f:facet>
+                                            <h:commandLink value="#{item.item.title}"
+                                                           action="bookPage?faces-redirect=true"
+                                                           actionListener="#{SingleItem.bookListener(item.item)}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Author(s)</f:facet>
+                                            <h:outputText id="creators" value="#{item.item.creators}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Lånad</f:facet>
+                                            <h:outputText id="loanDate" value="#{userPage.formatDate(item.loanDate)}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Åter</f:facet>
+                                            <h:outputText id="returnDate" value="#{userPage.returnDate(item.loanDate, item)}" />
+                                        </h:column>
+                                    </h:dataTable>
+                                    <h:outputLabel rendered="#{empty userPage.borrowedItems}" value="Du har inga lånade böcker." />
+                                </h:form>
                             </section>
                         </section>
                         <section class="userPageSubSection">
