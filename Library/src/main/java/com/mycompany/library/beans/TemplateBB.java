@@ -50,6 +50,15 @@ public class TemplateBB implements Serializable {
             return ("Inloggad som "+loggedInUser.getUsername());
         }
     }
+    
+    public String myPage(){
+        if(loggedInUser == null){
+            return "login.xhtml";
+        }
+        else{
+            return "userPage.xhtml";
+        }
+    }
 
     public User getLoggedInUser() {
         return loggedInUser;

@@ -54,7 +54,10 @@ public class UserPlusPageBB implements Serializable {
         List<Creator> cs = new ArrayList<Creator>();
         String[] creatorStrings = this.creators.split(",");
         for (String s: creatorStrings) {
-            Creator creator = new Creator(s);
+            Creator creator = library.getCreators().getByName(s);
+            if(creator == null){
+                creator = new Creator(s);
+            }
             cs.add(creator);
             library.getCreators().add(creator);
         }
