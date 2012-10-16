@@ -1,4 +1,4 @@
-package com.mycompany.library.beans.validation;
+package com.mycompany.library.validation.user;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

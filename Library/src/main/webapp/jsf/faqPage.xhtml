@@ -4,29 +4,36 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <body>
+        
         <ui:composition template="./template.xhtml">
+            
             <ui:define name="content">
-                <header>
+                
+                <header class="contentHeader">
                     <h1>Frågor och svar</h1>
                     <p>Här finns svar på vanliga frågor.</p>
                 </header>
-                <section>
+                
+                <section class="contentSection">
                     <ul>
                         <li>
-                            <h2>Fråga</h2>
-                            <p>Svar</p>
+                            <h2>Fråga: Fungerar sidan bra?</h2>
+                            <p>Svar: Ja.</p>
                         </li>
                         <li>
-                            <h2>Fråga</h2>
-                            <p>Svar</p>
+                            <h2>Fråga: Fungerar sidan dåligt?</h2>
+                            <p>Svar: Nej.</p>
                         </li>
                         <li>
-                            <h2>Fråga</h2>
-                            <p>Svar</p>
+                            <h2>Fråga: Answer to the Ultimate Question of Life, the Universe, and Everything?</h2>
+                            <p>Svar: 42.</p>
                         </li>
                     </ul>
                 </section>
+                
             </ui:define>
+            
         </ui:composition>
+        
     </body>
 </html>

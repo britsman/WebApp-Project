@@ -1,4 +1,4 @@
-package com.mycompany.library.beans.validation;
+package com.mycompany.library.validation.user;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
