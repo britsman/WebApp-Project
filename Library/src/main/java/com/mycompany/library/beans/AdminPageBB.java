@@ -14,10 +14,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 /**
  * Backing bean for the adminPage.xhtml page.
@@ -31,36 +27,16 @@ public class AdminPageBB implements Serializable {
     @Resource(name = "mail/gusbriter@student.gu.se")
     private Session mailSession;
     
-    @NotNull
-    @Size(min = 3, max = 8)
     private String username;
-    @NotNull
-    @Pattern(regexp = "^[_a-zA-Z0-9]+(\\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
-             message = "Provided email is not valid.")
     private String email;
-    @NotNull
-    @Size(min = 5, max = 20)
     private String password;
-    @NotNull
-    @DecimalMin(value = "0")
     private double feesOwed;
-    @NotNull
     private boolean isLib;
     
-    @NotNull
     private Long editId;
-    @NotNull
-    @Size(min = 3, max = 8)
     private String editUsername;
-    @NotNull
-    @Pattern(regexp = "^[_a-zA-Z0-9]+(\\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
-             message = "Provided email is not valid.")
     private String editEmail;
-    @NotNull
-    @Size(min = 5, max = 20)
     private String editPassword;
-    @NotNull
-    @DecimalMin(value = "0")
     private double editFeesOwed;
     
     // Defaul constructor.

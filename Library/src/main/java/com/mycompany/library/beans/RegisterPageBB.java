@@ -1,20 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.library.beans;
 
 import com.mycompany.library.core.User;
 import com.mycompany.library.core.UserRegistry;
 import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -30,18 +22,13 @@ public class RegisterPageBB implements Serializable {
     private UserPageBB privateUserBean;
     @Inject
     private TemplateBB loggedUser;
-    @Size(min = 1, message = "Obligatoriskt")
     private String username = "";
-    @Size(min = 1, message = "Obligatoriskt")
     private String email = "";
-    @Size(min = 1, message = "Obligatoriskt")
     private String password = "";
-    @Size(min = 1, message = "Obligatoriskt")
     private String confirmPassword = "";
     private String redirect = null;
 
-    public RegisterPageBB() {
-    }
+    public RegisterPageBB() {}
 
     public void registerUser() {
         if (checkUser()) {

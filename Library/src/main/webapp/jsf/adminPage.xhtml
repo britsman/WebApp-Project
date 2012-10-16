@@ -72,16 +72,24 @@
                                 <h:inputText id="editId" disabled="true" value="#{admin.editId}"/>
                                 <h:message for="editId" showSummary="true" showDetail="false" /><br />
                                 <h:outputLabel for="username" value="Användarnamn:" /><br />
-                                <h:inputText id="editUsername" value="#{admin.editUsername}"/>
+                                <h:inputText id="editUsername" value="#{admin.editUsername}">
+                                    <f:validator validatorId="UsernameValidator" />
+                                </h:inputText>
                                 <h:message for="editUsername" showSummary="true" showDetail="false" /><br />
                                 <h:outputLabel for="email" value="email:" /><br />
-                                <h:inputText id="editEmail" value="#{admin.editEmail}"/>
+                                <h:inputText id="editEmail" value="#{admin.editEmail}">
+                                    <f:validator validatorId="EmailValidator" />
+                                </h:inputText>
                                 <h:message for="editEmail" showSummary="true" showDetail="false" /><br />
                                 <h:outputLabel for="password" value="Lösenord:" /><br />
-                                <h:inputText id="editPassword" value="#{admin.editPassword}" />
+                                <h:inputText id="editPassword" value="#{admin.editPassword}">
+                                    <f:validator validatorId="PasswordValidator" />
+                                </h:inputText>
                                 <h:message for="editPassword" showSummary="true" showDetail="false" /><br />
                                 <h:outputLabel for="feesOwed" value="Skuld:" /><br />
-                                <h:inputText id="editFeesOwed" value="#{admin.editFeesOwed}" />
+                                <h:inputText id="editFeesOwed" value="#{admin.editFeesOwed}">
+                                    <f:validator validatorId="FeesOwedValidator" />
+                                </h:inputText>
                                 <h:message for="editFeesOwed" showSummary="true" showDetail="false" /><br />
                                 <h:commandButton id="btnEdit" value="Ändra"
                                                  action="adminPage?faces-redirect=true"
@@ -96,16 +104,24 @@
                         </header>
                         <h:form>
                             <h:outputLabel for="username" value="Användarnamn:" /><br />
-                            <h:inputText id="username" value="#{admin.username}"/>
+                            <h:inputText id="username" value="#{admin.username}">
+                                <f:validator validatorId="UsernameValidator" />
+                            </h:inputText>
                             <h:message for="username" showSummary="true" showDetail="false" /><br />
                             <h:outputLabel for="email" value="email:" /><br />
-                            <h:inputText id="email" value="#{admin.email}"/>
+                            <h:inputText id="email" value="#{admin.email}">
+                                <f:validator validatorId="EmailValidator" />
+                            </h:inputText>
                             <h:message for="email" showSummary="true" showDetail="false" /><br />
                             <h:outputLabel for="password" value="Lösenord:" /><br />
-                            <h:inputText id="password" value="#{admin.password}" />
+                            <h:inputText id="password" value="#{admin.password}">
+                                <f:validator validatorId="PasswordValidator" />
+                            </h:inputText>
                             <h:message for="password" showSummary="true" showDetail="false" /><br />
                             <h:outputLabel for="feesOwed" value="Skuld:" /><br />
-                            <h:inputText id="feesOwed" value="#{admin.feesOwed}" />
+                            <h:inputText id="feesOwed" value="#{admin.feesOwed}">
+                                <f:validator validatorId="FeesOWedValidator" />
+                            </h:inputText>
                             <h:message for="feesOwed" showSummary="true" showDetail="false" /><br />
                             <h:commandButton id="btnAdd" value="Lägg till"
                                              action="adminPage?faces-redirect=true"
@@ -113,7 +129,7 @@
                         </h:form>
                         <h:form>
                         <h:commandButton value="send email" action="adminPage?faces-redirect=true"
-                        actionListener="#{admin.sendEmail()}" /><br />
+                                         actionListener="#{admin.sendEmail()}" /><br />
                         </h:form>
                     </section>
                 </section>

@@ -13,29 +13,31 @@
                         <h1>Logga in</h1>
                         <p>Om du redan är registrerad så kan du skriva in ditt användarnamn och lösenord för att logga in.</p>
                     </header>
+                    
                     <h:form >
-
                         <p><h:outputLabel for="txtUser" value="Användare" /></p>
-                        <p><h:inputText id="txtUser" value="#{login.userName}" />  
-                            <h:message for="txtUser" showSummary="true" showDetail="false" style="color: red" /></p>
+                        <p><h:inputText id="txtUser" value="#{login.userName}">
+                                <f:validator validatorId="UsernameValidator" />
+                           </h:inputText>
+                           <h:message for="txtUser" showSummary="true" showDetail="false" style="color: red" /></p>
                         <p><h:outputLabel for="txtPassword" value="Lösenord" /></p>
-                        <p><h:inputSecret id="txtPassword" value="#{login.password}" />
-                            <h:message for="txtPassword" showSummary="true" showDetail="false" style="color: red" /></p>
+                        <p><h:inputSecret id="txtPassword" value="#{login.password}">
+                                <f:validator validatorId="PasswordValidator" />
+                           </h:inputSecret>
+                           <h:message for="txtPassword" showSummary="true" showDetail="false" style="color: red" /></p>
                         <p><h:commandButton id="btnOK" value="OK" 
                                             action="#{login.access()}"
                                             actionListener="#{login.validateUser()}"/></p>
                         <h:outputText style="color: red " binding="#{login.txtOutput}" />
-                        
-
-
                     </h:form>
-                    <p>Om du har glömt ditt lösenord kan du klicka <a href=" ">här</a> för att få hjälp.</p>
+                    
+                    <p>Om du har glömt ditt lösenord kan du klicka <a href="#">här</a> för att få hjälp.</p>
                 </section>
+                
                 <section id="registerSection" class="loginRegisterSection">
                     <header class="loginRegisterHeader">
                         <h1>Registrera dig</h1>
                         <p>Om du inte är registrerad så måste du först fylla i formuläret nedan för att kunna logga in.</p>
-
                     </header>
                     
                         <h:form>
