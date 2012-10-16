@@ -45,14 +45,14 @@ public class QueryProccessor {
     }
     
     //Till avancerad sökning
-    public List<Item> searchItem(String id, String title, String creator, String description, int fromYear, int toYear, boolean inStock, String language, String genre){
+    public List<Item> searchItem(String id, String title, String creator, String publisher, String description, int fromYear, int toYear, boolean inStock, String language, String genre){
         EntityManager em;
         List<Item> resultList = null;
         String q = "Select i from Item i where 1=1 ";
         if(id != null) {q += " AND i.id = '"+id+"'";}
         if(title != null){q += " AND i.title like '%"+title+"%'";}
-        
         if(creator != null){q += " And i.id in (select i2.id from Item i2, Creator c where i2.creators=c and c.name like '%"+creator+"%')";}
+        if(publisher != null){q += " AND i.publisher like %'"+publisher+"'%";}
         if(description != null){q += " AND i.description like '%"+description+"%'";}
         if (fromYear != 0 && toYear != 0){q += " and i.year_released between "+fromYear+" and "+toYear;}
         else if(fromYear == 0 && toYear != 0){q += " and i.year_released <"+toYear;}

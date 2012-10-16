@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html">
+    
     <h:head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="./../resources/css/template.css" rel="stylesheet" type="text/css" />
         <link href="./../resources/css/library.css" rel="stylesheet" type="text/css" />
@@ -21,10 +21,12 @@
                 <h:form>    
                     <p><h:outputText id="txtInloggad" value="#{template.loggedUser()}" /></p>
                     <h1>Bibliotek</h1>
-                    <h:commandLink tabindex="6" id="linkLogOut" action="library?faces-redirect=true" actionListener="#{template.actionListener(e)}" style="color: blue" value="">#{template.logOutString}</h:commandLink>
-                    
+                    <h:commandLink tabindex="6" id="linkLogOut"
+                                   action="library?faces-redirect=true"
+                                   actionListener="#{template.actionListener(e)}" style="color: blue"
+                                   value="">#{template.logOutString}
+                    </h:commandLink>
                 </h:form>
-                                
             </header>
             <nav id="pageNav">
                 <ul>
@@ -69,8 +71,11 @@
                 </aside>
             </section>
             <footer id="pageFooter">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed egestas, risus quis porta feugiat, sapien augue vulputate metus, et bibendum eros turpis pulvinar lacus. In nec ullamcorper mauris. Quisque fermentum, sem vitae tempus dapibus, justo enim malesuada augue, sed congue nisl felis ac metus. Suspendisse tortor nisl, dapibus at ornare eu, vestibulum ut risus. In hac habitasse platea dictumst. Pellentesque nec enim vel orci pellentesque fermentum. Phasellus porta, lectus ac consectetur varius, nibh dolor tempor ipsum, at tincidunt justo lectus et velit.</p>
-                <p>Copyright &copy; Group 7 DIT126 HT 2012 (lol)</p>
+                <p>Bibliotekssida av</p>
+                <p>Eric</p>
+                <p>Johannes</p>
+                <p>Fredrik</p>
+                <p>Fredrik</p>
             </footer>
         </section>
     </h:body>

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.library.beans;
 
 import com.mycompany.library.core.User;
@@ -10,20 +6,14 @@ import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.faces.component.UIOutput;
 import javax.inject.Inject;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  * Backing bean for the findBookPage.xhtml page
- *
  * @author Hannes
  */
 @Named("login")
@@ -34,16 +24,13 @@ public class LoginPageBB implements Serializable {
     private UserPageBB privateUserBean;
     @Inject
     private TemplateBB loggedUser;
-    @Size(min = 1, message = "Obligatoriskt"  )
     private String userName;
-    @Size(min = 1, message = "Obligatoriskt")
     private String password;
     private UIOutput txtOutput;
     private boolean accessGranted = false;
     private boolean isLibrarian = false;
 
-    public LoginPageBB() {
-    }
+    public LoginPageBB() {}
 
     public void validateUser() {
         UserRegistry users = WebbLib.INSTANCE.getUsers();
