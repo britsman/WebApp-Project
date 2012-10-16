@@ -114,31 +114,74 @@
                         </header>
                         <h:form>
                             <h:outputLabel for="id" value="ID" /><br />
-                            <h:inputText id="id" value="#{userPlus.id}"/><br />
+                            <h:inputText id="id" value="#{userPlus.id}">
+                                <f:validator validatorId="IdValidator" />
+                            </h:inputText>
+                            <h:message for="id" showSummary="true" showDetail="false" /><br />
+                            
                             <h:outputLabel for="title" value="Titel" /><br />
-                            <h:inputText id="title" value="#{userPlus.title}"/><br />
+                            <h:inputText id="title" value="#{userPlus.title}">
+                                <f:validator validatorId="TitleValidator" />
+                            </h:inputText>
+                            <h:message for="title" showSummary="true" showDetail="false" /><br />
+                            
                             <h:outputLabel for="creators" value="Skapare" /><br />
-                            <h:inputText id="creators" value="#{userPlus.creators}"/><br />
+                            <h:inputText id="creators" value="#{userPlus.creators}">
+                                <f:validator validatorId="CreatorsValidator" />
+                            </h:inputText>
+                            <h:message for="creators" showSummary="true" showDetail="false" /><br />
+                            
                             <h:outputLabel for="image" value="Bild" /><br />
-                            <h:inputText id="image" value="#{userPlus.image}"/><br />
+                            <h:inputText id="image" value="#{userPlus.image}">
+                                <f:validator validatorId="ImageValidator" />
+                            </h:inputText>
+                            <h:message for="image" showSummary="true" showDetail="false" /><br />
+                            
                             <h:outputLabel for="description" value="Beskrivning" /><br />
-                            <h:inputText id="description" value="#{userPlus.description}"/><br />
+                            <h:inputText id="description" value="#{userPlus.description}">
+                                <f:validator validatorId="DescriptionValidator" />
+                            </h:inputText>
+                            <h:message for="description" showSummary="true" showDetail="false" /><br />
+                            
                             <h:outputLabel for="loan_period" value="Utlåningstid" /><br />
-                            <h:inputText id="loan_period" value="#{userPlus.loan_period}"/><br />
+                            <h:inputText id="loan_period" value="#{userPlus.loan_period}">
+                                <f:validator validatorId="LoanPeriodValidator" />
+                            </h:inputText>
+                            <h:message for="loan_period" showSummary="true" showDetail="false" /><br />
+                            
                             <h:outputLabel for="fee" value="Skuld" /><br />
-                            <h:inputText id="fee" value="#{userPlus.fee}"/><br />
+                            <h:inputText id="fee" value="#{userPlus.fee}">
+                                <f:validator validatorId="FeeValidator" />
+                            </h:inputText>
+                            <h:message for="fee" showSummary="true" showDetail="false" /><br />
+                            
                             <h:outputLabel for="year_release" value="Utgivningsår" /><br />
-                            <h:inputText id="year_release" value="#{userPlus.year_release}"/><br />
+                            <h:inputText id="year_release" value="#{userPlus.year_release}">
+                                <f:validator validatorId="YearReleaseValidator" />
+                            </h:inputText>
+                            <h:message for="year_release" showSummary="true" showDetail="false" /><br />
+                            
                             <h:outputLabel for="genre" value="Genre" /><br />
-                            <h:inputText id="genre" value="#{userPlus.genre}"/><br />
+                            <h:inputText id="genre" value="#{userPlus.genre}">
+                                <f:validator validatorId="GenreValidator" />
+                            </h:inputText>
+                            <h:message for="genre" showSummary="true" showDetail="false" /><br />
+                            
                             <h:outputLabel for="language" value="Språk" /><br />
-                            <h:inputText id="language" value="#{userPlus.language}"/><br />
+                            <h:inputText id="language" value="#{userPlus.language}">
+                                <f:validator validatorId="LanguageValidator" />
+                            </h:inputText>
+                            <h:message for="language" showSummary="true" showDetail="false" /><br />
+                            
                             <h:outputLabel for="quantity" value="Kvantitet" /><br />
-                            <h:inputText id="quantity" value="#{userPlus.quantity}"/><br />
+                            <h:inputText id="quantity" value="#{userPlus.quantity}">
+                                <f:validator validatorId="QuantityValidator" />
+                            </h:inputText>
+                            <h:message for="quantity" showSummary="true" showDetail="false" /><br />
+                            
                             <h:commandButton id="btnAdd" value="Lägg till"
                                              action="#{userPlus.action}"
                                              actionListener="#{userPlus.createItem}" /><br />
-                            <h:messages showSummary="true" showDetail="false" />
                         </h:form>
                     </section>
                 </section>

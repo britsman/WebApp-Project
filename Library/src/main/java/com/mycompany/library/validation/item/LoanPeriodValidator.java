@@ -1,5 +1,6 @@
 package com.mycompany.library.validation.item;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
@@ -19,6 +20,18 @@ public class LoanPeriodValidator implements Validator {
     
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+        int loanPeriod = (int) value;
+        
+        // Check length constraints.
+        if (loanPeriod < MIN) {
+            String summary = "Utlåningstiden kan inte vara mindre än " + MIN + ".";
+            String detail = "Utlåningstiden kan inte vara mindre än " + MIN + ".";
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail));
+        } else if (loanPeriod > MAX) {
+            String summary = "Utlåningstiden kan inte vara större än " + MAX + ".";
+            String detail = "Utlåningstiden kan inte vara större än " + MAX + ".";
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail));
+        }
     }
 }

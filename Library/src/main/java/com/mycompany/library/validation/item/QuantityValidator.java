@@ -1,5 +1,6 @@
 package com.mycompany.library.validation.item;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
@@ -18,6 +19,14 @@ public class QuantityValidator implements Validator {
     
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+        int quantity = (int) value;
+        
+        // Check length constraints.
+        if (quantity < MIN) {
+            String summary = "Kvantiteten kan inte understiga 0.";
+            String detail = "Kvantiteten kan inte understiga 0.";
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail));
+        }
     }
 }

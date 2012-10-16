@@ -1,5 +1,6 @@
 package com.mycompany.library.validation.item;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
@@ -18,6 +19,14 @@ public class CreatorsValidator implements Validator {
     
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+        String creators = (String) value;
+        
+        // Check length constraints.
+        if (creators.length() < MIN_LENGTH) {
+            String summary = "Fältet är obligatoriskt.";
+            String detail = "Fältet är obligatoriskt.";
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail));
+        }
     }
 }
