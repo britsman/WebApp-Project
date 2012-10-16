@@ -8,8 +8,7 @@
     <body>
         <ui:composition template="./template.xhtml">
             <ui:define name="content">
-                <header id="findBookHeader">
-                    <br><h1><h:outputText value="#{search.genre}"/></h1></br>    
+                <header id="findBookHeader"> 
                     <h1>Hitta bok</h1>
                     <p>Här kan du söka efter böcker eller andra items.</p>
                 </header>
@@ -18,9 +17,9 @@
                         <p><h:inputText id="txtSearch" value="#{search.topSearch}" />
                             <h:commandButton id="btnOK" value="Sök" action="#{search.searchAll()}"/>                       
                         </p>    
-                        <h:outputLabel value="#{search.topSearch}"/>
-
-
+                        
+                        <br><h:outputLabel value="#{search.genre}"/></br>
+                        
                         <br><a id="displayAdvaced" href="javascript:toggle();"  >Avancerad sökning</a> </br>
                         <script language="javascript"> 
                             function toggle() {
@@ -49,7 +48,7 @@
 
                                     <br><h:outputLabel value="Genre"/></br>                          
                                     <h:selectOneMenu id="genreTable" value="#{search.genre}" style="margin-bottom: 0.5em">
-                                        <f:selectItem  itemLabel="Alla" itemValue="Alla" />
+                                        <f:selectItem  itemLabel="Alla" itemValue="all" />
                                         <f:selectItem  itemLabel="Antologier" itemValue="Antologier" />
                                         <f:selectItem  itemLabel="Barn" itemValue="Barn" />
                                         <f:selectItem  itemLabel="Deckare &amp; kriminalromaner" itemValue="DeckareKriminal" />
@@ -71,9 +70,9 @@
 
                                     <br><h:outputLabel value="Språk"/></br> 
                                     <h:selectOneMenu id="laguageTable" value="#{search.language}" style="margin-bottom: 0.5em">
+                                        <f:selectItem itemLabel="Alla" itemValue="all"/>
                                         <f:selectItem itemLabel="Svenska" itemValue="swedish"/>
                                         <f:selectItem itemLabel="Engelska" itemValue="english"/>
-                                        <f:selectItem itemLabel="Alla" itemValue="all"/>
                                     </h:selectOneMenu>
                                     
                                     <br><h:outputLabel value="Typ"/></br>                          
@@ -85,41 +84,34 @@
                                     </h:selectOneMenu>
                                     
                                     <br><h:outputLabel for="srcFromYear" value="Från år"/><span style="padding-left: 40px"/><h:outputLabel for="srcToYear" value="Till år"/></br>
-                                    <h:inputText value="#{search.fromYear}" id="srcFromYear" size="5"/><span style="margin-bottom: 0.5em;padding-left: 30px"/><h:inputText value="#{search.toYear}" id="srcToYear" size="5"/>
+                                    <h:inputText  id="srcFromYear" size="5"/><span style="margin-bottom: 0.5em;padding-left: 30px"/><h:inputText  id="srcToYear" size="5"/>
 
                                     <br><h:outputLabel for="srcDescription" value="Fritext"/></br>
                                     <h:inputTextarea id="srcDescription" style="margin-bottom: 0.5em"/>
 
                                     <br><h:outputLabel value="Finns inne i lager" /></br>
-                                    <input id="srcCheckbox" type="checkbox" name="option1" value="srcInStock"/>
+                                    <input id="srcCheckbox" type="checkbox" name="option1" />
 
-                                    <br><h:commandButton style=" margin-top: 1em" value="Sök" /></br>
+                                    <br><h:commandButton style=" margin-top: 1em" value="Sök" action="#{search.searchAdvanced()}"/></br>
                                 </h:form>
                             </div>
                         </div>      
                     </h:form>
                     <h:form>
-                        <h:dataTable var="item" value="#{search.result}" rendered="#{not empty search.result}" border="1">
-                                    <h:column>
-                                        <f:facet name="header">Title</f:facet>
-                                        <h:outputText id="title" value="#{item.item.title}" />
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">Author(s)</f:facet>
-                                        <h:outputText id="creators" value="#{item.item.creators}" />
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">Lånad</f:facet>
-                                        <h:outputText id="loanDate" value="#{userPage.formatDate(item.loanDate)}" />
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">Åter</f:facet>
-                                        <h:outputText id="returnDate" value="#{userPage.returnDate(item.loanDate, item)}" />
-                                    </h:column>
-                                </h:dataTable>
-                        
-                        
-                        
+                        <h:dataTable var="item" value="#{search.result}" border="1" rendered="#{not empty search.result}" style="width: 100%">
+                            <h:column>
+                                <f:facet name="header"></f:facet>
+                                
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Title</f:facet>
+                                <h:outputText id="title" value="#{item.title}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Author(s)</f:facet>
+                                <h:outputText id="creators" value="#{item.creators}" />
+                            </h:column>
+                        </h:dataTable>     
                     </h:form>
                 </section>
             </ui:define>
