@@ -1,5 +1,6 @@
 package com.mycompany.library.beans;
 
+import com.mycompany.library.core.SendEmails;
 import com.mycompany.library.core.User;
 import com.mycompany.library.core.UserRegistry;
 import com.mycompany.library.core.WebbLib;
@@ -32,5 +33,14 @@ public class UserRegistryBean implements Serializable{
     }
     public User getByUserName(String name){
         return users.getByUsername(name);
+    }
+    public void sendReminder(User user){
+        SendEmails.sendReminder(user);
+    }
+    public void sendFee(User user){
+        SendEmails.sendFee(user);
+    }
+    public void sendRegCode(String email, Long code){
+        SendEmails.sendRegCode(email, code);
     }
 }
