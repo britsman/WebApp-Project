@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.library.beans;
 
 import com.mycompany.library.core.Book;
@@ -20,26 +16,30 @@ import javax.inject.Named;
 @Named("SingleItem")
 @ConversationScoped
 public class ItemPageBB implements Serializable{
+    
     @Inject private Conversation convo;
     private ItemBean items;
     private Book book;
     
-    public ItemPageBB(){
     //Needed since another constructor has been specified.
-    }
+    public ItemPageBB(){}
+    
     @Inject
     public ItemPageBB(ItemBean items){
         this.items = items;
     }
+    
     public Book getBook(){
         return book;
-    }      
-    public void BookListener(Item item) {
-        this.book = (Book) item;
+    } 
+    
+    public void bookListener(Item item) {
         if (convo.isTransient()) {
             convo.begin();
         }
+        this.book = (Book) item;
     }
+    
     public String action() {
         if (!convo.isTransient()) {
             convo.end();
@@ -52,7 +52,8 @@ public class ItemPageBB implements Serializable{
             return null;
         }
     }
-        @PreDestroy  // MUST HAVE back button etc.
+    
+    @PreDestroy  // MUST HAVE back button etc.
     public void destroy() {
         if (convo != null) {
             if (!convo.isTransient()) {

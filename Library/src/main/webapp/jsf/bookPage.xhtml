@@ -22,11 +22,10 @@
                         #{SingleItem.book.language}
                         #{SingleItem.book.pageNum}
                         #{SingleItem.book.quantity}
-                        <h:button onclick="#{SingleItem.action()}" value="Tillbaks 
-                        till listan"/>
+                        <h:button onclick="#{SingleItem.action()}" value="Tillbaks till listan"/>
                     </p>
-                     <h6> Kort Besrivning</h6>
-                    <p>#{SingleItem.description}</p>
+                    <h6>Kort Besrivning</h6>
+                    <p>#{SingleItem.book.description}</p>
                 </section>
             </ui:define>
         </ui:composition>
