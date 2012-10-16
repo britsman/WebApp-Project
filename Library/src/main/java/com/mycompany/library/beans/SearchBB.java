@@ -21,7 +21,7 @@ import javax.inject.Named;
 @Named("search")
 @SessionScoped
 public class SearchBB implements Serializable{
-    private String id=null,title=null,creator=null,description=null,language,genre,type;
+    private String id=null,title=null,creator=null,publisher=null,description=null,language,genre,type;
     private String topSearch=null;
     private int fromYear = 0,toYear =0;
     private boolean inStock = true;
@@ -50,7 +50,8 @@ public class SearchBB implements Serializable{
         genre=null;
         language=null;
         type=null;
-        result = query.searchItem(id, title, creator, description, fromYear, toYear, inStock, language, genre);
+        publisher=null;
+        result = query.searchItem(id, title, creator, publisher, description, fromYear, toYear, inStock, language, genre);
         System.out.println("DETTA ÄR INNE I ADVANCED först genre"+genre+" sen sprak"+language+" sen typ "+type);
     }
 
