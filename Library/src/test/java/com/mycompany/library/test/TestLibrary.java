@@ -106,28 +106,28 @@ public class TestLibrary {
         QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
         List<Item> foundItems = null;
         
-        foundItems = q.searchItem(null, "Moby Dick", null, null, 0, 0, false, null, null);
+        foundItems = q.searchItem(null, "Moby Dick", null, null, null, 0, 0, false, null, null);
         System.out.println("Results for title Moby Dick: " + foundItems.get(0).getId());
         System.out.println("Expected: " + item1.getId());
         
-        foundItems = q.searchItem(null, null, "Jules Verne", null, 0, 0, false, null, null);
+        foundItems = q.searchItem(null, null, "Jules Verne", null, null, 0, 0, false, null, null);
         System.out.println("Results for creator Jules Verne: " + foundItems.get(0).getId() + 
         " & " + foundItems.get(1).getId());
         System.out.println("Expected: " + item2.getId() + " & " + item3.getId());
         
-        foundItems= q.searchItem(null, null, null, "valar", 0, 0, false, null, null);
+        foundItems= q.searchItem(null, null, null, null, "valar", 0, 0, false, null, null);
         System.out.println("Böcker om valar: " + foundItems);
         
-        foundItems= q.searchItem(null, null, null, "valar", 0, 0, true, null, null);
+        foundItems= q.searchItem(null, null, null, null, "valar", 0, 0, true, null, null);
         System.out.println("Böcker om valar i lager: " + foundItems);
         
-        foundItems= q.searchItem(null, null, null, null, 1864, 1864, false, null, null);
+        foundItems= q.searchItem(null, null, null, null, null, 1864, 1864, false, null, null);
         System.out.println("Böcker skrivna 1864: " + foundItems);
         
-        foundItems= q.searchItem(null, null, null, null, 1860, 0, false, null, null);
+        foundItems= q.searchItem(null, null, null, null, null, 1860, 0, false, null, null);
         System.out.println("Böcker skrivna efter 1860: " + foundItems);
         
-        foundItems= q.searchItem(null, null, null, null, 0, 1870, false, null, null);
+        foundItems= q.searchItem(null, null, null, null, null, 0, 1870, false, null, null);
         System.out.println("Böcker skrivna före 1870: " + foundItems);
         
         foundItems = q.searchAll("Verne");
