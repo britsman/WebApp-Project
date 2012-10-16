@@ -25,13 +25,16 @@ import org.junit.Test;
  */
 public class TestLibrary {
     private String creatorName = "Author";
-    private String itemId = "0975-523";
-    private String userName = "Eric1";
+    private String itemId = "0975-522";
+    private String userName = "Eric";
     
     @Test
     public void orderedTest(){//Tests were being done async, causing bugs.
         testAddItem();
         testAddUser();
+        //ska fixa så testAddUser lägger till flera grejer, annars kmmr detta
+        //test ta bort reservationen så fort den läggs tillför varje ny user).
+        //testAlterQue(); 
         testSearch();
     }
     public void testAddItem(){
@@ -70,6 +73,23 @@ public class TestLibrary {
         user = users.update(user);
         reserve = user.getReservedItems().get((user.getReservedItems().size()-1));
         System.out.println("\n" + reserve.getQuePosition(user) + "\n");
+    }
+    public void testAlterQue(){
+        UserRegistry users = WebbLib.INSTANCE.getUsers();
+        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
+        ItemCollection items = WebbLib.INSTANCE.getItems();
+        User user = users.getByUsername(userName);
+        Item item = items.find(itemId);
+        ReservedItem reserve = q.findReservedItem(item);
+        if(reserve != null && user.hasReserve(reserve.getId())){
+            reserve.updatePositions(user);
+            user.updateReservation(reserve);
+            user = users.update(user);
+            if(reserve.getQue().size() == 1){
+                reserve = q.findReservedItem(item);
+                q.removeReservedItem(reserve.getId());
+            }
+        }
     }
     public void testSearch(){
         CreatorCollection creators = WebbLib.INSTANCE.getCreators();

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -43,7 +44,23 @@ public class QueryProccessor {
         }        
         return reserved;
     }
-    
+    public void removeReservedItem(Long id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            String query = "delete from ReservedItem ri where ri.id= :id";
+            Query q = em.createQuery(query);
+            q.setParameter("id", id);
+            em.getTransaction().begin();
+            q.executeUpdate();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println("Query exception: " + e.getMessage());
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
     //Till avancerad sökning
     public List<Item> searchItem(String id, String title, String creator, String publisher, String description, int fromYear, int toYear, boolean inStock, String language, String genre){
         EntityManager em;
@@ -140,5 +157,33 @@ public class QueryProccessor {
             }
         }       
         return position;
+    }
+    public void updatePositions(User user, ReservedItem reserved){
+        EntityManager em = emf.createEntityManager();
+        try {
+            String query1 = "delete from QueElement q where q.id in (select q1.id from "+
+            "ReservedItem ri inner join ri.que q1 where ri= :reserved and q.user= :user)";
+            String query2 = "update QueElement q set "+
+            "q.position= (q.position - 1) where q.id in (select q1.id from "+
+            "ReservedItem ri inner join ri.que q1 where ri= :reserved)";
+            Query q1 = em.createQuery(query1);
+            Query q2 = em.createQuery(query2);
+            q1.setParameter("reserved", reserved);
+            q1.setParameter("user", user);
+            q2.setParameter("reserved", reserved);
+            em.getTransaction().begin();
+            q1.executeUpdate();
+            q2.executeUpdate();
+            em.getTransaction().commit();
+        }
+        catch(Exception e){
+           System.err.println("Query exception: " + e.getMessage());
+           e.printStackTrace();
+        }
+        finally{
+            if (em != null) {
+                em.close();
+            }
+        }       
     }
 }
