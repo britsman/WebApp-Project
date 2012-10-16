@@ -59,6 +59,15 @@ public class TemplateBB implements Serializable {
             return "userPage.xhtml";
         }
     }
+    
+    public String myPageLinkName(){
+        if(loggedInUser == null){
+            return "Logga in/Registrera";
+        }
+        else{
+            return "Min sida";
+        }
+    }
 
     public User getLoggedInUser() {
         return loggedInUser;
