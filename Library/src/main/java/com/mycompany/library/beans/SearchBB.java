@@ -21,22 +21,38 @@ import javax.inject.Named;
 @Named("search")
 @SessionScoped
 public class SearchBB implements Serializable{
-    private String id,title,creator,description,language,genre;
-    private int fromYear,toYear;
-    private boolean inStock;
+    private String id=null,title=null,creator=null,publisher=null,description=null,language,genre,type;
+    private String topSearch=null;
+    private int fromYear = 0,toYear =0;
+    private boolean inStock = true;
     private List<Item> result;
     
     public SearchBB() {
-    }
-    
-    public void searchAll(){
         
     }
     
-    public void searchAdvanced(String id, String title, String creator, String description, int fromYear, int toYear, boolean inStock, String language, String genre){
+    public void searchAll(){     
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
-        result = query.searchItem(id, title, creator, description, fromYear, toYear, inStock, language, genre);
-        System.out.println(result);
+        if(topSearch!=""){
+        result = query.searchAll(topSearch);
+        }
+     }
+    
+    
+    
+    public void searchAdvanced(){
+        QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
+        if(id=="")id=null;
+        if(title=="")title=null;
+        if(creator=="")creator=null;
+        if(description=="")description=null;
+        
+        genre=null;
+        language=null;
+        type=null;
+        publisher=null;
+        result = query.searchItem(id, title, creator, publisher, description, fromYear, toYear, inStock, language, genre);
+        System.out.println("DETTA ÄR INNE I ADVANCED först genre"+genre+" sen sprak"+language+" sen typ "+type);
     }
 
     public String getId() {
@@ -117,6 +133,22 @@ public class SearchBB implements Serializable{
 
     public void setResult(List<Item> result) {
         this.result = result;
+    }
+
+    public String getTopSearch() {
+        return topSearch;
+    }
+
+    public void setTopSearch(String topSearch) {
+        this.topSearch = topSearch;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
     
     
