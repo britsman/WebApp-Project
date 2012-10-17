@@ -26,7 +26,7 @@ import org.junit.Test;
 public class TestLibrary {
     private String creatorName = "Author";
     private String itemId = "0975-522";
-    private String userName = "Eric";
+    private String userName = "Eric1";
     
     @Test
     public void orderedTest(){//Tests were being done async, causing bugs.
@@ -36,6 +36,8 @@ public class TestLibrary {
         //test ta bort reservationen så fort den läggs tillför varje ny user).
         //testAlterQue(); 
         testSearch();
+        //samma som för testAlterQue, kör inte denna om ni inte har mer än en grej i dbn.
+        //testRemove(); 
     }
     public void testAddItem(){
         ItemCollection items = WebbLib.INSTANCE.getItems();
@@ -71,8 +73,6 @@ public class TestLibrary {
             user.setReservedItems(reserve);
         }
         user = users.update(user);
-        reserve = user.getReservedItems().get((user.getReservedItems().size()-1));
-        System.out.println("\n" + reserve.getQuePosition(user) + "\n");
     }
     public void testAlterQue(){
         UserRegistry users = WebbLib.INSTANCE.getUsers();
@@ -93,7 +93,6 @@ public class TestLibrary {
     }
     public void testSearch(){
         CreatorCollection creators = WebbLib.INSTANCE.getCreators();
-        
         List<Creator> cList = new ArrayList<>();
         ItemCollection items = WebbLib.INSTANCE.getItems();
         
@@ -153,5 +152,19 @@ public class TestLibrary {
         foundItems = q.searchAll("Verne");
         System.out.println("Antal resultat: " + foundItems.size()); 
         
+    }
+    public void testRemove(){
+        
+        UserRegistry users = WebbLib.INSTANCE.getUsers();
+        User user = users.getByUsername(userName);
+        try{
+        user.getBookmarkedItems().remove(0);
+        user.getBorrowedItems().get(0).removeFromTable();
+        user.getBorrowedItems().remove(0);
+        users.update(user);
+        }
+        catch(Exception e){
+            //Do nothing
+        }
     }
 }

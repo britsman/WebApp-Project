@@ -61,6 +61,23 @@ public class QueryProccessor {
             }
         }
     }
+    void removeBorrowedItem(Long id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            String query = "delete from BorrowedItem b where b.id= :id";
+            Query q = em.createQuery(query);
+            q.setParameter("id", id);
+            em.getTransaction().begin();
+            q.executeUpdate();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println("Query exception: " + e.getMessage());
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
     //Till avancerad sökning
     public List<Item> searchItem(String id, String title, String creator, String publisher, String description, int fromYear, int toYear, boolean inStock, String language, String genre){
         EntityManager em;
