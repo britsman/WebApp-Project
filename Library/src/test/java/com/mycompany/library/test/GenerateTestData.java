@@ -5,10 +5,12 @@
 package com.mycompany.library.test;
 
 import com.mycompany.library.core.Book;
+import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.Creator;
 import com.mycompany.library.core.CreatorCollection;
 import com.mycompany.library.core.Item;
 import com.mycompany.library.core.ItemCollection;
+import com.mycompany.library.core.ReservedItem;
 import com.mycompany.library.core.User;
 import com.mycompany.library.core.UserRegistry;
 import com.mycompany.library.core.WebbLib;
@@ -137,6 +139,7 @@ public class GenerateTestData {
     }
     
     public void generateUserData() {
+        // Making some users.
         UserRegistry ur = WebbLib.INSTANCE.getUsers();
         
         User user1 = new User("user1", "user1", "user1@user.mail", 0.0);
@@ -144,11 +147,58 @@ public class GenerateTestData {
         User user3 = new User("user3", "user3", "user3@user.mail", 0.0);
         
         user1.setIsLibrarian(true);
-        
         user2.setFeesOwed(20.0);
         
         ur.add(user1);
         ur.add(user2);
         ur.add(user3);
+        
+        // Making some creators.
+        CreatorCollection cc = WebbLib.INSTANCE.getCreators();
+        
+        Creator creator1 = new Creator("creator1");
+        Creator creator2 = new Creator("creator2");
+        Creator creator3 = new Creator("creator3");
+        
+        List<Creator> creators1 = new ArrayList<Creator>();
+        creators1.add(creator1);
+        List<Creator> creators2 = new ArrayList<Creator>();
+        creators1.add(creator2);
+        List<Creator> creators3 = new ArrayList<Creator>();
+        creators1.add(creator3);
+        
+        cc.add(creator1);
+        cc.add(creator2);
+        cc.add(creator3);
+        
+        // Making some items.
+        ItemCollection ic = WebbLib.INSTANCE.getItems();
+        
+        Item item1 = new Item("1", "title1", creators1, "Svenska", 2012, "Genre1", "Image1", "Description1", 1, 5, 10);
+        Item item2 = new Item("2", "title2", creators2, "Svenska", 2012, "Genre2", "Image2", "Description2", 1, 5, 10);
+        Item item3 = new Item("3", "title3", creators3, "Svenska", 2012, "Genre3", "Image3", "Description2", 1, 5, 10);
+        
+        ic.add(item1);
+        ic.add(item2);
+        ic.add(item3);
+        
+        // BorrowedItem
+        BorrowedItem borrowedItem1 = new BorrowedItem(item2, user2);
+        
+        // ReservedItem
+        ReservedItem reservedItem1 = new ReservedItem(item3, user3);
+        
+        // Update
+        ur.update(user1);
+        ur.update(user2);
+        ur.update(user3);
+        
+        cc.update(creator1);
+        cc.update(creator2);
+        cc.update(creator3);
+        
+        ic.update(item1);
+        ic.update(item2);
+        ic.update(item3);
     }
 }
