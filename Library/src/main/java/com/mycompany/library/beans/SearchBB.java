@@ -32,21 +32,15 @@ public class SearchBB implements Serializable {
 
     public void searchAll() {
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
-        if (topSearch != "") {
+        if (!topSearch.isEmpty()) {
             result = query.searchAll(topSearch);
         }
     }
 
     public void searchAdvanced() {
+       
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
-//        if(id=="")id=null;
-//        if(title=="")title=null;
-//        if(creator=="")creator=null;
-//        if(description=="")description=null;
-//        
-        genre=null;
-        language=null;
-        type=null;
+        System.out.println("INNE I SEARCH ADVANCED PUBLISHER ÄR : "+ publisher);
         result = query.searchItem(id, title, creator, publisher, description, fromYear, toYear, inStock, language, genre);
 
     }

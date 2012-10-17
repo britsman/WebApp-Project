@@ -105,14 +105,15 @@
                         <h:head>
                             <link href="./../resources/css/searchPage.css" rel="stylesheet" type="text/css" />
                         </h:head>
-                        <h:dataTable id="resultTable" var="item" value="#{search.result}" rowClasses="even,odd">
-                            <h:column >                               
-                                <h:graphicImage value="/resources/img/defaultBook.png" width="60" height="50" />
+                        <h:dataTable id="resultTable" var="item" value="#{search.result}" rowClasses="even,odd" style="width: 100%">
+                            <h:column > 
+                                
+                                    <h:graphicImage value="/resources/img/defaultBook.png" width="60" height="50" />
                             </h:column>
-                            <h:column>
-                                <h:commandLink id="listItemTitle" value="#{item.title}" style="color: black" action="bookPage?faces-redirect=true"/>
-                                <p><h:outputText id="creators" value="#{item.creators}"/></p>
-                                <h:outputText id="genre" value="#{item.genre}"/>                                
+                            <h:column>    
+                                    <h:commandLink id="listItemTitle" value="#{item.title}" style="color: black" action="bookPage?faces-redirect=true"/>
+                                    <p><h:outputText id="publisher" value="#{item.publisher}" /></p>
+                                    <h:outputText id="genre" value="#{item.genre}"/>                          
                             </h:column>
                         </h:dataTable>     
                     </h:form>
