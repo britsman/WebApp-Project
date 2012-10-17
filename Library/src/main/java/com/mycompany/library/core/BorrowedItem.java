@@ -23,7 +23,7 @@ public class BorrowedItem implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.MERGE)
     private Item item;
     private @Temporal(javax.persistence.TemporalType.DATE) Date loanDate = new Date();
     @ManyToOne(cascade=CascadeType.MERGE)
@@ -80,10 +80,8 @@ public class BorrowedItem implements Serializable{
         this.collected = collected;
     }
     private void borrowItem(){
-        ItemCollection items = WebbLib.INSTANCE.getItems();
         this.user.setBorrowedItems(this);
         this.item.setQuantity((this.item.getQuantity())-1);
-        this.item = items.update(this.item);
     }
     public void removeFromTable(){
         QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();

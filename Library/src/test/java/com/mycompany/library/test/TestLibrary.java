@@ -25,7 +25,7 @@ import org.junit.Test;
  */
 public class TestLibrary {
     private String creatorName = "Author";
-    private String itemId = "0975-522";
+    private String itemId = "0975-523";
     private String userName = "Eric1";
     
     @Test
@@ -51,7 +51,6 @@ public class TestLibrary {
         Item item = new Book(itemId, "testbook", temp, "publisher",
         "English", 2012, 200, "comedy", "img", "desc", 1, 7, 10);
         item = items.update(item);
-        System.out.println("\n" + item.getCreatorNames() + "\n");
     }
     public void testAddUser(){
         UserRegistry users = WebbLib.INSTANCE.getUsers();
@@ -63,12 +62,13 @@ public class TestLibrary {
         }
         Item item = items.find(itemId);
         user.setBookmarkedItems(item);
+        if(item.getQuantity() > 0 && !user.hasBorrowed(item.getId())){
         new BorrowedItem(item, user);  
-        ReservedItem reserve = q.findReservedItem(item);
-        if(reserve == null){
-            reserve = new ReservedItem(item, user); 
         }
-        else if(!user.getReservedItems().contains(reserve)){
+        ReservedItem reserve = q.findReservedItem(item);
+        if (reserve == null) {
+            reserve = new ReservedItem(item, user);
+        } else if (!user.getReservedItems().contains(reserve)) {
             reserve.setQue(user);
             user.setReservedItems(reserve);
         }
@@ -81,7 +81,7 @@ public class TestLibrary {
         User user = users.getByUsername(userName);
         Item item = items.find(itemId);
         ReservedItem reserve = q.findReservedItem(item);
-        if(reserve != null && user.hasReserve(reserve.getId())){
+        if(reserve != null && user.hasReserved(reserve.getId())){
             reserve.updatePositions(user);
             user.updateReservation(reserve);
             user = users.update(user);
