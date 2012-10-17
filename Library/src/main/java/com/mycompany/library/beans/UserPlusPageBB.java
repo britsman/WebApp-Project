@@ -1,7 +1,9 @@
 package com.mycompany.library.beans;
 
+import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.Creator;
 import com.mycompany.library.core.Item;
+import com.mycompany.library.core.QueryProccessor;
 import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -295,5 +297,9 @@ public class UserPlusPageBB implements Serializable {
 
     public void setEditQuantity(int editQuantity) {
         this.editQuantity = editQuantity;
+    }
+    public List<BorrowedItem> getAllBorrowedItems(){
+        QueryProccessor q = library.getQueryProccessor();
+        return q.getAllBorrowedItems();
     }
 }

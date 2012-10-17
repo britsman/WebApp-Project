@@ -78,6 +78,23 @@ public class QueryProccessor {
             }
         }
     }
+    public List<BorrowedItem> getAllBorrowedItems() {
+        List<BorrowedItem> items = new ArrayList<>();
+        EntityManager em = emf.createEntityManager();
+        try {
+            String query = "SELECT bi from BorrowedItem bi";
+            TypedQuery<BorrowedItem> q = em.createQuery(query, BorrowedItem.class);
+            items = q.getResultList();
+
+        } catch (Exception e) {
+            System.err.println("Query exception: " + e.getMessage());
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return items;
+    }
     //Till avancerad sökning
     public List<Item> searchItem(String id, String title, String creator, String publisher, String description, int fromYear, int toYear, boolean inStock, String language, String genre){
         EntityManager em;
