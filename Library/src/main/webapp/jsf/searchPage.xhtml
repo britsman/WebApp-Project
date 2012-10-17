@@ -110,7 +110,7 @@
                                 <h:graphicImage value="/resources/img/defaultBook.png" width="60" height="50" />
                             </h:column>
                             <h:column>
-                                <h:commandLink id="listItemTitle" value="#{item.title}" style="color: black" action="bookPage?faces-redirect=true"/>
+                                <h:commandLink id="listItemTitle" value="#{item.title}" style="color: black" actionListener="#{SingleItem.bookListener(item, "search")}"/>
                                 <p><h:outputText id="creators" value="#{item.creators}"/></p>
                                 <h:outputText id="genre" value="#{item.genre}"/>                                
                             </h:column>

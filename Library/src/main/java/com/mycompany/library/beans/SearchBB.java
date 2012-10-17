@@ -32,7 +32,7 @@ public class SearchBB implements Serializable {
 
     public void searchAll() {
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
-        if (topSearch != "") {
+        if (!topSearch.equals("")) {
             result = query.searchAll(topSearch);
         }
     }
