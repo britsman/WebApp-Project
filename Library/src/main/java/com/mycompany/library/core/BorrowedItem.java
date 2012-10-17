@@ -83,7 +83,7 @@ public class BorrowedItem implements Serializable{
         ItemCollection items = WebbLib.INSTANCE.getItems();
         this.user.setBorrowedItems(this);
         this.item.setQuantity((this.item.getQuantity())-1);
-        items.update(this.item);
+        this.item = items.update(this.item);
     }
     public void removeFromTable(){
         QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
@@ -98,6 +98,6 @@ public class BorrowedItem implements Serializable{
             this.item.setQuantity((this.item.getQuantity())+1);
             this.removeFromTable();
         }
-        items.update(this.item);
+        this.item = items.update(this.item);
     }
 }
