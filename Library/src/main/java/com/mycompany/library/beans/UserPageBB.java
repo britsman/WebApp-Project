@@ -2,6 +2,7 @@ package com.mycompany.library.beans;
 
 import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.Item;
+import com.mycompany.library.core.ReservedItem;
 import com.mycompany.library.core.User;
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -45,6 +46,10 @@ public class UserPageBB implements Serializable {
     
     public List<Item> getFavorites() {
         return user.getBookmarkedItems();
+    }
+    
+    public List<ReservedItem> getReservedItems() {
+        return user.getReservedItems();
     }
     
     public String returnDate(Date loanDate, BorrowedItem item) {
