@@ -9,6 +9,8 @@ import com.mycompany.library.core.Creator;
 import com.mycompany.library.core.CreatorCollection;
 import com.mycompany.library.core.Item;
 import com.mycompany.library.core.ItemCollection;
+import com.mycompany.library.core.User;
+import com.mycompany.library.core.UserRegistry;
 import com.mycompany.library.core.WebbLib;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +49,7 @@ public class GenerateTestData {
     @Test
     public void runTests(){
         genData();
-        
+        generateUserData();
     }
     
     
@@ -132,5 +134,21 @@ public class GenerateTestData {
         item7 = items.update(item7);
         
         
+    }
+    
+    public void generateUserData() {
+        UserRegistry ur = WebbLib.INSTANCE.getUsers();
+        
+        User user1 = new User("user1", "user1", "user1@user.mail", 0.0);
+        User user2 = new User("user2", "user2", "user2@user.mail", 0.0);
+        User user3 = new User("user3", "user3", "user3@user.mail", 0.0);
+        
+        user1.setIsLibrarian(true);
+        
+        user2.setFeesOwed(20.0);
+        
+        ur.add(user1);
+        ur.add(user2);
+        ur.add(user3);
     }
 }
