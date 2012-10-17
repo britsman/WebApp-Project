@@ -33,6 +33,12 @@ public class Book extends Item implements Serializable{
         this.publisher = publisher;
         this.pageNum = pageNum;
     }
+    public Book(String id, String title, List<Creator> creators, String publisher, 
+    String language,  int year, int pageNum, String genre, int quantity) {
+        super(id, title, creators, language, year, genre, quantity);
+        this.publisher = publisher;
+        this.pageNum = pageNum;
+    }
     
 
     public String getPublisher() {

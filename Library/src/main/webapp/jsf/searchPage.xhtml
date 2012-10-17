@@ -107,7 +107,7 @@
                         </h:head>
                         <h:dataTable id="resultTable" var="item" value="#{search.result}" rowClasses="even,odd">
                             <h:column >                               
-                                <h:graphicImage value="/resources/img/defaultBook.png" width="60" height="50" />
+                                <h:graphicImage value="#{item.image}" width="60" height="50" />
                             </h:column>
                             <h:column>
                                 <h:commandLink id="listItemTitle" value="#{item.title}" 
