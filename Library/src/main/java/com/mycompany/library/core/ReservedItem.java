@@ -74,4 +74,8 @@ public class ReservedItem implements Serializable {
         QueryProccessor qp = WebbLib.INSTANCE.getQueryProccessor();
         return qp.getQuePosition(user, this);
     }
+    public void updatePositions(User user){     
+        QueryProccessor qp = WebbLib.INSTANCE.getQueryProccessor();
+        qp.updatePositions(user, this);
+    }
 }

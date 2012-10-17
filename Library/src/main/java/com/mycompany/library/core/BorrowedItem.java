@@ -82,4 +82,8 @@ public class BorrowedItem implements Serializable{
     private void borrowItem(){
         this.user.setBorrowedItems(this);
     }
+    public void removeFromTable(){
+        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
+        q.removeBorrowedItem(this.id);
+    }
 }

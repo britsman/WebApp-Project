@@ -25,14 +25,19 @@ import org.junit.Test;
  */
 public class TestLibrary {
     private String creatorName = "Author";
-    private String itemId = "0975-523";
+    private String itemId = "0975-522";
     private String userName = "Eric1";
     
     @Test
     public void orderedTest(){//Tests were being done async, causing bugs.
         testAddItem();
         testAddUser();
+        //ska fixa så testAddUser lägger till flera grejer, annars kmmr detta
+        //test ta bort reservationen så fort den läggs tillför varje ny user).
+        //testAlterQue(); 
         testSearch();
+        //samma som för testAlterQue, kör inte denna om ni inte har mer än en grej i dbn.
+        //testRemove(); 
     }
     public void testAddItem(){
         ItemCollection items = WebbLib.INSTANCE.getItems();
@@ -68,12 +73,26 @@ public class TestLibrary {
             user.setReservedItems(reserve);
         }
         user = users.update(user);
-        reserve = user.getReservedItems().get((user.getReservedItems().size()-1));
-        System.out.println("\n" + reserve.getQuePosition(user) + "\n");
+    }
+    public void testAlterQue(){
+        UserRegistry users = WebbLib.INSTANCE.getUsers();
+        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
+        ItemCollection items = WebbLib.INSTANCE.getItems();
+        User user = users.getByUsername(userName);
+        Item item = items.find(itemId);
+        ReservedItem reserve = q.findReservedItem(item);
+        if(reserve != null && user.hasReserve(reserve.getId())){
+            reserve.updatePositions(user);
+            user.updateReservation(reserve);
+            user = users.update(user);
+            if(reserve.getQue().size() == 1){
+                reserve = q.findReservedItem(item);
+                q.removeReservedItem(reserve.getId());
+            }
+        }
     }
     public void testSearch(){
         CreatorCollection creators = WebbLib.INSTANCE.getCreators();
-        
         List<Creator> cList = new ArrayList<>();
         ItemCollection items = WebbLib.INSTANCE.getItems();
         
@@ -133,5 +152,22 @@ public class TestLibrary {
         foundItems = q.searchAll("Verne");
         System.out.println("Antal resultat: " + foundItems.size()); 
         
+        foundItems= q.searchItem(null, null, null, "Penguin", null, 0, 0, false, null, null);
+        System.out.println("Böcker utgivna via Penguin: " + foundItems);
+        
+    }
+    public void testRemove(){
+        
+        UserRegistry users = WebbLib.INSTANCE.getUsers();
+        User user = users.getByUsername(userName);
+        try{
+        user.getBookmarkedItems().remove(0);
+        user.getBorrowedItems().get(0).removeFromTable();
+        user.getBorrowedItems().remove(0);
+        users.update(user);
+        }
+        catch(Exception e){
+            //Do nothing
+        }
     }
 }

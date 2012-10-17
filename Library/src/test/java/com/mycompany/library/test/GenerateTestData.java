@@ -56,10 +56,7 @@ public class GenerateTestData {
         
         List<Creator> cList = new ArrayList<>();
         ItemCollection items = WebbLib.INSTANCE.getItems();
-        
-        List<Item> iList = null;
-        
-        String[] nameArray = {"Jules Verne", "Herman Melville", "Max Brooks", "JRR Tolkien", "Jan Skansholm", "Ulf Bilting", "JK Rowling", "Mo Yan"};
+                
         Creator c1 = null;
         Creator c2 = null;
         
@@ -97,8 +94,10 @@ public class GenerateTestData {
         if(c2 == null){
             c2 = new Creator("Ulf Bilting");
         }
-        cList.set(0, c1);
-        cList.set(1, c2);
+        
+        cList.clear();
+        cList.add(c1);
+        cList.add(c2);
         
         Item item4 = new Book("978-9144076065", "Vägen till C", cList, "Studentlitteratur", "Swedish", 2011, 269, "Computers", "img", 
                 "Här står det en massa om C", 1, 10, 20);
@@ -114,15 +113,24 @@ public class GenerateTestData {
                 "Andra boken i LotR", 4, 7, 10);
         item5 = items.update(item5);
         
+        c1 = creators.getByName("JRR Tolkien");
+        if(c1 == null){
+            c1 = new Creator("JRR Tolkien");
+        }
+        cList.set(0, c1);
         Item item6 = new Book("978-0618574940", "The Fellowship of the Ring", cList, "Mariner Books", "English", 2005, 544, "Fantasy", "img",
                 "Första boken i LotR", 4, 7, 10);
         item6 = items.update(item6);
         
+        c1 = creators.getByName("JRR Tolkien");
+        if(c1 == null){
+            c1 = new Creator("JRR Tolkien");
+        }
+        cList.set(0, c1);
         Item item7 = new Book("978-0618574971", "The Return of the King", cList, "Mariner Books", "English", 2005, 544, "Fantasy", "img",
                 "Tredje och sista boken i LotR", 4, 7, 10);
+        item7 = items.update(item7);
         
-        cList.clear();
         
-        Item item8 = new Book();
     }
 }

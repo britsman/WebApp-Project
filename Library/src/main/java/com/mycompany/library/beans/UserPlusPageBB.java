@@ -112,6 +112,15 @@ public class UserPlusPageBB implements Serializable {
         return "userPlusPage?faces-redirect=true";
     }
     
+    public String creatorsToString(List<String> creatorNames) {
+        String result = "";
+        for (String s : creatorNames) {
+            result += s + ", ";
+        }
+        result = result.substring(0, result.length() - 2);
+        return result;
+    }
+    
     public String getId() {
         return id;
     }

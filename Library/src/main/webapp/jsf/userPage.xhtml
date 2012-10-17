@@ -57,21 +57,64 @@
                         </section>
                         <section class="userPageSubSection">
                             <header class="sectionHeader">
+                                <h1>Reserverade böcker</h1>
+                                <p>Böcker du har reserverat.</p>
+                            </header>
+                            <section>
+                                <h:form>
+                                    <h:dataTable var="item" value="#{userPage.reservedItems}" rendered="#{not empty userPage.reservedItems}" border="1">
+                                        <h:column>
+                                            <f:facet name="header">Title</f:facet>
+                                            <h:commandLink value="#{item.item.title}"
+                                                           action="bookPage?faces-redirect=true"
+                                                           actionListener="#{SingleItem.bookListener(item.item)}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Author(s)</f:facet>
+                                            <h:outputText id="creators" value="#{item.item.creators}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Author(s)</f:facet>
+                                            <h:outputText id="quantity" value="#{item.item.quantity}" />
+                                        </h:column>
+                                        <h:column>
+                                            <h:commandLink value="Reservera" rendered="#{item.item.quantity lt 1}" />
+                                            <h:commandLink value="Låna" rendered="#{item.item.quantity gt 0}" />
+                                        </h:column>
+                                    </h:dataTable>
+                                    <h:outputLabel rendered="#{empty userPage.reservedItems}" value="Du har inte reserverat några böcker." />
+                                </h:form>
+                            </section>
+                        </section>
+                        <section class="userPageSubSection">
+                            <header class="sectionHeader">
                                 <h1>Favoriter</h1>
                                 <p>Böcker i din favoritlista.</p>
                             </header>
                             <section>
-                                <h:dataTable var="item" value="#{userPage.favorites}" rendered="#{not empty userPage.favorites}" border="1">
-                                    <h:column>
-                                        <f:facet name="header">Title</f:facet>
-                                        <h:outputText id="title" value="#{item.title}" />
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">Author(s)</f:facet>
-                                        <h:outputText id="creators" value="#{item.creators}" />
-                                    </h:column>
-                                </h:dataTable>
-                                <h:outputLabel rendered="#{empty userPage.favorites}" value="Du har inte lagt till några böcker till din favoritlista." />
+                                <h:form>
+                                    <h:dataTable var="item" value="#{userPage.favorites}" rendered="#{not empty userPage.favorites}" border="1">
+                                        <h:column>
+                                            <f:facet name="header">Title</f:facet>
+                                            <h:commandLink value="#{item.title}"
+                                                           action="bookPage?faces-redirect=true"
+                                                           actionListener="#{SingleItem.bookListener(item)}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Author(s)</f:facet>
+                                            <h:outputText id="creators" value="#{item.creators}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Author(s)</f:facet>
+                                            <h:outputText id="quantity" value="#{item.quantity}" />
+                                        </h:column>
+                                        <h:column>
+                                            <h:commandLink value="Reservera" rendered="#{item.quantity lt 1}" />
+                                            <h:commandLink value="Låna" rendered="#{item.quantity gt 0}" />
+                                        </h:column>
+                                    </h:dataTable>
+                                    <h:outputLabel rendered="#{empty userPage.favorites}" value="Du har inte lagt till några böcker till din favoritlista." />
+                                </h:form>
                             </section>
                         </section>
                     </section>

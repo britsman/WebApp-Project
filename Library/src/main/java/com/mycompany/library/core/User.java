@@ -126,4 +126,22 @@ public class User implements Serializable{
     public void setBookmarkedItems(Item item) {
         this.bookmarkedItems.add(item);
     }
+    public void updateReservation(ReservedItem reserved){
+        for(int i = 0; i < this.reservedItems.size(); i++){
+            if(reserved.getId() == this.reservedItems.get(i).getId()){
+                this.reservedItems.remove(i);
+                break;
+            }
+        }
+    }
+        public boolean hasReserve(Long id){
+        boolean hasIt = false;
+        for(int i = 0; i < this.reservedItems.size(); i++){
+            if(id == this.reservedItems.get(i).getId()){
+                hasIt = true;
+                break;
+            }
+        }
+        return hasIt;
+    }
 }

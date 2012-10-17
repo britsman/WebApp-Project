@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -43,23 +44,56 @@ public class QueryProccessor {
         }        
         return reserved;
     }
-    
+    public void removeReservedItem(Long id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            String query = "delete from ReservedItem ri where ri.id= :id";
+            Query q = em.createQuery(query);
+            q.setParameter("id", id);
+            em.getTransaction().begin();
+            q.executeUpdate();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println("Query exception: " + e.getMessage());
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+    void removeBorrowedItem(Long id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            String query = "delete from BorrowedItem b where b.id= :id";
+            Query q = em.createQuery(query);
+            q.setParameter("id", id);
+            em.getTransaction().begin();
+            q.executeUpdate();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println("Query exception: " + e.getMessage());
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
     //Till avancerad sökning
     public List<Item> searchItem(String id, String title, String creator, String publisher, String description, int fromYear, int toYear, boolean inStock, String language, String genre){
         EntityManager em;
         List<Item> resultList = null;
-        String q = "Select i from Item i where 1=1 ";
+        String q = "Select i from Book i where 1=1 ";
         if(id != null) {q += " AND i.id = '"+id+"'";}
-        if(title != null){q += " AND i.title like '%"+title+"%'";}
-        if(creator != null){q += " And i.id in (select i2.id from Item i2, Creator c where i2.creators=c and c.name like '%"+creator+"%')";}
-        if(publisher != null){q += " AND i.publisher like %'"+publisher+"'%";}
-        if(description != null){q += " AND i.description like '%"+description+"%'";}
+        if(title != null){q += " AND lower(i.title) like '%"+title.toLowerCase()+"%'";}
+        if(creator != null){q += " And i.id in (select i2.id from Item i2, Creator c where i2.creators=c and lower(c.name) like '%"+creator.toLowerCase()+"%')";}
+        if(publisher != null){q += " AND lower(i.publisher) like '%"+publisher.toLowerCase()+"%'";}
+        if(description != null){q += " AND lower(i.description) like '%"+description.toLowerCase()+"%'";}
         if (fromYear != 0 && toYear != 0){q += " and i.year_released between "+fromYear+" and "+toYear;}
         else if(fromYear == 0 && toYear != 0){q += " and i.year_released <"+toYear;}
         else if(fromYear != 0 && toYear == 0){q += " and i.year_released >"+fromYear;}
         if(inStock){q += " AND i.quantity > 0";}
-        if(language != null){q += " and language = '" + language+"'";}
-        if(genre != null){q += " and genre = '" + genre+"'";}
+        if(language != null){q += " and lower(language) = '" + language.toLowerCase()+"'";}
+        if(genre != null){q += " and lower(genre) = '" + genre.toLowerCase()+"'";}
         
         System.out.println(q);
         
@@ -81,9 +115,10 @@ public class QueryProccessor {
     public List<Item> searchAll(String search){
         List<Item> results = null;
         EntityManager em = emf.createEntityManager();
+        search = search.toLowerCase();
         
-        String q = "SELECT i from Item i where i.id='"+search+"' or i.title like '%"+search+"%' or i.description like '%"+search+
-                "%' OR i.id in (select i2.id from Item i2, Creator c where i2.creators=c and c.name like '%"+search+"%')";
+        String q = "SELECT i from Item i where i.id='"+search+"' or lower(i.title) like '%"+search+"%' or lower(i.description) like '%"+search+
+                "%' OR i.id in (select i2.id from Item i2, Creator c where i2.creators=c and lower(c.name) like '%"+search+"%')";
         
         System.out.println(q);
         
@@ -140,5 +175,33 @@ public class QueryProccessor {
             }
         }       
         return position;
+    }
+    public void updatePositions(User user, ReservedItem reserved){
+        EntityManager em = emf.createEntityManager();
+        try {
+            String query1 = "delete from QueElement q where q.id in (select q1.id from "+
+            "ReservedItem ri inner join ri.que q1 where ri= :reserved and q.user= :user)";
+            String query2 = "update QueElement q set "+
+            "q.position= (q.position - 1) where q.id in (select q1.id from "+
+            "ReservedItem ri inner join ri.que q1 where ri= :reserved)";
+            Query q1 = em.createQuery(query1);
+            Query q2 = em.createQuery(query2);
+            q1.setParameter("reserved", reserved);
+            q1.setParameter("user", user);
+            q2.setParameter("reserved", reserved);
+            em.getTransaction().begin();
+            q1.executeUpdate();
+            q2.executeUpdate();
+            em.getTransaction().commit();
+        }
+        catch(Exception e){
+           System.err.println("Query exception: " + e.getMessage());
+           e.printStackTrace();
+        }
+        finally{
+            if (em != null) {
+                em.close();
+            }
+        }       
     }
 }
