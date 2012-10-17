@@ -82,11 +82,11 @@ public class QueryProccessor {
     public List<Item> searchItem(String id, String title, String creator, String publisher, String description, int fromYear, int toYear, boolean inStock, String language, String genre){
         EntityManager em;
         List<Item> resultList = null;
-        String q = "Select i from Item i where 1=1 ";
+        String q = "Select i from Book i where 1=1 ";
         if(id != null) {q += " AND i.id = '"+id+"'";}
         if(title != null){q += " AND lower(i.title) like '%"+title.toLowerCase()+"%'";}
         if(creator != null){q += " And i.id in (select i2.id from Item i2, Creator c where i2.creators=c and lower(c.name) like '%"+creator.toLowerCase()+"%')";}
-        if(publisher != null){q += " AND lower(i.publisher) like %'"+publisher.toLowerCase()+"'%";}
+        if(publisher != null){q += " AND lower(i.publisher) like '%"+publisher.toLowerCase()+"%'";}
         if(description != null){q += " AND lower(i.description) like '%"+description.toLowerCase()+"%'";}
         if (fromYear != 0 && toYear != 0){q += " and i.year_released between "+fromYear+" and "+toYear;}
         else if(fromYear == 0 && toYear != 0){q += " and i.year_released <"+toYear;}

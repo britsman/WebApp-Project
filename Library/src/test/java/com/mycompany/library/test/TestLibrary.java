@@ -152,6 +152,9 @@ public class TestLibrary {
         foundItems = q.searchAll("Verne");
         System.out.println("Antal resultat: " + foundItems.size()); 
         
+        foundItems= q.searchItem(null, null, null, "Penguin", null, 0, 0, false, null, null);
+        System.out.println("Böcker utgivna via Penguin: " + foundItems);
+        
     }
     public void testRemove(){
         

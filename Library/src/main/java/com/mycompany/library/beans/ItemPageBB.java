@@ -53,6 +53,16 @@ public class ItemPageBB implements Serializable{
         }
     }
     
+    public String buttonValue(){
+        return "Låna"; //Ska ändras så att den bortkommenterade metoden används istället.
+        /*if(book.getQuantity() > 0){
+            return "Låna";
+        }
+        else{
+            return "Reservera";
+        }*/
+    }
+    
     @PreDestroy  // MUST HAVE back button etc.
     public void destroy() {
         if (convo != null) {

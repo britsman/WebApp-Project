@@ -15,17 +15,20 @@
                     <!-- Have Image displayed on the left of text? maybe use table.-->
                     <h5>#{SingleItem.book.title}</h5>
                     <p>
-                        #{SingleItem.book.creators}
-                        #{SingleItem.book.publisher}
-                        #{SingleItem.book.year}
-                        #{SingleItem.book.genre}
-                        #{SingleItem.book.language}
-                        #{SingleItem.book.pageNum}
-                        #{SingleItem.book.quantity}
+                        <dl>
+                            <dd>Författare:</dd> <dt>#{SingleItem.book.creators}</dt>
+                            <dd>Förlag:</dd> <dt>#{SingleItem.book.publisher}</dt>
+                            <dd>Utgivningsår:</dd> <dt>#{SingleItem.book.year}</dt>
+                            <dd>Genre:</dd> <dt>#{SingleItem.book.genre}</dt>
+                            <dd>Språk:</dd> <dt>#{SingleItem.book.language}</dt>
+                            <dd>Antal sidor:</dd> <dt>#{SingleItem.book.pageNum}</dt>
+                            <dd>Antal i lager:</dd> <dt>#{SingleItem.book.quantity}</dt>
+                        </dl>
                         <h:button onclick="#{SingleItem.action()}" value="Tillbaks till listan"/>
                     </p>
                     <h6>Kort Besrivning</h6>
                     <p>#{SingleItem.book.description}</p>
+                    <h:button value="#{SingleItem.buttonValue()}"/>
                 </section>
             </ui:define>
         </ui:composition>
