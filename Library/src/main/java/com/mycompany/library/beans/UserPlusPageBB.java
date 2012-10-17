@@ -302,4 +302,10 @@ public class UserPlusPageBB implements Serializable {
         QueryProccessor q = library.getQueryProccessor();
         return q.getAllBorrowedItems();
     }
+    public void checkCollectDatePassed(){
+        List<BorrowedItem> temp = this.getAllBorrowedItems();
+        for(int i = 0; i < temp.size(); i++){
+            temp.get(i).checkCollectDatePassed();
+        }
+    }
 }
