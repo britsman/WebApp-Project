@@ -196,16 +196,18 @@ public class QueryProccessor {
     public void updatePositions(User user, ReservedItem reserved){
         EntityManager em = emf.createEntityManager();
         try {
+            int position = getQuePosition(user, reserved);
             String query1 = "delete from QueElement q where q.id in (select q1.id from "+
             "ReservedItem ri inner join ri.que q1 where ri= :reserved and q.user= :user)";
             String query2 = "update QueElement q set "+
             "q.position= (q.position - 1) where q.id in (select q1.id from "+
-            "ReservedItem ri inner join ri.que q1 where ri= :reserved)";
+            "ReservedItem ri inner join ri.que q1 where ri= :reserved) and q.position > :position";
             Query q1 = em.createQuery(query1);
             Query q2 = em.createQuery(query2);
             q1.setParameter("reserved", reserved);
             q1.setParameter("user", user);
             q2.setParameter("reserved", reserved);
+            q2.setParameter("position", position);
             em.getTransaction().begin();
             q1.executeUpdate();
             q2.executeUpdate();
