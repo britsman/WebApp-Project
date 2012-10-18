@@ -70,15 +70,17 @@
                                                            actionListener="#{SingleItem.bookListener(item.item, &quot;userPage&quot;)}"/>
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">Author(s)</f:facet>
+                                            <f:facet name="header">Författare</f:facet>
                                             <h:outputText id="creators" value="#{item.item.creators}" />
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">Author(s)</f:facet>
+                                            <f:facet name="header">Kvantitet</f:facet>
                                             <h:outputText id="quantity" value="#{item.item.quantity}" />
                                         </h:column>
-                                        <h:column rendered="#{item.item.quantity gt 0}">
-                                            <h:commandLink value="Låna" />
+                                        <h:column>
+                                            <f:facet name="header">Kölapp</f:facet>
+                                            <h:outputText id="queuePosition" value="#{userPage.queuePosition}" rendered="#{userPage.queuePosition gt 0}" />
+                                            <h:commandLink value="Låna" rendered="#{item.item.quantity gt 0 and userPage.queuePosition eq 0}" />
                                         </h:column>
                                     </h:dataTable>
                                     <h:outputLabel rendered="#{empty userPage.reservedItems}" value="Du har inte reserverat några böcker." />
@@ -110,10 +112,10 @@
                                         <h:column>
                                             <h:commandLink value="Reservera" rendered="#{item.quantity lt 1}"
                                                            action="userPage?faces-redirect=true"
-                                                           actionListener="#{userPage.reserveItem(item)}"/>
+                                                           actionListener="#{userPage.reserveItem(item)}" />
                                             <h:commandLink value="Låna" rendered="#{item.quantity gt 0}"
                                                            action="userPage?faces-redirect=true"
-                                                           actionListener="#{userPage.borrowItem(item)}"/>
+                                                           actionListener="#{userPage.borrowItem(item)}" />
                                         </h:column>
                                     </h:dataTable>
                                     <h:outputLabel rendered="#{empty userPage.bookmarkedItems}" value="Du har inte lagt till några böcker till din favoritlista." />
