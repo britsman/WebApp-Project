@@ -105,17 +105,24 @@
                         <h:head>
                             <link href="./../resources/css/searchPage.css" rel="stylesheet" type="text/css" />
                         </h:head>
-                        <h:dataTable id="resultTable" var="item" value="#{search.result}" rowClasses="even,odd">
-                            <h:column >                               
-                                <h:graphicImage value="#{item.image}" width="60" height="50" />
-                            </h:column>
+                        <h:dataTable id="resultTable" var="item" value="#{search.result}" rowClasses="even,odd" style="width: 100%">
                             <h:column>
-                                <h:commandLink id="listItemTitle" value="#{item.title}" 
-                                style="color: black" action="bookPage?faces-redirect=true" 
-                                actionListener="#{SingleItem.bookListener(item, &quot;search&quot;)}"/>
-                                <p><h:outputText id="creators" value="#{item.creatorNames}"/></p>
-                                <h:outputText id="genre" value="#{item.genre}"/>                                
-                            </h:column>
+                                <table>
+                                    <tr>
+                                        <td><h:graphicImage value="#{item.image}" width="60" height="50" /></td>
+                                        <td width="500px"><h:commandLink id="listItemTitle" value="#{item.title}" 
+                                            style="color: black" action="bookPage?faces-redirect=true" 
+                                            actionListener="#{SingleItem.bookListener(item, &quot;search&quot;)}"/>
+                                            <p><h:outputText id="creators" value="#{item.creatorNames}"/></p>
+                                            <h:outputText id="genre" value="#{item.genre}"/>    
+                                         </td>
+                                        <td >
+                                            <h:commandLink id="resultTableBookmark" value="Bokmärk" style="color: blue"/>
+                                            <h:commandLink id="resultTableBorrow" value="Låna bok" style="color: blue"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </h:column>     
                         </h:dataTable>     
                     </h:form>
                 </section>

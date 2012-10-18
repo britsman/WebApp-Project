@@ -183,6 +183,16 @@
                                              action="#{userPlus.action}"
                                              actionListener="#{userPlus.createItem}" /><br />
                         </h:form>
+                        
+                        <h:form>
+                            <h:dataTable var="borrowedBook" value="#{userPlus.allBorrowedItems}" border="1">
+                                <h:column>
+                                    <f:facet name="header">Id</f:facet>
+                                    <h:outputText id="id" value="#{items.title}" />
+                                </h:column>
+                            </h:dataTable>
+                            
+                        </h:form>
                     </section>
                 </section>
             </ui:define>
