@@ -48,7 +48,6 @@ public class Item implements Serializable{
     private String genre;
     private String language;
     private int quantity;
-
     public Item() {
     }
 
@@ -160,8 +159,20 @@ public class Item implements Serializable{
             this.creators.get(i).setItems(this);
         }
     }
-    public List<String> getCreatorNames(){
+    public String getCreatorNames(){
+        String tmp ="";
+        
         QueryProccessor qp = WebbLib.INSTANCE.getQueryProccessor();
-        return qp.getCreatorNames(this);
+        List<String> list = qp.getCreatorNames(this);
+        for(String e:list){
+            tmp += e;
+        }
+        
+        return tmp; 
     }
+    
+    
+ 
+    
+    
 }
