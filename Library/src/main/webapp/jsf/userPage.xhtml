@@ -76,7 +76,7 @@
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Författare</f:facet>
-                                            <h:outputText id="creators" value="#{item.item.creators}" />
+                                            <h:outputText id="creators" value="#{item.item.creatorNames}" />
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Kvantitet</f:facet>
@@ -84,8 +84,7 @@
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Kölapp</f:facet>
-                                            <h:outputText id="queuePosition" value="#{userPage.queuePosition}" rendered="#{userPage.queuePosition gt 0}" />
-                                            <h:commandLink value="Låna" rendered="#{item.item.quantity gt 0 and userPage.queuePosition eq 0}" />
+                                            <h:outputText id="queuePosition" value="#{userPage.getQueuePosition(item)}" />
                                         </h:column>
                                         <h:column>
                                             <h:commandLink value="Ta bort"
