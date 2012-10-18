@@ -23,8 +23,8 @@ import javax.inject.Named;
 public class ItemPageBB implements Serializable{
     
     @Inject private Conversation convo;
-    private static final WebbLib library = WebbLib.INSTANCE;
-    private UserRegistry users = library.getUsers();
+    
+    private UserRegistryBean urb;
     private ItemBean items;
     private Book book;
     private String redirectPage;
@@ -34,8 +34,9 @@ public class ItemPageBB implements Serializable{
     public ItemPageBB(){}
     
     @Inject
-    public ItemPageBB(ItemBean items){
+    public ItemPageBB(ItemBean items, UserRegistryBean urb){
         this.items = items;
+        this.urb = urb;
     }
     
     public Book getBook(){
@@ -91,7 +92,7 @@ public class ItemPageBB implements Serializable{
         else{
             user.tryReserveItem(book);
         }
-        users.update(user);
+        urb.update(user);
     }
     
     @PreDestroy  // MUST HAVE back button etc.
