@@ -2,7 +2,9 @@ package com.mycompany.library.beans;
 
 import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.Creator;
+import com.mycompany.library.core.CreatorCollection;
 import com.mycompany.library.core.Item;
+import com.mycompany.library.core.ItemCollection;
 import com.mycompany.library.core.QueryProccessor;
 import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
@@ -19,7 +21,8 @@ import javax.inject.Named;
 @SessionScoped
 public class UserPlusPageBB implements Serializable {
     
-    private static final WebbLib library = WebbLib.INSTANCE;
+    private CreatorCollection creatorCollection = WebbLib.INSTANCE.getCreators();
+    private ItemCollection itemCollection = WebbLib.INSTANCE.getItems();
     
     private String id;
     private String title;
@@ -49,21 +52,21 @@ public class UserPlusPageBB implements Serializable {
     public UserPlusPageBB() {}
     
     public List<Item> getAll() {
-        return library.getItems().getAll();
+        return itemCollection.getAll();
     }
     
     public void createItem() {
         List<Creator> cs = new ArrayList<Creator>();
         String[] creatorStrings = this.creators.split(",");
         for (String s: creatorStrings) {
-            Creator creator = library.getCreators().getByName(s);
+            Creator creator = creatorCollection.getByName(s);
             if(creator == null){
                 creator = new Creator(s);
             }
             cs.add(creator);
-            library.getCreators().add(creator);
+            creatorCollection.add(creator);
         }
-        library.getItems().add(new Item(id, title, cs, language, year_release,
+        itemCollection.add(new Item(id, title, cs, language, year_release,
                 genre, image, description, quantity, loan_period, fee));
     }
     
@@ -81,18 +84,17 @@ public class UserPlusPageBB implements Serializable {
         editGenre = genre;
         editLanguage = language;
         editQuantity = quantity;
-        System.out.println("Edit prepared");
     }
     
     public void updateItem(String id) {
-        Item i = library.getItems().find(id);
+        Item i = itemCollection.find(id);
         i.setTitle(editTitle);
         List<Creator> cs = new ArrayList<Creator>();
         String[] creatorStrings = this.editCreators.split(",");
         for (String s: creatorStrings) {
             Creator creator = new Creator(s);
             cs.add(creator);
-            library.getCreators().add(creator);
+            creatorCollection.add(creator);
         }
         i.setCreators(cs);
         i.setImage(editImage);
@@ -103,11 +105,11 @@ public class UserPlusPageBB implements Serializable {
         i.setGenre(editGenre);
         i.setLanguage(editLanguage);
         i.setQuantity(editQuantity);
-        library.getItems().update(i);
+        itemCollection.update(i);
     }
     
     public void removeItem(String id) {
-        library.getItems().remove(id);
+        itemCollection.remove(id);
     }
 
     public String action() {
@@ -119,8 +121,22 @@ public class UserPlusPageBB implements Serializable {
         for (String s : creatorNames) {
             result += s + ", ";
         }
-        result = result.substring(0, result.length() - 2);
+        if (!result.isEmpty()) {
+            result = result.substring(0, result.length() - 2);
+        }
         return result;
+    }
+    
+    public List<BorrowedItem> getAllBorrowedItems(){
+        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
+        return q.getAllBorrowedItems();
+    }
+    
+    public void checkCollectDatePassed(){
+        List<BorrowedItem> temp = this.getAllBorrowedItems();
+        for(int i = 0; i < temp.size(); i++){
+            temp.get(i).checkCollectDatePassed();
+        }
     }
     
     public String getId() {
@@ -297,15 +313,5 @@ public class UserPlusPageBB implements Serializable {
 
     public void setEditQuantity(int editQuantity) {
         this.editQuantity = editQuantity;
-    }
-    public List<BorrowedItem> getAllBorrowedItems(){
-        QueryProccessor q = library.getQueryProccessor();
-        return q.getAllBorrowedItems();
-    }
-    public void checkCollectDatePassed(){
-        List<BorrowedItem> temp = this.getAllBorrowedItems();
-        for(int i = 0; i < temp.size(); i++){
-            temp.get(i).checkCollectDatePassed();
-        }
     }
 }

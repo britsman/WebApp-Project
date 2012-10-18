@@ -145,6 +145,7 @@ public class GenerateTestData {
         User user1 = new User("user1", "user1", "user1@user.mail", 0.0);
         User user2 = new User("user2", "user2", "user2@user.mail", 0.0);
         User user3 = new User("user3", "user3", "user3@user.mail", 0.0);
+        User user4 = new User("user4", "user4", "user4@user.mail", 0.0);
         
         user1.setIsLibrarian(true);
         user2.setFeesOwed(20.0);
@@ -152,6 +153,7 @@ public class GenerateTestData {
         ur.add(user1);
         ur.add(user2);
         ur.add(user3);
+        ur.add(user4);
         
         // Making some creators.
         CreatorCollection cc = WebbLib.INSTANCE.getCreators();
@@ -188,10 +190,14 @@ public class GenerateTestData {
         // ReservedItem
         ReservedItem reservedItem1 = new ReservedItem(item3, user3);
         
+        // BookmarkedItem
+        user4.setBookmarkedItems(item1);
+        
         // Update
         ur.update(user1);
         ur.update(user2);
         ur.update(user3);
+        ur.update(user4);
         
         cc.update(creator1);
         cc.update(creator2);

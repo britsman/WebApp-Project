@@ -5,13 +5,10 @@ import com.mycompany.library.core.Item;
 import com.mycompany.library.core.ReservedItem;
 import com.mycompany.library.core.User;
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -44,12 +41,26 @@ public class UserPageBB implements Serializable {
         return user.getBorrowedItems();
     }
     
-    public List<Item> getFavorites() {
+    public List<Item> getBookmarkedItems() {
         return user.getBookmarkedItems();
     }
     
     public List<ReservedItem> getReservedItems() {
         return user.getReservedItems();
+    }
+    
+    public void bookmarkItem(Item item) {
+        user.setBookmarkedItems(item);
+    }
+    
+    public void reserveItem(Item item) {
+        ReservedItem reservedItem = new ReservedItem(item, user);
+        user.setReservedItems(reservedItem);
+    }
+    
+    public void borrowItem(Item item) {
+        BorrowedItem borrowedItem = new BorrowedItem(item, user);
+        user.setBorrowedItems(borrowedItem);
     }
     
     public String returnDate(Date loanDate, BorrowedItem item) {
