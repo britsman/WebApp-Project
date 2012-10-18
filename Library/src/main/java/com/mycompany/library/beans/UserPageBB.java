@@ -43,21 +43,15 @@ public class UserPageBB implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-        
-    public List<BorrowedItem> getBorrowedItems() {
-        return user.getBorrowedItems();
-    }
-    
-    public List<Item> getBookmarkedItems() {
-        return user.getBookmarkedItems();
-    }
-    
-    public List<ReservedItem> getReservedItems() {
-        return user.getReservedItems();
-    }
     
     public int getQueuePosition() {
         return 3;
+    }
+
+    /* Managing bookmarked items */
+    
+    public List<Item> getBookmarkedItems() {
+        return user.getBookmarkedItems();
     }
     
     public void bookmarkItem(Item item) {
@@ -70,6 +64,12 @@ public class UserPageBB implements Serializable {
         urb.update(user);
     }
     
+    /* Managing reserved items */
+    
+    public List<ReservedItem> getReservedItems() {
+        return user.getReservedItems();
+    }
+    
     public void reserveItem(Item item) {
         user.tryReserveItem(item);
         user = urb.update(user);
@@ -77,7 +77,14 @@ public class UserPageBB implements Serializable {
     
     public void removeReservedItem(ReservedItem reservedItem) {
         reservedItem.updatePositions(user);
+        user.updateReservation(reservedItem);
         user = urb.update(user);
+    }
+    
+    /* Managing borrowed items */
+    
+    public List<BorrowedItem> getBorrowedItems() {
+        return user.getBorrowedItems();
     }
     
     public void borrowItem(Item item) {
@@ -89,6 +96,8 @@ public class UserPageBB implements Serializable {
         user.removeBorrowedItem(borrowedItem);
         user = urb.update(user);
     }
+    
+    /* Managing dates */
     
     public String returnDate(Date loanDate, BorrowedItem item) {
         Calendar calendar = Calendar.getInstance();
