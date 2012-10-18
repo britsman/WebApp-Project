@@ -32,7 +32,7 @@
                     <p>
                         <h:outputText value="#{SingleItem.book.description}" />
                     </p>
-                    <h:form><h:button value="#{SingleItem.buttonValue()}" rendered="#{SingleItem.buttonVisible()}" /></h:form>
+                    <h:form><h:button value="#{SingleItem.buttonValue()}" rendered="#{SingleItem.buttonVisible()}" action="bookPage?faces-redirect=true" actionListener="#{SingleItem.borrowOrReserve()}" /></h:form>
                     <p><h:outputText value="Logga in för att låna eller reservera" rendered="#{!SingleItem.buttonVisible()}"/></p>
                     
                 </section>
