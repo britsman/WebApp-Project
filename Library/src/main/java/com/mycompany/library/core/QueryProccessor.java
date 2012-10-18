@@ -97,7 +97,7 @@ public class QueryProccessor {
     }
     //Till avancerad sökning
     public List<Item> searchItem(String id, String title, String creator, String publisher, String description, int fromYear, int toYear, boolean inStock, String language, String genre){
-        EntityManager em;
+        EntityManager em = emf.createEntityManager();
         List<Item> resultList = null;
         String q = "Select i from Book i where 1=1 ";
         if(id != null) {q += " AND i.id = '"+id+"'";}
@@ -115,7 +115,6 @@ public class QueryProccessor {
         System.out.println(q);
         
         try{
-            em = emf.createEntityManager();
             TypedQuery<Item> query = em.createQuery(q, Item.class);
             resultList = query.getResultList();
             
@@ -124,6 +123,9 @@ public class QueryProccessor {
             System.err.println("Query exception: " + e.getMessage());
         }
         finally{
+            if(em != null){
+                em.close();
+            }
             return resultList;
         }
     }
@@ -149,6 +151,9 @@ public class QueryProccessor {
             System.err.println("Query exception: " + e.getMessage());
         }
         finally{
+            if(em != null){
+                em.close();
+            }
             return results;
         }
     }

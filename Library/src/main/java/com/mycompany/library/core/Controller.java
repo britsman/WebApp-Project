@@ -81,7 +81,11 @@ public class Controller<T, K> implements Serializable {
 
     public T find(K id) {    
         EntityManager em = emf.createEntityManager();
-        return em.find(clazz, id);
+        T found = em.find(clazz, id);
+        if (em != null) {
+            em.close();
+        }
+        return found;
     }
 
     public List<T> getAll() {
@@ -89,6 +93,9 @@ public class Controller<T, K> implements Serializable {
         String query = "select t from " + clazz.getSimpleName() + " t";
         TypedQuery<T> q = em.createQuery(query, clazz);
         List<T> found = q.getResultList();
+        if (em != null) {
+                em.close();
+        }
         return found;
     }
 
