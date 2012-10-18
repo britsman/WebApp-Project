@@ -62,6 +62,9 @@
                                </h:inputSecret>
                             <h:message for="txtPasswordRegConfirm" showSummary="true" showDetail="false" style="color: red" /></p>
                             <p><h:commandButton id="btnOK" value="OK"  actionListener="#{register.registerUser()}" action ="#{register.access()}"/></p>
+                            
+                            <p><h:outputLabel for="" value ="rR"/></p>
+                            <h:inputText id="txtConfirmationcode" value="#{register.username}"/>
                         </h:form>
                     
                 </section>
