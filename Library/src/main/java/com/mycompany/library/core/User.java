@@ -53,7 +53,39 @@ public class User implements Serializable{
         this.bookmarkedItems = new ArrayList<>();
     }
     
-
+    public void tryBorrowItem(Item item) {
+        UserRegistry userRegistry = WebbLib.INSTANCE.getUsers();
+        if(item.getQuantity() > 0 && !this.hasBorrowed(item.getId())) {
+            new BorrowedItem(item, this);
+        }
+    }
+    
+    public void removeBorrowedItem(BorrowedItem borrowedItem) {
+        if (borrowedItems.contains(borrowedItem)) {
+            ItemCollection ic = WebbLib.INSTANCE.getItems();
+            
+            borrowedItem.removeFromTable();
+            borrowedItems.remove(borrowedItem);
+            
+            Item item = borrowedItem.getItem();
+            int quantity = item.getQuantity();
+            item.setQuantity(quantity + 1);
+            
+            ic.update(item);
+        }
+    }
+    
+    public void tryReserveItem(Item item) {
+        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
+        ReservedItem reserve = q.findReservedItem(item);
+        if (reserve == null) {
+            reserve = new ReservedItem(item, this);
+        } else if (!this.getReservedItems().contains(reserve)) {
+            reserve.setQue(this);
+            this.setReservedItems(reserve);
+        }
+    }
+    
     public Long getId() {
         return id;
     }
@@ -100,8 +132,6 @@ public class User implements Serializable{
     public void setIsLibrarian(boolean isLibrarian) {
         this.isLibrarian = isLibrarian;
     }
-    
-    
 
     public List<BorrowedItem> getBorrowedItems() {
         return borrowedItems;
@@ -118,7 +148,7 @@ public class User implements Serializable{
     public void setReservedItems(ReservedItem reservedItem) {
         this.reservedItems.add(reservedItem);
     }
-
+    
     public List<Item> getBookmarkedItems() {
         return bookmarkedItems;
     }
@@ -126,6 +156,11 @@ public class User implements Serializable{
     public void setBookmarkedItems(Item item) {
         this.bookmarkedItems.add(item);
     }
+    
+    public void removeBookmarkedItem(Item item) {
+        bookmarkedItems.remove(item);
+    }
+    
     public void updateReservation(ReservedItem reserved){
         for(int i = 0; i < this.reservedItems.size(); i++){
             if(reserved.getId() == this.reservedItems.get(i).getId()){
@@ -134,6 +169,7 @@ public class User implements Serializable{
             }
         }
     }
+    
     public boolean hasReserved(Long id) {
         boolean hasIt = false;
         for (int i = 0; i < this.reservedItems.size(); i++) {
@@ -144,6 +180,7 @@ public class User implements Serializable{
         }
         return hasIt;
     }
+    
     public boolean hasBorrowed(String id) {
         boolean hasIt = false;
         for (int i = 0; i < this.borrowedItems.size(); i++) {

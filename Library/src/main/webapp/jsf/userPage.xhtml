@@ -50,6 +50,11 @@
                                             <f:facet name="header">Åter</f:facet>
                                             <h:outputText id="returnDate" value="#{userPage.returnDate(item.loanDate, item)}" />
                                         </h:column>
+                                        <h:column>
+                                            <h:commandLink value="Remove"
+                                                           action="userPage?faces-redirect=true"
+                                                           actionListener="#{userPage.removeBorrowedItem(item)}"/>
+                                        </h:column>
                                     </h:dataTable>
                                     <h:outputLabel rendered="#{empty userPage.borrowedItems}" value="Du har inga lånade böcker." />
                                 </h:form>

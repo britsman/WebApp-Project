@@ -160,11 +160,11 @@ public class TestLibrary {
         
         UserRegistry users = WebbLib.INSTANCE.getUsers();
         User user = users.getByUsername(userName);
-        try{
-        user.getBookmarkedItems().remove(0);
-        user.getBorrowedItems().get(0).removeFromTable();
-        user.getBorrowedItems().remove(0);
-        users.update(user);
+        try {
+            user.getBookmarkedItems().remove(0);
+            user.getBorrowedItems().get(0).removeFromTable();
+            user.getBorrowedItems().remove(0);
+            users.update(user);
         }
         catch(Exception e){
             //Do nothing

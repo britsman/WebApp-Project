@@ -65,16 +65,29 @@ public class UserPageBB implements Serializable {
         urb.update(user);
     }
     
-    public void reserveItem(Item item) {
-        ReservedItem reservedItem = new ReservedItem(item, user);
-        user.setReservedItems(reservedItem);
+    public void removeBookmakedItem(Item item) {
+        user.removeBookmarkedItem(item);
         urb.update(user);
     }
     
+    public void reserveItem(Item item) {
+        user.tryReserveItem(item);
+        user = urb.update(user);
+    }
+    
+    public void removeReservedItem(ReservedItem reservedItem) {
+        reservedItem.updatePositions(user);
+        user = urb.update(user);
+    }
+    
     public void borrowItem(Item item) {
-        BorrowedItem borrowedItem = new BorrowedItem(item, user);
-        user.setBorrowedItems(borrowedItem);
-        urb.update(user);
+        user.tryBorrowItem(item);
+        user = urb.update(user);
+    }
+    
+    public void removeBorrowedItem(BorrowedItem borrowedItem) {
+        user.removeBorrowedItem(borrowedItem);
+        user = urb.update(user);
     }
     
     public String returnDate(Date loanDate, BorrowedItem item) {
