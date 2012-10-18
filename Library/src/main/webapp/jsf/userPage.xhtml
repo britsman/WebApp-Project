@@ -87,6 +87,11 @@
                                             <h:outputText id="queuePosition" value="#{userPage.queuePosition}" rendered="#{userPage.queuePosition gt 0}" />
                                             <h:commandLink value="Låna" rendered="#{item.item.quantity gt 0 and userPage.queuePosition eq 0}" />
                                         </h:column>
+                                        <h:column>
+                                            <h:commandLink value="Ta bort"
+                                                           action="userPage?faces-redirect=true"
+                                                           actionListener="#{userPage.removeReservedItem(item)}" />
+                                        </h:column>
                                     </h:dataTable>
                                     <h:outputLabel rendered="#{empty userPage.reservedItems}" value="Du har inte reserverat några böcker." />
                                 </h:form>
@@ -121,6 +126,11 @@
                                             <h:commandLink value="Låna" rendered="#{item.quantity gt 0}"
                                                            action="userPage?faces-redirect=true"
                                                            actionListener="#{userPage.borrowItem(item)}" />
+                                        </h:column>
+                                        <h:column>
+                                            <h:commandLink value="Ta bort"
+                                                           action="userPage?faces-redirect=true"
+                                                           actionListener="#{userPage.removeBookmakedItem(item)}" />
                                         </h:column>
                                     </h:dataTable>
                                     <h:outputLabel rendered="#{empty userPage.bookmarkedItems}" value="Du har inte lagt till några böcker till din favoritlista." />
