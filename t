@@ -1,0 +1,805 @@
+commit 9145b0e3fcdb37ce88bf183369d0150030554bac
+Merge: 2b2b92b 75056d7
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Thu Oct 18 16:06:38 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit 2b2b92b2051f107b34206950cff1e8c546d02353
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Thu Oct 18 16:06:24 2012 +0200
+
+    Fixat getQueuePosition i userPage.
+
+commit 75056d729b29f1d0b2ebbb3ae2bb63e32c56a3ce
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Thu Oct 18 15:22:18 2012 +0200
+
+    Lagt till funktionalitet i item/bookpage så det ska gå att låna/reservera böcker om man är inloggad
+
+commit fa132a3fe09893c77dc93db0cead7cca9a906b84
+Merge: 9d854f8 b476d2e
+Author: Hannes <Hannes@129.16.180.113>
+Date:   Thu Oct 18 15:09:03 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit 9d854f8d60a87d60dd78471ca1c30521ba95727c
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Thu Oct 18 15:08:15 2012 +0200
+
+    Fixat sökfunktionen i template
+
+commit b476d2efa4e7430cec915507ba921bede5c7e8b0
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Thu Oct 18 15:08:07 2012 +0200
+
+    Rättat upp Controller och QueryProcessor så alla entitymanagers stängs.
+
+commit cf048caec3d53e26941b4a804a7c622c42fbd182
+Merge: c0a5270 fe2ecc9
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Thu Oct 18 14:51:08 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit c0a5270ce49189497b1ce2688d02d1c1e231be7f
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Thu Oct 18 14:50:45 2012 +0200
+
+    Lagt till lite i userPage
+
+commit fe2ecc9d11e12514518549cd36d82833c3a96607
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Thu Oct 18 14:49:28 2012 +0200
+
+    Fixat sökfunktionen i template
+
+commit 86dd31ec4c586a1493eb82d88d8128d9238bb276
+Merge: 32e3944 b8a489f
+Author: Hannes <Hannes@129.16.180.113>
+Date:   Thu Oct 18 14:22:21 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit 32e39449b28debd333e86bb2925f481817ff71dc
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Thu Oct 18 14:22:05 2012 +0200
+
+    Fixat sökfunktionen i template
+
+commit b8a489f29a5d3438b86e97cac90f38f48df66a83
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Thu Oct 18 14:18:24 2012 +0200
+
+    Ändrade persistence filerna så dom fungerar med LibDB igen (:p)
+
+commit 21b0753bc4b51bce6c2f6dea51a9e95b4cc21ffd
+Merge: e0f10c1 35accad
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Thu Oct 18 14:15:17 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit e0f10c189d78b2430326784cc1e5129afb2d293b
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Thu Oct 18 14:15:02 2012 +0200
+
+    Fixat en hel del med UserPage reserve/borrow/bookmark item add, remove och update.
+
+commit 35accad5df59bb60934c523b87d2727cb51bd7bd
+Merge: 6c1a5fe e07f457
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Thu Oct 18 13:37:35 2012 +0200
+
+commit e07f457843c1f92406e1e201559c588e20c37991
+Author: dargar <fredrik.estelius@gmail.com>
+Date:   Thu Oct 18 12:09:22 2012 +0200
+
+    Lite mer pillande i userPage.
+
+commit a91b62b4be97413a593b666f63feea8ce8da53fb
+Author: dargar <fredrik.estelius@gmail.com>
+Date:   Thu Oct 18 10:59:01 2012 +0200
+
+    Från userPage kan man nu låna/reservera böcker från bookmarked listan (men det verka inte fungera perfekt än)
+
+commit 4818ec28b3deea18c126d9471e7c37d29fa82f88
+Author: dargar <fredrik.estelius@gmail.com>
+Date:   Thu Oct 18 10:25:10 2012 +0200
+
+    Fixat testet så det generear böcker istället för items plus ett par andra små fixar.
+
+commit d0aa783472997df429a712c336728885b1950b45
+Author: dargar <fredrik.estelius@gmail.com>
+Date:   Wed Oct 17 23:50:03 2012 +0200
+
+    Fixat klart (mer eller mindre) ett test för att generera lite test data.
+
+commit 04e6fdde20a796ddfa3412b44e686d49d24521d8
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Wed Oct 17 22:29:58 2012 +0200
+
+commit 00c000b8caaa54d6e7497291747c316b829c78c1
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Wed Oct 17 22:07:06 2012 +0200
+
+    Lagt till den kortare item/bok constructorn (för default fee/dagar att låna innan böter/img länk/description länk. Även uppdaterat andra ställen i koden relaterat till detta.
+
+commit 76210ad8dac4c2448f4ba0cdf36ed74aaec2ad2a
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Wed Oct 17 21:38:00 2012 +0200
+
+commit 5a838f1f91987a1c18eee2a9bfb7eff4119228fe
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Wed Oct 17 20:53:41 2012 +0200
+
+commit ad1c8f81972850d2a777acbb4c5cb5d8fa4d49bb
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Wed Oct 17 20:51:38 2012 +0200
+
+    lagt till checkCollectDatePassed som kollar om hämt-datumet passerat. Just nu har jag gjort att den kollar efter 3 dagar som max hämtetid innan BorrowedItemen tas bort.
+
+commit 4aa4028a372fe4d8f6d5433f82e5740afbb95160
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Wed Oct 17 20:16:58 2012 +0200
+
+    Ändrat commandlinken i searchPage som redirecta till bookpage (den kallar nu även på booklistener)
+
+commit 558eb63229390c3e8a023bff57b516583329f4d3
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Wed Oct 17 20:14:34 2012 +0200
+
+    Ändrat topSearch!="" till !topSearch.equals("") i searchBB (använd inte !=/== för string comparisons). Ändrat bookListener i ItemPageBB så den även tar en string (används sedan i redirecten). Gjort så userpage skickar med denna string, ändrat commandlinken i searchPage som redirecta till bookpage (den kallar nu på booklistener)
+
+commit 49d44474e26575df04844399138b595364363e4e
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Wed Oct 17 18:28:11 2012 +0200
+
+    Lagt till getAllBorrowedItems() (kan nås via userpluspagebb).
+
+commit 17b0451c2c0f2dcee8e339b3aa6ea6c72596cd17
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Wed Oct 17 11:49:30 2012 +0200
+
+    Börjat på lite mer data generering i GenerateTestData.
+
+commit 6c1a5fec7b6b73ffd21abc24353c3dbb4a9f50b5
+Merge: dfbaf8a ee995d9
+Author: Hannes <Hannes@129.16.182.213>
+Date:   Wed Oct 17 11:39:05 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit dfbaf8a30b04173553f29606b860376d9ad7d028
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Wed Oct 17 11:38:07 2012 +0200
+
+commit ee995d9cf3cfcfd452ff86398693ce1f79f21869
+Merge: 8e31734 0f0417b
+Author: sjoholmf <sjoholmf@ed-3358-11.studat.chalmers.se>
+Date:   Wed Oct 17 11:34:40 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit 8e3173408a8bea2e7ba8928de62310bb3e102f12
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Wed Oct 17 11:34:25 2012 +0200
+
+    Ändrat searchItem så den enbart söker i Book-tabellen. Annars går det inte att söka efter publisher eftersom bara books har publisher.
+    
+    Har även utökat bookpage så den har en låna-knapp (som ännu inte är kopplat till något) samt visar info om boken.
+
+commit 0f0417bf51806549b313f1faa7676299557531ae
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Wed Oct 17 11:28:53 2012 +0200
+
+    User page har fått en tabell för reserverade items. Lagt till länkar som sedan skall gå till bookPage, låna/reservera etc.
+
+commit 64d8d56c4106bc2133489ea13a038333efb09c0e
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Wed Oct 17 11:02:21 2012 +0200
+
+    Fixat creatorNames display i userPage
+
+commit 68307af1da65be03e08dd45623f0c524bc4c2399
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Wed Oct 17 10:20:48 2012 +0200
+
+    Ändrat så att sökmetoderna är case insensitive
+
+commit be671776f7cc30dd79ef53014d217a7a96d9318c
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Wed Oct 17 02:09:27 2012 +0200
+
+    Behövde lägga till en query för att få delete att gå igenom "ordentligt" för BorrowedItems också, men nu funkar det med(kolla testRemove). Jag tror nog det bästa vi kan göra är att ändra koden så vi har collections för reserved/borrowed också (om jag gör det så kan jag snygga till en del delar av koden och ta bort ett par "extrametoder"). Har inte gjort det än dock, får nog fokusera på att integrera allting först så ser vi om det finns tid över.
+
+commit 08f50df78d80ea28aba33655f0a325c6bb69eb6e
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Wed Oct 17 01:08:39 2012 +0200
+
+    Efter massa databaskrångel så funkar det nu att uppdatera positionen på alla andra när första personen i en que tas bort, receiveditem objektet som det berör tas även bort från users receiveditems etc, samt att receiveditemen tas bort från receiveditem tabellen när den inte har några users kvar i sin que. (koden för hur man gör detta finns i Junit test klassen). Ska sätta igång o skriva listan på allt vi ska kunna göra/visa upp nu, kommer ha med den imorron.
+
+commit b5dcba160079d885cdbdf7ba5212c203caaf2d5a
+Merge: bdd1318 f1bbb12
+Author: Hannes <Hannes@Hannes-PC>
+Date:   Tue Oct 16 21:03:11 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit bdd131805be291f5a1e0d766ecac37d9746fa760
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Tue Oct 16 21:01:32 2012 +0200
+
+commit f1bbb125f778aeabce05dc1c8c4bfff86f7e2d68
+Author: dargar <fredrik.estelius@gmail.com>
+Date:   Tue Oct 16 16:33:02 2012 +0200
+
+    Lagt till länk från userpage listor till individuell book page.
+
+commit 2d26adffd856f68330e8621f6e7a494cfc7dbe47
+Merge: 0940b87 b24774f
+Author: estelius <estelius@ed-3358-13.studat.chalmers.se>
+Date:   Tue Oct 16 11:38:27 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit b24774f75a08b8947cdc12fc0883bdd4d33cc2b9
+Merge: f0b8586 e8c1d44
+Author: sjoholmf <sjoholmf@ed-3358-12.studat.chalmers.se>
+Date:   Tue Oct 16 11:32:15 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit 0940b87769716e7bbe26137081d227e25d92a01e
+Merge: 294efd7 e8c1d44
+Author: estelius <estelius@ed-3358-13.studat.chalmers.se>
+Date:   Tue Oct 16 11:30:18 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit 294efd73b1558e5a77b69cfd91af54dac29b391d
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Tue Oct 16 11:30:02 2012 +0200
+
+    Lagt till grundläggande validering för items på userpluspage.
+
+commit f0b8586216f3a4c14f556fd20ee994ab46dff085
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Tue Oct 16 11:28:45 2012 +0200
+
+    Fixade i templaten så den länkar till Min sida om man är inloggad och login om man inte är inloggad.
+    Anpassade testlibrary till den uppdaterade sökfunktionen.
+
+commit e8c1d447df970a43a803b95f193e78cf547ab037
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Tue Oct 16 11:21:38 2012 +0200
+
+commit 117aec30c25a9a17764fe3272e50cdfaecf1a2aa
+Merge: fe5d6fa cbbb51f
+Author: Hannes <Hannes@129.16.189.116>
+Date:   Tue Oct 16 11:12:15 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit fe5d6fafa44cf19b0ed30e6d438c0c999a1f334d
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Tue Oct 16 11:06:27 2012 +0200
+
+commit cbbb51f2e0b79c424038180743cffdd8a5d202d2
+Merge: 46b6e89 b04b72d
+Author: sjoholmf <sjoholmf@ed-3358-12.studat.chalmers.se>
+Date:   Tue Oct 16 11:04:03 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit 46b6e89ac1c1ed71a1c57a2da358723663d28dfd
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Tue Oct 16 11:03:43 2012 +0200
+
+    Lagt till publisher i searchitem.
+    Ändrade i userpluspagebb så att den kollar om författare finns med innan den lägger till ny.
+    Har lagt till klassen GenerateTestData som slänger in lite författare och böcker i databasen.
+
+commit b04b72d3ca6b29463421b084e68223adffe56133
+Merge: c2aba22 7b1c227
+Author: estelius <estelius@ed-3358-13.studat.chalmers.se>
+Date:   Tue Oct 16 10:49:06 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit c2aba229ca21a4a83bbfd0e3e16443708d73d1b3
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Tue Oct 16 10:48:39 2012 +0200
+
+    Några små ändringar plus har lagt till en massa validators för items. Dom används inte i jsf sidorna än.
+
+commit 7b1c2277c75aa5677f58d7fb7fbe091581f6f5dc
+Author: Britsman <eric_britsman@hotmail.com>
+Date:   Tue Oct 16 10:25:32 2012 +0200
+
+    Lagt till emailmetoderna (anropa proxymetoder i userregistrybean).
+
+commit 63afaedbda42b7eaaddd7120dfbf508da5fc0391
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Tue Oct 16 08:47:50 2012 +0200
+
+    Har lagt till validering med Validator klasserna för alla fälten i adminPage och login sidan.
+
+commit 3f6f9906f1070ce28be4658abdd4b894a7871786
+Merge: 8eac3f3 de1c14a
+Author: Hannes <Hannes@Hannes-PC>
+Date:   Mon Oct 15 22:07:28 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit 8eac3f374cf0a06970cf5c67c6c7eecac287056e
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Mon Oct 15 22:07:12 2012 +0200
+
+commit de1c14af1c6191cbf9a4afb6d69f71f4e3111b8d
+Author: dargar <fredrik.estelius@gmail.com>
+Date:   Mon Oct 15 20:19:28 2012 +0200
+
+    Har lagt till ett alternativt förslag för att validera username/email/password när man registrerar användare. Det borde vara lättare att sköta allt på "ett" ställe (t.ex. så kan adminPage också använda klasserna för samma sak). Kan utvidgas för att validera items med.
+
+commit 700ec7ac47064309bee07671f5f6234c1331e9fc
+Merge: a4ac1d4 8fb92be
+Author: Hannes <Hannes@129.16.191.243>
+Date:   Mon Oct 15 15:41:18 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit a4ac1d46fff96290a8195dc5be7c1b51166a65f1
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Mon Oct 15 15:34:52 2012 +0200
+
+commit 8fb92befff4f02524d23502f349ec64c287a42b9
+Merge: 9844d8e da98204
+Author: sjoholmf <sjoholmf@ed-3358-14.studat.chalmers.se>
+Date:   Mon Oct 15 15:34:05 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit 9844d8e0887eb46526956f325d2641bf6494d41c
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Mon Oct 15 15:32:16 2012 +0200
+
+    Ändrat i searchItem så den returnerar saker som innehåller rätt item-namn eller creator-namn. Sökning på "Verne" returnerar alltså bland annat allt av Jules Verne.
+
+commit da982041d5133d224a728b941186e8cdd29969a2
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Mon Oct 15 15:30:49 2012 +0200
+
+    Fixat buggen jag snacka om tidigare (måste ha den som commandbutton i sin egen form, med redirect till samma sida som action o sendEmail som actionlistener). även fixat så att det inte går att replya till den riktiga adressen som mailen skickas från.
+
+commit 2e08035dce992387bb28ac8990917c5d1860518a
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Mon Oct 15 15:15:55 2012 +0200
+
+    user page har fått lite bättre datumutskrifter.
+
+commit d1809edb0cab9dc9547fdc7c0bdb627076584268
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Mon Oct 15 12:53:42 2012 +0200
+
+    lagt till setFrom (gör så att avsändarfältet visar ett namn istället för en emailadress)
+
+commit 85b270e1fd63875fee75a0ca6b01db4239e3716b
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Mon Oct 15 12:14:14 2012 +0200
+
+    Fixat så man kan emaila, basic email är väldigt enkelt men är krångligare om man tex vill skicka med en fil eller sånt. Finns även mycket man kan göra om man vill greja med formateringen på mailen som skickas ut. just nu mailar man till hardcoded adress via knapp på adminpage. pga av någon bugg så aktiveras email sendingen också en gång för varje gång man går till adminpage via index (sedan fungerar knappen som förväntat).
+    
+    VIKTIGT: måste ställa in en en massa grejer i glassfish, följ instruktionerna i början på denna sidan:
+    http://javaeenotes.blogspot.se/2010/04/using-javamail-api-with-glassfish-and.html
+
+commit c1b28623230cc6135fc119e80541ed1751d8fc4d
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Mon Oct 15 11:22:34 2012 +0200
+
+commit 5711ee3c3ba556762591f3a9e21401990a81dac7
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Mon Oct 15 09:22:59 2012 +0200
+
+commit 38c9f7b3b7858be389229b43c51655e1e2528c50
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Mon Oct 15 08:59:39 2012 +0200
+
+commit 3eadfe79901d2595ea294b8aab96c759fe6f79fb
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Sun Oct 14 00:38:43 2012 +0200
+
+    Fixat fungerande querys för att skaffa user position i en reserveditems que, samt en query som hämtar alla creator names för en viss item som en lista av strings (för printing i item tabellen). Har även fixat några buggar i testsearch (som orsakade dubletter på vissa creators/ creator items om man körde testet flera gånger). håller på o researchar för email generation nu, maila om ni kommer på nån annan query ni vill ha eller så.
+
+commit 8a16e335f055a2e5a9a580291e51daeb3455aaf8
+Author: dargar <fredrik.estelius@gmail.com>
+Date:   Fri Oct 12 22:23:47 2012 +0200
+
+    Fixatl lite grundläggande validering till adminpage.
+
+commit f6b451694482d1102fb0c2924d9a419dc7cfb283
+Author: dargar <fredrik.estelius@gmail.com>
+Date:   Fri Oct 12 21:30:49 2012 +0200
+
+    AdminPage använder nu UserRegistryBean istället för WebbLib direkt plus några andra små fixar.
+
+commit 2b678f923d5956e04d2778d82dd1286c236cab04
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Thu Oct 11 16:55:30 2012 +0200
+
+    Har fixat search-metoder i queryprocessor och en testklass som testar dessa.
+
+commit 9111e34a9ea2bf0f0cf7899bd089000c61798ed0
+Author: Britsman <eric_britsman@hotmail.com>
+Date:   Thu Oct 11 16:47:34 2012 +0200
+
+commit b5555aac7c14c831787f979cee0303608f365239
+Merge: eafd133 4b8010e
+Author: Britsman <eric_britsman@hotmail.com>
+Date:   Thu Oct 11 16:45:55 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit eafd1338ad6100cdc1237190d2f39c323a93b6bf
+Author: Britsman <eric_britsman@hotmail.com>
+Date:   Thu Oct 11 16:45:39 2012 +0200
+
+commit 4b8010ef65231b2d49001126ba1dd718eb4c046c
+Merge: 3458686 c3c9dc6
+Author: estelius <estelius@ed-3354-09.studat.chalmers.se>
+Date:   Thu Oct 11 16:09:38 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit 3458686a40c5592e9cce491f6b43025aaa59f93e
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Thu Oct 11 16:09:10 2012 +0200
+
+    UserPlusPage kan nu (mer eller mindre) CRUDa items.
+
+commit c3c9dc6954c638881ce417c48775974c3609d268
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Thu Oct 11 15:27:23 2012 +0200
+
+    Fixat logg in för user, userplus och logg ut mm.
+
+commit a51c597e514119aa7b86e3b77d63289ffabe37e3
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Thu Oct 11 15:20:38 2012 +0200
+
+    Fixat logg in för user, userplus och logg ut mm.
+
+commit 363ce25da0878396ed126c55e1937ec6f35cec6f
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Thu Oct 11 14:52:39 2012 +0200
+
+    Fixat logg in för user, userplus och logg ut mm.
+
+commit 794bedb0cf862b3142fe3c96d1125907076766e4
+Merge: c8e45b8 8bfdfd4
+Author: Hannes <Hannes@129.16.176.127>
+Date:   Thu Oct 11 14:31:21 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit c8e45b86fe3403af81af45c8adfd474556ec40a3
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Thu Oct 11 14:30:53 2012 +0200
+
+    Fixat logg in för user, userplus och logg ut mm.
+
+commit 8bfdfd454b85020b0110b0e4d891b075013687fa
+Author: FREDRIK ESTELIUS <estelius@ed-3354-09.studat.chalmers.se>
+Date:   Thu Oct 11 14:28:39 2012 +0200
+
+    Fixat userPage och persistence.xml filer
+
+commit fb6d429654da1d7832a0268a59f85e5f0838e32a
+Merge: 3419095 912104e
+Author: Hannes <Hannes@129.16.176.127>
+Date:   Thu Oct 11 13:19:20 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit 34190955a07eb7b65eed1c73ad28b65f442045d0
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Thu Oct 11 13:19:04 2012 +0200
+
+    Fixat logg in för user, userplus och logg ut mm.
+
+commit a5ae20a7c94d9efcbb276c1851c9f2b88757bb3e
+Merge: 8ae81f5 eb98b8b
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Thu Oct 11 13:15:14 2012 +0200
+
+    Fixat logg in för user, userplus och logg ut mm.
+
+commit 912104eefe9c1ef63dfaf5840894aba01659e3ee
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Thu Oct 11 12:03:00 2012 +0200
+
+commit 698faa6af685ab268e26d33211a372ffad8fc6ed
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Thu Oct 11 12:00:22 2012 +0200
+
+    Bookpage uppdaterad, modellerad efter delete/edit i workshopen (page med en conversationscope backend som ska ta emot från en tidigare  page). Har inte gjort nåt med backing bean för booksidan, eller pagen som ska skicka in böcker (findbook) än.
+
+commit 6222cfa6080ccd8d03e473983ac7b7adb57d7fb9
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Thu Oct 11 00:33:14 2012 +0200
+
+    Grejat hela dan med att få map med user och position för que att funka med databasen, men det verkar som man behöver använda hibernate/nyare version av eclipselink för det vill inte funka. Iochmed att jag inte tycker att det är värt att lägga mer tid på det så skapade jag en embbedable class  istället (som innehåller en int och en user) som jag sedan har en lista på i ReservedItem. Man kan alltså nu kolla up en users position i kön, bara att jag fick göra det med en ny klass istället för en hashmap.
+
+commit 0cf789f5865ada3dd40272434141b66cdcb41f17
+Author: dargar <fredrik.estelius@gmail.com>
+Date:   Wed Oct 10 19:41:43 2012 +0200
+
+    UserPagePlus har fått lite mer kött på benen.
+
+commit 8ae81f51b70b9a1e22657030fe90a0b9ec8ed0db
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Wed Oct 10 19:24:39 2012 +0200
+
+commit eb98b8bb96dd45b78f3bc383465d9db4b50137d2
+Author: dargar <fredrik.estelius@gmail.com>
+Date:   Wed Oct 10 13:28:22 2012 +0200
+
+    UserPage fungerar så länge man sätter user id manuellt i bönan. Har gjort en första start på userpluspage, men mycket kvar att göra där.
+
+commit 8180362b1df90807d47c498c0de640933a506e0c
+Author: dargar <fredrik.estelius@gmail.com>
+Date:   Tue Oct 9 22:43:56 2012 +0200
+
+    Sma updateringar i adminpage och userpage.
+
+commit 7821a31ffb774a78bb79e1aef728c0e748a73439
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Tue Oct 9 09:49:40 2012 +0200
+
+    Börjat jobba på UserPage.
+
+commit 916188ffa0f632e44de64e55d9f5967f74e87d1b
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Tue Oct 9 09:28:07 2012 +0200
+
+    Lagt till isLibrarian.
+
+commit 860cd9a878e08127e705526eec9d4c1a21916670
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Tue Oct 9 02:00:50 2012 +0200
+
+    Funkar nu att reservera items (en item reserverad av flera users i kö/flera items reserverad av samma users). Visade sig att junit körde dem 2 testerna async vilket orsakade dem flesta buggarna jag försökt fixa (testAddItems måste ske först). Jag har fixat nu så den kör ett test i taget.
+
+commit ab7835f983dec47d3dd9bbb77280a2dd153bf891
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Mon Oct 8 22:39:11 2012 +0200
+
+commit 9827b2181eb55bdf69395e934dcc6f21e83995a0
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Mon Oct 8 19:17:43 2012 +0200
+
+commit 002bd3efccc0b3690f6608316f9d073c6e1e1e15
+Author: dargar <fredrik.estelius@gmail.com>
+Date:   Mon Oct 8 18:48:31 2012 +0200
+
+    Efter mycket om och men sa fungerar crud pa admin sidan, men det ar inte snyggt gjort (annu :p)
+
+commit 95f44a940f15d92288b6c01e49f2bd2e3df2480e
+Author: Britsman <eric_britsman@hotmail.com>
+Date:   Mon Oct 8 14:19:02 2012 +0200
+
+    Fick ändra lite i testerna igen, nu funkar det att lägga till nya item med ny creator, gammal item med ny creator samt ny item + gammal creator.
+
+commit 026281f09351ea58f3c20c2aa9926e0da7b0adac
+Author: Britsman <eric_britsman@hotmail.com>
+Date:   Mon Oct 8 12:14:51 2012 +0200
+
+commit 8e00ccc69e509cb79d579803b4b75abd4a26e1be
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Mon Oct 8 11:06:10 2012 +0200
+
+    Ändrat i testet så att det funkar även om man inte har några creators i databasen.
+
+commit f8d8aac015a4905cd19d833a6744bc4fd9a4f6b2
+Author: dargar <fredrik.estelius@gmail.com>
+Date:   Sat Oct 6 17:58:46 2012 +0200
+
+    Add och remove user (borde) fungera pa adminsidan nu. Inte gjort klart update annu.
+
+commit f58552db4102076c079feaf0838a112d4ad7c378
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Sat Oct 6 17:12:15 2012 +0200
+
+    fixat så flera creators kan vara creator av samma item via Junit test.
+
+commit fcf61adb12600a2d5b2936f6ad7c098bd4d83d5e
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Sat Oct 6 17:07:59 2012 +0200
+
+    fixat så flera creators kan vara creator av samma item via Junit test.
+
+commit f1173d6520a417504cbb4842b41ac61c0496617a
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Sat Oct 6 15:30:32 2012 +0200
+
+    Grejer fortfararande med cascaden. den vill inte lägga till flera borroweditems som använder samma user & item samtidigt (ska funka pga att datumet kan vara olika). Kan lägga till flera creators men den vill inte länka flera creators till samma item.  Testerna för ReservedItem är disablade, försöker lösa det andra först.
+
+commit 0501e2f948b38f2efcca8ec2b04c62b3815f8636
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Fri Oct 5 21:55:16 2012 +0200
+
+    Det funkar att testa grejer o så nu, se till att lägga till en databas for projektet och modifiera persistence.xml i other sources + other test sources så dem pekar till den DB:n. Relationen mellan user och reserved item är inte helt korrekt dock (usersen hamnar inte i samma que trots att det är samma item). Håller på och grejar med det nu.
+
+commit 62542c3bb59802cad4a6683fc487b60a1bbad684
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Fri Oct 5 18:18:46 2012 +0200
+
+    Fick skriva persistance.xml manuellt, anledningen att det inte funka innan var att maven-webbapp projekt genererar persistence för JTA istället för resource local. Fick även ändra namn på "year" attributet (till year_released) och user tabellen (till LIBRARY_USERS) pga reservedKeyWordException i databasen. Vi borde nog kolla up om vi hellre vill använda EJB för projektet dock.
+
+commit b6e4a4d5e0a95b397b4c762f269acd55c7454d55
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Thu Oct 4 22:17:08 2012 +0200
+
+commit 4505c7346ad483d7c31def0d7362ba0775a628d1
+Author: Britsman <eric_britsman@hotmail.com>
+Date:   Thu Oct 4 18:17:04 2012 +0200
+
+    fixat persistence xml, men det verkar krångla trots att jag är connectad både till glassfish och databasen, måste läsa om hur man kombinerar.
+
+commit 461a3d8e614892d742250bb266e75b3c1a64b957
+Author: Britsman <eric_britsman@hotmail.com>
+Date:   Thu Oct 4 18:05:02 2012 +0200
+
+    Måste ställa in target db innan det går att testa, men den krånglar när jag försöker skapa en persistence xml
+
+commit 7167789e7b610e89e324f6374da6689e47fab3d2
+Author: Britsman <eric_britsman@hotmail.com>
+Date:   Thu Oct 4 17:37:28 2012 +0200
+
+commit d1493998ebba69cca510ab8a40a9ab569f0ad138
+Merge: bb9e94c d332271
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Thu Oct 4 16:47:18 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit bb9e94cd1d75c2b1635ca1631f228940dfd831b0
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Thu Oct 4 16:46:58 2012 +0200
+
+    Ändrat i UserRegistry och CreatorCollection så id är Long istället för String
+
+commit d33227157c6a8bcf30e2f5505c7fa1f5c235dda0
+Merge: 9650492 0ff61d5
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Thu Oct 4 16:44:38 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit 9650492b42c0b7d231f7d73611e00215e25c78b7
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Thu Oct 4 16:44:14 2012 +0200
+
+    More tiny adminPage additions
+
+commit 0ff61d53f262b6657f163f7acc9b058837dfeefb
+Merge: 414c6e3 acbe89d
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Thu Oct 4 16:39:21 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit 414c6e3f8eb1667d54491c15be5965b5da517a09
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Thu Oct 4 16:39:10 2012 +0200
+
+    Lagt till getbyname/title/username samt en CreatorCollection
+
+commit acbe89deb133011240a9ee88d4bc69e1edb648bd
+Merge: a32dc18 ec67a65
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Thu Oct 4 16:26:40 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit ec67a65641d8404a1502302ce30b5a514500aae9
+Merge: 82ed338 92e35df
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Thu Oct 4 16:25:19 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit a32dc188afc7e3ad414c32ddeb35993afdfa4522
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Thu Oct 4 16:25:10 2012 +0200
+
+    Added backing bean for adminPage
+
+commit 82ed338c0de1f38132167837e30dd91161f733f3
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Thu Oct 4 16:24:28 2012 +0200
+
+    Controller-klassen färdig
+
+commit 92e35df1e8f0f694cfbf8abc59acb64e49db21b0
+Merge: 3d20af0 0582acd
+Author: Britsman <eric_britsman@hotmail.com>
+Date:   Thu Oct 4 16:07:15 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit 3d20af0e6051165c0c25b48032d11bbf48f63fd2
+Author: Britsman <eric_britsman@hotmail.com>
+Date:   Thu Oct 4 16:07:00 2012 +0200
+
+commit 0582acd1d480150b4c292e6b6327e38f255f937f
+Merge: ed71e8a 758f940
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Thu Oct 4 16:02:54 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit 758f9404d67122db01472dbf540f2723c03c3703
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Thu Oct 4 16:02:06 2012 +0200
+
+    Rättar i POM, med gamla gick det inte att bygga.
+
+commit ed71e8a1b2acdc30fd4b8d836256d6c71e41ce90
+Merge: c4e2546 fa16230
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Thu Oct 4 15:56:57 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit c4e2546e309cc3f81a4c51d42119626ab9a6004e
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Thu Oct 4 15:55:25 2012 +0200
+
+    Some more xhtml editing, primarily adminPage
+
+commit fa16230afde06c0541906bf2547f6817fe9af08c
+Merge: 15cdd73 bc5c874
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Thu Oct 4 15:51:21 2012 +0200
+
+    Merge branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+commit 15cdd73177403fd377031872f5fbb6ad4330d2e9
+Author: sjoholmf <sjoholmf@ed-3358-10.studat.chalmers.se>
+Date:   Thu Oct 4 15:50:43 2012 +0200
+
+commit bc5c8747055c0569855f2523f3eb076adf080f9d
+Author: estelius <estelius@ed-3358-11.studat.chalmers.se>
+Date:   Thu Oct 4 15:08:25 2012 +0200
+
+    Added lots of basic xhtml pages.
+
+commit 0c64cd569106315b97d87fde70c6323d23f6a004
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Thu Oct 4 12:40:09 2012 +0200
+
+    Initial classes and stuff
+
+commit baa284a9c7ab6186fa3bfa365951e769ff55c971
+Author: Hannes <Hannes@129.16.190.219>
+Date:   Wed Oct 3 16:22:25 2012 +0200
+
+commit c9a238b778c5a9aaa7bbb2d5b2b4bdf80ca48fcb
+Author: dargar <fredrik.estelius@gmail.com>
+Date:   Wed Oct 3 12:52:16 2012 +0200
+
+    Fredrik E test commit/push
+
+commit d24045f7218a25ceffcb0f887ae52ac2513e35b3
+Author: Eric Britsman <gusbriter@student.gu.se>
+Date:   Wed Oct 3 12:41:39 2012 +0200
+
+    Initial classes and stuff
+
+commit 38c45112440eebb542efd8be06d83bf2931b6483
+Author: britsman <eric_britsman@hotmail.com>
+Date:   Thu Sep 20 02:04:43 2012 -0700
+
+    Initial commit
