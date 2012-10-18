@@ -45,10 +45,11 @@
                         <header class="sidebarHeader">
                             <h1>Snabbsök</h1>
                         </header>
-                        <form>
-                            <p><input type="text" /></p>
-                            <p><input type="submit" value="Sök"/></p>
-                        </form>
+                        <h:form>
+                            <p><h:inputText id="txtSearch" value="#{search.topSearch}" />
+                            <h:commandButton id="btnOK" value="Sök" actionListener="#{search.searchAll()}" action="searchPage?faces-redirect=true" />                       
+                        </p> 
+                        </h:form>
                     </section>
                     <section class="pageAsideSection">
                         <header class="sidebarHeader">
