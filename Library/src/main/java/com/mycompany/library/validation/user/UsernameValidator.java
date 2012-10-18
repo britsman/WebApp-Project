@@ -15,7 +15,7 @@ import javax.faces.validator.*;
 public class UsernameValidator implements Validator {
     
     // Constraints.
-    private static final String regex = "[a-zA-Z]*";
+    private static final String regex = "[a-zA-Z0-9]*";
     private static final int min = 3;
     private static final int max = 8;
     

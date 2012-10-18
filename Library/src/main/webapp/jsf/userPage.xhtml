@@ -36,7 +36,7 @@
                                             <f:facet name="header">Title</f:facet>
                                             <h:commandLink value="#{item.item.title}"
                                                            action="bookPage?faces-redirect=true"
-                                                           actionListener="#{SingleItem.bookListener(item.item)}"/>
+                                                           actionListener="#{SingleItem.bookListener(item.item, &quot;userPage&quot;)}" />
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Author(s)</f:facet>
@@ -67,19 +67,20 @@
                                             <f:facet name="header">Title</f:facet>
                                             <h:commandLink value="#{item.item.title}"
                                                            action="bookPage?faces-redirect=true"
-                                                           actionListener="#{SingleItem.bookListener(item.item)}"/>
+                                                           actionListener="#{SingleItem.bookListener(item.item, &quot;userPage&quot;)}"/>
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">Author(s)</f:facet>
+                                            <f:facet name="header">Författare</f:facet>
                                             <h:outputText id="creators" value="#{item.item.creators}" />
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">Author(s)</f:facet>
+                                            <f:facet name="header">Kvantitet</f:facet>
                                             <h:outputText id="quantity" value="#{item.item.quantity}" />
                                         </h:column>
                                         <h:column>
-                                            <h:commandLink value="Reservera" rendered="#{item.item.quantity lt 1}" />
-                                            <h:commandLink value="Låna" rendered="#{item.item.quantity gt 0}" />
+                                            <f:facet name="header">Kölapp</f:facet>
+                                            <h:outputText id="queuePosition" value="#{userPage.queuePosition}" rendered="#{userPage.queuePosition gt 0}" />
+                                            <h:commandLink value="Låna" rendered="#{item.item.quantity gt 0 and userPage.queuePosition eq 0}" />
                                         </h:column>
                                     </h:dataTable>
                                     <h:outputLabel rendered="#{empty userPage.reservedItems}" value="Du har inte reserverat några böcker." />
@@ -93,27 +94,31 @@
                             </header>
                             <section>
                                 <h:form>
-                                    <h:dataTable var="item" value="#{userPage.favorites}" rendered="#{not empty userPage.favorites}" border="1">
+                                    <h:dataTable var="item" value="#{userPage.bookmarkedItems}" rendered="#{not empty userPage.bookmarkedItems}" border="1">
                                         <h:column>
                                             <f:facet name="header">Title</f:facet>
                                             <h:commandLink value="#{item.title}"
                                                            action="bookPage?faces-redirect=true"
-                                                           actionListener="#{SingleItem.bookListener(item)}"/>
+                                                           actionListener="#{SingleItem.bookListener(item, &quot;userPage&quot;)}"/>
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">Author(s)</f:facet>
+                                            <f:facet name="header">Författare</f:facet>
                                             <h:outputText id="creators" value="#{item.creators}" />
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">Author(s)</f:facet>
+                                            <f:facet name="header">Kvantitet</f:facet>
                                             <h:outputText id="quantity" value="#{item.quantity}" />
                                         </h:column>
                                         <h:column>
-                                            <h:commandLink value="Reservera" rendered="#{item.quantity lt 1}" />
-                                            <h:commandLink value="Låna" rendered="#{item.quantity gt 0}" />
+                                            <h:commandLink value="Reservera" rendered="#{item.quantity lt 1}"
+                                                           action="userPage?faces-redirect=true"
+                                                           actionListener="#{userPage.reserveItem(item)}" />
+                                            <h:commandLink value="Låna" rendered="#{item.quantity gt 0}"
+                                                           action="userPage?faces-redirect=true"
+                                                           actionListener="#{userPage.borrowItem(item)}" />
                                         </h:column>
                                     </h:dataTable>
-                                    <h:outputLabel rendered="#{empty userPage.favorites}" value="Du har inte lagt till några böcker till din favoritlista." />
+                                    <h:outputLabel rendered="#{empty userPage.bookmarkedItems}" value="Du har inte lagt till några böcker till din favoritlista." />
                                 </h:form>
                             </section>
                         </section>

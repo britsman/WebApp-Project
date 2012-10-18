@@ -11,7 +11,9 @@
                     <h1>Bokinformation</h1>
                 </header>
                 <section id="bookInformationSection">
-                    <p>#{SingleItem.book.image}</p>
+                    <p>
+                        <h:graphicImage value="#{SingleItem.book.image}" width="120" height="100" />
+                    </p>
                     <!-- Have Image displayed on the left of text? maybe use table.-->
                     <h5>#{SingleItem.book.title}</h5>
                     <p>
@@ -27,7 +29,9 @@
                         <h:button onclick="#{SingleItem.action()}" value="Tillbaks till listan"/>
                     </p>
                     <h6>Kort Besrivning</h6>
-                    <p>#{SingleItem.book.description}</p>
+                    <p>
+                        <h:outputText value="#{SingleItem.book.description}" />
+                    </p>
                     <h:button value="#{SingleItem.buttonValue()}"/>
                 </section>
             </ui:define>

@@ -20,6 +20,7 @@ public class ItemPageBB implements Serializable{
     @Inject private Conversation convo;
     private ItemBean items;
     private Book book;
+    private String redirectPage;
     
     //Needed since another constructor has been specified.
     public ItemPageBB(){}
@@ -33,11 +34,12 @@ public class ItemPageBB implements Serializable{
         return book;
     } 
     
-    public void bookListener(Item item) {
+    public void bookListener(Item item, String redirectPage) {
         if (convo.isTransient()) {
             convo.begin();
         }
         this.book = (Book) item;
+        this.redirectPage = redirectPage;
     }
     
     public String action() {
@@ -45,7 +47,7 @@ public class ItemPageBB implements Serializable{
             convo.end();
         }
         try {
-            return "booklist?faces-redirect=true"; // Go back
+            return this.redirectPage + "?faces-redirect=true"; // Go back
         } catch (Exception e) {
             // Not implemented
             //return "error?faces-redirect=true&amp;cause=" + e.getMessage();

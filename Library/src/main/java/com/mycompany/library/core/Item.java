@@ -68,7 +68,21 @@ public class Item implements Serializable{
         this.fee = fee;
         addItems();
     }
-    
+    public Item(String id, String title, List<Creator> creators, String language,
+    int year, String genre, int quantity) {
+        this.id = id;
+        this.title = title;
+        this.creators = creators;
+        this.language = language;
+        this.year_released = year;
+        this.genre = genre;
+        this.image = "/resources/img/defaultBook.png";
+        this.description = "No description available.";
+        this.quantity = quantity;
+        this.loan_period = 7;
+        this.fee = 10;
+        addItems();
+    }
     
 
     public String getId() {

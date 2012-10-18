@@ -5,14 +5,12 @@ import com.mycompany.library.core.Item;
 import com.mycompany.library.core.ReservedItem;
 import com.mycompany.library.core.User;
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -23,10 +21,16 @@ import javax.inject.Named;
 @SessionScoped
 public class UserPageBB implements Serializable {
     
+    private UserRegistryBean urb;
     private User user;
 
     // Default constructor.
     public UserPageBB() {}
+    
+    @Inject
+    public UserPageBB(UserRegistryBean urb) {
+        this.urb = urb;
+    }
     
     public String getUsetName(){
         return user.getUsername();
@@ -44,12 +48,33 @@ public class UserPageBB implements Serializable {
         return user.getBorrowedItems();
     }
     
-    public List<Item> getFavorites() {
+    public List<Item> getBookmarkedItems() {
         return user.getBookmarkedItems();
     }
     
     public List<ReservedItem> getReservedItems() {
         return user.getReservedItems();
+    }
+    
+    public int getQueuePosition() {
+        return 3;
+    }
+    
+    public void bookmarkItem(Item item) {
+        user.setBookmarkedItems(item);
+        urb.update(user);
+    }
+    
+    public void reserveItem(Item item) {
+        ReservedItem reservedItem = new ReservedItem(item, user);
+        user.setReservedItems(reservedItem);
+        urb.update(user);
+    }
+    
+    public void borrowItem(Item item) {
+        BorrowedItem borrowedItem = new BorrowedItem(item, user);
+        user.setBorrowedItems(borrowedItem);
+        urb.update(user);
     }
     
     public String returnDate(Date loanDate, BorrowedItem item) {

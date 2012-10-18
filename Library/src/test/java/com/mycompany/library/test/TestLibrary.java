@@ -25,7 +25,7 @@ import org.junit.Test;
  */
 public class TestLibrary {
     private String creatorName = "Author";
-    private String itemId = "0975-522";
+    private String itemId = "0975-523";
     private String userName = "Eric1";
     
     @Test
@@ -49,9 +49,8 @@ public class TestLibrary {
         }
         temp.add(creator);
         Item item = new Book(itemId, "testbook", temp, "publisher",
-        "English", 2012, 200, "comedy", "img", "desc", 1, 7, 10);
+        "English", 2012, 200, "comedy", "/resources/img/defaultBook.png", "desc", 1, 7, 10);
         item = items.update(item);
-        System.out.println("\n" + item.getCreatorNames() + "\n");
     }
     public void testAddUser(){
         UserRegistry users = WebbLib.INSTANCE.getUsers();
@@ -63,12 +62,13 @@ public class TestLibrary {
         }
         Item item = items.find(itemId);
         user.setBookmarkedItems(item);
+        if(item.getQuantity() > 0 && !user.hasBorrowed(item.getId())){
         new BorrowedItem(item, user);  
-        ReservedItem reserve = q.findReservedItem(item);
-        if(reserve == null){
-            reserve = new ReservedItem(item, user); 
         }
-        else if(!user.getReservedItems().contains(reserve)){
+        ReservedItem reserve = q.findReservedItem(item);
+        if (reserve == null) {
+            reserve = new ReservedItem(item, user);
+        } else if (!user.getReservedItems().contains(reserve)) {
             reserve.setQue(user);
             user.setReservedItems(reserve);
         }
@@ -81,7 +81,7 @@ public class TestLibrary {
         User user = users.getByUsername(userName);
         Item item = items.find(itemId);
         ReservedItem reserve = q.findReservedItem(item);
-        if(reserve != null && user.hasReserve(reserve.getId())){
+        if(reserve != null && user.hasReserved(reserve.getId())){
             reserve.updatePositions(user);
             user.updateReservation(reserve);
             user = users.update(user);
@@ -102,7 +102,7 @@ public class TestLibrary {
         }
         cList.add(c1);
         Item item1 = new Book("978-0140623178", "Moby Dick", cList, "Penguin",
-        "English", 1851, 544, "Horror", "img", "Tuff bok om valar och grejer, inte skriven av Jules Verne", 1, 7, 10);
+        "English", 1851, 544, "Horror", "/resources/img/defaultBook.png", "Tuff bok om valar och grejer, inte skriven av Jules Verne", 1, 7, 10);
         item1 = items.update(item1);
         
         c1 = creators.getByName("Jules Verne");
@@ -111,14 +111,14 @@ public class TestLibrary {
         }
         cList.set(0, c1);
         Item item2 = new Book("978-2080702999", "La tour du Monde en quatre-vingts jours", cList, "Flammarion", "French", 1873, 200,
-        "Adventure", "img", "Tuff bok, inte lika många valar dock.", 1, 7, 10);
+        "Adventure", "/resources/img/defaultBook.png", "Tuff bok, inte lika många valar dock.", 1, 7, 10);
         item2 = items.update(item2);
         
         c1 = item2.getCreators().get(0);
         cList.set(0, c1);
         
         Item item3 = new Book("978-0486440880", "Journey to the Center of the Earth", cList, "Dover Thrift", "English", 1864, 200, 
-                "Adventure", "img", "Massa grejer i jorden", 0, 7, 10);
+                "Adventure", "/resources/img/defaultBook.png", "Massa grejer i jorden", 0, 7, 10);
        item3 = items.update(item3);
        
         //Här börjar sökningen

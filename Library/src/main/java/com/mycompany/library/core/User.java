@@ -134,10 +134,20 @@ public class User implements Serializable{
             }
         }
     }
-        public boolean hasReserve(Long id){
+    public boolean hasReserved(Long id) {
         boolean hasIt = false;
-        for(int i = 0; i < this.reservedItems.size(); i++){
-            if(id == this.reservedItems.get(i).getId()){
+        for (int i = 0; i < this.reservedItems.size(); i++) {
+            if (id == this.reservedItems.get(i).getId()) {
+                hasIt = true;
+                break;
+            }
+        }
+        return hasIt;
+    }
+    public boolean hasBorrowed(String id) {
+        boolean hasIt = false;
+        for (int i = 0; i < this.borrowedItems.size(); i++) {
+            if (id.equals(this.borrowedItems.get(i).getItem().getId())){
                 hasIt = true;
                 break;
             }
