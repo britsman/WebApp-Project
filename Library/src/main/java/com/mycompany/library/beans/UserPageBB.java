@@ -44,8 +44,8 @@ public class UserPageBB implements Serializable {
         this.user = user;
     }
     
-    public int getQueuePosition() {
-        return 3;
+    public int getQueuePosition(ReservedItem reservedItem) { 
+       return reservedItem.getQuePosition(user);
     }
 
     /* Managing bookmarked items */
