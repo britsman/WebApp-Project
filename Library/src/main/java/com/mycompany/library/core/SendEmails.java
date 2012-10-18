@@ -22,7 +22,7 @@ import javax.mail.internet.MimeMessage;
  */
 public class SendEmails {
     
-    @Resource(name = "mail/library")
+    @Resource(name = "mail/gusbriter@student.gu.se")
     private static Session mailSession;
     public static final Long milliPerDay = 86400000L;
     

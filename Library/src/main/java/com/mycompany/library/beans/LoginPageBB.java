@@ -24,6 +24,8 @@ public class LoginPageBB implements Serializable {
     private UserPageBB privateUserBean;
     @Inject
     private TemplateBB loggedUser;
+    @Inject
+    UserRegistryBean users;
     private String userName;
     private String password;
     private UIOutput txtOutput;
@@ -33,8 +35,7 @@ public class LoginPageBB implements Serializable {
     public LoginPageBB() {}
 
     public void validateUser() {
-        UserRegistry users = WebbLib.INSTANCE.getUsers();
-        User user = users.getByUsername(userName);
+        User user = users.getByUserName(userName);
         if (user == null) {
             accessGranted = false;
             txtOutput.setValue("Användare inte hittad!");
@@ -59,8 +60,9 @@ public class LoginPageBB implements Serializable {
     }
 
     public void validateLibrarian(User u){   
-        if(u.isIsLibrarian())
+        if(u.isIsLibrarian()){
            isLibrarian = true;
+        }
         
     }
     

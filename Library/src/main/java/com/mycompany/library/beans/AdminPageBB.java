@@ -23,8 +23,9 @@ import javax.mail.internet.MimeMessage;
 @SessionScoped
 public class AdminPageBB implements Serializable {
     
-    private UserRegistryBean urb;
-    @Resource(name = "mail/gusbriter@student.gu.se")
+    @Inject
+    private UserRegistryBean users;
+    @Resource(name = "mail/library")
     private Session mailSession;
     
     private String username;
@@ -42,27 +43,22 @@ public class AdminPageBB implements Serializable {
     // Defaul constructor.
     public AdminPageBB() {}
     
-    @Inject
-    public AdminPageBB(UserRegistryBean urb) {
-        this.urb = urb;
-    }
-    
     public String action() {
         return "adminPages?faces-redirect=true";
     }
     
     public List<User> getAllUsers() {
-        return urb.getAll();
+        return users.getAll();
     }
     
     // Create and add a new user.
     public void createUser() {
-        urb.add(new User(username, password, email, feesOwed));
+        users.add(new User(username, password, email, feesOwed));
     }
     
     // Remove an existing user.
     public void removeUser(Long id) {
-        urb.remove(id);
+        users.remove(id);
     }
     
     public void prepareEdit(Long id, String username, String email, String password, double feesOwed) {
@@ -75,18 +71,18 @@ public class AdminPageBB implements Serializable {
     
     // Edit an existing user.
     public void editUser() {
-        User user = urb.find(editId);
+        User user = users.find(editId);
         user.setUsername(editUsername);
         user.setEmail(editEmail);
         user.setPassword(editPassword);
         user.setFeesOwed(editFeesOwed);
-        urb.update(user);
+        users.update(user);
     }
     
     public void userPlus(Long editId, boolean value){
-        User user = urb.find(editId);
+        User user = users.find(editId);
         user.setIsLibrarian(value);
-        urb.update(user);
+        users.update(user);
     }
     
     public String getUsername() {

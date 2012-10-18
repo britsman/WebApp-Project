@@ -160,19 +160,15 @@ public class Item implements Serializable{
         }
     }
     public String getCreatorNames(){
-        String tmp ="";
-        
+        String result ="";
         QueryProccessor qp = WebbLib.INSTANCE.getQueryProccessor();
-        List<String> list = qp.getCreatorNames(this);
-        for(String e:list){
-            tmp += e;
+        List<String> creatorNames = qp.getCreatorNames(this);
+        for (String s : creatorNames) {
+            result += s + ", ";
         }
-        
-        return tmp; 
+        if (!result.isEmpty()) {
+            result = result.substring(0, result.length() - 2);
+        }
+        return result;
     }
-    
-    
- 
-    
-    
 }

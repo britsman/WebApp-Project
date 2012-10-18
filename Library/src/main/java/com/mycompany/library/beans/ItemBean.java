@@ -32,10 +32,10 @@ public class ItemBean implements Serializable{
     public Item update(Item item){
         return items.update(item);
     }
-    public void find(String id){
-        items.find(id);
+    public Item find(String id){
+        return items.find(id);
     }
-    public void getByTitle(String name){
-        items.getByTitle(name);
+    public List<Item> getByTitle(String name){
+        return items.getByTitle(name);
     }
 }

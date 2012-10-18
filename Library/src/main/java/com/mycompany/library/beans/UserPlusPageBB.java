@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -21,8 +22,10 @@ import javax.inject.Named;
 @SessionScoped
 public class UserPlusPageBB implements Serializable {
     
-    private CreatorCollection creatorCollection = WebbLib.INSTANCE.getCreators();
-    private ItemCollection itemCollection = WebbLib.INSTANCE.getItems();
+    @Inject
+    private CreatorBean creatorCollection;
+    @Inject
+    private ItemBean itemCollection;
     
     private String id;
     private String title;
@@ -58,15 +61,14 @@ public class UserPlusPageBB implements Serializable {
     public void createItem() {
         List<Creator> cs = new ArrayList<Creator>();
         String[] creatorStrings = this.creators.split(",");
-        for (String s: creatorStrings) {
-            Creator creator = creatorCollection.getByName(s);
+        for (String name: creatorStrings) {
+            Creator creator = creatorCollection.getByName(name);
             if(creator == null){
-                creator = new Creator(s);
+                creator = new Creator(name);
             }
             cs.add(creator);
-            creatorCollection.add(creator);
         }
-        itemCollection.add(new Item(id, title, cs, language, year_release,
+        itemCollection.update(new Item(id, title, cs, language, year_release,
                 genre, image, description, quantity, loan_period, fee));
     }
     
@@ -89,7 +91,7 @@ public class UserPlusPageBB implements Serializable {
     public void updateItem(String id) {
         Item i = itemCollection.find(id);
         i.setTitle(editTitle);
-        List<Creator> cs = new ArrayList<Creator>();
+        List<Creator> cs = new ArrayList<>();
         String[] creatorStrings = this.editCreators.split(",");
         for (String s: creatorStrings) {
             Creator creator = new Creator(s);
@@ -115,18 +117,6 @@ public class UserPlusPageBB implements Serializable {
     public String action() {
         return "userPlusPage?faces-redirect=true";
     }
-    
-    public String creatorsToString(List<String> creatorNames) {
-        String result = "";
-        for (String s : creatorNames) {
-            result += s + ", ";
-        }
-        if (!result.isEmpty()) {
-            result = result.substring(0, result.length() - 2);
-        }
-        return result;
-    }
-    
     public List<BorrowedItem> getAllBorrowedItems(){
         QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
         return q.getAllBorrowedItems();
