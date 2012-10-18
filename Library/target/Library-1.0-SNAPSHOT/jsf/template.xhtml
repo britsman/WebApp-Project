@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./../resources/css/template.css" rel="stylesheet" type="text/css" />
+        <link href="./../resources/css/library.css" rel="stylesheet" type="text/css" />
+        <link href="./../resources/css/login.css" rel="stylesheet" type="text/css" />
+        <link href="./../resources/css/admin.css" rel="stylesheet" type="text/css" />
+        <link href="./../resources/css/user.css" rel="stylesheet" type="text/css" />
+        <link href="./../resources/css/userPlus.css" rel="stylesheet" type="text/css" />
+        <title>Bibliotek</title>
+    </h:head>
+
+    <h:body>
+        <section id="wrapper">
+            <header id="pageHeader">
+                <h:form>    
+                    <p><h:outputText id="txtInloggad" value="#{template.loggedUser()}" /></p>
+                    <h1>Bibliotek</h1>
+                    <h:commandLink tabindex="6" id="linkLogOut"
+                                   action="library?faces-redirect=true"
+                                   actionListener="#{template.actionListener(e)}" style="color: blue"
+                                   value="">#{template.logOutString}
+                    </h:commandLink>
+                </h:form>
+            </header>
+            <nav id="pageNav">
+                <ul>
+                    <li><a href="library.xhtml">Startsidan</a></li>
+                    <li><h:link outcome="#{template.myPage()}" value="#{template.myPageLinkName()}" /></li>
+                    <li><a href="searchPage.xhtml">Hitta böcker</a></li>
+                    <li><a href="faqPage.xhtml">Frågor &amp; Svar</a></li>                    
+                </ul>
+            </nav>
+            <section id="contentWrapper">
+                <section id="pageContent">
+                    <ui:insert name="content">Content</ui:insert>
+                </section>
+                <aside id="pageAside">
+                    <section class="pageAsideSection">
+                        <header class="sidebarHeader">
+                            <h1>Snabbsök</h1>
+                        </header>
+                        <h:form>
+                            <p><h:inputText id="txtSearch" value="#{search.topSearch}" />
+                            <h:commandButton id="btnOK" value="Sök" actionListener="#{search.searchAll()}" action="searchPage?faces-redirect=true" />                       
+                        </p> 
+                        </h:form>
+                    </section>
+                    <section class="pageAsideSection">
+                        <header class="sidebarHeader">
+                            <h1>Öppettider</h1>
+                        </header>
+                        <ul>
+                            <li><p>Mån - Fre: 13:00 - 19:00</p></li>
+                            <li><p>Lördag: 10:00 - 14:00</p></li>
+                            <li><p>Söndag: Stängt</p></li>
+                        </ul>
+                    </section>
+                    <section class="pageAsideSection">
+                        <header class="sidebarHeader">
+                            <h1>Information</h1>
+                        </header>
+                        <p>Adress: Biblioteksgatan 1 12345 Stad</p>
+                        <p>Telefon: 031 00 00 00</p>
+                        <p>Email: bibliotek@bibliotek.se</p>
+                    </section>
+                </aside>
+            </section>
+            <footer id="pageFooter">
+                <p>Bibliotekssida av</p>
+                <p>Eric</p>
+                <p>Johannes</p>
+                <p>Fredrik</p>
+                <p>Fredrik</p>
+            </footer>
+        </section>
+    </h:body>
+</html>

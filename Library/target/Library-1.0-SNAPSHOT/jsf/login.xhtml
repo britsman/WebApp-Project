@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body>
+        <ui:composition template="./template.xhtml">
+            <ui:define name="content">
+                <section id="loginSection" class="loginRegisterSection">
+                    <header class="loginRegisterHeader">
+                        <h1>Logga in</h1>
+                        <p>Om du redan är registrerad så kan du skriva in ditt användarnamn och lösenord för att logga in.</p>
+                    </header>
+                    
+                    <h:form >
+                        <p><h:outputLabel for="txtUser" value="Användare" /></p>
+                        <p><h:inputText id="txtUser" value="#{login.userName}">
+                                <f:validator validatorId="UsernameValidator" />
+                           </h:inputText>
+                           <h:message for="txtUser" showSummary="true" showDetail="false" style="color: red" /></p>
+                        <p><h:outputLabel for="txtPassword" value="Lösenord" /></p>
+                        <p><h:inputSecret id="txtPassword" value="#{login.password}">
+                                <f:validator validatorId="PasswordValidator" />
+                           </h:inputSecret>
+                           <h:message for="txtPassword" showSummary="true" showDetail="false" style="color: red" /></p>
+                        <p><h:commandButton id="btnOK" value="OK" 
+                                            action="#{login.access()}"
+                                            actionListener="#{login.validateUser()}"/></p>
+                        <h:outputText style="color: red " binding="#{login.txtOutput}" />
+                    </h:form>
+                    
+                    <p>Om du har glömt ditt lösenord kan du klicka <a href="#">här</a> för att få hjälp.</p>
+                </section>
+                
+                <section id="registerSection" class="loginRegisterSection">
+                    <header class="loginRegisterHeader">
+                        <h1>Registrera dig</h1>
+                        <p>Om du inte är registrerad så måste du först fylla i formuläret nedan för att kunna logga in.</p>
+                    </header>
+                    
+                        <h:form>
+                            <p><h:outputLabel for="txtUserReg" value ="Användare"/></p>
+                            <p><h:inputText id="txtUserReg" value="#{register.username}">
+                                    <f:validator validatorId="UsernameValidator" />
+                               </h:inputText>
+                            <h:message for="txtUserReg" showSummary="true" showDetail="false" style="color: red" /></p>
+                            <p><h:outputLabel for="txtEmailReg" value ="Email"/></p>
+                            <p><h:inputText id="txtEmailReg" value="#{register.email}">
+                                    <f:validator validatorId="EmailValidator" />
+                               </h:inputText>
+                            <h:message for="txtEmailReg" showSummary="true" showDetail="false" style="color: red" /></p>
+                            <p><h:outputLabel for="txtPasswordReg" value ="Lösenord"/></p>
+                            <p><h:inputSecret id="txtPasswordReg" value="#{register.password}">
+                                    <f:validator validatorId="PasswordValidator" />
+                               </h:inputSecret>
+                            <h:message for="txtPasswordReg" showSummary="true" showDetail="false" style="color: red" /></p>
+                            <p><h:outputLabel for="txtPasswordReg" value ="Upprepa lösenord"/></p>
+                            <p><h:inputSecret id="txtPasswordRegConfirm" value="#{register.confirmPassword}">
+                                    <f:validator validatorId="PasswordValidator" />
+                               </h:inputSecret>
+                            <h:message for="txtPasswordRegConfirm" showSummary="true" showDetail="false" style="color: red" /></p>
+                            <p><h:commandButton id="btnOK" value="OK"  actionListener="#{register.registerUser()}" action ="#{register.access()}"/></p>
+                            
+                            <p><h:outputLabel for="" value ="rR"/></p>
+                            <h:inputText id="txtConfirmationcode" value="#{register.username}"/>
+                        </h:form>
+                    
+                </section>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

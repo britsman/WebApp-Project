@@ -1,0 +1,14 @@
+
+#userPlusPage section {
+    border: solid 1px black;
+    margin: 10px;
+    padding: 5px;
+}
+
+#userPlusTableSection {
+    overflow: scroll;
+}
+
+#userPlusPage input {
+    margin-bottom: 5px;
+}

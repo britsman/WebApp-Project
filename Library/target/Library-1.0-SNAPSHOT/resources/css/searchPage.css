@@ -1,0 +1,38 @@
+/* 
+    Document   : searchPage
+    Created on : Oct 14, 2012, 6:26:42 PM
+    Author     : Hannes
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+
+#searchForm{
+    display:none; 
+}
+
+.resultTable{
+     border:"0"; 
+     rendered:"#{not empty search.result}";
+     style:"max-height: 150px"; 
+     
+}
+
+.odd{
+    
+}
+.even{
+    background: #ECEDF4;
+   
+}
+
+.listItemTitle{
+    font-size: 34px;
+    font-weight: bold; 
+        
+}
+

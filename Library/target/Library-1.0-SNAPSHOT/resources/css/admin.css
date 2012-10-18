@@ -1,0 +1,33 @@
+
+#adminPage {
+    padding: 10px 10px 0px 10px;
+    overflow: hidden;
+}
+
+#adminPage table {
+    margin-bottom: 10px;
+}
+
+#adminPage td {
+    padding: 5px;
+    font: 12px serif;
+}
+
+#adminPageHeader {
+    margin-bottom: 10px;
+}
+
+.adminSection {
+    border: solid 1px black;
+    margin-bottom: 10px;
+    padding: 10px 10px 0px 10px;
+}
+
+.adminSectionHeader {
+    margin-bottom: 10px;
+}
+
+#adminPage input {
+    margin-bottom: 5px;
+    padding: 2px;
+}

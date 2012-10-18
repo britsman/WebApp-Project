@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <body>
+        <ui:composition template="./template.xhtml">
+            <ui:define name="content">
+                <section id="userPage">
+                    <header id="userPageHeader">
+                        <h1>Min sida</h1>
+                    </header>
+                    <h:link outcome="userPlusPage" value="Hantera böcker" rendered="#{userPage.user.isLibrarian}" />
+                    <section class="userPageSection">
+                        <section class="userPageSubSection">
+                            <header class="sectionHeader">
+                                <h1>Profil</h1>
+                            </header>
+                            <section>
+                                <p>Användarnamn: #{userPage.user.username}</p>
+                                <p>Email: #{userPage.user.email}</p>
+                                <p>Skuld: #{userPage.user.feesOwed} kr</p>
+                            </section>
+                        </section>
+                        <section class="userPageSubSection">
+                            <header class="sectionHeader">
+                                <h1>Lånade böcker</h1>
+                                <p>Dina lånade böcker.</p>
+                            </header>
+                            <section>
+                                <h:form>
+                                    <h:dataTable var="item" value="#{userPage.borrowedItems}" rendered="#{not empty userPage.borrowedItems}" border="1">
+                                        <h:column>
+                                            <f:facet name="header">Title</f:facet>
+                                            <h:commandLink value="#{item.item.title}"
+                                                           action="bookPage?faces-redirect=true"
+                                                           actionListener="#{SingleItem.bookListener(item.item, &quot;userPage&quot;)}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Author(s)</f:facet>
+                                            <h:outputText id="creators" value="#{item.item.creators}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Lånad</f:facet>
+                                            <h:outputText id="loanDate" value="#{userPage.formatDate(item.loanDate)}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Åter</f:facet>
+                                            <h:outputText id="returnDate" value="#{userPage.returnDate(item.loanDate, item)}" />
+                                        </h:column>
+                                        <h:column>
+                                            <h:commandLink value="Remove"
+                                                           action="userPage?faces-redirect=true"
+                                                           actionListener="#{userPage.removeBorrowedItem(item)}"/>
+                                        </h:column>
+                                    </h:dataTable>
+                                    <h:outputLabel rendered="#{empty userPage.borrowedItems}" value="Du har inga lånade böcker." />
+                                </h:form>
+                            </section>
+                        </section>
+                        <section class="userPageSubSection">
+                            <header class="sectionHeader">
+                                <h1>Reserverade böcker</h1>
+                                <p>Böcker du har reserverat.</p>
+                            </header>
+                            <section>
+                                <h:form>
+                                    <h:dataTable var="item" value="#{userPage.reservedItems}" rendered="#{not empty userPage.reservedItems}" border="1">
+                                        <h:column>
+                                            <f:facet name="header">Title</f:facet>
+                                            <h:commandLink value="#{item.item.title}"
+                                                           action="bookPage?faces-redirect=true"
+                                                           actionListener="#{SingleItem.bookListener(item.item, &quot;userPage&quot;)}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Författare</f:facet>
+                                            <h:outputText id="creators" value="#{item.item.creatorNames}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Kvantitet</f:facet>
+                                            <h:outputText id="quantity" value="#{item.item.quantity}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Kölapp</f:facet>
+                                            <h:outputText id="queuePosition" value="#{userPage.getQueuePosition(item)}" />
+                                        </h:column>
+                                        <h:column>
+                                            <h:commandLink value="Ta bort"
+                                                           action="userPage?faces-redirect=true"
+                                                           actionListener="#{userPage.removeReservedItem(item)}" />
+                                        </h:column>
+                                    </h:dataTable>
+                                    <h:outputLabel rendered="#{empty userPage.reservedItems}" value="Du har inte reserverat några böcker." />
+                                </h:form>
+                            </section>
+                        </section>
+                        <section class="userPageSubSection">
+                            <header class="sectionHeader">
+                                <h1>Favoriter</h1>
+                                <p>Böcker i din favoritlista.</p>
+                            </header>
+                            <section>
+                                <h:form>
+                                    <h:dataTable var="item" value="#{userPage.bookmarkedItems}" rendered="#{not empty userPage.bookmarkedItems}" border="1">
+                                        <h:column>
+                                            <f:facet name="header">Title</f:facet>
+                                            <h:commandLink value="#{item.title}"
+                                                           action="bookPage?faces-redirect=true"
+                                                           actionListener="#{SingleItem.bookListener(item, &quot;userPage&quot;)}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Författare</f:facet>
+                                            <h:outputText id="creators" value="#{item.creators}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Kvantitet</f:facet>
+                                            <h:outputText id="quantity" value="#{item.quantity}" />
+                                        </h:column>
+                                        <h:column>
+                                            <h:commandLink value="Reservera" rendered="#{item.quantity lt 1}"
+                                                           action="userPage?faces-redirect=true"
+                                                           actionListener="#{userPage.reserveItem(item)}" />
+                                            <h:commandLink value="Låna" rendered="#{item.quantity gt 0}"
+                                                           action="userPage?faces-redirect=true"
+                                                           actionListener="#{userPage.borrowItem(item)}" />
+                                        </h:column>
+                                        <h:column>
+                                            <h:commandLink value="Ta bort"
+                                                           action="userPage?faces-redirect=true"
+                                                           actionListener="#{userPage.removeBookmakedItem(item)}" />
+                                        </h:column>
+                                    </h:dataTable>
+                                    <h:outputLabel rendered="#{empty userPage.bookmarkedItems}" value="Du har inte lagt till några böcker till din favoritlista." />
+                                </h:form>
+                            </section>
+                        </section>
+                    </section>
+                </section>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+        <ui:composition template="./template.xhtml">
+            <ui:define name="content">
+                <section id="adminPage">
+                    <header id="adminPageHeader">
+                        <h1>Administratörsida</h1>
+                        <p>Hantera registrerade användare.</p>
+                    </header>
+                    <section id="handleUsersSection" class="adminSection">
+                        <header class="adminSectionHeader">
+                            <h1>Hantera användare</h1>
+                            <p>Här kan man manuellt hantera alla registrerade användare.</p>
+                        </header>
+                        <h:form>
+                            <h:dataTable var="user" value="#{admin.allUsers}" border="1">
+                                <h:column>
+                                    <f:facet name="header">Id</f:facet>
+                                    <h:outputText id="id" value="#{user.id}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Username</f:facet>
+                                    <h:outputText id="username" value="#{user.username}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Email</f:facet>
+                                    <h:outputText id="email" value="#{user.email}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Password</f:facet>
+                                    <h:outputText id="password" value="#{user.password}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Fees owed</f:facet>
+                                    <h:outputText id="feesOwed" value="#{user.feesOwed}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Is Librarian</f:facet>
+                                    <h:outputText id="isLibrarian" value="#{user.isLibrarian}" />
+                                </h:column>
+                                <h:column>
+                                    <h:commandLink value="Edit"
+                                                   action="adminPage?faces-redirect=true"
+                                                   actionListener="#{admin.prepareEdit(user.id, user.username, user.email, user.password, user.feesOwed)}" />
+                                </h:column>
+                                <h:column>
+                                    <h:commandLink value="Remove"
+                                                   action="adminPage?faces-redirect=true"
+                                                   actionListener="#{admin.removeUser(user.id)}" />
+                                </h:column>
+                                <h:column>
+                                    <h:commandLink value="Is Librarian"
+                                                   rendered="#{not user.isLibrarian}"
+                                                   action="adminPage?faces-redirect=true"
+                                                   actionListener="#{admin.userPlus(user.id, true)}" />
+                                    <h:commandLink value="Isn't Librarian "
+                                                   rendered="#{user.isLibrarian}"
+                                                   action="adminPage?faces-redirect=true"
+                                                   actionListener="#{admin.userPlus(user.id, false)}" />
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                        <section id="adminEditSection" class="adminSection">
+                            <h:form>
+                                <h:outputLabel for="id" value="ID:" /><br />
+                                <h:inputText id="editId" disabled="true" value="#{admin.editId}"/>
+                                <h:message for="editId" showSummary="true" showDetail="false" /><br />
+                                <h:outputLabel for="username" value="Användarnamn:" /><br />
+                                <h:inputText id="editUsername" value="#{admin.editUsername}">
+                                    <f:validator validatorId="UsernameValidator" />
+                                </h:inputText>
+                                <h:message for="editUsername" showSummary="true" showDetail="false" /><br />
+                                <h:outputLabel for="email" value="email:" /><br />
+                                <h:inputText id="editEmail" value="#{admin.editEmail}">
+                                    <f:validator validatorId="EmailValidator" />
+                                </h:inputText>
+                                <h:message for="editEmail" showSummary="true" showDetail="false" /><br />
+                                <h:outputLabel for="password" value="Lösenord:" /><br />
+                                <h:inputText id="editPassword" value="#{admin.editPassword}">
+                                    <f:validator validatorId="PasswordValidator" />
+                                </h:inputText>
+                                <h:message for="editPassword" showSummary="true" showDetail="false" /><br />
+                                <h:outputLabel for="feesOwed" value="Skuld:" /><br />
+                                <h:inputText id="editFeesOwed" value="#{admin.editFeesOwed}">
+                                    <f:validator validatorId="FeesOwedValidator" />
+                                </h:inputText>
+                                <h:message for="editFeesOwed" showSummary="true" showDetail="false" /><br />
+                                <h:commandButton id="btnEdit" value="Ändra"
+                                                 action="adminPage?faces-redirect=true"
+                                                 actionListener="#{admin.editUser()}" /><br />
+                            </h:form>
+                        </section>
+                    </section>
+                    <section id="addUserSection" class="adminSection">
+                        <header class="adminSectionHeader">
+                            <h1>Ny användare</h1>
+                            <p>Här kan man manuellt lägga till en ny användare.</p>
+                        </header>
+                        <h:form>
+                            <h:outputLabel for="username" value="Användarnamn:" /><br />
+                            <h:inputText id="username" value="#{admin.username}">
+                                <f:validator validatorId="UsernameValidator" />
+                            </h:inputText>
+                            <h:message for="username" showSummary="true" showDetail="false" /><br />
+                            <h:outputLabel for="email" value="email:" /><br />
+                            <h:inputText id="email" value="#{admin.email}">
+                                <f:validator validatorId="EmailValidator" />
+                            </h:inputText>
+                            <h:message for="email" showSummary="true" showDetail="false" /><br />
+                            <h:outputLabel for="password" value="Lösenord:" /><br />
+                            <h:inputText id="password" value="#{admin.password}">
+                                <f:validator validatorId="PasswordValidator" />
+                            </h:inputText>
+                            <h:message for="password" showSummary="true" showDetail="false" /><br />
+                            <h:outputLabel for="feesOwed" value="Skuld:" /><br />
+                            <h:inputText id="feesOwed" value="#{admin.feesOwed}">
+                                <f:validator validatorId="FeesOwedValidator" />
+                            </h:inputText>
+                            <h:message for="feesOwed" showSummary="true" showDetail="false" /><br />
+                            <h:commandButton id="btnAdd" value="Lägg till"
+                                             action="adminPage?faces-redirect=true"
+                                             actionListener="#{admin.createUser()}" /><br />
+                        </h:form>
+                        <h:form>
+                        <h:commandButton value="send email" action="adminPage?faces-redirect=true"
+                                         actionListener="#{admin.sendEmail()}" /><br />
+                        </h:form>
+                    </section>
+                </section>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
