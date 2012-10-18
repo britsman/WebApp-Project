@@ -32,7 +32,9 @@
                     <p>
                         <h:outputText value="#{SingleItem.book.description}" />
                     </p>
-                    <h:button value="#{SingleItem.buttonValue()}"/>
+                    <h:form><h:button value="#{SingleItem.buttonValue()}" rendered="#{SingleItem.buttonVisible()}" /></h:form>
+                    <p><h:outputText value="Logga in för att låna eller reservera" rendered="#{!SingleItem.buttonVisible()}"/></p>
+                    
                 </section>
             </ui:define>
         </ui:composition>
