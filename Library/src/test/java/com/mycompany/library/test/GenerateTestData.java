@@ -174,9 +174,9 @@ public class GenerateTestData {
         // Making some items.
         ItemCollection ic = WebbLib.INSTANCE.getItems();
         
-        Item item1 = new Item("1", "title1", creators1, "Svenska", 2012, "Genre1", "Image1", "Description1", 1, 5, 10);
-        Item item2 = new Item("2", "title2", creators2, "Svenska", 2012, "Genre2", "Image2", "Description2", 1, 5, 10);
-        Item item3 = new Item("3", "title3", creators3, "Svenska", 2012, "Genre3", "Image3", "Description2", 1, 5, 10);
+        Book item1 = new Book("1", "title1", creators1, "Publisher1", "Language1", 2012, 1337, "Genre1", 5);
+        Book item2 = new Book("2", "title2", creators2, "Publisher2", "Language2", 2012, 1337, "Genre2", 5);
+        Book item3 = new Book("3", "title3", creators3, "Publisher3", "Language3", 2012, 1337, "Genre3", 5);
         
         ic.add(item1);
         ic.add(item2);

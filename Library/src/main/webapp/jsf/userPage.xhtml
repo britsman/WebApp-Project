@@ -36,7 +36,7 @@
                                             <f:facet name="header">Title</f:facet>
                                             <h:commandLink value="#{item.item.title}"
                                                            action="bookPage?faces-redirect=true"
-                                                           actionListener="#{SingleItem.bookListener(item.item)}"/>
+                                                           actionListener="#{SingleItem.bookListener(item.item, &quot;userPage&quot;)}" />
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Author(s)</f:facet>
@@ -67,7 +67,7 @@
                                             <f:facet name="header">Title</f:facet>
                                             <h:commandLink value="#{item.item.title}"
                                                            action="bookPage?faces-redirect=true"
-                                                           actionListener="#{SingleItem.bookListener(item.item, "userPage")}"/>
+                                                           actionListener="#{SingleItem.bookListener(item.item, &quot;userPage&quot;)}"/>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Author(s)</f:facet>
@@ -98,7 +98,7 @@
                                             <f:facet name="header">Title</f:facet>
                                             <h:commandLink value="#{item.title}"
                                                            action="bookPage?faces-redirect=true"
-                                                           actionListener="#{SingleItem.bookListener(item)}"/>
+                                                           actionListener="#{SingleItem.bookListener(item, &quot;userPage&quot;)}"/>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Author(s)</f:facet>
