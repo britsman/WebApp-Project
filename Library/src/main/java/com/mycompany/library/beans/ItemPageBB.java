@@ -22,7 +22,9 @@ import javax.inject.Named;
 @ConversationScoped
 public class ItemPageBB implements Serializable{
     
-    @Inject private Conversation convo;
+
+    @Inject
+    private Conversation convo;
     
     private UserRegistryBean urb;
     private ItemBean items;
@@ -35,6 +37,7 @@ public class ItemPageBB implements Serializable{
     
     @Inject
     public ItemPageBB(ItemBean items, UserRegistryBean urb){
+
         this.items = items;
         this.urb = urb;
     }
