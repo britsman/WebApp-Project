@@ -53,11 +53,11 @@
                                     
                                     <br>
                                         <h:outputLabel for="checkInOut" value="ISBN " />
-                                        <h:inputText id="checkInOut" />                                   
+                                        <h:inputText id="checkInOut"  />                                   
                                     </br>
                                     <h:commandButton value="Checka in"/>
                                     <h:commandButton value="Checka Ut"/>
-                                    <h:dataTable var="item" value="#{userPlus.allBorrowedItems}">
+                                    <h:dataTable var="item" value="#{userPlus.isbnSearchResult}">
                                         <h:column>
                                             <h:outputText value="#{item.user.username}"/>
                                         </h:column>
