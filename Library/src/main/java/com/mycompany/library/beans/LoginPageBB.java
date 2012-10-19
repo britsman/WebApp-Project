@@ -52,7 +52,7 @@ public class LoginPageBB implements Serializable {
     }
     public boolean validatePassword(User u){
         if(u.getPassword().equalsIgnoreCase(password)){
-            privateUserBean.setUser(u);
+            //privateUserBean.setUser(u);
             loggedUser.setLoggedInUser(u);
             accessGranted = true;
             return true;
