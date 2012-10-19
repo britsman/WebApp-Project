@@ -25,8 +25,8 @@ public class EmailValidator implements Validator {
         String email = (String) value;
         
         // Check length constraints.
-        int usernameLength = email.length();
-        if (usernameLength == 0) {
+        int emailLength = email.length();
+        if (emailLength == 0) {
             String summary = "Fältet är obligatoriskt.";
             String detail = "Fältet är obligatoriskt.";
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail));

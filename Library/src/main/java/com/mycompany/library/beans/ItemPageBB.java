@@ -1,12 +1,8 @@
 package com.mycompany.library.beans;
 
 import com.mycompany.library.core.Book;
-import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.Item;
-import com.mycompany.library.core.ReservedItem;
 import com.mycompany.library.core.User;
-import com.mycompany.library.core.UserRegistry;
-import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.Conversation;
@@ -22,26 +18,22 @@ import javax.inject.Named;
 @ConversationScoped
 public class ItemPageBB implements Serializable{
     
-
     @Inject
     private Conversation convo;
-    
-    private UserRegistryBean urb;
-    private ItemBean items;
+    private UserRegistryBean users;
+    private TemplateBB template;
     private Book book;
     private String redirectPage;
     private User user;
     
-    //Needed since another constructor has been specified.
     public ItemPageBB(){}
-    
-    @Inject
-    public ItemPageBB(ItemBean items, UserRegistryBean urb){
 
-        this.items = items;
-        this.urb = urb;
+    @Inject
+    public ItemPageBB(UserRegistryBean users, TemplateBB template) {
+        this.users = users;
+        this.template = template;
+        this.user = this.template.getLoggedInUser();
     }
-    
     public Book getBook(){
         return book;
     } 
@@ -95,7 +87,13 @@ public class ItemPageBB implements Serializable{
         else{
             user.tryReserveItem(book);
         }
-        urb.update(user);
+        user = users.update(user);
+    }
+    public void bookMark(){
+        if(!user.getBookmarkedItems().contains(book)){
+            user.setBookmarkedItems(book);
+        }
+        user = users.update(user);
     }
     
     @PreDestroy  // MUST HAVE back button etc.

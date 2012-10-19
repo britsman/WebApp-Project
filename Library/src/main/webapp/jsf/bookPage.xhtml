@@ -26,13 +26,18 @@
                             <dd>Antal sidor:</dd> <dt>#{SingleItem.book.pageNum}</dt>
                             <dd>Antal i lager:</dd> <dt>#{SingleItem.book.quantity}</dt>
                         </dl>
-                        <h:button onclick="#{SingleItem.action()}" value="Tillbaks till listan"/>
                     </p>
                     <h6>Kort Besrivning</h6>
                     <p>
                         <h:outputText value="#{SingleItem.book.description}" />
                     </p>
-                    <h:form><h:button value="#{SingleItem.buttonValue()}" rendered="#{SingleItem.buttonVisible()}" action="bookPage?faces-redirect=true" actionListener="#{SingleItem.borrowOrReserve()}" /></h:form>
+                    <h:form>
+                        <h:commandButton value="#{SingleItem.buttonValue()}" rendered="#{SingleItem.buttonVisible()}" action="#{SingleItem.action()}" 
+                        actionListener="#{SingleItem.borrowOrReserve()}" />
+                        <h:commandButton value="Bokmarkera" rendered="#{SingleItem.buttonVisible()}" action="#{SingleItem.action()}" 
+                        actionListener="#{SingleItem.bookMark()}" />
+                        <h:commandButton action="#{SingleItem.action()}" value="Gå Tillbaka"/>
+                    </h:form>
                     <p><h:outputText value="Logga in för att låna eller reservera" rendered="#{not SingleItem.buttonVisible()}"/></p>
                     
                 </section>

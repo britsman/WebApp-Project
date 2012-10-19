@@ -99,7 +99,7 @@ public class QueryProccessor {
     public List<Item> searchItem(String id, String title, String creator, String publisher, String description, int fromYear, int toYear, boolean inStock, String language, String genre){
         EntityManager em = emf.createEntityManager();
         List<Item> resultList = null;
-        String q = "Select i from Book i where 1=1 ";
+        String q = "Select i from Item i where 1=1 ";
         if(id != null) {q += " AND i.id = '"+id+"'";}
         if(title != null){q += " AND lower(i.title) like '%"+title.toLowerCase()+"%'";}
         if(creator != null){q += " And i.id in (select i2.id from Item i2, Creator c where i2.creators=c and lower(c.name) like '%"+creator.toLowerCase()+"%')";}

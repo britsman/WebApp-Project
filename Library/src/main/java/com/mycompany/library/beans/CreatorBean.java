@@ -31,10 +31,10 @@ public class CreatorBean implements Serializable{
     public Creator update(Creator creator){
         return creators.update(creator);
     }
-    public void find(Long id){
-        creators.find(id);
+    public Creator find(Long id){
+        return creators.find(id);
     }
-    public void getByName(String name){
-        creators.getByName(name);
+    public Creator getByName(String name){
+        return creators.getByName(name);
     }
 }

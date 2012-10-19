@@ -1,12 +1,12 @@
 package com.mycompany.library.beans;
 
-import com.mycompany.library.core.SendEmails;
 import com.mycompany.library.core.User;
 import com.mycompany.library.core.UserRegistry;
 import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -15,6 +15,13 @@ import javax.enterprise.context.SessionScoped;
 @SessionScoped
 public class UserRegistryBean implements Serializable{
     UserRegistry users = WebbLib.INSTANCE.getUsers();
+    EmailBean emailBean;
+    
+    public UserRegistryBean(){}
+    @Inject
+    public UserRegistryBean(EmailBean emailBean){
+        this.emailBean = emailBean;
+    }
     
     public List<User> getAll(){
         return users.getAll();
@@ -35,12 +42,12 @@ public class UserRegistryBean implements Serializable{
         return users.getByUsername(name);
     }
     public void sendReminder(User user){
-        SendEmails.sendReminder(user);
+        emailBean.sendReminder(user);
     }
     public void sendFee(User user){
-        SendEmails.sendFee(user);
+        emailBean.sendFee(user);
     }
     public void sendRegCode(String email, Long code){
-        SendEmails.sendRegCode(email, code);
+        emailBean.sendRegCode(email, code);
     }
 }

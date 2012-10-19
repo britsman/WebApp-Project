@@ -40,7 +40,7 @@
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Author(s)</f:facet>
-                                            <h:outputText id="creators" value="#{item.item.creators}" />
+                                            <h:outputText id="creators" value="#{item.item.creatorNames}" />
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Lånad</f:facet>
@@ -79,10 +79,6 @@
                                             <h:outputText id="creators" value="#{item.item.creatorNames}" />
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">Kvantitet</f:facet>
-                                            <h:outputText id="quantity" value="#{item.item.quantity}" />
-                                        </h:column>
-                                        <h:column>
                                             <f:facet name="header">Kölapp</f:facet>
                                             <h:outputText id="queuePosition" value="#{userPage.getQueuePosition(item)}" />
                                         </h:column>
@@ -112,7 +108,7 @@
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Författare</f:facet>
-                                            <h:outputText id="creators" value="#{item.creators}" />
+                                            <h:outputText id="creators" value="#{item.creatorNames}" />
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Kvantitet</f:facet>

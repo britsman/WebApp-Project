@@ -37,7 +37,7 @@
                 <section id="registerSection" class="loginRegisterSection">
                     <header class="loginRegisterHeader">
                         <h1>Registrera dig</h1>
-                        <p>Om du inte är registrerad så måste du först fylla i formuläret nedan för att kunna logga in.</p>
+                        <p>Om du inte är registrerad så måste du först fylla i alla fält utom det sista nedan och sedan trycka ok.</p>
                     </header>
                     
                         <h:form>
@@ -52,19 +52,19 @@
                                </h:inputText>
                             <h:message for="txtEmailReg" showSummary="true" showDetail="false" style="color: red" /></p>
                             <p><h:outputLabel for="txtPasswordReg" value ="Lösenord"/></p>
-                            <p><h:inputSecret id="txtPasswordReg" value="#{register.password}">
+                            <p><h:inputText id="txtPasswordReg" value="#{register.password}">
                                     <f:validator validatorId="PasswordValidator" />
-                               </h:inputSecret>
+                               </h:inputText>
                             <h:message for="txtPasswordReg" showSummary="true" showDetail="false" style="color: red" /></p>
                             <p><h:outputLabel for="txtPasswordReg" value ="Upprepa lösenord"/></p>
-                            <p><h:inputSecret id="txtPasswordRegConfirm" value="#{register.confirmPassword}">
+                            <p><h:inputText id="txtPasswordRegConfirm" value="#{register.confirmPassword}">
                                     <f:validator validatorId="PasswordValidator" />
-                               </h:inputSecret>
+                               </h:inputText>
                             <h:message for="txtPasswordRegConfirm" showSummary="true" showDetail="false" style="color: red" /></p>
                             <p><h:commandButton id="btnOK" value="OK"  actionListener="#{register.registerUser()}" action ="#{register.access()}"/></p>
                             
-                            <p><h:outputLabel for="" value ="rR"/></p>
-                            <h:inputText id="txtConfirmationcode" value="#{register.username}"/>
+                            <p><h:outputLabel for="" value ="Skriv in koden du får emailad till dig och tryck sedan ok igen."/></p>
+                            <h:inputText id="txtConfirmationcode" value="#{register.inputCode}"/>
                         </h:form>
                     
                 </section>

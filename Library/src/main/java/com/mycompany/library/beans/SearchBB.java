@@ -6,11 +6,13 @@ package com.mycompany.library.beans;
 
 import com.mycompany.library.core.Item;
 import com.mycompany.library.core.QueryProccessor;
+import com.mycompany.library.core.User;
 import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -21,13 +23,20 @@ import javax.inject.Named;
 @SessionScoped
 public class SearchBB implements Serializable {
 
+    private TemplateBB template;
     private String id, title, creator, publisher, description, language, genre,type;
     private String topSearch;
     private int fromYear, toYear;
     private boolean inStock;
     private List<Item> result;
+    private User user;
 
     public SearchBB() {
+    }
+    @Inject
+    public SearchBB(TemplateBB template) {
+        this.template = template;
+        this.user = this.template.getLoggedInUser();
     }
 
     public void searchAll() {

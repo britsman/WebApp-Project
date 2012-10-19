@@ -2,15 +2,14 @@ package com.mycompany.library.beans;
 
 import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.Creator;
-import com.mycompany.library.core.CreatorCollection;
 import com.mycompany.library.core.Item;
-import com.mycompany.library.core.ItemCollection;
 import com.mycompany.library.core.QueryProccessor;
 import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -21,9 +20,8 @@ import javax.inject.Named;
 @SessionScoped
 public class UserPlusPageBB implements Serializable {
     
-    private CreatorCollection creatorCollection = WebbLib.INSTANCE.getCreators();
-    private ItemCollection itemCollection = WebbLib.INSTANCE.getItems();
-    
+    private CreatorBean creatorCollection;
+    private ItemBean itemCollection;
     private String id;
     private String title;
     private String creators;
@@ -34,8 +32,7 @@ public class UserPlusPageBB implements Serializable {
     private int year_release;
     private String genre;
     private String language;
-    private int quantity;
-    
+    private int quantity;   
     private String editId;
     private String editTitle;
     private String editCreators;
@@ -50,23 +47,26 @@ public class UserPlusPageBB implements Serializable {
     
     // Default constructor.
     public UserPlusPageBB() {}
-    
+    @Inject
+    public UserPlusPageBB(CreatorBean creatorCollection, ItemBean itemCollection) {
+        this.creatorCollection = creatorCollection;
+        this.itemCollection = itemCollection;
+    }
     public List<Item> getAll() {
         return itemCollection.getAll();
     }
     
     public void createItem() {
-        List<Creator> cs = new ArrayList<Creator>();
+        List<Creator> cs = new ArrayList<>();
         String[] creatorStrings = this.creators.split(",");
-        for (String s: creatorStrings) {
-            Creator creator = creatorCollection.getByName(s);
+        for (String name: creatorStrings) {
+            Creator creator = creatorCollection.getByName(name);
             if(creator == null){
-                creator = new Creator(s);
+                creator = new Creator(name);
             }
             cs.add(creator);
-            creatorCollection.add(creator);
         }
-        itemCollection.add(new Item(id, title, cs, language, year_release,
+        itemCollection.update(new Item(id, title, cs, language, year_release,
                 genre, image, description, quantity, loan_period, fee));
     }
     
@@ -89,7 +89,7 @@ public class UserPlusPageBB implements Serializable {
     public void updateItem(String id) {
         Item i = itemCollection.find(id);
         i.setTitle(editTitle);
-        List<Creator> cs = new ArrayList<Creator>();
+        List<Creator> cs = new ArrayList<>();
         String[] creatorStrings = this.editCreators.split(",");
         for (String s: creatorStrings) {
             Creator creator = new Creator(s);
@@ -115,18 +115,6 @@ public class UserPlusPageBB implements Serializable {
     public String action() {
         return "userPlusPage?faces-redirect=true";
     }
-    
-    public String creatorsToString(List<String> creatorNames) {
-        String result = "";
-        for (String s : creatorNames) {
-            result += s + ", ";
-        }
-        if (!result.isEmpty()) {
-            result = result.substring(0, result.length() - 2);
-        }
-        return result;
-    }
-    
     public List<BorrowedItem> getAllBorrowedItems(){
         QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
         return q.getAllBorrowedItems();
