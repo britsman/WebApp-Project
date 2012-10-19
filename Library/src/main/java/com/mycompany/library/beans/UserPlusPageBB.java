@@ -9,7 +9,9 @@ import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
+import javax.annotation.PreDestroy;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -18,9 +20,11 @@ import javax.inject.Named;
  * @author Fredrik
  */
 @Named("userPlus")
-@SessionScoped
+@ConversationScoped
 public class UserPlusPageBB implements Serializable {
     
+    @Inject
+    private Conversation convo;
     private CreatorBean creatorCollection;
     private ItemBean itemCollection;
     private String id;
@@ -102,7 +106,7 @@ public class UserPlusPageBB implements Serializable {
         for (String s: creatorStrings) {
             Creator creator = new Creator(s);
             cs.add(creator);
-            creatorCollection.add(creator);
+            creatorCollection.update(creator);
         }
         b.setCreators(cs);
         b.setPublisher(editPublisher);
@@ -366,8 +370,29 @@ public class UserPlusPageBB implements Serializable {
     public void setIsbnSearchResult(List<BorrowedItem> isbnSearchResult) {
         this.isbnSearchResult = isbnSearchResult;
     }
-    
-    
-    
-    
+    public void librarianListener() {
+        if (convo.isTransient()) {
+            convo.begin();
+        }
+    }
+    @PreDestroy  // MUST HAVE back button etc.
+    public void destroy() {
+        if (convo != null) {
+            if (!convo.isTransient()) {
+                convo.end();
+            }
+        }
+    }
+     public String endConversation() {
+        if (!convo.isTransient()) {
+            convo.end();
+        }
+        try {
+            return "?faces-redirect=true"; // Go back
+        } catch (Exception e) {
+            // Not implemented
+            //return "error?faces-redirect=true&amp;cause=" + e.getMessage();
+            return null;
+        }
+    }
 }
