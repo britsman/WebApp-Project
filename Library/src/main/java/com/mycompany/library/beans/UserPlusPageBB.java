@@ -102,7 +102,7 @@ public class UserPlusPageBB implements Serializable {
         for (String s: creatorStrings) {
             Creator creator = new Creator(s);
             cs.add(creator);
-            creatorCollection.add(creator);
+            creatorCollection.update(creator);
         }
         b.setCreators(cs);
         b.setPublisher(editPublisher);
