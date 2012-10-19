@@ -6,9 +6,89 @@
 }
 
 #userPlusTableSection {
+    
     overflow: scroll;
 }
 
 #userPlusPage input {
     margin-bottom: 5px;
 }
+
+.listItem{
+    font-size: 10px;
+}
+
+body{font-family:Arial, Helvetica, sans-serif;}
+ 
+/*Remove the lists bullets*/
+ 
+ul,li{list-style:none;}
+ 
+/*Entire page container, assign a size and center it*/
+ 
+h1 {
+    
+    font-size: 14px;
+    font-weight: bold
+}
+ 
+/*tab_container is the DIV that contains all the tab area, tab_content is the div that contains each of the tabs' content*/
+ 
+#tab_container{ width:100%; border:1px solid #E0E0E0;}
+ 
+#tab_content{padding:5px; background:#FFFFFF; border:1px solid #04667f;}
+ 
+/*The TAB header*/
+ 
+ul.tab_header{margin:0px; padding:0px; margin-top:5px; margin-bottom:6px; }
+ 
+ul.tab_header li{display:inline;}
+ 
+/*The tab header links are converted to uppercase and give it a padding and a border */
+ 
+ul.tab_header li a{
+ 
+color:#097793;
+ 
+padding:5px 10px 6px 10px;
+ 
+text-transform:uppercase;
+ 
+border:1px solid #04667f;
+ 
+background:#FFFFFF;}
+ 
+/*On a tab change, we change the bottom border to white and fuse it with the content colour*/
+ 
+ul.tab_header li a:hover{border:1px solid #CCCCCC;}
+ 
+ul.tab_header a.active{color:#000000;
+ 
+border-bottom: 1px solid #ffffff; background:#FFFFFF; }
+ 
+a.tab{font: bold 12px Arial, Helvetica, sans-serif; text-decoration:none;}
+ 
+/*Giving some style to content list, you can add styles for other elements that you like to include in the tabs */
+
+
+.odd{
+    
+}
+.even{
+    background: #ECEDF4;
+   
+}
+
+
+
+.content ul{margin:10px 0px; padding:0 11px;}
+ 
+.content ul li{ margin-bottom:3px; font-size:15px;}
+ 
+.content ul li a{color:#3f4c4f;}
+ 
+.content ul li a:hover{color:#899fa5;}
+ 
+/*IMPORTANT, we give display none because with JQuery we show the content when it is clicked*/
+ 
+#content_2, #content_3, #content_4 { display:none; }

@@ -132,6 +132,19 @@ public class UserPlusPageBB implements Serializable {
         return q.getAllBorrowedItems();
     }
     
+    //VARFÖR HITTAR JAG INTE DENNA METODEN FRÅN USERPLUSPAGE???
+    public List<BorrowedItem> getAllBorrowedItemByISBN(){
+        List<BorrowedItem> tmp = null;
+        QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
+        for(BorrowedItem b: query.getAllBorrowedItems()){
+            if(b.getId().toString()== "12"){
+                tmp.add(b);
+            }
+        }
+        
+        return tmp;
+    }
+    
     public void checkCollectDatePassed(){
         List<BorrowedItem> temp = this.getAllBorrowedItems();
         for(int i = 0; i < temp.size(); i++){

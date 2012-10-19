@@ -117,8 +117,11 @@
                                             <h:outputText id="genre" value="#{item.genre}"/>    
                                          </td>
                                         <td >
-                                            <h:commandLink id="resultTableBookmark" value="Bokmärk" style="color: blue"/>
-                                            <h:commandLink id="resultTableBorrow" value="Låna bok" style="color: blue"/>
+                                            <td><h:commandLink id="resultTableBorrow" value="Låna bok" style="color: blue"/></td>
+                                            <td><h:commandLink id="resultTableBookmark">
+                                                    <h:graphicImage value="/resources/img/star_none.png"/>   
+                                                </h:commandLink></td>
+                                            
                                         </td>
                                     </tr>
                                 </table>

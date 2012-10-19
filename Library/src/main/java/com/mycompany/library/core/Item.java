@@ -165,7 +165,7 @@ public class Item implements Serializable{
         QueryProccessor qp = WebbLib.INSTANCE.getQueryProccessor();
         List<String> list = qp.getCreatorNames(this);
         for(String e:list){
-            tmp += e;
+            tmp += e +"\n";
         }
         
         return tmp; 
