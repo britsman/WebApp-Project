@@ -43,6 +43,7 @@ public class RegisterPageBB implements Serializable {
                     triedRegister = true;
                 }
             }
+            
         }
         else{
             completeRegistration();
