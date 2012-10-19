@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.Asynchronous;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.mail.Address;
 import javax.mail.Message;
@@ -24,7 +25,7 @@ import javax.mail.internet.MimeMessage;
  *
  * @author user
  */
-@SessionScoped
+@RequestScoped
 public class EmailBean implements Serializable{
     
     @Resource(name = "mail/library")
