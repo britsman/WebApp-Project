@@ -46,11 +46,11 @@
                             </ul>
                             <div id="tab_content">
                                 <div id="content_1" class="content">
-                                    
+
                                     <header>
                                         <br><h1>Här Checkar du in/ut böcker.</h1></br>
                                     </header>
-                                    
+
                                     <br>
                                         <h:outputLabel for="checkInOut" value="ISBN " />
                                         <h:inputText id="checkInOut"  />                                   
@@ -62,10 +62,10 @@
                                             <h:outputText value="#{item.user.username}"/>
                                         </h:column>
                                     </h:dataTable>
-                                
-                                
+
+
                                 </div>
-                                
+
                                 <div id="content_2" class="content">
                                     <ul>
                                         <header>
@@ -96,7 +96,7 @@
                                                     <f:validator validatorId="CreatorsValidator" />
                                                 </h:inputText>
                                                 <h:message for="creators" showSummary="true" showDetail="false" /><br />
-                                                
+
                                                 <h:outputLabel for="publisher" value="Förlag" /><br />
                                                 <h:inputText id="publisher" value="#{userPlus.publisher}">
                                                     <f:validator validatorId="PublisherValidator" />
@@ -132,13 +132,13 @@
                                                     <f:validator validatorId="YearReleaseValidator" />
                                                 </h:inputText>
                                                 <h:message for="year_release" showSummary="true" showDetail="false" /><br />
-                                                
+
                                                 <h:outputLabel for="pageNum" value="Antal sidor" /> <br />
                                                 <h:inputText id="pageNum" value="#{userPlus.pageNum}">
                                                     <f:validator validatorId="PageNumValidator" />
                                                 </h:inputText>
                                                 <h:message for="pageNum" showSummary="true" showDetail="false" /><br />
-                                                    
+
 
                                                 <h:outputLabel for="genre" value="Genre" /><br />
                                                 <h:inputText id="genre" value="#{userPlus.genre}">
@@ -173,27 +173,27 @@
                                             <br><h1>Här ser du lånade böcker.</h1></br>
                                         </header>
                                         <h:form>
-                                            
+
                                             <br><h:outputLabel for="sortTable" value="Sortera på "/></br>
                                             <h:selectOneMenu id="sortTable"  style="margin-bottom: 0.5em; width: 150px"  >
                                                 <f:selectItem itemLabel="Titel" itemValue="Titel"/>
                                                 <f:selectItem itemLabel="Författare" itemValue="Author"/>
                                                 <f:selectItem itemLabel="ISBN" itemValue="ISBN"/>                                                
                                             </h:selectOneMenu>
-                                            
+
                                             <br><h:dataTable var="borrowedBook" value="#{userPlus.allBorrowedItems}">
-                                                <h:column>
-                                                    
-                                                    <table>
-                                                        <tr>
-                                                            <td><h:outputText id="borrowedBooklistTitle" value="#{borrowedBook.item.title}" /></td>
-                                                            <td><h:outputText id="borrowedBooklistUser" value="#{borrowedBook.user.username}" /></td>
-                                                            <td><h:outputText id="borrowedBooklistDate" value="#{borrowedBook.loanDate}" /></td>
-                                                            <td><h:outputText id="borrowedBooklistId" value="#{borrowedBook.id}" /></td>
-                                                        </tr>   
-                                                    </table>
-                                                </h:column>
-                                            </h:dataTable>
+                                                    <h:column>
+
+                                                        <table>
+                                                            <tr>
+                                                                <td><h:outputText id="borrowedBooklistTitle" value="#{borrowedBook.item.title}" /></td>
+                                                                <td><h:outputText id="borrowedBooklistUser" value="#{borrowedBook.user.username}" /></td>
+                                                                <td><h:outputText id="borrowedBooklistDate" value="#{borrowedBook.loanDate}" /></td>
+                                                                <td><h:outputText id="borrowedBooklistId" value="#{borrowedBook.id}" /></td>
+                                                            </tr>   
+                                                        </table>
+                                                    </h:column>
+                                                </h:dataTable>
                                             </br>
                                         </h:form>
                                     </ul>
@@ -206,9 +206,9 @@
                                         </header>
 
                                         <h:form>
-                                            <br><h:outputLabel for="editSerch" value="Sök efter bok "/>
-                                                <h:inputText id="editSerch"/> 
-                                                <h:commandButton id="editSerchButton" value="Sök"/>
+                                            <br><h:outputLabel for="editSearch" value="Sök efter bok "/>
+                                                <h:inputText id="editSearch"/> 
+                                                <h:commandButton id="editSearchButton" value="Sök"/>
                                             </br>
                                             <h:dataTable var="items" value="#{userPlus.all}" border="0" rowClasses="even,odd">
                                                 <h:column>
@@ -240,42 +240,42 @@
                                                                                action="#{userPlus.action}"
                                                                                actionListener="#{userPlus.removeItem(items.id)}" class="listItem"/>
                                                             </td>
-                                                            
+
                                                         </tr>       
                                                     </table>
                                                     <h:form>
                                                         <div id="editForm" style="display: none;background-color: lightgoldenrodyellow">
-                                            <section>
-                                                <h:form>
-                                                    <h:outputLabel for="editId" value="ID" /><br />
-                                                    <h:inputText id="editId" disabled="true" value="#{userPlus.editId}"/><br />
-                                                    <h:outputLabel for="editTitle" value="Title" /><br />
-                                                    <h:inputText id="editTitle" value="#{userPlus.editTitle}"/><br />
-                                                    <h:outputLabel for="editCreators" value="Creators" /><br />
-                                                    <h:inputText id="editCreators" value="#{userPlus.editCreators}"/><br />
-                                                    <h:outputLabel for="editImage" value="Image" /><br />
-                                                    <h:inputText id="editImage" value="#{userPlus.editImage}"/><br />
-                                                    <h:outputLabel for="editDescription" value="Description" /><br />
-                                                    <h:inputText id="editDescription" value="#{userPlus.editDescription}"/><br />
-                                                    <h:outputLabel for="editLoan_period" value="Loan period" /><br />
-                                                    <h:inputText id="editLoan_period" value="#{userPlus.editLoan_period}"/><br />
-                                                    <h:outputLabel for="editFee" value="Fee" /><br />
-                                                    <h:inputText id="editFee" value="#{userPlus.editFee}"/><br />
-                                                    <h:outputLabel for="editYear_release" value="Year released" /><br />
-                                                    <h:inputText id="editYear_release" value="#{userPlus.editYear_release}"/><br />
-                                                    <h:outputLabel for="editGenre" value="Genre" /><br />
-                                                    <h:inputText id="editGenre" value="#{userPlus.editGenre}"/><br />
-                                                    <h:outputLabel for="editLanguage" value="Language" /><br />
-                                                    <h:inputText id="editLanguage" value="#{userPlus.editLanguage}"/><br />
-                                                    <h:outputLabel for="editQuantity" value="Quantity" /><br />
-                                                    <h:inputText id="editQuantity" value="#{userPlus.editQuantity}"/><br />
-                                                    <h:commandButton id="btnEdit" value="Ändra"
+                                                            <section>
+                                                                <h:form>
+                                                                    <h:outputLabel for="editId" value="ID" /><br />
+                                                                    <h:inputText id="editId" disabled="true" value="#{userPlus.editId}"/><br />
+                                                                    <h:outputLabel for="editTitle" value="Title" /><br />
+                                                                    <h:inputText id="editTitle" value="#{userPlus.editTitle}"/><br />
+                                                                    <h:outputLabel for="editCreators" value="Creators" /><br />
+                                                                    <h:inputText id="editCreators" value="#{userPlus.editCreators}"/><br />
+                                                                    <h:outputLabel for="editImage" value="Image" /><br />
+                                                                    <h:inputText id="editImage" value="#{userPlus.editImage}"/><br />
+                                                                    <h:outputLabel for="editDescription" value="Description" /><br />
+                                                                    <h:inputText id="editDescription" value="#{userPlus.editDescription}"/><br />
+                                                                    <h:outputLabel for="editLoan_period" value="Loan period" /><br />
+                                                                    <h:inputText id="editLoan_period" value="#{userPlus.editLoan_period}"/><br />
+                                                                    <h:outputLabel for="editFee" value="Fee" /><br />
+                                                                    <h:inputText id="editFee" value="#{userPlus.editFee}"/><br />
+                                                                    <h:outputLabel for="editYear_release" value="Year released" /><br />
+                                                                    <h:inputText id="editYear_release" value="#{userPlus.editYear_release}"/><br />
+                                                                    <h:outputLabel for="editGenre" value="Genre" /><br />
+                                                                    <h:inputText id="editGenre" value="#{userPlus.editGenre}"/><br />
+                                                                    <h:outputLabel for="editLanguage" value="Language" /><br />
+                                                                    <h:inputText id="editLanguage" value="#{userPlus.editLanguage}"/><br />
+                                                                    <h:outputLabel for="editQuantity" value="Quantity" /><br />
+                                                                    <h:inputText id="editQuantity" value="#{userPlus.editQuantity}"/><br />
+                                                                    <h:commandButton id="btnEdit" value="Ändra"
                                                                      action="#{userPlus.action}"
-                                                                     actionListener="#{userPlus.updateItem(userPlus.editId)}" /><br />
-                                                    <h:messages showSummary="true" showDetail="false" />
-                                                </h:form>
-                                            </section>
-                                        </div>
+                                                                                     actionListener="#{userPlus.updateItem(userPlus.editId)}" /><br />
+                                                                    <h:messages showSummary="true" showDetail="false" />
+                                                                </h:form>
+                                                            </section>
+                                                        </div>
                                                     </h:form>
                                                 </h:column>
                                             </h:dataTable>
@@ -295,7 +295,7 @@
                                                 }
                                             } 
                                         </script>
-                                             
+
 
                                     </ul>
                                 </div>
