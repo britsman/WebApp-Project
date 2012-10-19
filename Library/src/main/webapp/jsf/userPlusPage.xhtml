@@ -42,7 +42,7 @@
                                 <li><a class="tab" title="content_1" href="#">In/Ut checkning</a></li>
                                 <li><a class="tab" title="content_2" href="#">Lägg till bok</a></li>
                                 <li><a class="tab" title="content_3" href="#">Lånade böcker</a></li>
-                                <li><a class="tab" title="content_4" href="#">Editera böcker</a></li>
+                                <li><a class="tab" title="content_4" href="#">Ändra böcker</a></li>
                             </ul>
                             <div id="tab_content">
                                 <div id="content_1" class="content">
@@ -207,10 +207,10 @@
 
                                         <h:form>
                                             <br><h:outputLabel for="editSerch" value="Sök efter bok "/>
-                                                <h:inputText id="editSerch"/> 
-                                                <h:commandButton id="editSerchButton" value="Sök"/>
+                                                <h:inputText id="editSerch" value="#{userPlus.topSearch}" /> 
+                                                <h:commandButton id="editSerchButton" value="#{userPlus.searchAll()}"/>
                                             </br>
-                                            <h:dataTable var="items" value="#{userPlus.all}" border="0" rowClasses="even,odd">
+                                            <h:dataTable var="items" value="#{userPlus.result}" border="0" rowClasses="even,odd">
                                                 <h:column>
                                                     <table width="100%">
                                                         <tr>

@@ -50,6 +50,8 @@ public class UserPlusPageBB implements Serializable {
     private String editLanguage;
     private int editQuantity;
     private List<BorrowedItem> isbnSearchResult;
+    private String topSearch;
+    private List<Item> result;
     
     // Default constructor.
     public UserPlusPageBB() {}
@@ -148,6 +150,13 @@ public class UserPlusPageBB implements Serializable {
         List<BorrowedItem> temp = this.getAllBorrowedItems();
         for(int i = 0; i < temp.size(); i++){
             temp.get(i).checkCollectDatePassed();
+        }
+    }
+    
+        public void searchAll() {
+        QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
+        if (!topSearch.equals("")) {
+            result = query.searchAll(topSearch);
         }
     }
     
