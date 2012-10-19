@@ -162,7 +162,6 @@ public class Item implements Serializable{
     public String getCreatorNames(){
         String result ="";
         QueryProccessor qp = WebbLib.INSTANCE.getQueryProccessor();
-
         List<String> creatorNames = qp.getCreatorNames(this);
         for (String s : creatorNames) {
             result += s + ", ";
