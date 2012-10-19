@@ -1,5 +1,6 @@
 package com.mycompany.library.beans;
 
+import com.mycompany.library.core.Book;
 import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.Creator;
 import com.mycompany.library.core.Item;
@@ -25,8 +26,10 @@ public class UserPlusPageBB implements Serializable {
     private String id;
     private String title;
     private String creators;
+    private String publisher;
     private String image;
     private String description;
+    private int pageNum;
     private int loan_period;
     private int fee;
     private int year_release;
@@ -36,8 +39,10 @@ public class UserPlusPageBB implements Serializable {
     private String editId;
     private String editTitle;
     private String editCreators;
+    private String editPublisher;
     private String editImage;
     private String editDescription;
+    private int editPageNum;
     private int editLoan_period;
     private int editFee;
     private int editYear_release;
@@ -66,18 +71,20 @@ public class UserPlusPageBB implements Serializable {
             }
             cs.add(creator);
         }
-        itemCollection.update(new Item(id, title, cs, language, year_release,
+        itemCollection.update(new Book(id, title, cs, publisher, language, year_release, pageNum,
                 genre, image, description, quantity, loan_period, fee));
     }
     
-    public void prepareEdit(String id, String title, String creators,
-            String image, String description, int loan_period, int fee,
+    public void prepareEdit(String id, String title, String creators, String publisher,
+            String image, String description, int pageNum, int loan_period, int fee,
             int year_released, String genre, String language, int quantity) {
         editId = id;
         editTitle = title;
         editCreators = creators;
+        editPublisher = publisher;
         editImage = image;
         editDescription = description;
+        editPageNum = pageNum;
         editLoan_period = loan_period;
         editFee = fee;
         editYear_release = year_released;
@@ -87,8 +94,8 @@ public class UserPlusPageBB implements Serializable {
     }
     
     public void updateItem(String id) {
-        Item i = itemCollection.find(id);
-        i.setTitle(editTitle);
+        Book b = (Book) itemCollection.find(id);
+        b.setTitle(editTitle);
         List<Creator> cs = new ArrayList<>();
         String[] creatorStrings = this.editCreators.split(",");
         for (String s: creatorStrings) {
@@ -96,16 +103,18 @@ public class UserPlusPageBB implements Serializable {
             cs.add(creator);
             creatorCollection.add(creator);
         }
-        i.setCreators(cs);
-        i.setImage(editImage);
-        i.setDescription(editDescription);
-        i.setLoan_period(editLoan_period);
-        i.setFee(editFee);
-        i.setYear(editYear_release);
-        i.setGenre(editGenre);
-        i.setLanguage(editLanguage);
-        i.setQuantity(editQuantity);
-        itemCollection.update(i);
+        b.setCreators(cs);
+        b.setPublisher(editPublisher);
+        b.setImage(editImage);
+        b.setDescription(editDescription);
+        b.setPageNum(editPageNum);
+        b.setLoan_period(editLoan_period);
+        b.setFee(editFee);
+        b.setYear(editYear_release);
+        b.setGenre(editGenre);
+        b.setLanguage(editLanguage);
+        b.setQuantity(editQuantity);
+        itemCollection.update(b);
     }
     
     public void removeItem(String id) {
@@ -162,6 +171,38 @@ public class UserPlusPageBB implements Serializable {
 
     public void setCreators(String creators) {
         this.creators = creators;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public String getEditPublisher() {
+        return editPublisher;
+    }
+
+    public void setEditPublisher(String editPublisher) {
+        this.editPublisher = editPublisher;
+    }
+
+    public int getEditPageNum() {
+        return editPageNum;
+    }
+
+    public void setEditPageNum(int editPageNum) {
+        this.editPageNum = editPageNum;
     }
 
     public String getImage() {
