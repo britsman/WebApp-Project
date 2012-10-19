@@ -15,11 +15,8 @@ import javax.inject.Named;
 @SessionScoped
 public class RegisterPageBB implements Serializable {
     
-    @Inject
     private UserRegistryBean users;
-    @Inject
     private UserPageBB privateUserBean;
-    @Inject
     private TemplateBB loggedUser;
     private String username = "";
     private String email = "";
@@ -31,7 +28,12 @@ public class RegisterPageBB implements Serializable {
     private boolean triedRegister = false;
 
     public RegisterPageBB() {}
-
+    @Inject
+    public RegisterPageBB(UserRegistryBean users, UserPageBB privateUserBean, TemplateBB loggedUser) {
+        this.users = users;
+        this.privateUserBean = privateUserBean;
+        this.loggedUser = loggedUser;
+    }
     public void registerUser() {
         if (!triedRegister) {
             if (checkUser()) {

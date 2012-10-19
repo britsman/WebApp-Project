@@ -18,17 +18,22 @@ import javax.inject.Named;
 @ConversationScoped
 public class ItemPageBB implements Serializable{
     
-
     @Inject
     private Conversation convo;
-    @Inject
     private UserRegistryBean users;
+    private TemplateBB template;
     private Book book;
     private String redirectPage;
     private User user;
     
     public ItemPageBB(){}
-    
+
+    @Inject
+    public ItemPageBB(UserRegistryBean users, TemplateBB template) {
+        this.users = users;
+        this.template = template;
+        this.user = this.template.getLoggedInUser();
+    }
     public Book getBook(){
         return book;
     } 

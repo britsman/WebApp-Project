@@ -21,15 +21,15 @@ import javax.inject.Named;
 @SessionScoped
 public class UserPageBB implements Serializable {
     
-    private UserRegistryBean urb;
+    private UserRegistryBean users;
     private User user;
 
     // Default constructor.
     public UserPageBB() {}
     
     @Inject
-    public UserPageBB(UserRegistryBean urb) {
-        this.urb = urb;
+    public UserPageBB(UserRegistryBean users) {
+        this.users = users;
     }
     
     public String getUsetName(){
@@ -56,12 +56,12 @@ public class UserPageBB implements Serializable {
     
     public void bookmarkItem(Item item) {
         user.setBookmarkedItems(item);
-        urb.update(user);
+        users.update(user);
     }
     
     public void removeBookmakedItem(Item item) {
         user.removeBookmarkedItem(item);
-        urb.update(user);
+        users.update(user);
     }
     
     /* Managing reserved items */
@@ -72,13 +72,13 @@ public class UserPageBB implements Serializable {
     
     public void reserveItem(Item item) {
         user.tryReserveItem(item);
-        user = urb.update(user);
+        user = users.update(user);
     }
     
     public void removeReservedItem(ReservedItem reservedItem) {
         reservedItem.updatePositions(user);
         user.updateReservation(reservedItem);
-        user = urb.update(user);
+        user = users.update(user);
     }
     
     /* Managing borrowed items */
@@ -89,12 +89,12 @@ public class UserPageBB implements Serializable {
     
     public void borrowItem(Item item) {
         user.tryBorrowItem(item);
-        user = urb.update(user);
+        user = users.update(user);
     }
     
     public void removeBorrowedItem(BorrowedItem borrowedItem) {
         user.removeBorrowedItem(borrowedItem);
-        user = urb.update(user);
+        user = users.update(user);
     }
     
     /* Managing dates */

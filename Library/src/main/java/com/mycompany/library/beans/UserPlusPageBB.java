@@ -2,9 +2,7 @@ package com.mycompany.library.beans;
 
 import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.Creator;
-import com.mycompany.library.core.CreatorCollection;
 import com.mycompany.library.core.Item;
-import com.mycompany.library.core.ItemCollection;
 import com.mycompany.library.core.QueryProccessor;
 import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
@@ -22,11 +20,8 @@ import javax.inject.Named;
 @SessionScoped
 public class UserPlusPageBB implements Serializable {
     
-    @Inject
     private CreatorBean creatorCollection;
-    @Inject
     private ItemBean itemCollection;
-    
     private String id;
     private String title;
     private String creators;
@@ -37,8 +32,7 @@ public class UserPlusPageBB implements Serializable {
     private int year_release;
     private String genre;
     private String language;
-    private int quantity;
-    
+    private int quantity;   
     private String editId;
     private String editTitle;
     private String editCreators;
@@ -53,13 +47,17 @@ public class UserPlusPageBB implements Serializable {
     
     // Default constructor.
     public UserPlusPageBB() {}
-    
+    @Inject
+    public UserPlusPageBB(CreatorBean creatorCollection, ItemBean itemCollection) {
+        this.creatorCollection = creatorCollection;
+        this.itemCollection = itemCollection;
+    }
     public List<Item> getAll() {
         return itemCollection.getAll();
     }
     
     public void createItem() {
-        List<Creator> cs = new ArrayList<Creator>();
+        List<Creator> cs = new ArrayList<>();
         String[] creatorStrings = this.creators.split(",");
         for (String name: creatorStrings) {
             Creator creator = creatorCollection.getByName(name);

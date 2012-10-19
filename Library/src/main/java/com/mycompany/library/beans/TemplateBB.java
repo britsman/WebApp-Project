@@ -22,17 +22,16 @@ import javax.inject.Named;
 @SessionScoped
 public class TemplateBB implements Serializable {
     
-    @Inject
     private UserPageBB privateUserBean;
     private User loggedInUser=null;
     private String logOutString;
     
-
-    
     public TemplateBB() {
     }
-    
-    
+    @Inject
+    public TemplateBB(UserPageBB privateUserBean) {
+        this.privateUserBean = privateUserBean;
+    }
     public void logOut(){
         loggedInUser = null;
         privateUserBean.setUser(null);

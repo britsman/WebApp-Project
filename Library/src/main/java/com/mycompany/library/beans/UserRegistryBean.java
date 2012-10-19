@@ -15,8 +15,13 @@ import javax.inject.Inject;
 @SessionScoped
 public class UserRegistryBean implements Serializable{
     UserRegistry users = WebbLib.INSTANCE.getUsers();
-    @Inject
     EmailBean emailBean;
+    
+    public UserRegistryBean(){}
+    @Inject
+    public UserRegistryBean(EmailBean emailBean){
+        this.emailBean = emailBean;
+    }
     
     public List<User> getAll(){
         return users.getAll();

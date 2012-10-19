@@ -20,12 +20,9 @@ import javax.inject.Inject;
 @RequestScoped
 public class LoginPageBB implements Serializable {
 
-    @Inject
     private UserPageBB privateUserBean;
-    @Inject
     private TemplateBB loggedUser;
-    @Inject
-    UserRegistryBean users;
+    private UserRegistryBean users;
     private String userName;
     private String password;
     private UIOutput txtOutput;
@@ -33,7 +30,13 @@ public class LoginPageBB implements Serializable {
     private boolean isLibrarian = false;
 
     public LoginPageBB() {}
-
+    
+    @Inject
+    public LoginPageBB(UserPageBB privateUserBean, TemplateBB loggedUser, UserRegistryBean users) {
+        this.privateUserBean = privateUserBean;
+        this.loggedUser = loggedUser;
+        this.users = users;
+    }
     public void validateUser() {
         User user = users.getByUserName(userName);
         if (user == null) {
@@ -47,8 +50,6 @@ public class LoginPageBB implements Serializable {
             access();
         }
     }
-    
-    
     public boolean validatePassword(User u){
         if(u.getPassword().equalsIgnoreCase(password)){
             privateUserBean.setUser(u);
