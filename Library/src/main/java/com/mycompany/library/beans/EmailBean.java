@@ -2,13 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.library.core;
+package com.mycompany.library.beans;
 
+import com.mycompany.library.core.BorrowedItem;
+import com.mycompany.library.core.User;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.Asynchronous;
+import javax.enterprise.context.SessionScoped;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.Session;
@@ -20,14 +24,17 @@ import javax.mail.internet.MimeMessage;
  *
  * @author user
  */
-public class SendEmails {
+@SessionScoped
+public class EmailBean implements Serializable{
     
-    @Resource(name = "mail/gusbriter@student.gu.se")
-    private static Session mailSession;
-    public static final Long milliPerDay = 86400000L;
+    @Resource(name = "mail/library")
+    private Session mailSession;
+    private final Long milliPerDay = 86400000L;
+    
+    public EmailBean(){}
     
     @Asynchronous
-    public static void sendReminder(User user){
+    public void sendReminder(User user){
         Message msg = new MimeMessage(mailSession);
         mailSession.setDebug(true);
         List<BorrowedItem> temp = user.getBorrowedItems();
@@ -56,7 +63,7 @@ public class SendEmails {
         }
     }
     @Asynchronous
-    public static void sendFee(User user) {
+    public void sendFee(User user) {
         Message msg = new MimeMessage(mailSession);
         mailSession.setDebug(true);
         List<BorrowedItem> temp = user.getBorrowedItems();
@@ -91,7 +98,8 @@ public class SendEmails {
         }
     }
     @Asynchronous
-    public static void sendRegCode(String email, Long code){
+    public void sendRegCode(String email, Long code){
+        System.out.println("\n" + email + " !!!! " + code + "\n");
         Message msg = new MimeMessage(mailSession);
         mailSession.setDebug(true);
         try {

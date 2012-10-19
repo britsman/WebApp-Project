@@ -23,7 +23,6 @@ import javax.mail.internet.MimeMessage;
 @SessionScoped
 public class AdminPageBB implements Serializable {
     
-    @Inject
     private UserRegistryBean users;
     @Resource(name = "mail/library")
     private Session mailSession;
@@ -42,6 +41,11 @@ public class AdminPageBB implements Serializable {
     
     // Defaul constructor.
     public AdminPageBB() {}
+    
+    @Inject
+    public AdminPageBB(UserRegistryBean users) {
+        this.users = users;
+    }
     
     public String action() {
         return "adminPages?faces-redirect=true";

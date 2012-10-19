@@ -27,12 +27,12 @@ public class PasswordValidator implements Validator {
         String password = (String) value;
         
         // Check length constraints.
-        int usernameLength = password.length();
-        if (usernameLength == 0) {
+        int passwordLength = password.length();
+        if (passwordLength == 0) {
             String summary = "Fältet är obligatoriskt.";
             String detail = "Fältet är obligatoriskt.";
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail));
-        } else if (usernameLength < MIN || usernameLength > MAX) {
+        } else if (passwordLength < MIN || passwordLength > MAX) {
             String summary = "Lösenordet måste vara mellan " + MIN + " och "+ MAX + " tecken långt.";
             String detail = "Lösenordet måste vara mellan " + MIN + " och "+ MAX + " tecken långt.";
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail));

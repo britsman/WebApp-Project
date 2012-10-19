@@ -47,8 +47,8 @@ public class RegisterPageBB implements Serializable {
         }
     }
     public void completeRegistration(){
-        triedRegister = false;
-        if (checkUser() && generatedCode == inputCode) {
+        if (checkUser() == true && generatedCode.equals(inputCode)) {
+            System.out.println("True");
                 User newUser = new User(username, password, email, 0.0);
                 newUser = users.update(newUser);
                 privateUserBean.setUser(newUser);
@@ -57,8 +57,10 @@ public class RegisterPageBB implements Serializable {
         }
         else{
             //visa att registration failed (koden var fel)
+            System.out.println("False");
             redirect = "login?faces-redirect=true";
         }
+        clear();
     }
     
     public String access(){
@@ -117,5 +119,13 @@ public class RegisterPageBB implements Serializable {
 
     public void setInputCode(Long inputCode) {
         this.inputCode = inputCode;
-    }   
+    }
+    private void clear(){        
+    triedRegister = false;
+    username = "";
+    email = "";
+    password = "";
+    confirmPassword = "";
+    inputCode = null;
+    }
 }
