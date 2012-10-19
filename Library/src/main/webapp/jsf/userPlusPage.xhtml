@@ -96,6 +96,12 @@
                                                     <f:validator validatorId="CreatorsValidator" />
                                                 </h:inputText>
                                                 <h:message for="creators" showSummary="true" showDetail="false" /><br />
+                                                
+                                                <h:outputLabel for="publisher" value="Förlag" /><br />
+                                                <h:inputText id="publisher" value="#{userPlus.publisher}">
+                                                    <f:validator validatorId="PublisherValidator" />
+                                                </h:inputText>
+                                                <h:message for="publisher" showSummary="true" showDetail="false" /><br />
 
                                                 <h:outputLabel for="image" value="Bild" /><br />
                                                 <h:inputText id="image" value="#{userPlus.image}">
@@ -126,6 +132,13 @@
                                                     <f:validator validatorId="YearReleaseValidator" />
                                                 </h:inputText>
                                                 <h:message for="year_release" showSummary="true" showDetail="false" /><br />
+                                                
+                                                <h:outputLabel for="pageNum" value="Antal sidor" /> <br />
+                                                <h:inputText id="pageNum" value="#{userPlus.pageNum}">
+                                                    <f:validator validatorId="PageNumValidator" />
+                                                </h:inputText>
+                                                <h:message for="pageNum" showSummary="true" showDetail="false" /><br />
+                                                    
 
                                                 <h:outputLabel for="genre" value="Genre" /><br />
                                                 <h:inputText id="genre" value="#{userPlus.genre}">
