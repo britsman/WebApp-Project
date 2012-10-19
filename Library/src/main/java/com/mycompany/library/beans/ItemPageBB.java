@@ -51,6 +51,7 @@ public class ItemPageBB implements Serializable{
             convo.begin();
         }
         this.book = (Book) item;
+        this.user = this.template.getLoggedInUser();
         this.redirectPage = redirectPage;
     }
     
@@ -92,8 +93,8 @@ public class ItemPageBB implements Serializable{
     public void bookMark(){
         if(!user.getBookmarkedItems().contains(book)){
             user.setBookmarkedItems(book);
+            user = users.update(user);
         }
-        user = users.update(user);
     }
     
     @PreDestroy  // MUST HAVE back button etc.

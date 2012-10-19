@@ -16,7 +16,6 @@ import javax.inject.Named;
 public class RegisterPageBB implements Serializable {
     
     private UserRegistryBean users;
-    private UserPageBB privateUserBean;
     private TemplateBB loggedUser;
     private String username = "";
     private String email = "";
@@ -31,7 +30,6 @@ public class RegisterPageBB implements Serializable {
     @Inject
     public RegisterPageBB(UserRegistryBean users, UserPageBB privateUserBean, TemplateBB loggedUser) {
         this.users = users;
-        this.privateUserBean = privateUserBean;
         this.loggedUser = loggedUser;
     }
     public void registerUser() {
@@ -54,7 +52,6 @@ public class RegisterPageBB implements Serializable {
             System.out.println("True");
                 User newUser = new User(username, password, email, 0.0);
                 newUser = users.update(newUser);
-                privateUserBean.setUser(newUser);
                 loggedUser.setLoggedInUser(newUser);              
                 redirect = "userPage?faces-redirect=true";
         }
