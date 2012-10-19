@@ -36,7 +36,7 @@ public class SearchBB implements Serializable {
     @Inject
     public SearchBB(TemplateBB template) {
         this.template = template;
-        this.user = this.template.getLoggedInUser();
+        
     }
 
     public void searchAll() {
@@ -48,11 +48,6 @@ public class SearchBB implements Serializable {
 
     public void searchAdvanced() {
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
-//        if(id=="")id=null;
-//        if(title=="")title=null;
-//        if(creator=="")creator=null;
-//        if(description=="")description=null;
-//        
         genre=null;
         language=null;
         type=null;
@@ -60,6 +55,14 @@ public class SearchBB implements Serializable {
 
     }
 
+    public boolean linkVisible(){  
+        this.user = this.template.getLoggedInUser();
+        return user != null;
+    }
+    
+    
+     
+    
     public List<Item> getResult() {
         return result;
     }

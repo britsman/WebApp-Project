@@ -44,6 +44,7 @@ public class UserPlusPageBB implements Serializable {
     private String editGenre;
     private String editLanguage;
     private int editQuantity;
+    private List<BorrowedItem> isbnSearchResult;
     
     // Default constructor.
     public UserPlusPageBB() {}
@@ -120,16 +121,17 @@ public class UserPlusPageBB implements Serializable {
         return q.getAllBorrowedItems();
     }
     
-    //VARFÖR HITTAR JAG INTE DENNA METODEN FRÅN USERPLUSPAGE???
-    public List<BorrowedItem> getAllBorrowedItemByISBN(){
-        List<BorrowedItem> tmp = null;
+        
+    public List<BorrowedItem> getAllBorrowedItemByISBN(String isbn){
+        List<BorrowedItem> tmp = null;        
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
         for(BorrowedItem b: query.getAllBorrowedItems()){
-            if(b.getId().toString()== "12"){
-                tmp.add(b);
+            
+            if(b.getItem().getId().equals(isbn)){
+                tmp.add(b); 
             }
         }
-        
+        isbnSearchResult = tmp;
         return tmp;
     }
     
@@ -315,4 +317,16 @@ public class UserPlusPageBB implements Serializable {
     public void setEditQuantity(int editQuantity) {
         this.editQuantity = editQuantity;
     }
+
+    public List<BorrowedItem> getIsbnSearchResult() {
+        return isbnSearchResult;
+    }
+
+    public void setIsbnSearchResult(List<BorrowedItem> isbnSearchResult) {
+        this.isbnSearchResult = isbnSearchResult;
+    }
+    
+    
+    
+    
 }
