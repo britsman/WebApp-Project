@@ -87,7 +87,13 @@ public class ItemPageBB implements Serializable{
         else{
             user.tryReserveItem(book);
         }
-        users.update(user);
+        user = users.update(user);
+    }
+    public void bookMark(){
+        if(!user.getBookmarkedItems().contains(book)){
+            user.setBookmarkedItems(book);
+        }
+        user = users.update(user);
     }
     
     @PreDestroy  // MUST HAVE back button etc.

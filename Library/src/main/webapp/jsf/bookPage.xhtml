@@ -34,6 +34,8 @@
                     <h:form>
                         <h:commandButton value="#{SingleItem.buttonValue()}" rendered="#{SingleItem.buttonVisible()}" action="#{SingleItem.action()}" 
                         actionListener="#{SingleItem.borrowOrReserve()}" />
+                        <h:commandButton value="Bokmarkera" rendered="#{SingleItem.buttonVisible()}" action="#{SingleItem.action()}" 
+                        actionListener="#{SingleItem.bookMark()}" />
                         <h:commandButton action="#{SingleItem.action()}" value="Gå Tillbaka"/>
                     </h:form>
                     <p><h:outputText value="Logga in för att låna eller reservera" rendered="#{not SingleItem.buttonVisible()}"/></p>
