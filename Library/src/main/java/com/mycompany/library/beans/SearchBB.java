@@ -8,6 +8,7 @@ import com.mycompany.library.core.Item;
 import com.mycompany.library.core.QueryProccessor;
 import com.mycompany.library.core.User;
 import com.mycompany.library.core.WebbLib;
+import com.mycompany.library.core.Book;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -30,13 +31,17 @@ public class SearchBB implements Serializable {
     private boolean inStock;
     private List<Item> result;
     private User user;
+    private Book book;
+    
+    @Inject
+    private UserRegistryBean users;
 
     public SearchBB() {
     }
     @Inject
     public SearchBB(TemplateBB template) {
         this.template = template;
-        this.user = this.template.getLoggedInUser();
+        
     }
 
     public void searchAll() {
@@ -48,18 +53,50 @@ public class SearchBB implements Serializable {
 
     public void searchAdvanced() {
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
-//        if(id=="")id=null;
-//        if(title=="")title=null;
-//        if(creator=="")creator=null;
-//        if(description=="")description=null;
-//        
         genre=null;
         language=null;
         type=null;
         result = query.searchItem(id, title, creator, publisher, description, fromYear, toYear, inStock, language, genre);
 
     }
+    
+     public void borrowOrReserve(Item item){
+         this.book = (Book) item;
+        if(book.getQuantity() > 0){
+            user.tryBorrowItem(book);
+        }
+        else{
+            user.tryReserveItem(book);
+        }
+        user = users.update(user);
+    }
+    
+     public void bookMark(Item item){
+         this.book = (Book) item;
+        if(!user.getBookmarkedItems().contains(book)){
+            user.setBookmarkedItems(book);
+        }
+        
+        user = users.update(user);
+    }
+    
+    
 
+    public boolean linkVisible(){  
+        this.user = this.template.getLoggedInUser();
+        return user != null;
+    }
+    
+    public String bookMarkImg(Item item){
+        this.book = (Book) item;
+        if(user.getBookmarkedItems().contains(book)){
+            return "/resources/img/star_full.png";
+        }
+        return "/resources/img/star_none.png";
+    }
+    
+     
+    
     public List<Item> getResult() {
         return result;
     }
