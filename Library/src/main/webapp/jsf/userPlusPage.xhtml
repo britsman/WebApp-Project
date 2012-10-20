@@ -53,7 +53,7 @@
 
                                     <br>
                                         <h:outputLabel for="checkInOut" value="ISBN " />
-                                        <h:inputText id="checkInOut"  />                                   
+                                        <h:inputText id="checkInOut"  />
                                     </br>
                                     <h:commandButton value="Checka in"/>
                                     <h:commandButton value="Checka Ut"/>
@@ -62,7 +62,29 @@
                                             <h:outputText value="#{item.user.username}"/>
                                         </h:column>
                                     </h:dataTable>
-
+                                    
+                                    <h:dataTable var="borrowedItem" value="#{userPlus.allBorrowedItems}">
+                                        <h:column>
+                                            <f:facet name="header">ISBN</f:facet>
+                                            <h:outputText value="#{borrowedItem.item.id}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Title</f:facet>
+                                            <h:outputText value="#{borrowedItem.item.title}" />
+                                        </h:column>
+                                    </h:dataTable>
+                                    <h:form>
+                                        <h:outputLabel for="checkInOut" value="ISBN " />
+                                        <h:inputText id="checkInOut" value="#{userPlus.checkInOut}">
+                                            <f:validator validatorId="IdValidator" />
+                                        </h:inputText>
+                                        <h:commandButton value="Checka in"
+                                                         action="#{userPlus.action}"
+                                                         actionListener="#{userPlus.checkInItem}" />
+                                        <h:commandButton value="Checka ut"
+                                                         action="#{userPlus.action}"
+                                                         actionListener="#{userPlus.checkOutItem}" />
+                                    </h:form>
 
                                 </div>
 

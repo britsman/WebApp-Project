@@ -5,6 +5,8 @@ import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.Creator;
 import com.mycompany.library.core.Item;
 import com.mycompany.library.core.QueryProccessor;
+import com.mycompany.library.core.User;
+import com.mycompany.library.core.UserRegistry;
 import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,8 +23,11 @@ import javax.inject.Named;
 @RequestScoped
 public class UserPlusPageBB implements Serializable {
 
+    // Collections
     private CreatorBean creatorCollection;
     private ItemBean itemCollection;
+    
+    // Field for adding new items.
     private String id;
     private String title;
     private String creators;
@@ -36,6 +41,8 @@ public class UserPlusPageBB implements Serializable {
     private String genre;
     private String language;
     private int quantity;   
+    
+    // Fields for editing existing items.
     private String editId;
     private String editTitle;
     private String editCreators;
@@ -49,15 +56,19 @@ public class UserPlusPageBB implements Serializable {
     private String editGenre;
     private String editLanguage;
     private int editQuantity;
+    
     private List<BorrowedItem> isbnSearchResult;
+    private String checkInOut;
     
     // Default constructor.
     public UserPlusPageBB() {}
+    
     @Inject
     public UserPlusPageBB(CreatorBean creatorCollection, ItemBean itemCollection) {
         this.creatorCollection = creatorCollection;
         this.itemCollection = itemCollection;
     }
+    
     public List<Item> getAll() {
         return itemCollection.getAll();
     }
@@ -125,14 +136,14 @@ public class UserPlusPageBB implements Serializable {
     public String action() {
         return "userPlusPage?faces-redirect=true";
     }
+    
     public List<BorrowedItem> getAllBorrowedItems(){
         QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
         return q.getAllBorrowedItems();
     }
     
-        
     public List<BorrowedItem> getAllBorrowedItemByISBN(String isbn){
-        List<BorrowedItem> tmp = null;        
+        List<BorrowedItem> tmp = new ArrayList<BorrowedItem>();
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
         for(BorrowedItem b: query.getAllBorrowedItems()){
             
@@ -149,6 +160,32 @@ public class UserPlusPageBB implements Serializable {
         for(int i = 0; i < temp.size(); i++){
             temp.get(i).checkCollectDatePassed();
         }
+    }
+    
+    public void checkInItem() {
+        System.out.println("Checking in start");
+        List<BorrowedItem> borrowedItems = getAllBorrowedItemByISBN(checkInOut);
+        System.out.println("Checking in isbn: " + checkInOut);
+        BorrowedItem borrowedItem = borrowedItems.get(0);
+        
+        User user = borrowedItem.getUser();
+        List<BorrowedItem> userBorrowedItems = user.getBorrowedItems();
+        
+        System.out.println("Checking in user: " + user);
+        System.out.println("Checking in item: " + borrowedItem);
+        
+        if (userBorrowedItems.contains(borrowedItem)) {
+            borrowedItem.removeFromTable();
+            user.removeBorrowedItem(borrowedItem);
+        }
+        
+        UserRegistry ur = WebbLib.INSTANCE.getUsers();
+        ur.update(user);
+        System.out.println("Checking in finish");
+    }
+    
+    public void checkOutItem() {
+        
     }
     
     public String getId() {
@@ -366,8 +403,12 @@ public class UserPlusPageBB implements Serializable {
     public void setIsbnSearchResult(List<BorrowedItem> isbnSearchResult) {
         this.isbnSearchResult = isbnSearchResult;
     }
-    
-    
-    
-    
+
+    public String getCheckInOut() {
+        return checkInOut;
+    }
+
+    public void setCheckInOut(String checkInOut) {
+        this.checkInOut = checkInOut;
+    }
 }
