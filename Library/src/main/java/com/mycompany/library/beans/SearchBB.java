@@ -11,7 +11,6 @@ import com.mycompany.library.core.WebbLib;
 import com.mycompany.library.core.Book;
 import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,6 +23,7 @@ import javax.inject.Named;
 @SessionScoped
 public class SearchBB implements Serializable {
 
+    private UserRegistryBean users;
     private TemplateBB template;
     private String id, title, creator, publisher, description, language, genre,type;
     private String topSearch;
@@ -32,16 +32,14 @@ public class SearchBB implements Serializable {
     private List<Item> result;
     private User user;
     private Book book;
-    
-    @Inject
-    private UserRegistryBean users;
 
     public SearchBB() {
     }
     @Inject
-    public SearchBB(TemplateBB template) {
+    public SearchBB(UserRegistryBean users, TemplateBB template) {
+        this.users = users;
         this.template = template;
-        
+        this.user = template.getLoggedInUser();
     }
 
     public void searchAll() {
@@ -61,7 +59,7 @@ public class SearchBB implements Serializable {
     }
     
      public void borrowOrReserve(Item item){
-         this.book = (Book) item;
+        book = (Book) item;
         if(book.getQuantity() > 0){
             user.tryBorrowItem(book);
         }
@@ -69,26 +67,27 @@ public class SearchBB implements Serializable {
             user.tryReserveItem(book);
         }
         user = users.update(user);
+        user = template.getLoggedInUser();
     }
     
      public void bookMark(Item item){
          this.book = (Book) item;
         if(!user.getBookmarkedItems().contains(book)){
             user.setBookmarkedItems(book);
-        }
-        
+        }        
         user = users.update(user);
+        user = template.getLoggedInUser();
     }
     
     
 
     public boolean linkVisible(){  
-        this.user = this.template.getLoggedInUser();
+        user = template.getLoggedInUser();
         return user != null;
     }
     
     public String bookMarkImg(Item item){
-        this.book = (Book) item;
+        book = (Book) item;
         if(user.getBookmarkedItems().contains(book)){
             return "/resources/img/star_full.png";
         }
@@ -224,5 +223,4 @@ public class SearchBB implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
-    
 }
