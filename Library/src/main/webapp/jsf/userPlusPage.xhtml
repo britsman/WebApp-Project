@@ -65,6 +65,14 @@
                                     
                                     <h:dataTable var="borrowedItem" value="#{userPlus.allBorrowedItems}">
                                         <h:column>
+                                            <f:facet name="header">Lån id</f:facet>
+                                            <h:outputText value="#{borrowedItem.id}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Lånad av</f:facet>
+                                            <h:outputText value="#{borrowedItem.user.username}" />
+                                        </h:column>
+                                        <h:column>
                                             <f:facet name="header">ISBN</f:facet>
                                             <h:outputText value="#{borrowedItem.item.id}" />
                                         </h:column>
@@ -74,10 +82,8 @@
                                         </h:column>
                                     </h:dataTable>
                                     <h:form>
-                                        <h:outputLabel for="checkInOut" value="ISBN " />
-                                        <h:inputText id="checkInOut" value="#{userPlus.checkInOut}">
-                                            <f:validator validatorId="IdValidator" />
-                                        </h:inputText>
+                                        <h:outputLabel for="checkInOut" value="Lån id " />
+                                        <h:inputText id="checkInOut" value="#{userPlus.checkInOut}" />
                                         <h:commandButton value="Checka in"
                                                          action="#{userPlus.action}"
                                                          actionListener="#{userPlus.checkInItem}" />

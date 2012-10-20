@@ -58,7 +58,7 @@ public class UserPlusPageBB implements Serializable {
     private int editQuantity;
     
     private List<BorrowedItem> isbnSearchResult;
-    private String checkInOut;
+    private Long checkInOut;
     
     // Default constructor.
     public UserPlusPageBB() {}
@@ -163,16 +163,21 @@ public class UserPlusPageBB implements Serializable {
     }
     
     public void checkInItem() {
-        System.out.println("Checking in start");
-        List<BorrowedItem> borrowedItems = getAllBorrowedItemByISBN(checkInOut);
-        System.out.println("Checking in isbn: " + checkInOut);
-        BorrowedItem borrowedItem = borrowedItems.get(0);
+        List<BorrowedItem> borrowedItems = getAllBorrowedItems();
+        BorrowedItem borrowedItem = null;
+        for (BorrowedItem bi : borrowedItems) {
+            if (bi.getId() == checkInOut) {
+                borrowedItem = bi;
+            }
+        }
+        
+        if (borrowedItem == null) {
+            // Fixa
+            return;
+        }
         
         User user = borrowedItem.getUser();
         List<BorrowedItem> userBorrowedItems = user.getBorrowedItems();
-        
-        System.out.println("Checking in user: " + user);
-        System.out.println("Checking in item: " + borrowedItem);
         
         if (userBorrowedItems.contains(borrowedItem)) {
             borrowedItem.removeFromTable();
@@ -181,11 +186,10 @@ public class UserPlusPageBB implements Serializable {
         
         UserRegistry ur = WebbLib.INSTANCE.getUsers();
         ur.update(user);
-        System.out.println("Checking in finish");
     }
     
     public void checkOutItem() {
-        
+        // TODO
     }
     
     public String getId() {
@@ -404,11 +408,11 @@ public class UserPlusPageBB implements Serializable {
         this.isbnSearchResult = isbnSearchResult;
     }
 
-    public String getCheckInOut() {
+    public Long getCheckInOut() {
         return checkInOut;
     }
 
-    public void setCheckInOut(String checkInOut) {
+    public void setCheckInOut(Long checkInOut) {
         this.checkInOut = checkInOut;
     }
 }
