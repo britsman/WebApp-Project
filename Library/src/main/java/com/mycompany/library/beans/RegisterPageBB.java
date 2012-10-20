@@ -3,6 +3,10 @@ package com.mycompany.library.beans;
 import com.mycompany.library.core.User;
 import java.io.Serializable;
 import java.util.Random;
+import javax.annotation.PreDestroy;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -12,9 +16,11 @@ import javax.inject.Named;
  * @author Hannes
  */
 @Named("register")
-@SessionScoped
+@ConversationScoped
 public class RegisterPageBB implements Serializable {
     
+    @Inject
+    private Conversation convo;
     private UserRegistryBean users;
     private TemplateBB loggedUser;
     private String username = "";
@@ -33,6 +39,9 @@ public class RegisterPageBB implements Serializable {
         this.loggedUser = loggedUser;
     }
     public void registerUser() {
+        if (convo.isTransient()) {
+            convo.begin();
+        }
         if (!triedRegister) {
             if (checkUser()) {
                 if (checkPassword()) {
@@ -119,12 +128,32 @@ public class RegisterPageBB implements Serializable {
     public void setInputCode(Long inputCode) {
         this.inputCode = inputCode;
     }
-    private void clear(){        
-    triedRegister = false;
-    username = "";
-    email = "";
-    password = "";
-    confirmPassword = "";
-    inputCode = null;
+        public String closeConversation() {
+        if (!convo.isTransient()) {
+            convo.end();
+        }
+        try {
+            return  redirect; // Go back
+        } catch (Exception e) {
+            // Not implemented
+            //return "error?faces-redirect=true&amp;cause=" + e.getMessage();
+            return null;
+        }
+    }
+    @PreDestroy  // MUST HAVE back button etc.
+    public void destroy() {
+        if (convo != null) {
+            if (!convo.isTransient()) {
+                convo.end();
+            }
+        }
+    }
+    private void clear() {
+        triedRegister = false;
+        username = "";
+        email = "";
+        password = "";
+        confirmPassword = "";
+        inputCode = null;
     }
 }
