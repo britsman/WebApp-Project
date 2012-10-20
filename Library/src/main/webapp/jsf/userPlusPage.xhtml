@@ -237,7 +237,6 @@
                                                             </td >
                                                             <td width="60px" align="left">
                                                                 <h:commandLink value="Remove"
-                                                                               action="#{userPlus.action}"
                                                                                actionListener="#{userPlus.removeItem(items.id)}" class="listItem"/>
                                                             </td>
 
@@ -270,8 +269,7 @@
                                                                     <h:outputLabel for="editQuantity" value="Quantity" /><br />
                                                                     <h:inputText id="editQuantity" value="#{userPlus.editQuantity}"/><br />
                                                                     <h:commandButton id="btnEdit" value="Ändra"
-                                                                     action="#{userPlus.action}"
-                                                                                     actionListener="#{userPlus.updateItem(userPlus.editId)}" /><br />
+                                                                    actionListener="#{userPlus.updateItem(userPlus.editId)}" /><br />
                                                                     <h:messages showSummary="true" showDetail="false" />
                                                                 </h:form>
                                                             </section>
