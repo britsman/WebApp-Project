@@ -6,6 +6,7 @@ import com.mycompany.library.core.Creator;
 import com.mycompany.library.core.CreatorCollection;
 import com.mycompany.library.core.Item;
 import com.mycompany.library.core.ItemCollection;
+import com.mycompany.library.core.QueryProccessor;
 import com.mycompany.library.core.ReservedItem;
 import com.mycompany.library.core.User;
 import com.mycompany.library.core.UserRegistry;
@@ -22,12 +23,12 @@ public class GenerateTestData {
     
     @Test
     public void runTests(){
-        genData();
+        generateItemData();
         generateUserData();
     }
     
     
-    public void genData() {
+    public void generateItemData() {
         CreatorCollection creators = WebbLib.INSTANCE.getCreators();
         
         List<Creator> cList = new ArrayList<>();
@@ -109,76 +110,89 @@ public class GenerateTestData {
         
         
     }
-    
-    @Test
     public void generateUserData() {
         // Making some users.
         UserRegistry ur = WebbLib.INSTANCE.getUsers();
+        ItemCollection ic = WebbLib.INSTANCE.getItems();
+        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
         
-        User user1 = new User("user1", "user1", "user1@user.mail", 0.0);
-        User user2 = new User("user2", "user2", "user2@user.mail", 0.0);
-        User user3 = new User("user3", "user3", "user3@user.mail", 0.0);
-        User user4 = new User("user4", "user4", "user4@user.mail", 0.0);
-        
+        User user1 = ur.getByUsername("user1");
+        User user2 = ur.getByUsername("user2");
+        User user3 = ur.getByUsername("user3");
+        User user4 = ur.getByUsername("user4");
+        if(user1 == null){
+            user1 = new User("user1", "user1", "user1@user.mail", 0.0);
+        }
+        if (user2 == null) {
+            user2 = new User("user2", "user2", "user2@user.mail", 0.0);
+        }
+        if (user3 == null) {
+            user3 = new User("user3", "user3", "user3@user.mail", 0.0);            
+        }
+        if (user4 == null) {           
+            user4 = new User("user4", "user4", "user4@user.mail", 0.0);
+        }           
         user1.setIsLibrarian(true);
         user2.setFeesOwed(20.0);
-        
-        ur.add(user1);
-        ur.add(user2);
-        ur.add(user3);
-        ur.add(user4);
         
         // Making some creators.
         CreatorCollection cc = WebbLib.INSTANCE.getCreators();
         
-        Creator creator1 = new Creator("creator1");
-        Creator creator2 = new Creator("creator2");
-        Creator creator3 = new Creator("creator3");
+        Creator creator1 = cc.getByName("creator1");
+        Creator creator2 = cc.getByName("creator2");
+        Creator creator3 = cc.getByName("creator3");
         
-        List<Creator> creators1 = new ArrayList<Creator>();
-        List<Creator> creators2 = new ArrayList<Creator>();
-        List<Creator> creators3 = new ArrayList<Creator>();
+        if (creator1 == null) {
+            creator1 = new Creator("creator1");
+        }
+        if (creator2 == null) {
+            creator2 = new Creator("creator2");
+        }
+        if (creator3 == null) {
+            creator3 = new Creator("creator3");
+        }
+        List<Creator> creators1 = new ArrayList<>();  
         
         creators1.add(creator1);
         creators1.add(creator2);
-        creators1.add(creator3);
+        creators1.add(creator3); 
         
-        cc.add(creator1);
-        cc.add(creator2);
-        cc.add(creator3);
-        
-        // Making some items.
-        ItemCollection ic = WebbLib.INSTANCE.getItems();
-        
-        Book item1 = new Book("1", "title1", creators1, "Publisher1", "Language1", 2012, 1337, "Genre1", 5);
-        Book item2 = new Book("2", "title2", creators2, "Publisher2", "Language2", 2012, 1337, "Genre2", 5);
-        Book item3 = new Book("3", "title3", creators3, "Publisher3", "Language3", 2012, 1337, "Genre3", 5);
-        
-        ic.add(item1);
-        ic.add(item2);
-        ic.add(item3);
+        Item item1 = new Book("1", "title1", creators1, "Publisher1", "Language1", 2012, 1337, "Genre1", 5);
+        item1 = ic.update(item1);
+        creator1 = item1.getCreators().get(0);
+        creator2 = item1.getCreators().get(1);
+        creator3 = item1.getCreators().get(2);
+        creators1.set(0, creator1);
+        creators1.set(1, creator2);
+        creators1.set(2, creator3);
+        Item item2 = new Book("2", "title2", creators1, "Publisher2", "Language2", 2012, 1337, "Genre2", 5);
+        item2 = ic.update(item2);
+        creator1 = item2.getCreators().get(0);
+        creator2 = item2.getCreators().get(1);
+        creator3 = item2.getCreators().get(2);
+        creators1.set(0, creator1);
+        creators1.set(1, creator2);
+        creators1.set(2, creator3);
+        Item item3 = new Book("3", "title3", creators1, "Publisher3", "Language3", 2012, 1337, "Genre3", 5);
+        item3 = ic.update(item3);
         
         // BorrowedItem
-        BorrowedItem borrowedItem1 = new BorrowedItem(item2, user2);
+        if(!user2.hasBorrowed(item2.getId())){
+            BorrowedItem borrowedItem1 = new BorrowedItem(item2, user2);
+        }
         
         // ReservedItem
+        if(q.findReservedItem(item3) == null){
         ReservedItem reservedItem1 = new ReservedItem(item3, user3);
+        }
         
         // BookmarkedItem
-        user4.setBookmarkedItems(item1);
-        
-        // Update
+        if(!user4.getBookmarkedItems().contains(item1)){
+            user4.setBookmarkedItems(item1);
+        }
         ur.update(user1);
         ur.update(user2);
         ur.update(user3);
         ur.update(user4);
-        
-        cc.update(creator1);
-        cc.update(creator2);
-        cc.update(creator3);
-        
-        ic.update(item1);
-        ic.update(item2);
-        ic.update(item3);
     }
 }
