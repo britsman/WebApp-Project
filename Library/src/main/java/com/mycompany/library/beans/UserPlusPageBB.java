@@ -8,6 +8,7 @@ import com.mycompany.library.core.QueryProccessor;
 import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -51,7 +52,14 @@ public class UserPlusPageBB implements Serializable {
     private int editQuantity;
     private List<BorrowedItem> isbnSearchResult;
     private String topSearch;
-    private List<Item> result;
+    private List<Item> result= null;
+    private String show_content ="";
+    private boolean edit = false;
+    private String stdSort;
+    
+    
+    
+    
     
     // Default constructor.
     public UserPlusPageBB() {}
@@ -59,12 +67,37 @@ public class UserPlusPageBB implements Serializable {
     public UserPlusPageBB(CreatorBean creatorCollection, ItemBean itemCollection) {
         this.creatorCollection = creatorCollection;
         this.itemCollection = itemCollection;
-    }
-    public List<Item> getAll() {
-        return itemCollection.getAll();
+        show_content ="content_1";
+        stdSort="title";
+        
     }
     
+    public List<Item> getAll() {
+        List<Item> list = itemCollection.getAll();
+        
+        if(stdSort.equals("title")){
+                Collections.sort(list,Item.ItemTitleComparator); 
+              
+        }
+                
+           if(stdSort.equals("year_released"))
+                Collections.sort(list);
+                
+            if(stdSort.equals("author"))
+                Collections.sort(list,Item.ItemAuthorComparator); 
+                
+            if(stdSort.equals("isbn"))
+                Collections.sort(list,Item.ItemISBNComparator);
+                
+                return list;
+          
+    }
+    
+   
+    
+    
     public void createItem() {
+        
         List<Creator> cs = new ArrayList<>();
         String[] creatorStrings = this.creators.split(",");
         for (String name: creatorStrings) {
@@ -76,24 +109,38 @@ public class UserPlusPageBB implements Serializable {
         }
         itemCollection.update(new Book(id, title, cs, publisher, language, year_release, pageNum,
                 genre, image, description, quantity, loan_period, fee));
+        id="";
+        title="";
+        cs.clear();
+        publisher="";
+        language="";
+        year_release=0;
+        pageNum=0;
+        genre="";
+        image="";
+        description="";
+        quantity=0;
+        loan_period=0;
+        fee=0;
+       
     }
     
-    public void prepareEdit(String id, String title, String creators, String publisher,
-            String image, String description, int pageNum, int loan_period, int fee,
-            int year_released, String genre, String language, int quantity) {
-        editId = id;
-        editTitle = title;
-        editCreators = creators;
-        editPublisher = publisher;
-        editImage = image;
-        editDescription = description;
-        editPageNum = pageNum;
-        editLoan_period = loan_period;
-        editFee = fee;
-        editYear_release = year_released;
-        editGenre = genre;
-        editLanguage = language;
-        editQuantity = quantity;
+
+    public void prepareEdit(Item item) {
+        editId = item.getId();
+        editTitle = item.getTitle();
+        editCreators = item.getCreatorNames();
+        editPublisher = item.getPublisher();
+        editImage = item.getImage();
+        editDescription = item.getDescription();
+        editPageNum = 3;
+        editLoan_period = item.getLoan_period();
+        editFee = item.getFee();
+        editYear_release = item.getYear();
+        editGenre = item.getGenre();
+        editLanguage = item.getLanguage();
+        editQuantity = item.getQuantity();
+        edit=true;
     }
     
     public void updateItem(String id) {
@@ -118,13 +165,15 @@ public class UserPlusPageBB implements Serializable {
         b.setLanguage(editLanguage);
         b.setQuantity(editQuantity);
         itemCollection.update(b);
+        edit=false;
     }
     
     public void removeItem(String id) {
         itemCollection.remove(id);
     }
 
-    public String action() {
+    public String action(String tab) {
+        show_content = tab;
         return "userPlusPage?faces-redirect=true";
     }
     public List<BorrowedItem> getAllBorrowedItems(){
@@ -160,6 +209,11 @@ public class UserPlusPageBB implements Serializable {
         }
     }
     
+      
+        
+        
+        
+        
     public String getId() {
         return id;
     }
@@ -375,8 +429,39 @@ public class UserPlusPageBB implements Serializable {
     public void setIsbnSearchResult(List<BorrowedItem> isbnSearchResult) {
         this.isbnSearchResult = isbnSearchResult;
     }
-    
-    
+
+    public String getTopSearch() {
+        return topSearch;
+    }
+
+    public void setTopSearch(String topSearch) {
+        this.topSearch = topSearch;
+    }
+
+    public String getShow_content() {
+        return show_content;
+    }
+
+    public void setShow_content(String show_content) {
+        this.show_content = show_content;
+    }
+
+    public boolean isEdit() {
+        return edit;
+    }
+
+    public void setEdit(boolean edit) {
+        this.edit = edit;
+    }
+
+    public String getStdSort() {
+        return stdSort;
+    }
+
+    public void setStdSort(String stdSort) {
+        this.stdSort = stdSort;
+    }
+  
     
     
 }

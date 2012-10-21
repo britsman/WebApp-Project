@@ -6,6 +6,7 @@ package com.mycompany.library.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
@@ -28,7 +29,7 @@ import javax.persistence.Table;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="TYPE", discriminatorType=DiscriminatorType.STRING,length=20)
 @DiscriminatorValue("I")
-public class Item implements Serializable{
+public class Item implements Serializable, Comparable<Item> {
     //Unique identifier (stored as strings since ISBN contains '-' signs).
     @Id
     private String id;
@@ -48,14 +49,16 @@ public class Item implements Serializable{
     private String genre;
     private String language;
     private int quantity;
+    private String publisher;
     public Item() {
     }
 
-    public Item(String id, String title, List<Creator> creators, String language,
+    public Item(String id, String title,String publisher, List<Creator> creators, String language,
     int year, String genre, String image, String description, int quantity, 
     int loan_period, int fee) {
         this.id = id;
         this.title = title;
+        this.publisher = publisher;
         this.creators = creators;
         this.language = language;
         this.year_released = year;
@@ -67,10 +70,11 @@ public class Item implements Serializable{
         this.fee = fee;
         addItems();
     }
-    public Item(String id, String title, List<Creator> creators, String language,
+    public Item(String id, String title,String publisher, List<Creator> creators, String language,
     int year, String genre, int quantity) {
         this.id = id;
         this.title = title;
+        this.publisher = publisher;
         this.creators = creators;
         this.language = language;
         this.year_released = year;
@@ -96,6 +100,15 @@ public class Item implements Serializable{
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+    
     public String getImage() {
         return image;
     }
@@ -171,4 +184,63 @@ public class Item implements Serializable{
         }
         return result;
     }
+
+    @Override
+    public int compareTo(Item o) {
+        return this.year_released - o.year_released;
+        
+    }
+    
+  	public static Comparator<Item> ItemTitleComparator 
+                          = new Comparator<Item>() {
+ 
+	    public int compare(Item item_1, Item item_2) {
+ 
+	      String itemName1 = item_1.getTitle().toUpperCase();
+	      String itemName2 = item_2.getTitle().toUpperCase();
+ 
+	      return itemName1.compareTo(itemName2);
+ 
+	      //Vänd ordningen
+	      //return fruitName2.compareTo(fruitName1);
+	    }
+ 
+	};
+        
+        public static Comparator<Item> ItemISBNComparator 
+                          = new Comparator<Item>() {
+ 
+	    public int compare(Item item_1, Item item_2) {
+ 
+	      String itemName1 = item_1.getId().replace("-","");
+	      String itemName2 = item_2.getId().replace("-","");
+ 
+	      return itemName1.compareTo(itemName2);
+ 
+	      //Vänd ordningen
+	      //return fruitName2.compareTo(fruitName1);
+	    }
+ 
+	};
+        
+        public static Comparator<Item> ItemAuthorComparator 
+                          = new Comparator<Item>() {
+ 
+	    public int compare(Item item_1, Item item_2) {
+ 
+	      String itemName1 = item_1.getCreatorNames().toUpperCase();
+	      String itemName2 = item_2.getCreatorNames().toUpperCase();
+ 
+	      return itemName1.compareTo(itemName2);
+ 
+	      //Vänd ordningen
+	      //return fruitName2.compareTo(fruitName1);
+	    }
+ 
+	};
+        
+        
+        
+        
+        
 }

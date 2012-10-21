@@ -28,14 +28,14 @@ public class Book extends Item implements Serializable{
     public Book(String id, String title, List<Creator> creators, String publisher, 
     String language,  int year, int pageNum, String genre, String image, String description, 
     int quantity, int loan_period, int fee) {
-        super(id, title, creators, language, year, genre, image,description, 
+        super(id, title,publisher, creators, language, year, genre, image,description, 
         quantity, loan_period, fee);
         this.publisher = publisher;
         this.pageNum = pageNum;
     }
     public Book(String id, String title, List<Creator> creators, String publisher, 
     String language,  int year, int pageNum, String genre, int quantity) {
-        super(id, title, creators, language, year, genre, quantity);
+        super(id, title,publisher, creators, language, year, genre, quantity);
         this.publisher = publisher;
         this.pageNum = pageNum;
     }

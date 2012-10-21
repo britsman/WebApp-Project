@@ -32,7 +32,7 @@ public class SearchBB implements Serializable {
     private List<Item> result;
     private User user;
     private Book book;
-    
+        
     @Inject
     private UserRegistryBean users;
 
