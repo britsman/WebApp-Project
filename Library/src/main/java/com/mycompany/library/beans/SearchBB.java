@@ -26,26 +26,25 @@ public class SearchBB implements Serializable {
     @Inject
     private Conversation convo;
     private UserRegistryBean users;
-    private TemplateBB template;
+    private SessionBB session;
     private String id, title, creator, publisher, description, language, genre,type;
     private String topSearch;
     private int fromYear, toYear;
     private boolean inStock;
-    private List<Item> result;
 
     public SearchBB() {
     }
     @Inject
-    public SearchBB(UserRegistryBean users, TemplateBB template) {
+    public SearchBB(UserRegistryBean users, SessionBB session) {
         this.users = users;
-        this.template = template;
+        this.session = session;
     }
 
     public void searchAll() {
         checkConversation();
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
         if (!topSearch.equals("")) {
-            result = query.searchAll(topSearch);
+            session.setSearchResult(query.searchAll(topSearch));
         }
     }
 
@@ -55,51 +54,40 @@ public class SearchBB implements Serializable {
         genre=null;
         language=null;
         type=null;
-        result = query.searchItem(id, title, creator, publisher, description, fromYear, toYear, inStock, language, genre);
+        session.setSearchResult(query.searchItem(id, title, creator, publisher, description, fromYear, toYear, inStock, language, genre));
 
     }
     
      public void borrowOrReserve(Item item){
         checkConversation();
         if(item.getQuantity() > 0){
-            template.getLoggedInUser().tryBorrowItem(item);
+            session.getLoggedInUser().tryBorrowItem(item);
         }
         else{
-            template.getLoggedInUser().tryReserveItem(item);
+            session.getLoggedInUser().tryReserveItem(item);
         }
-        template.setLoggedInUser(users.update(template.getLoggedInUser()));
+        session.setLoggedInUser(users.update(session.getLoggedInUser()));
     }
     
      public void bookMark(Item item){
-        if(!template.getLoggedInUser().getBookmarkedItems().contains(item)){
-            template.getLoggedInUser().setBookmarkedItems(item);
+        if(!session.getLoggedInUser().getBookmarkedItems().contains(item)){
+            session.getLoggedInUser().setBookmarkedItems(item);
         }        
-        template.setLoggedInUser(users.update(template.getLoggedInUser()));
+        session.setLoggedInUser(users.update(session.getLoggedInUser()));
     }
     
     
 
     public boolean linkVisible(){  
-        return template.getLoggedInUser() != null;
+        return session.getLoggedInUser() != null;
     }
     
     public String bookMarkImg(Item item){
-        if(template.getLoggedInUser().getBookmarkedItems().contains(item)){
+        if(session.getLoggedInUser().getBookmarkedItems().contains(item)){
             return "/resources/img/star_full.png";
         }
         return "/resources/img/star_none.png";
     }
-    
-     
-    
-    public List<Item> getResult() {
-        return result;
-    }
-
-    public void setResult(List<Item> result) {
-        this.result = result;
-    }
-
     public String getTopSearch() {
         return topSearch;
     }

@@ -108,7 +108,7 @@
                         <h:head>
                             <link href="./../resources/css/searchPage.css" rel="stylesheet" type="text/css" />
                         </h:head>
-                        <h:dataTable id="resultTable" var="item" value="#{search.result}" rowClasses="even,odd" style="width: 100%">
+                        <h:dataTable id="resultTable" var="item" value="#{currentSession.searchResult}" rowClasses="even,odd" style="width: 100%">
                             <h:column>
                                 <table>
                                     <tr>

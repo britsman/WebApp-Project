@@ -23,13 +23,13 @@ import javax.inject.Named;
 public class UserPageBB implements Serializable {
     
     private UserRegistryBean users;
-    private TemplateBB template;
+    private SessionBB template;
     // Default constructor.
     public UserPageBB() {
     }
     
     @Inject
-    public UserPageBB(UserRegistryBean users, TemplateBB template) {
+    public UserPageBB(UserRegistryBean users, SessionBB template) {
         this.users = users;
         this.template = template;
     }

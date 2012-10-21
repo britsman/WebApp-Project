@@ -4,8 +4,11 @@
  */
 package com.mycompany.library.beans;
 
+import com.mycompany.library.core.Item;
 import com.mycompany.library.core.User;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
@@ -18,17 +21,19 @@ import javax.inject.Named;
  *
  * @author Hannes
  */
-@Named("template")
+@Named("currentSession")
 @SessionScoped
-public class TemplateBB implements Serializable {
+public class SessionBB implements Serializable {
     
     private User loggedInUser=null;
     private String logOutString;
+    private List<Item> searchResult = new ArrayList<>();
     
-    public TemplateBB() {
+    public SessionBB() {
     }
     public void logOut(){
-        loggedInUser = null;    
+        loggedInUser = null; 
+        clearSearch();
     }
     
     public String loggedUser(){        
@@ -78,12 +83,13 @@ public class TemplateBB implements Serializable {
     public void setLogOutString(String logOutString) {
         this.logOutString = logOutString;
     }
-
-  
-    
-  
-    
-    
-
-
+    public List<Item> getSearchResult() {
+        return searchResult;
+    }
+    public void setSearchResult(List<Item> searchResult) {
+        this.searchResult = searchResult;
+    }
+    public void clearSearch(){
+        searchResult = new ArrayList<>();
+    }
 }

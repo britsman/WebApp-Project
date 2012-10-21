@@ -21,14 +21,14 @@ public class ItemPageBB implements Serializable{
     @Inject
     private Conversation convo;
     private UserRegistryBean users;
-    private TemplateBB template;
+    private SessionBB template;
     private Book book;
     private String redirectPage;
     
     public ItemPageBB(){}
 
     @Inject
-    public ItemPageBB(UserRegistryBean users, TemplateBB template) {
+    public ItemPageBB(UserRegistryBean users, SessionBB template) {
         this.users = users;
         this.template = template;
     }

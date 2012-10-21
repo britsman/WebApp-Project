@@ -20,7 +20,7 @@ public class RegisterPageBB implements Serializable {
     @Inject
     private Conversation convo;
     private UserRegistryBean users;
-    private TemplateBB loggedUser;
+    private SessionBB loggedUser;
     private String username = "";
     private String email = "";
     private String password = "";
@@ -32,7 +32,7 @@ public class RegisterPageBB implements Serializable {
 
     public RegisterPageBB() {}
     @Inject
-    public RegisterPageBB(UserRegistryBean users, UserPageBB privateUserBean, TemplateBB loggedUser) {
+    public RegisterPageBB(UserRegistryBean users, UserPageBB privateUserBean, SessionBB loggedUser) {
         this.users = users;
         this.loggedUser = loggedUser;
     }
