@@ -5,11 +5,6 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       >
-
-
-
-
-
     <body>
         <ui:composition template="./../WEB-INF/html/template.xhtml">
             <ui:define name="content">
@@ -107,12 +102,12 @@
                                     </h:dataTable>
                                     <h:form>
                                         <h:outputLabel for="checkInOut" value="Lån id " />
-                                        <h:inputText id="checkInOut" value="#{userPlus.checkInOut}" />
+                                        <h:inputText id="checkInOut" value="" />
                                         <h:commandButton value="Checka in"
-                                                         action="#{userPlus.action}"
+                                                        
                                                          actionListener="#{userPlus.checkInItem}" />
                                         <h:commandButton value="Checka ut"
-                                                         action="#{userPlus.action}"
+                                                         
                                                          actionListener="#{userPlus.checkOutItem}" />
                                     </h:form>
 
@@ -346,15 +341,11 @@
                                         
 
                                         <h:form>
-<<<<<<< HEAD
+
                                             <br><h:outputLabel for="editSerch" value="Sök efter bok "/>
                                                 <h:inputText id="editSerch"  /> 
                                                 <h:commandButton id="editSerchButton" value="Sök" />
-=======
-                                            <br><h:outputLabel for="editSearch" value="Sök efter bok "/>
-                                                <h:inputText id="editSearch"/> 
-                                                <h:commandButton id="editSearchButton" value="Sök"/>
->>>>>>> branch 'master' of https://github.com/britsman/WebApp-Project.git
+
                                             </br>
                                             
                                             sortera på namn  år isbn författare
@@ -401,21 +392,17 @@
                                                             </td >
                                                             <td width="60px" align="left">
                                                                 <h:commandLink value="Remove"
-<<<<<<< HEAD
                                                                                action="#{userPlus.action(&quot;content_4&quot;)}"
                                                                                actionListener="#{userPlus.removeItem(items.id)}" 
                                                                                />
-=======
-                                                                               actionListener="#{userPlus.removeItem(items.id)}" class="listItem"/>
->>>>>>> branch 'master' of https://github.com/britsman/WebApp-Project.git
+
+                                                                          
                                                             </td>
 
                                                         </tr>       
                                                     </table>
                                                     <h:form>
-<<<<<<< HEAD
-                                                        
-=======
+
                                                         <div id="editForm" style="display: none;background-color: lightgoldenrodyellow">
                                                             <section>
                                                                 <h:form>
@@ -447,32 +434,11 @@
                                                                 </h:form>
                                                             </section>
                                                         </div>
->>>>>>> branch 'master' of https://github.com/britsman/WebApp-Project.git
                                                     </h:form>
                                                 </h:column>
                                             </h:dataTable>
                                         </h:form>
-<<<<<<< HEAD
 
-=======
-
-                                        <script language="javascript"> 
-                                            function toggle() {
-                                                var settings = document.getElementById("editForm");
-                                                                
-                                                if(settings.style.display == "block") {
-                                                    settings.style.display = "none";
-                                                                    
-                                                }
-                                                else {
-                                                    settings.style.display = "block";
-                                                                    
-                                                }
-                                            } 
-                                        </script>
-
-
->>>>>>> branch 'master' of https://github.com/britsman/WebApp-Project.git
                                     </ul>
                                 </div>
                             </div>

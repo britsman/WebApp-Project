@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -21,7 +22,7 @@ import javax.inject.Named;
  * @author Fredrik
  */
 @Named("userPlus")
-@RequestScoped
+@SessionScoped
 public class UserPlusPageBB implements Serializable {
 
     // Collections
@@ -216,29 +217,29 @@ public class UserPlusPageBB implements Serializable {
     }
     
     public void checkInItem() {
-        List<BorrowedItem> borrowedItems = getAllBorrowedItems();
-        BorrowedItem borrowedItem = null;
-        for (BorrowedItem bi : borrowedItems) {
-            if (bi.getId() == checkInOut) {
-                borrowedItem = bi;
-            }
-        }
-        
-        if (borrowedItem == null) {
-            // Fixa
-            return;
-        }
-        
-        User user = borrowedItem.getUser();
-        List<BorrowedItem> userBorrowedItems = user.getBorrowedItems();
-        
-        if (userBorrowedItems.contains(borrowedItem)) {
-            borrowedItem.removeFromTable();
-            user.removeBorrowedItem(borrowedItem);
-        }
-        
-        UserRegistry ur = WebbLib.INSTANCE.getUsers();
-        ur.update(user);
+//        List<BorrowedItem> borrowedItems = getAllBorrowedItems();
+//        BorrowedItem borrowedItem = null;
+//        for (BorrowedItem bi : borrowedItems) {
+//            if (bi.getId() == checkInOut) {
+//                borrowedItem = bi;
+//            }
+//        }
+//        
+//        if (borrowedItem == null) {
+//            // Fixa
+//            return;
+//        }
+//        
+//        User user = borrowedItem.getUser();
+//        List<BorrowedItem> userBorrowedItems = user.getBorrowedItems();
+//        
+//        if (userBorrowedItems.contains(borrowedItem)) {
+//            borrowedItem.removeFromTable();
+//            user.removeBorrowedItem(borrowedItem);
+//        }
+//        
+//        UserRegistry ur = WebbLib.INSTANCE.getUsers();
+//        ur.update(user);
     }
     
     public void checkOutItem() {
@@ -473,7 +474,7 @@ public class UserPlusPageBB implements Serializable {
         this.isbnSearchResult = isbnSearchResult;
     }
 
-<<<<<<< HEAD
+
     public String getTopSearch() {
         return topSearch;
     }
@@ -507,14 +508,4 @@ public class UserPlusPageBB implements Serializable {
     }
   
     
-    
-=======
-    public Long getCheckInOut() {
-        return checkInOut;
-    }
-
-    public void setCheckInOut(Long checkInOut) {
-        this.checkInOut = checkInOut;
-    }
->>>>>>> branch 'master' of https://github.com/britsman/WebApp-Project.git
 }
