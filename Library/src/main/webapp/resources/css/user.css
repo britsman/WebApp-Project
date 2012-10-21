@@ -24,3 +24,6 @@
     border: solid 1px black;
     margin: 10px 0px;
 }
+
+.even{background-color: orange; }
+.odd{background-color: white;}

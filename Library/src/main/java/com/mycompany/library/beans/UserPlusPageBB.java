@@ -61,10 +61,9 @@ public class UserPlusPageBB implements Serializable {
     
     private List<BorrowedItem> isbnSearchResult;
     private String topSearch;
-    private List<Item> result= null;
     private String show_content ="";
     private boolean edit = false;
-    private String stdSort;
+    private String stdSort="";
     
     
     
@@ -77,9 +76,9 @@ public class UserPlusPageBB implements Serializable {
     public UserPlusPageBB(CreatorBean creatorCollection, ItemBean itemCollection) {
         this.creatorCollection = creatorCollection;
         this.itemCollection = itemCollection;
-
+        
         show_content ="content_1";
-        stdSort="title";
+        
         
 
     }
@@ -87,27 +86,35 @@ public class UserPlusPageBB implements Serializable {
    
     
     public List<Item> getAll() {
-        List<Item> list = itemCollection.getAll();
         
-        if(stdSort.equals("title")){
-                Collections.sort(list,Item.ItemTitleComparator); 
-              
-        }
-                
-           if(stdSort.equals("year_released"))
-                Collections.sort(list);
-                
-            if(stdSort.equals("author"))
-                Collections.sort(list,Item.ItemAuthorComparator); 
-                
-            if(stdSort.equals("isbn"))
-                Collections.sort(list,Item.ItemISBNComparator);
-                
-                return list;
-          
+        return itemCollection.getAll();
+        
     }
     
-   
+//   public List<Item> sortedList(String sort){
+//       sort="author";
+//       if(sort.equals("title")){
+//                Collections.sort(items,Item.ItemTitleComparator); 
+//              
+//        }
+//                
+//           if(sort.equals("year_released"))
+//                Collections.sort(items);
+//                
+//            if(sort.equals("author"))
+//                Collections.sort(items,Item.ItemAuthorComparator); 
+//                
+//            if(sort.equals("isbn"))
+//                Collections.sort(items,Item.ItemISBNComparator);
+//                
+//            System.out.println("Inne i GET ALL med string = " + sort);
+//                return items;
+//          
+//       
+//   }
+    
+    
+    
     
     
     public void createItem() {
@@ -249,20 +256,8 @@ public class UserPlusPageBB implements Serializable {
     
 
     
-
     
-        public void searchAll() {
-        QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
-        if (!topSearch.equals("")) {
-            result = query.searchAll(topSearch);
-        }
-    }
-    
-      
-        
-        
-        
-        
+     
     public String getId() {
         return id;
     }
@@ -510,7 +505,6 @@ public class UserPlusPageBB implements Serializable {
 
     public void setStdSort(String stdSort) {
         this.stdSort = stdSort;
-    }
-  
+    }  
     
 }

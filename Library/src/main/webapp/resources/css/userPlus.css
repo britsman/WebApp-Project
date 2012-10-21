@@ -60,10 +60,10 @@ background:#FFFFFF;}
  
 ul.tab_header li a:hover{border:1px solid #CCCCCC;}
  
-tab active{color:#000000;
- 
-                        border-bottom: 1px solid #ffffff; background:#FFFFFF; }
- 
+tab active{color:#000000; border-bottom: 1px solid #ffffff; background:#FFFFFF; }
+
+.tab{color:activecaption;}
+.tab td{color:black;}
 a.tab{font: bold 12px Arial, Helvetica, sans-serif; text-decoration:none;}
  
 
@@ -101,4 +101,29 @@ a.tab{font: bold 12px Arial, Helvetica, sans-serif; text-decoration:none;}
     font-family: serif;
     color: red;
     
+}
+
+.listItem{
+    font-size: 14px;
+    width: 60px;
+    height: 40px;
+}
+
+.itemTable tr td{
+
+    width: 100px;
+    
+}
+
+.listAddRemove{
+    
+    text-align: start center;
+    font-size: 15px;
+    font-family: serif;
+    color: blue;
+}
+
+.borrowedItem{
+font-family: sans-serif;
+font-size: 20px;
 }

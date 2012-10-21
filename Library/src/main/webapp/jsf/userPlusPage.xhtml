@@ -82,22 +82,26 @@
                                         </h:column>
                                     </h:dataTable>
                                     
-                                    <h:dataTable var="borrowedItem" value="#{userPlus.allBorrowedItems}">
-                                        <h:column>
-                                            <f:facet name="header">Lån id</f:facet>
-                                            <h:outputText value="#{borrowedItem.id}" />
+                                    
+                                    <h:dataTable var="borrowedItem" value="#{userPlus.allBorrowedItems}" style="width: 100%" border="1">
+                                        <h:column id="loneId">
+                                            <f:facet  name="header" class="s">Lån id</f:facet>
+                                            <h:outputText value="#{borrowedItem.id}" class="borrowedItem"/>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Lånad av</f:facet>
-                                            <h:outputText value="#{borrowedItem.user.username}" />
+                                            <h:outputText value="#{borrowedItem.user.username}" class="borrowedItem"/>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">ISBN</f:facet>
-                                            <h:outputText value="#{borrowedItem.item.id}" />
+                                            <h:outputText value="#{borrowedItem.item.id}" class="borrowedItem"/>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Title</f:facet>
-                                            <h:outputText value="#{borrowedItem.item.title}" />
+                                            <h:outputText value="#{borrowedItem.item.title}" class="borrowedItem"/>
+                                        </h:column>
+                                        <h:column>
+                                            <h:commandButton value="Checka In"/>                                            
                                         </h:column>
                                     </h:dataTable>
                                     <h:form>
@@ -221,7 +225,7 @@
                                 <div id="content_3" class="content">
                                     <ul>    
                                         <header>
-                                            <br><h1>Här ser du lånade böcker.</h1></br>
+                                            <br><h1>Här ser du alla lånade böcker.</h1></br>
                                         </header>
                                         <h:form>
 
@@ -253,7 +257,19 @@
                                     <ul>
 
                                         <header>
-                                            <br><h1>Här kan du ändra böcker.</h1></br>
+                                            <table width="100%">
+                                                <tr>
+                                                    <td>
+                                                    <br><h1>Här kan du ändra böcker.</h1></br>
+                                                    </td>
+                                                    <td>
+                                                        <br><h1><h:outputLabel value="Sök efter bok "/></h1>
+                                                        <h:inputText id="editSerch"  /> 
+                                                        <h:commandButton id="editSerchButton" value="Sök" />
+                                                    </br>
+                                                    </td>    
+                                                </tr>
+                                            </table>
                                         </header>
                                         
                                         <h:form id="editForm" style="background-color: lightgoldenrodyellow" rendered="#{userPlus.edit}">
@@ -322,7 +338,7 @@
                                                         <tr>
                                                             <td>
                                                                 <h:outputLabel for="editDescription" value="Beskrivning" /><br />
-                                                                <h:inputTextarea id="editDescription" value="#{userPlus.editDescription}"/>
+                                                                <h:inputTextarea id="editDescription" value="#{userPlus.editDescription}" style="max-width: 200px;min-width: 200px;max-height: 150px;min-height: 150px"/>
                                                             </td>
                                                         </tr>
                                                     </table>    
@@ -342,61 +358,62 @@
 
                                         <h:form>
 
-                                            <br><h:outputLabel for="editSerch" value="Sök efter bok "/>
-                                                <h:inputText id="editSerch"  /> 
-                                                <h:commandButton id="editSerchButton" value="Sök" />
-
-                                            </br>
-                                            
-                                            sortera på namn  år isbn författare
-                                            
                                             <h:form>
                                                 <table>
                                                     <tr>
-                                                        <td><h:commandLink value="Titel"  actionListener="#{userPlus.setStdSort(&quot;title&quot;)}"/></td>
-                                                        <td><h:commandLink value="Författare" actionListener="#{userPlus.setStdSort(&quot;author&quot;)}"/></td>
-                                                        <td><h:commandLink value="Isbn"  actionListener="#{userPlus.setStdSort(&quot;isb&quot;)}"/></td>
-                                                        <td><h:commandLink value="År" actionListener="#{userPlus.setStdSort(&quot;year_released&quot;)}"/></td>
+                                                        <td><h1 style="padding-right: 10px ">Sortera på</h1></td>
+                                                        <td width="40px"><h:commandLink class="tab" value="Titel"  action="#{userPlus.action(&quot;content_4&quot;)}"/></td>
+                                                        <td width="40px"><h:commandLink class="tab" value="Författare" action="#{userPlus.action(&quot;content_4&quot;)}"/></td>
+                                                        <td width="40px"><h:commandLink class="tab" value="Isbn" action="#{userPlus.action(&quot;content_4&quot;)}" /></td>
+                                                        <td width="40px"><h:commandLink class="tab" value="År" action="#{userPlus.action(&quot;content_4&quot;)}" /></td>
                                                     </tr>
-                                                </table>
+                                                </table><br/>
                                             </h:form>
                                             
-                                            
-                                            <h:dataTable var="items" value="#{userPlus.getAll()}" border="0" rowClasses="even,odd">
+                                            <table  class="tab">
+                                                    <tr>
+                                                        <td width="40px"></td>
+                                                        <td width="60px">Titel</td>
+                                                        <td width="60px">Författare</td>
+                                                        <td width="60px">Isbn</td>
+                                                        <td width="60px">Antal</td></tr>
+                                                </table>
+                                            <h:dataTable var="items" value="#{userPlus.all}" border="0" rowClasses="even,odd" width="100%">
+                                               
                                                 <h:column>
-                                                    <table width="100%">
+                                                      
+                                                    <table width="100%" class="itemTable">
                                                         <tr>
-                                                            <td width="40px">                                                                    
+                                                            <td>
+                                                                
                                                                 <h:graphicImage id="image" value="#{items.image}" class="listItem" width="30px" height="30px"/>
                                                             </td>
                                                             <td>
 
                                                                 <h:outputText id="title" value="#{items.title}" class="listItem"/>
                                                             </td>
-                                                            <td width="60px">
+                                                            <td>
 
                                                                 <h:outputText id="creators" value="#{items.creatorNames}" class="listItem"/>
                                                             </td>
-                                                            <td width="60px">
+                                                            <td>
                                                                 <h:outputText id="id" value="#{items.id}" class="listItem"/>
                                                             </td>
 
-                                                            <td width="60px">
+                                                            <td>
                                                                 <h:outputText id="quantity" value="#{items.quantity}" class="listItem"/>
                                                             </td>
-                                                            <td width="60px">
+                                                            <td class="listAddRemove">
                                                                 <h:commandLink id="editButton" value="Edit" 
                                                                                action="#{userPlus.action(&quot;content_4&quot;)}"
-                                                                               actionListener="#{userPlus.prepareEdit(items)}"/>
+                                                                               actionListener="#{userPlus.prepareEdit(items)}"/><br/>
                                                                 
-                                                            </td >
-                                                            <td width="60px" align="left">
+                                                                
+                                                            
                                                                 <h:commandLink value="Remove"
                                                                                action="#{userPlus.action(&quot;content_4&quot;)}"
                                                                                actionListener="#{userPlus.removeItem(items.id)}" 
-                                                                               />
-
-                                                                          
+                                                                               /> 
                                                             </td>
 
                                                         </tr>       
