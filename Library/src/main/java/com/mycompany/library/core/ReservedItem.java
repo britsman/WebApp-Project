@@ -76,7 +76,7 @@ public class ReservedItem implements Serializable {
     }
     public void updatePositions(User user) {
         QueryProccessor qp = WebbLib.INSTANCE.getQueryProccessor();
-        
         qp.updatePositions(user, this);
+        user.updateReservation(this);      
     }
 }

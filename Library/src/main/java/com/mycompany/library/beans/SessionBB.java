@@ -4,8 +4,11 @@
  */
 package com.mycompany.library.beans;
 
+import com.mycompany.library.core.Item;
 import com.mycompany.library.core.User;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
@@ -18,25 +21,19 @@ import javax.inject.Named;
  *
  * @author Hannes
  */
-@Named("template")
+@Named("currentSession")
 @SessionScoped
-public class TemplateBB implements Serializable {
+public class SessionBB implements Serializable {
     
-    private UserPageBB privateUserBean;
     private User loggedInUser=null;
     private String logOutString;
+    private List<Item> searchResult = new ArrayList<>();
     
-    public TemplateBB() {
-    }
-    @Inject
-    public TemplateBB(UserPageBB privateUserBean) {
-        this.privateUserBean = privateUserBean;
+    public SessionBB() {
     }
     public void logOut(){
-        loggedInUser = null;
-        privateUserBean.setUser(null);
-        
-        
+        loggedInUser = null; 
+        clearSearch();
     }
     
     public String loggedUser(){        
@@ -75,15 +72,6 @@ public class TemplateBB implements Serializable {
     public void setLoggedInUser(User loggedInUser) {
         this.loggedInUser = loggedInUser;
     }
-
-    public UserPageBB getPrivateUserBean() {
-        return privateUserBean;
-    }
-
-    public void setPrivateUserBean(UserPageBB privateUserBean) {
-        this.privateUserBean = privateUserBean;
-    }
-    
      public void actionListener(ActionEvent e) {
         logOut();
     }
@@ -95,12 +83,13 @@ public class TemplateBB implements Serializable {
     public void setLogOutString(String logOutString) {
         this.logOutString = logOutString;
     }
-
-  
-    
-  
-    
-    
-
-
+    public List<Item> getSearchResult() {
+        return searchResult;
+    }
+    public void setSearchResult(List<Item> searchResult) {
+        this.searchResult = searchResult;
+    }
+    public void clearSearch(){
+        searchResult = new ArrayList<>();
+    }
 }

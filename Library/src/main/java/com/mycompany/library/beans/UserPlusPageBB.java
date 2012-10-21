@@ -220,6 +220,7 @@ public class UserPlusPageBB implements Serializable {
 //        List<BorrowedItem> borrowedItems = getAllBorrowedItems();
 //        BorrowedItem borrowedItem = null;
 //        for (BorrowedItem bi : borrowedItems) {
+//            
 //            if (bi.getId() == checkInOut) {
 //                borrowedItem = bi;
 //            }
@@ -245,6 +246,10 @@ public class UserPlusPageBB implements Serializable {
     public void checkOutItem() {
         // TODO
     }
+    
+
+    
+
     
         public void searchAll() {
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();

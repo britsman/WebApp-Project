@@ -18,19 +18,19 @@
         <section id="wrapper">
             <header id="pageHeader">
                 <h:form>    
-                    <p><h:outputText id="txtInloggad" value="#{template.loggedUser()}" /></p>
+                    <p><h:outputText id="txtInloggad" value="#{currentSession.loggedUser()}" /></p>
                     <h1>Bibliotek</h1>
                     <h:commandLink tabindex="6" id="linkLogOut"
                                    action="library?faces-redirect=true"
-                                   actionListener="#{template.actionListener(e)}" style="color: blue"
-                                   value="">#{template.logOutString}
+                                   actionListener="#{currentSession.actionListener(e)}" style="color: blue"
+                                   value="">#{currentSession.logOutString}
                     </h:commandLink>
                 </h:form>
             </header>
             <nav id="pageNav">
                 <ul>
                     <li><a href="library.xhtml">Startsidan</a></li>
-                    <li><h:link outcome="#{template.myPage()}" value="#{template.myPageLinkName()}" /></li>
+                    <li><h:link outcome="#{currentSession.myPage()}" value="#{currentSession.myPageLinkName()}" /></li>
                     <li><a href="searchPage.xhtml">Hitta böcker</a></li>
                     <li><a href="faqPage.xhtml">Frågor &amp; Svar</a></li>                    
                 </ul>

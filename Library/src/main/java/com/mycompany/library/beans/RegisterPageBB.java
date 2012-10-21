@@ -6,8 +6,6 @@ import java.util.Random;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -22,7 +20,7 @@ public class RegisterPageBB implements Serializable {
     @Inject
     private Conversation convo;
     private UserRegistryBean users;
-    private TemplateBB loggedUser;
+    private SessionBB loggedUser;
     private String username = "";
     private String email = "";
     private String password = "";
@@ -34,7 +32,7 @@ public class RegisterPageBB implements Serializable {
 
     public RegisterPageBB() {}
     @Inject
-    public RegisterPageBB(UserRegistryBean users, UserPageBB privateUserBean, TemplateBB loggedUser) {
+    public RegisterPageBB(UserRegistryBean users, UserPageBB privateUserBean, SessionBB loggedUser) {
         this.users = users;
         this.loggedUser = loggedUser;
     }
@@ -129,12 +127,12 @@ public class RegisterPageBB implements Serializable {
     public void setInputCode(Long inputCode) {
         this.inputCode = inputCode;
     }
-        public String closeConversation() {
+    public String closeConversation() {
         if (!convo.isTransient()) {
             convo.end();
         }
         try {
-            return  redirect; // Go back
+            return redirect; // Go back
         } catch (Exception e) {
             // Not implemented
             //return "error?faces-redirect=true&amp;cause=" + e.getMessage();

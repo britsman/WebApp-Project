@@ -16,8 +16,10 @@
                 </header>
                 <section id="findBookSection">
                     <h:form>
-                        <p><h:inputText id="txtSearch" value="#{search.topSearch}" />
-                            <h:commandButton id="btnOK" value="Sök" action="#{search.searchAll()}"/>                       
+                        <p>
+                            <h:inputText id="txtSearch" value="#{search.topSearch}" />
+                            <h:commandButton id="btnOK" value="Sök" action="#{search.redirectToSelf()}"
+                            actionListener="#{search.searchAll()}"/>                       
                         </p>    
 
                         <br><a id="displayAdvaced" href="javascript:toggle();" style="margin-bottom: 0.5em" >Avancerad sökning</a> </br>
@@ -96,7 +98,8 @@
                                     <br><h:outputLabel value="Finns inne i lager" /></br>
                                     <input id="srcCheckbox" type="checkbox" name="option1" />
 
-                                    <br><h:commandButton style=" margin-top: 1em" value="Sök" action="#{search.searchAdvanced()}"/></br>
+                                    <br><h:commandButton style=" margin-top: 1em" value="Sök" action="#{search.redirectToSelf()}" 
+                                        actionListener="#{search.searchAdvanced()}"/></br>
                                 </h:form>
                             </div>
                         </div>      
@@ -105,20 +108,20 @@
                         <h:head>
                             <link href="./../resources/css/searchPage.css" rel="stylesheet" type="text/css" />
                         </h:head>
-                        <h:dataTable id="resultTable" var="item" value="#{search.result}" rowClasses="even,odd" style="width: 100%">
+                        <h:dataTable id="resultTable" var="item" value="#{currentSession.searchResult}" rowClasses="even,odd" style="width: 100%">
                             <h:column>
                                 <table>
                                     <tr>
                                         <td><h:graphicImage value="#{item.image}" width="60" height="50" /></td>
                                         <td width="500px"><h:commandLink id="listItemTitle" value="#{item.title}" 
-                                            style="color: black" action="bookPage?faces-redirect=true" 
+                                            style="color: black" action="#{search.redirectToBookPage()}" 
                                             actionListener="#{SingleItem.bookListener(item, &quot;searchPage&quot;)}"/>
                                             <p><h:outputText id="creators" value="#{item.creatorNames}"/></p>
                                             <h:outputText id="genre" value="#{item.genre}"/>    
                                          </td>
                                         <td >
-                                            <td><h:commandLink id="resultTableBorrow"  value="Låna" actionListener="#{search.borrowOrReserve(item)}" rendered="#{search.linkVisible()}"/></td>
-                                            <td><h:commandLink id="resultTableBookmark" actionListener="#{search.bookMark(item)}" rendered="#{search.linkVisible()}">
+                                            <td><h:commandLink id="resultTableBorrow" action="#{search.redirectToSelf()}" value="Låna" actionListener="#{search.borrowOrReserve(item)}" rendered="#{search.linkVisible()}"/></td>
+                                            <td><h:commandLink id="resultTableBookmark" action="#{search.redirectToSelf()}" actionListener="#{search.bookMark(item)}" rendered="#{search.linkVisible()}">
                                                     <h:graphicImage value="#{search.bookMarkImg(item)}"/>   
                                                 </h:commandLink></td>
                                             

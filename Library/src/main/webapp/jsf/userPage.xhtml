@@ -14,7 +14,7 @@
                     </header>
                     <h:form>
                     <h:commandLink action="userPlusPage?faces-redirect=true" 
-                    value="Hantera böcker" rendered="#{userPage.user.isLibrarian}" />
+                    value="Hantera böcker" rendered="#{currentSession.loggedInUser.isLibrarian}" />
                     </h:form>
                     <section class="userPageSection">
                         <section class="userPageSubSection">
@@ -22,9 +22,9 @@
                                 <h1>Profil</h1>
                             </header>
                             <section>
-                                <p>Användarnamn: #{userPage.user.username}</p>
-                                <p>Email: #{userPage.user.email}</p>
-                                <p>Skuld: #{userPage.user.feesOwed} kr</p>
+                                <p>Användarnamn: #{currentSession.loggedInUser.username}</p>
+                                <p>Email: #{currentSession.loggedInUser.email}</p>
+                                <p>Skuld: #{currentSession.loggedInUser.feesOwed} kr</p>
                             </section>
                         </section>
                         <section class="userPageSubSection">
@@ -34,7 +34,7 @@
                             </header>
                             <section>
                                 <h:form>
-                                    <h:dataTable var="item" value="#{userPage.borrowedItems}" rendered="#{not empty userPage.borrowedItems}" border="1">
+                                    <h:dataTable var="item" value="#{currentSession.loggedInUser.borrowedItems}" rendered="#{not empty currentSession.loggedInUser.borrowedItems}" border="1">
                                         <h:column>
                                             <f:facet name="header">Title</f:facet>
                                             <h:commandLink value="#{item.item.title}"
@@ -59,7 +59,7 @@
                                                            actionListener="#{userPage.removeBorrowedItem(item)}"/>
                                         </h:column>
                                     </h:dataTable>
-                                    <h:outputLabel rendered="#{empty userPage.borrowedItems}" value="Du har inga lånade böcker." />
+                                    <h:outputLabel rendered="#{empty currentSession.loggedInUser.borrowedItems}" value="Du har inga lånade böcker." />
                                 </h:form>
                             </section>
                         </section>
@@ -70,7 +70,7 @@
                             </header>
                             <section>
                                 <h:form>
-                                    <h:dataTable var="item" value="#{userPage.reservedItems}" rendered="#{not empty userPage.reservedItems}" border="1">
+                                    <h:dataTable var="item" value="#{currentSession.loggedInUser.reservedItems}" rendered="#{not empty currentSession.loggedInUser.reservedItems}" border="1">
                                         <h:column>
                                             <f:facet name="header">Title</f:facet>
                                             <h:commandLink value="#{item.item.title}"
@@ -91,7 +91,7 @@
                                                            actionListener="#{userPage.removeReservedItem(item)}" />
                                         </h:column>
                                     </h:dataTable>
-                                    <h:outputLabel rendered="#{empty userPage.reservedItems}" value="Du har inte reserverat några böcker." />
+                                    <h:outputLabel rendered="#{empty currentSession.loggedInUser.reservedItems}" value="Du har inte reserverat några böcker." />
                                 </h:form>
                             </section>
                         </section>
@@ -102,7 +102,7 @@
                             </header>
                             <section>
                                 <h:form>
-                                    <h:dataTable var="item" value="#{userPage.bookmarkedItems}" rendered="#{not empty userPage.bookmarkedItems}" border="1">
+                                    <h:dataTable var="item" value="#{currentSession.loggedInUser.bookmarkedItems}" rendered="#{not empty currentSession.loggedInUser.bookmarkedItems}" border="1">
                                         <h:column>
                                             <f:facet name="header">Title</f:facet>
                                             <h:commandLink value="#{item.title}"
@@ -131,7 +131,7 @@
                                                            actionListener="#{userPage.removeBookmakedItem(item)}" />
                                         </h:column>
                                     </h:dataTable>
-                                    <h:outputLabel rendered="#{empty userPage.bookmarkedItems}" value="Du har inte lagt till några böcker till din favoritlista." />
+                                    <h:outputLabel rendered="#{empty currentSession.loggedInUser.bookmarkedItems}" value="Du har inte lagt till några böcker till din favoritlista." />
                                 </h:form>
                             </section>
                         </section>

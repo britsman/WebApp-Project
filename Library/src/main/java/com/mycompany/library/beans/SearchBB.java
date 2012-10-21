@@ -6,13 +6,12 @@ package com.mycompany.library.beans;
 
 import com.mycompany.library.core.Item;
 import com.mycompany.library.core.QueryProccessor;
-import com.mycompany.library.core.User;
 import com.mycompany.library.core.WebbLib;
-import com.mycompany.library.core.Book;
 import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
+import javax.annotation.PreDestroy;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -21,17 +20,19 @@ import javax.inject.Named;
  * @author Hannes
  */
 @Named("search")
-@SessionScoped
+@ConversationScoped
 public class SearchBB implements Serializable {
-
-    private TemplateBB template;
+    
+    @Inject
+    private Conversation convo;
+   
+    private SessionBB session;
     private String id, title, creator, publisher, description, language, genre,type;
     private String topSearch;
     private int fromYear, toYear;
     private boolean inStock;
     private List<Item> result;
-    private User user;
-    private Book book;
+    
         
     @Inject
     private UserRegistryBean users;
@@ -39,72 +40,59 @@ public class SearchBB implements Serializable {
     public SearchBB() {
     }
     @Inject
-    public SearchBB(TemplateBB template) {
-        this.template = template;
-        
+    public SearchBB(UserRegistryBean users, SessionBB session) {
+        this.users = users;
+        this.session = session;
     }
 
     public void searchAll() {
+        checkConversation();
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
         if (!topSearch.equals("")) {
-            result = query.searchAll(topSearch);
+            session.setSearchResult(query.searchAll(topSearch));
         }
     }
 
     public void searchAdvanced() {
+        checkConversation();
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
         genre=null;
         language=null;
         type=null;
-        result = query.searchItem(id, title, creator, publisher, description, fromYear, toYear, inStock, language, genre);
+        session.setSearchResult(query.searchItem(id, title, creator, publisher, description, fromYear, toYear, inStock, language, genre));
 
     }
     
      public void borrowOrReserve(Item item){
-         this.book = (Book) item;
-        if(book.getQuantity() > 0){
-            user.tryBorrowItem(book);
+        checkConversation();
+        if(item.getQuantity() > 0){
+            session.getLoggedInUser().tryBorrowItem(item);
         }
         else{
-            user.tryReserveItem(book);
+            session.getLoggedInUser().tryReserveItem(item);
         }
-        user = users.update(user);
+        session.setLoggedInUser(users.update(session.getLoggedInUser()));
     }
     
      public void bookMark(Item item){
-         this.book = (Book) item;
-        if(!user.getBookmarkedItems().contains(book)){
-            user.setBookmarkedItems(book);
-        }
-        
-        user = users.update(user);
+        if(!session.getLoggedInUser().getBookmarkedItems().contains(item)){
+            session.getLoggedInUser().setBookmarkedItems(item);
+        }        
+        session.setLoggedInUser(users.update(session.getLoggedInUser()));
     }
     
     
 
     public boolean linkVisible(){  
-        this.user = this.template.getLoggedInUser();
-        return user != null;
+        return session.getLoggedInUser() != null;
     }
     
     public String bookMarkImg(Item item){
-        this.book = (Book) item;
-        if(user.getBookmarkedItems().contains(book)){
+        if(session.getLoggedInUser().getBookmarkedItems().contains(item)){
             return "/resources/img/star_full.png";
         }
         return "/resources/img/star_none.png";
     }
-    
-     
-    
-    public List<Item> getResult() {
-        return result;
-    }
-
-    public void setResult(List<Item> result) {
-        this.result = result;
-    }
-
     public String getTopSearch() {
         return topSearch;
     }
@@ -224,5 +212,35 @@ public class SearchBB implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
-    
+    public void checkConversation(){
+        if (convo.isTransient()) {
+            convo.begin();
+        }
+    }
+    public String redirectToSelf() {
+        try {
+            return "searchPage?faces-redirect=true"; // Go back
+        } catch (Exception e) {
+            // Not implemented
+            //return "error?faces-redirect=true&amp;cause=" + e.getMessage();
+            return null;
+        }
+    }
+    public String redirectToBookPage() {
+        try {
+            return "bookPage?faces-redirect=true"; // Go back
+        } catch (Exception e) {
+            // Not implemented
+            //return "error?faces-redirect=true&amp;cause=" + e.getMessage();
+            return null;
+        }
+    }
+    @PreDestroy  // MUST HAVE back button etc.
+    public void destroy() {
+        if (convo != null) {
+            if (!convo.isTransient()) {
+                convo.end();
+            }
+        }
+    }
 }

@@ -1,9 +1,12 @@
 package com.mycompany.library.beans;
 
+import com.mycompany.library.core.Item;
 import com.mycompany.library.core.User;
 import com.mycompany.library.core.UserRegistry;
 import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -20,8 +23,7 @@ import javax.inject.Inject;
 @RequestScoped
 public class LoginPageBB implements Serializable {
 
-    private UserPageBB privateUserBean;
-    private TemplateBB loggedUser;
+    private SessionBB loggedUser;
     private UserRegistryBean users;
     private String userName;
     private String password;
@@ -32,8 +34,7 @@ public class LoginPageBB implements Serializable {
     public LoginPageBB() {}
     
     @Inject
-    public LoginPageBB(UserPageBB privateUserBean, TemplateBB loggedUser, UserRegistryBean users) {
-        this.privateUserBean = privateUserBean;
+    public LoginPageBB(SessionBB loggedUser, UserRegistryBean users) {
         this.loggedUser = loggedUser;
         this.users = users;
     }
@@ -52,7 +53,6 @@ public class LoginPageBB implements Serializable {
     }
     public boolean validatePassword(User u){
         if(u.getPassword().equalsIgnoreCase(password)){
-            //privateUserBean.setUser(u);
             loggedUser.setLoggedInUser(u);
             accessGranted = true;
             return true;
@@ -71,6 +71,7 @@ public class LoginPageBB implements Serializable {
     public String access() {
         System.out.println(isLibrarian);
         if (accessGranted == true) {
+             loggedUser.clearSearch();
              return"userPage?faces-redirect=true";
         }
         else {

@@ -80,7 +80,7 @@ public class User implements Serializable{
         ReservedItem reserve = q.findReservedItem(item);
         if (reserve == null) {
             reserve = new ReservedItem(item, this);
-        } else if (!this.getReservedItems().contains(reserve)) {
+        } else if (!this.hasReserved(reserve.getId())) {
             reserve.setQue(this);
             this.setReservedItems(reserve);
         }
