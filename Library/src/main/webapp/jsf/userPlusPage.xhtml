@@ -236,7 +236,8 @@
                                         <h:form>
                                             <br><h:outputLabel for="editSearch" value="Sök efter bok "/>
                                                 <h:inputText id="editSearch"/> 
-                                                <h:commandButton id="editSearchButton"  value="Sök"/>
+                                                <h:commandButton id="editSearchButton"  value="Sök"
+                                                action="#{userPlus.action}"/>
                                             </br>
                                             <h:dataTable var="items" value="#{userPlus.all}" border="0" rowClasses="even,odd">
                                                 <h:column>

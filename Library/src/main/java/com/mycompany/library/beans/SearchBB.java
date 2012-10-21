@@ -6,12 +6,12 @@ package com.mycompany.library.beans;
 
 import com.mycompany.library.core.Item;
 import com.mycompany.library.core.QueryProccessor;
-import com.mycompany.library.core.User;
 import com.mycompany.library.core.WebbLib;
-import com.mycompany.library.core.Book;
 import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
+import javax.annotation.PreDestroy;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,9 +20,11 @@ import javax.inject.Named;
  * @author Hannes
  */
 @Named("search")
-@SessionScoped
+@ConversationScoped
 public class SearchBB implements Serializable {
-
+    
+    @Inject
+    private Conversation convo;
     private UserRegistryBean users;
     private TemplateBB template;
     private String id, title, creator, publisher, description, language, genre,type;
@@ -30,8 +32,6 @@ public class SearchBB implements Serializable {
     private int fromYear, toYear;
     private boolean inStock;
     private List<Item> result;
-    private User user;
-    private Book book;
 
     public SearchBB() {
     }
@@ -39,10 +39,10 @@ public class SearchBB implements Serializable {
     public SearchBB(UserRegistryBean users, TemplateBB template) {
         this.users = users;
         this.template = template;
-        this.user = template.getLoggedInUser();
     }
 
     public void searchAll() {
+        checkConversation();
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
         if (!topSearch.equals("")) {
             result = query.searchAll(topSearch);
@@ -50,6 +50,7 @@ public class SearchBB implements Serializable {
     }
 
     public void searchAdvanced() {
+        checkConversation();
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
         genre=null;
         language=null;
@@ -59,36 +60,31 @@ public class SearchBB implements Serializable {
     }
     
      public void borrowOrReserve(Item item){
-        book = (Book) item;
-        if(book.getQuantity() > 0){
-            user.tryBorrowItem(book);
+        checkConversation();
+        if(item.getQuantity() > 0){
+            template.getLoggedInUser().tryBorrowItem(item);
         }
         else{
-            user.tryReserveItem(book);
+            template.getLoggedInUser().tryReserveItem(item);
         }
-        user = users.update(user);
-        user = template.getLoggedInUser();
+        template.setLoggedInUser(users.update(template.getLoggedInUser()));
     }
     
      public void bookMark(Item item){
-         this.book = (Book) item;
-        if(!user.getBookmarkedItems().contains(book)){
-            user.setBookmarkedItems(book);
+        if(!template.getLoggedInUser().getBookmarkedItems().contains(item)){
+            template.getLoggedInUser().setBookmarkedItems(item);
         }        
-        user = users.update(user);
-        user = template.getLoggedInUser();
+        template.setLoggedInUser(users.update(template.getLoggedInUser()));
     }
     
     
 
     public boolean linkVisible(){  
-        user = template.getLoggedInUser();
-        return user != null;
+        return template.getLoggedInUser() != null;
     }
     
     public String bookMarkImg(Item item){
-        book = (Book) item;
-        if(user.getBookmarkedItems().contains(book)){
+        if(template.getLoggedInUser().getBookmarkedItems().contains(item)){
             return "/resources/img/star_full.png";
         }
         return "/resources/img/star_none.png";
@@ -222,5 +218,36 @@ public class SearchBB implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+    public void checkConversation(){
+        if (convo.isTransient()) {
+            convo.begin();
+        }
+    }
+    public String redirectToSelf() {
+        try {
+            return "searchPage?faces-redirect=true"; // Go back
+        } catch (Exception e) {
+            // Not implemented
+            //return "error?faces-redirect=true&amp;cause=" + e.getMessage();
+            return null;
+        }
+    }
+    public String redirectToBookPage() {
+        try {
+            return "bookPage?faces-redirect=true"; // Go back
+        } catch (Exception e) {
+            // Not implemented
+            //return "error?faces-redirect=true&amp;cause=" + e.getMessage();
+            return null;
+        }
+    }
+    @PreDestroy  // MUST HAVE back button etc.
+    public void destroy() {
+        if (convo != null) {
+            if (!convo.isTransient()) {
+                convo.end();
+            }
+        }
     }
 }

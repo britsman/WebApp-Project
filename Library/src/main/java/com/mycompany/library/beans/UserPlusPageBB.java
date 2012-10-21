@@ -11,7 +11,7 @@ import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,7 +20,7 @@ import javax.inject.Named;
  * @author Fredrik
  */
 @Named("userPlus")
-@RequestScoped
+@SessionScoped
 public class UserPlusPageBB implements Serializable {
 
     // Collections
