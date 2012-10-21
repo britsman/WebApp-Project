@@ -2,13 +2,13 @@ package com.mycompany.library.beans;
 
 import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.Item;
+import com.mycompany.library.core.QueryProccessor;
 import com.mycompany.library.core.ReservedItem;
-import com.mycompany.library.core.User;
+import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -54,9 +54,13 @@ public class UserPageBB implements Serializable {
     }
     
     public void removeReservedItem(ReservedItem reservedItem) {
+        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
         reservedItem.updatePositions(template.getLoggedInUser());
-        template.getLoggedInUser().updateReservation(reservedItem);
         template.setLoggedInUser(users.update(template.getLoggedInUser()));
+        if(reservedItem.getQue().size() == 1){
+            reservedItem = q.findReservedItem(reservedItem.getItem());
+            q.removeReservedItem(reservedItem.getId());
+        }
     }
     public void borrowItem(Item item) {
         template.getLoggedInUser().tryBorrowItem(item);
