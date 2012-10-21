@@ -89,11 +89,13 @@ public class ItemPageBB implements Serializable{
             user.tryReserveItem(book);
         }
         user = users.update(user);
+        template.setLoggedInUser(user);
     }
     public void bookMark(){
         if(!user.getBookmarkedItems().contains(book)){
             user.setBookmarkedItems(book);
             user = users.update(user);
+            template.setLoggedInUser(user);
         }
     }
     

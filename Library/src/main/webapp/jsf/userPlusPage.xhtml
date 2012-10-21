@@ -70,14 +70,14 @@
                             </ul>
                             <div id="tab_content">
                                 <div id="content_1" class="content">
-                                    
+
                                     <header>
                                         <br><h1>Här Checkar du in/ut böcker.</h1></br>
                                     </header>
-                                    
+
                                     <br>
                                         <h:outputLabel for="checkInOut" value="ISBN " />
-                                        <h:inputText id="checkInOut"  />                                   
+                                        <h:inputText id="checkInOut"  />
                                     </br>
                                     <h:commandButton value="Checka in"/>
                                     <h:commandButton value="Checka Ut"/>
@@ -86,10 +86,38 @@
                                             <h:outputText value="#{item.user.username}"/>
                                         </h:column>
                                     </h:dataTable>
-                                
-                                
+                                    
+                                    <h:dataTable var="borrowedItem" value="#{userPlus.allBorrowedItems}">
+                                        <h:column>
+                                            <f:facet name="header">Lån id</f:facet>
+                                            <h:outputText value="#{borrowedItem.id}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Lånad av</f:facet>
+                                            <h:outputText value="#{borrowedItem.user.username}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">ISBN</f:facet>
+                                            <h:outputText value="#{borrowedItem.item.id}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Title</f:facet>
+                                            <h:outputText value="#{borrowedItem.item.title}" />
+                                        </h:column>
+                                    </h:dataTable>
+                                    <h:form>
+                                        <h:outputLabel for="checkInOut" value="Lån id " />
+                                        <h:inputText id="checkInOut" value="#{userPlus.checkInOut}" />
+                                        <h:commandButton value="Checka in"
+                                                         action="#{userPlus.action}"
+                                                         actionListener="#{userPlus.checkInItem}" />
+                                        <h:commandButton value="Checka ut"
+                                                         action="#{userPlus.action}"
+                                                         actionListener="#{userPlus.checkOutItem}" />
+                                    </h:form>
+
                                 </div>
-                                
+
                                 <div id="content_2" class="content">
                                     <ul>
                                         <header>
@@ -155,14 +183,18 @@
                                                 <h:inputText id="year_release" value="#{userPlus.year_release}">
                                                     <f:validator validatorId="YearReleaseValidator" />
                                                 </h:inputText>
+
                                                 <h:message for="year_release" showSummary="true" showDetail="false" class="message"/><br />
                                                 
+
                                                 <h:outputLabel for="pageNum" value="Antal sidor" /> <br />
                                                 <h:inputText id="pageNum" value="#{userPlus.pageNum}">
                                                     <f:validator validatorId="PageNumValidator" />
                                                 </h:inputText>
+
                                                 <h:message for="pageNum" showSummary="true" showDetail="false" class="message"/><br />
                                            
+
                                                 <h:outputLabel for="genre" value="Genre" /><br />
                                                 <h:inputText id="genre" value="#{userPlus.genre}">
                                                     <f:validator validatorId="GenreValidator" />
@@ -197,27 +229,27 @@
                                             <br><h1>Här ser du lånade böcker.</h1></br>
                                         </header>
                                         <h:form>
-                                            
+
                                             <br><h:outputLabel for="sortTable" value="Sortera på "/></br>
                                             <h:selectOneMenu id="sortTable"  style="margin-bottom: 0.5em; width: 150px"  >
                                                 <f:selectItem itemLabel="Titel" itemValue="Titel"/>
                                                 <f:selectItem itemLabel="Författare" itemValue="Author"/>
                                                 <f:selectItem itemLabel="ISBN" itemValue="ISBN"/>                                                
                                             </h:selectOneMenu>
-                                            
+
                                             <br><h:dataTable var="borrowedBook" value="#{userPlus.allBorrowedItems}">
-                                                <h:column>
-                                                    
-                                                    <table>
-                                                        <tr>
-                                                            <td><h:outputText id="borrowedBooklistTitle" value="#{borrowedBook.item.title}" /></td>
-                                                            <td><h:outputText id="borrowedBooklistUser" value="#{borrowedBook.user.username}" /></td>
-                                                            <td><h:outputText id="borrowedBooklistDate" value="#{borrowedBook.loanDate}" /></td>
-                                                            <td><h:outputText id="borrowedBooklistId" value="#{borrowedBook.id}" /></td>
-                                                        </tr>   
-                                                    </table>
-                                                </h:column>
-                                            </h:dataTable>
+                                                    <h:column>
+
+                                                        <table>
+                                                            <tr>
+                                                                <td><h:outputText id="borrowedBooklistTitle" value="#{borrowedBook.item.title}" /></td>
+                                                                <td><h:outputText id="borrowedBooklistUser" value="#{borrowedBook.user.username}" /></td>
+                                                                <td><h:outputText id="borrowedBooklistDate" value="#{borrowedBook.loanDate}" /></td>
+                                                                <td><h:outputText id="borrowedBooklistId" value="#{borrowedBook.id}" /></td>
+                                                            </tr>   
+                                                        </table>
+                                                    </h:column>
+                                                </h:dataTable>
                                             </br>
                                         </h:form>
                                     </ul>
@@ -314,9 +346,15 @@
                                         
 
                                         <h:form>
+<<<<<<< HEAD
                                             <br><h:outputLabel for="editSerch" value="Sök efter bok "/>
                                                 <h:inputText id="editSerch"  /> 
                                                 <h:commandButton id="editSerchButton" value="Sök" />
+=======
+                                            <br><h:outputLabel for="editSearch" value="Sök efter bok "/>
+                                                <h:inputText id="editSearch"/> 
+                                                <h:commandButton id="editSearchButton" value="Sök"/>
+>>>>>>> branch 'master' of https://github.com/britsman/WebApp-Project.git
                                             </br>
                                             
                                             sortera på namn  år isbn författare
@@ -363,19 +401,78 @@
                                                             </td >
                                                             <td width="60px" align="left">
                                                                 <h:commandLink value="Remove"
+<<<<<<< HEAD
                                                                                action="#{userPlus.action(&quot;content_4&quot;)}"
                                                                                actionListener="#{userPlus.removeItem(items.id)}" 
                                                                                />
+=======
+                                                                               actionListener="#{userPlus.removeItem(items.id)}" class="listItem"/>
+>>>>>>> branch 'master' of https://github.com/britsman/WebApp-Project.git
                                                             </td>
-                                                            
+
                                                         </tr>       
                                                     </table>
                                                     <h:form>
+<<<<<<< HEAD
                                                         
+=======
+                                                        <div id="editForm" style="display: none;background-color: lightgoldenrodyellow">
+                                                            <section>
+                                                                <h:form>
+                                                                    <h:outputLabel for="editId" value="ID" /><br />
+                                                                    <h:inputText id="editId" disabled="true" value="#{userPlus.editId}"/><br />
+                                                                    <h:outputLabel for="editTitle" value="Title" /><br />
+                                                                    <h:inputText id="editTitle" value="#{userPlus.editTitle}"/><br />
+                                                                    <h:outputLabel for="editCreators" value="Creators" /><br />
+                                                                    <h:inputText id="editCreators" value="#{userPlus.editCreators}"/><br />
+                                                                    <h:outputLabel for="editImage" value="Image" /><br />
+                                                                    <h:inputText id="editImage" value="#{userPlus.editImage}"/><br />
+                                                                    <h:outputLabel for="editDescription" value="Description" /><br />
+                                                                    <h:inputText id="editDescription" value="#{userPlus.editDescription}"/><br />
+                                                                    <h:outputLabel for="editLoan_period" value="Loan period" /><br />
+                                                                    <h:inputText id="editLoan_period" value="#{userPlus.editLoan_period}"/><br />
+                                                                    <h:outputLabel for="editFee" value="Fee" /><br />
+                                                                    <h:inputText id="editFee" value="#{userPlus.editFee}"/><br />
+                                                                    <h:outputLabel for="editYear_release" value="Year released" /><br />
+                                                                    <h:inputText id="editYear_release" value="#{userPlus.editYear_release}"/><br />
+                                                                    <h:outputLabel for="editGenre" value="Genre" /><br />
+                                                                    <h:inputText id="editGenre" value="#{userPlus.editGenre}"/><br />
+                                                                    <h:outputLabel for="editLanguage" value="Language" /><br />
+                                                                    <h:inputText id="editLanguage" value="#{userPlus.editLanguage}"/><br />
+                                                                    <h:outputLabel for="editQuantity" value="Quantity" /><br />
+                                                                    <h:inputText id="editQuantity" value="#{userPlus.editQuantity}"/><br />
+                                                                    <h:commandButton id="btnEdit" value="Ändra"
+                                                                    actionListener="#{userPlus.updateItem(userPlus.editId)}" /><br />
+                                                                    <h:messages showSummary="true" showDetail="false" />
+                                                                </h:form>
+                                                            </section>
+                                                        </div>
+>>>>>>> branch 'master' of https://github.com/britsman/WebApp-Project.git
                                                     </h:form>
                                                 </h:column>
                                             </h:dataTable>
                                         </h:form>
+<<<<<<< HEAD
+
+=======
+
+                                        <script language="javascript"> 
+                                            function toggle() {
+                                                var settings = document.getElementById("editForm");
+                                                                
+                                                if(settings.style.display == "block") {
+                                                    settings.style.display = "none";
+                                                                    
+                                                }
+                                                else {
+                                                    settings.style.display = "block";
+                                                                    
+                                                }
+                                            } 
+                                        </script>
+
+
+>>>>>>> branch 'master' of https://github.com/britsman/WebApp-Project.git
                                     </ul>
                                 </div>
                             </div>

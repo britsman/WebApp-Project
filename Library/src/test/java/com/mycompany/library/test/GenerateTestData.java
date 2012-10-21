@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.library.test;
 
 import com.mycompany.library.core.Book;
@@ -138,6 +134,7 @@ public class GenerateTestData {
         
     }
     
+    @Test
     public void generateUserData() {
         // Making some users.
         UserRegistry ur = WebbLib.INSTANCE.getUsers();
@@ -163,10 +160,11 @@ public class GenerateTestData {
         Creator creator3 = new Creator("creator3");
         
         List<Creator> creators1 = new ArrayList<Creator>();
-        creators1.add(creator1);
         List<Creator> creators2 = new ArrayList<Creator>();
-        creators1.add(creator2);
         List<Creator> creators3 = new ArrayList<Creator>();
+        
+        creators1.add(creator1);
+        creators1.add(creator2);
         creators1.add(creator3);
         
         cc.add(creator1);

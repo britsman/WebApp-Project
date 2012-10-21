@@ -5,12 +5,14 @@ import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.Creator;
 import com.mycompany.library.core.Item;
 import com.mycompany.library.core.QueryProccessor;
+import com.mycompany.library.core.User;
+import com.mycompany.library.core.UserRegistry;
 import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -19,11 +21,14 @@ import javax.inject.Named;
  * @author Fredrik
  */
 @Named("userPlus")
-@SessionScoped
+@RequestScoped
 public class UserPlusPageBB implements Serializable {
-    
+
+    // Collections
     private CreatorBean creatorCollection;
     private ItemBean itemCollection;
+    
+    // Field for adding new items.
     private String id;
     private String title;
     private String creators;
@@ -37,6 +42,8 @@ public class UserPlusPageBB implements Serializable {
     private String genre;
     private String language;
     private int quantity;   
+    
+    // Fields for editing existing items.
     private String editId;
     private String editTitle;
     private String editCreators;
@@ -50,6 +57,7 @@ public class UserPlusPageBB implements Serializable {
     private String editGenre;
     private String editLanguage;
     private int editQuantity;
+    
     private List<BorrowedItem> isbnSearchResult;
     private String topSearch;
     private List<Item> result= null;
@@ -63,14 +71,19 @@ public class UserPlusPageBB implements Serializable {
     
     // Default constructor.
     public UserPlusPageBB() {}
+    
     @Inject
     public UserPlusPageBB(CreatorBean creatorCollection, ItemBean itemCollection) {
         this.creatorCollection = creatorCollection;
         this.itemCollection = itemCollection;
+
         show_content ="content_1";
         stdSort="title";
         
+
     }
+    
+   
     
     public List<Item> getAll() {
         List<Item> list = itemCollection.getAll();
@@ -176,14 +189,14 @@ public class UserPlusPageBB implements Serializable {
         show_content = tab;
         return "userPlusPage?faces-redirect=true";
     }
+    
     public List<BorrowedItem> getAllBorrowedItems(){
         QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
         return q.getAllBorrowedItems();
     }
     
-        
     public List<BorrowedItem> getAllBorrowedItemByISBN(String isbn){
-        List<BorrowedItem> tmp = null;        
+        List<BorrowedItem> tmp = new ArrayList<BorrowedItem>();
         QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
         for(BorrowedItem b: query.getAllBorrowedItems()){
             
@@ -200,6 +213,36 @@ public class UserPlusPageBB implements Serializable {
         for(int i = 0; i < temp.size(); i++){
             temp.get(i).checkCollectDatePassed();
         }
+    }
+    
+    public void checkInItem() {
+        List<BorrowedItem> borrowedItems = getAllBorrowedItems();
+        BorrowedItem borrowedItem = null;
+        for (BorrowedItem bi : borrowedItems) {
+            if (bi.getId() == checkInOut) {
+                borrowedItem = bi;
+            }
+        }
+        
+        if (borrowedItem == null) {
+            // Fixa
+            return;
+        }
+        
+        User user = borrowedItem.getUser();
+        List<BorrowedItem> userBorrowedItems = user.getBorrowedItems();
+        
+        if (userBorrowedItems.contains(borrowedItem)) {
+            borrowedItem.removeFromTable();
+            user.removeBorrowedItem(borrowedItem);
+        }
+        
+        UserRegistry ur = WebbLib.INSTANCE.getUsers();
+        ur.update(user);
+    }
+    
+    public void checkOutItem() {
+        // TODO
     }
     
         public void searchAll() {
@@ -430,6 +473,7 @@ public class UserPlusPageBB implements Serializable {
         this.isbnSearchResult = isbnSearchResult;
     }
 
+<<<<<<< HEAD
     public String getTopSearch() {
         return topSearch;
     }
@@ -464,4 +508,13 @@ public class UserPlusPageBB implements Serializable {
   
     
     
+=======
+    public Long getCheckInOut() {
+        return checkInOut;
+    }
+
+    public void setCheckInOut(Long checkInOut) {
+        this.checkInOut = checkInOut;
+    }
+>>>>>>> branch 'master' of https://github.com/britsman/WebApp-Project.git
 }

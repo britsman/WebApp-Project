@@ -12,7 +12,10 @@
                     <header id="userPageHeader">
                         <h1>Min sida</h1>
                     </header>
-                    <h:link outcome="userPlusPage" value="Hantera böcker" rendered="#{userPage.user.isLibrarian}" />
+                    <h:form>
+                    <h:commandLink action="userPlusPage?faces-redirect=true" 
+                    value="Hantera böcker" rendered="#{userPage.user.isLibrarian}" />
+                    </h:form>
                     <section class="userPageSection">
                         <section class="userPageSubSection">
                             <header class="sectionHeader">
