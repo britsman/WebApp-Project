@@ -236,7 +236,7 @@
                                         <h:form>
                                             <br><h:outputLabel for="editSearch" value="Sök efter bok "/>
                                                 <h:inputText id="editSearch"/> 
-                                                <h:commandButton id="editSearchButton" value="Sök"/>
+                                                <h:commandButton id="editSearchButton"  value="Sök"/>
                                             </br>
                                             <h:dataTable var="items" value="#{userPlus.all}" border="0" rowClasses="even,odd">
                                                 <h:column>
@@ -264,7 +264,7 @@
                                                                 <a href="javascript:toggle();"><p>Edit</p></a>
                                                             </td >
                                                             <td width="60px" align="left">
-                                                                <h:commandLink value="Remove"
+                                                                <h:commandLink value="Remove" action="#{userPlus.action}"
                                                                                actionListener="#{userPlus.removeItem(items.id)}" class="listItem"/>
                                                             </td>
 
@@ -297,7 +297,8 @@
                                                                     <h:outputLabel for="editQuantity" value="Quantity" /><br />
                                                                     <h:inputText id="editQuantity" value="#{userPlus.editQuantity}"/><br />
                                                                     <h:commandButton id="btnEdit" value="Ändra"
-                                                                    actionListener="#{userPlus.updateItem(userPlus.editId)}" /><br />
+                                                                    action="#{userPlus.action}"
+                                                                    actionListener="#{userPlus.updateItem(items.id)}" /><br />
                                                                     <h:messages showSummary="true" showDetail="false" />
                                                                 </h:form>
                                                             </section>

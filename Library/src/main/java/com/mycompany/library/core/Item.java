@@ -17,6 +17,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Superclass for books, CD:S etc. Due to @MappedSuperclass, all attributes
@@ -48,6 +49,9 @@ public class Item implements Serializable{
     private String genre;
     private String language;
     private int quantity;
+    @Transient
+    private String creatorNames;
+            
     public Item() {
     }
 
@@ -159,16 +163,19 @@ public class Item implements Serializable{
             this.creators.get(i).setItems(this);
         }
     }
+    public void setCreatorNames(String names){
+        this.creatorNames = names;
+    }
     public String getCreatorNames(){
-        String result ="";
+        creatorNames ="";
         QueryProccessor qp = WebbLib.INSTANCE.getQueryProccessor();
-        List<String> creatorNames = qp.getCreatorNames(this);
-        for (String s : creatorNames) {
-            result += s + ", ";
+        List<String> temp = qp.getCreatorNames(this);
+        for (String s : temp) {
+            creatorNames += s + ", ";
         }
-        if (!result.isEmpty()) {
-            result = result.substring(0, result.length() - 2);
+        if (!creatorNames.isEmpty()) {
+            creatorNames= creatorNames.substring(0, creatorNames.length() - 2);
         }
-        return result;
+        return creatorNames;
     }
 }

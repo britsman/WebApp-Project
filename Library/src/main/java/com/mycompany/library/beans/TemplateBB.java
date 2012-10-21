@@ -22,21 +22,13 @@ import javax.inject.Named;
 @SessionScoped
 public class TemplateBB implements Serializable {
     
-    private UserPageBB privateUserBean;
     private User loggedInUser=null;
     private String logOutString;
     
     public TemplateBB() {
     }
-    @Inject
-    public TemplateBB(UserPageBB privateUserBean) {
-        this.privateUserBean = privateUserBean;
-    }
     public void logOut(){
-        loggedInUser = null;
-        privateUserBean.setUser(null);
-        
-        
+        loggedInUser = null;    
     }
     
     public String loggedUser(){        
@@ -75,15 +67,6 @@ public class TemplateBB implements Serializable {
     public void setLoggedInUser(User loggedInUser) {
         this.loggedInUser = loggedInUser;
     }
-
-    public UserPageBB getPrivateUserBean() {
-        return privateUserBean;
-    }
-
-    public void setPrivateUserBean(UserPageBB privateUserBean) {
-        this.privateUserBean = privateUserBean;
-    }
-    
      public void actionListener(ActionEvent e) {
         logOut();
     }

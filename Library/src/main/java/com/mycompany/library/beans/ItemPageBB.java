@@ -24,7 +24,6 @@ public class ItemPageBB implements Serializable{
     private TemplateBB template;
     private Book book;
     private String redirectPage;
-    private User user;
     
     public ItemPageBB(){}
 
@@ -32,26 +31,15 @@ public class ItemPageBB implements Serializable{
     public ItemPageBB(UserRegistryBean users, TemplateBB template) {
         this.users = users;
         this.template = template;
-        this.user = this.template.getLoggedInUser();
     }
     public Book getBook(){
         return book;
     } 
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-    
     public void bookListener(Item item, String redirectPage) {
         if (convo.isTransient()) {
             convo.begin();
         }
         this.book = (Book) item;
-        this.user = this.template.getLoggedInUser();
         this.redirectPage = redirectPage;
     }
     
@@ -78,24 +66,22 @@ public class ItemPageBB implements Serializable{
     }
     
     public boolean buttonVisible(){
-        return user != null;
+        return template.getLoggedInUser() != null;
     }
     
     public void borrowOrReserve(){
         if(book.getQuantity() > 0){
-            user.tryBorrowItem(book);
+            template.getLoggedInUser().tryBorrowItem(book);
         }
         else{
-            user.tryReserveItem(book);
+            template.getLoggedInUser().tryReserveItem(book);
         }
-        user = users.update(user);
-        template.setLoggedInUser(user);
+        template.setLoggedInUser(users.update(template.getLoggedInUser()));
     }
     public void bookMark(){
-        if(!user.getBookmarkedItems().contains(book)){
-            user.setBookmarkedItems(book);
-            user = users.update(user);
-            template.setLoggedInUser(user);
+        if(!template.getLoggedInUser().getBookmarkedItems().contains(book)){
+            template.getLoggedInUser().setBookmarkedItems(book);
+            template.setLoggedInUser(users.update(template.getLoggedInUser()));
         }
     }
     

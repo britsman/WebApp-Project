@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -19,13 +19,11 @@ import javax.inject.Named;
  * @author estelius
  */
 @Named("userPage")
-@SessionScoped
+@RequestScoped
 public class UserPageBB implements Serializable {
     
     private UserRegistryBean users;
     private TemplateBB template;
-    private User user;
-
     // Default constructor.
     public UserPageBB() {
     }
@@ -34,78 +32,40 @@ public class UserPageBB implements Serializable {
     public UserPageBB(UserRegistryBean users, TemplateBB template) {
         this.users = users;
         this.template = template;
-        this.user = template.getLoggedInUser();
     }
-    
-    public String getUserName() {
-        return user.getUsername();
-    }
-    
-    public User getUser() {
-        return user;
-    }
-    
-    public void setUser(User user) {
-        this.user = user;
-    }
-    
     public int getQueuePosition(ReservedItem reservedItem) {        
-        return reservedItem.getQuePosition(user);
+        return reservedItem.getQuePosition(template.getLoggedInUser());
     }
-
-    /* Managing bookmarked items */
-    public List<Item> getBookmarkedItems() {
-        return user.getBookmarkedItems();
-    }
-    
     public void bookmarkItem(Item item) {
-        if (!user.getBookmarkedItems().contains(item)) {
-            user.setBookmarkedItems(item);
-            user = users.update(user);
-            template.setLoggedInUser(user);
+        if (!template.getLoggedInUser().getBookmarkedItems().contains(item)) {
+            template.getLoggedInUser().setBookmarkedItems(item);
+            template.setLoggedInUser(users.update(template.getLoggedInUser()));
         }
     }
     
     public void removeBookmakedItem(Item item) {
-        user.removeBookmarkedItem(item);
-        users.update(user);
-        template.setLoggedInUser(user);
-    }
-
-    /* Managing reserved items */
-    public List<ReservedItem> getReservedItems() {
-        return user.getReservedItems();
+        template.getLoggedInUser().removeBookmarkedItem(item);
+        template.setLoggedInUser(users.update(template.getLoggedInUser()));
     }
     
     public void reserveItem(Item item) {
-        user.tryReserveItem(item);
-        user = users.update(user);
-        template.setLoggedInUser(user);
-        template.setLoggedInUser(user);
+        template.getLoggedInUser().tryReserveItem(item);
+        template.setLoggedInUser(users.update(template.getLoggedInUser()));
     }
     
     public void removeReservedItem(ReservedItem reservedItem) {
-        reservedItem.updatePositions(user);
-        user.updateReservation(reservedItem);
-        user = users.update(user);
-        template.setLoggedInUser(user);
+        reservedItem.updatePositions(template.getLoggedInUser());
+        template.getLoggedInUser().updateReservation(reservedItem);
+        template.setLoggedInUser(users.update(template.getLoggedInUser()));
     }
-
-    /* Managing borrowed items */
-    public List<BorrowedItem> getBorrowedItems() {
-        return user.getBorrowedItems();
-    }
-    
     public void borrowItem(Item item) {
-        user.tryBorrowItem(item);
-        user = users.update(user);
-        template.setLoggedInUser(user);
+        template.getLoggedInUser().tryBorrowItem(item);
+        template.setLoggedInUser(users.update(template.getLoggedInUser()));
     }
     
     public void removeBorrowedItem(BorrowedItem borrowedItem) {
-        user.removeBorrowedItem(borrowedItem);
-        user = users.update(user);
-        template.setLoggedInUser(user);
+        template.getLoggedInUser().removeBorrowedItem(borrowedItem);
+        template.setLoggedInUser(users.update(template.getLoggedInUser()));
     }
 
     /* Managing dates */

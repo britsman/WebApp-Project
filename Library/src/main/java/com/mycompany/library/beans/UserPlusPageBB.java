@@ -12,7 +12,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -21,7 +20,7 @@ import javax.inject.Named;
  * @author Fredrik
  */
 @Named("userPlus")
-@SessionScoped
+@RequestScoped
 public class UserPlusPageBB implements Serializable {
 
     // Collections
@@ -87,25 +86,6 @@ public class UserPlusPageBB implements Serializable {
         itemCollection.update(new Book(id, title, cs, publisher, language, year_release, pageNum,
                 genre, image, description, quantity, loan_period, fee));
     }
-    
-    public void prepareEdit(String id, String title, String creators, String publisher,
-            String image, String description, int pageNum, int loan_period, int fee,
-            int year_released, String genre, String language, int quantity) {
-        editId = id;
-        editTitle = title;
-        editCreators = creators;
-        editPublisher = publisher;
-        editImage = image;
-        editDescription = description;
-        editPageNum = pageNum;
-        editLoan_period = loan_period;
-        editFee = fee;
-        editYear_release = year_released;
-        editGenre = genre;
-        editLanguage = language;
-        editQuantity = quantity;
-    }
-    
     public void updateItem(String id) {
         Book b = (Book) itemCollection.find(id);
         b.setTitle(editTitle);
