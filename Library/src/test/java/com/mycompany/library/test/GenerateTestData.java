@@ -17,8 +17,7 @@ import java.util.List;
 import org.junit.Test;
 
 /**
- *
- * @author sjoholmf
+ *  Class for inserting initial data into the DB.
  */
 public class GenerateTestData {
     private final Long milliPerDay = 86400000L;

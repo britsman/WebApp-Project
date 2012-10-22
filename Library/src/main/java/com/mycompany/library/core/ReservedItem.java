@@ -14,8 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
- *
- * @author Eric
+ *  Class representing reservation ques on unavailable items.
  */
 @Entity
 public class ReservedItem implements Serializable {

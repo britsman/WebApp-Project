@@ -8,8 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- * Backing bean for the findBookPage.xhtml page
- * @author Hannes
+ * Backing bean for login part of login.xhtml
  */
 @Named("login")
 @RequestScoped

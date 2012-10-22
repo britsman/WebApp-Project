@@ -11,8 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author Hannes
+ *Backing bean for searchPage.xhtml.
  */
 @Named("search")
 @ConversationScoped

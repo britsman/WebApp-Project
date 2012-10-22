@@ -8,8 +8,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
- *
- * @author Eric
+ * "Helper" class for various JPQL queries.
  */
 public class QueryProccessor {
     private EntityManagerFactory emf;

@@ -9,8 +9,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 /**
- *
- * @author user
+ *Proxy bean for UserRegistry collection.
  */
 @ApplicationScoped
 public class UserRegistryBean implements Serializable{
@@ -22,7 +21,6 @@ public class UserRegistryBean implements Serializable{
     public UserRegistryBean(EmailBean emailBean){
         this.emailBean = emailBean;
     }
-    
     public List<User> getAll(){
         return users.getAll();
     }

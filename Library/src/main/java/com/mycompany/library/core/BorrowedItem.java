@@ -11,8 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
- *
- * @author Eric
+ *  Class representing an item a user has borrowed/needs to collect/needs to
+ *  return.
  */
 @Entity
 public class BorrowedItem implements Serializable {

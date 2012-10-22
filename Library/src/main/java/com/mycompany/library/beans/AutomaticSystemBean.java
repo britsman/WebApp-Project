@@ -13,8 +13,9 @@ import javax.inject.Named;
 
 /**
  * Class for automatically checking and sending notifications to users about book
- * reserveations, due dates, etc.
- * @author Eric
+ * books to turn in, books to pay fees for etc. Also checks if any BorrowedItem
+ * is still !collected after a certain number of days (and if true releases it from
+ * borrowed status).
  */
 @Named("AutoCheck")
 @ApplicationScoped

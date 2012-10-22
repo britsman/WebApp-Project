@@ -1,8 +1,7 @@
 package com.mycompany.library.core;
 
 /**
- *
- * @author sjoholmf
+ *  Class representing collection of all item creators.
  */
 public class CreatorCollection extends Controller<Creator, Long> {
     

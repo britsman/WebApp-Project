@@ -8,8 +8,7 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 
 /**
- *
- * @author user
+ *Proxy bean for CreatorCollection collection.
  */
 @ApplicationScoped
 public class CreatorBean implements Serializable{

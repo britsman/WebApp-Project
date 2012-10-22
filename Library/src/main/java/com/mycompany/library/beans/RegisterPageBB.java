@@ -10,8 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author Hannes
+ *Backing bean for register part of login.xhtml.
  */
 @Named("register")
 @ConversationScoped

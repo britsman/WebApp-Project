@@ -4,19 +4,17 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 /**
- *
- * @author Eric
+ * Class representing a book available at the library (most attributes in
+ * superclass, subclass is mainly for filtering in searches, ie show only items
+ * which are books etc).
  */
 @Entity
-@Table(name="BOOKS")
 @DiscriminatorValue("B")
 public class Book extends Item implements Serializable{
 
     private int pageNum;
-    
     
     public Book() {}
 
