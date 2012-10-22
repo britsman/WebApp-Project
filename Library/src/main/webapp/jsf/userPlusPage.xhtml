@@ -69,40 +69,39 @@
                                     <header>
                                         <br><h1>Här Checkar du in/ut böcker.</h1></br>
                                     </header>
-
-                                    <h:form>
-                                    <h:dataTable var="borrowedItem" value="#{userPlus.allBorrowedItems}" style="width: 100%" border="1">
-                                        <h:column id="loneId">
-                                            <f:facet  name="header" class="s">Lån id</f:facet>
+                                    <h:outputLabel value="Id" style="margin-left: 14px; font-size: 16px; font-weight: bold"/>
+                                    <h:outputLabel  value="Namn" style="margin-left: 20px; font-size: 16px; font-weight: bold"/>
+                                    <h:form >
+                                        
+                                        <h:dataTable var="borrowedItem" value="#{userPlus.allBorrowedItems}" style="width: 100%"  cellspacing="10px">
+                                        
+                                            <h:outputLabel for="loneId" value="Id"/>
+                                            
+                                       <h:column id="loneId">
+                                            
                                             <h:outputText value="#{borrowedItem.id}" class="borrowedItem"/>
                                         </h:column>
-                                        <h:column>
-                                            <f:facet name="header">Lånad av</f:facet>
+                                        <h:column id="username">
+                                            
                                             <h:outputText value="#{borrowedItem.user.username}" class="borrowedItem"/>
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">ISBN</f:facet>
-                                            <h:outputText value="#{borrowedItem.item.id}" class="borrowedItem"/>
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">Title</f:facet>
+                                            
                                             <h:outputText value="#{borrowedItem.item.title}" class="borrowedItem"/>
                                         </h:column>
                                         <h:column>
-                                            <f:facet name="header">Collected</f:facet>
-                                            <h:outputText value="#{borrowedItem.collected}" class="borrowedItem"/>
-                                        </h:column>
-                                        <h:column>
-                                            <h:commandButton value="Checka Out" 
+                                            <h:commandButton value="Lämna ut" rendered="#{not(borrowedItem.collected)}"
                                                              action="userPlusPage?faces-redirect=true"
-                                                             actionListener="#{userPlus.checkOutItem(borrowedItem)}">
-                                                <f:attribute name="borrowedItem" value="#{borrowedItem}" />
+                                                             actionListener="#{userPlus.checkOutItem(borrowedItem)}"
+                                                             style="width: 100px">
+                                                
                                             </h:commandButton>
-                                        </h:column>
-                                        <h:column>
-                                            <h:commandButton   value="Checka In" 
+                                        
+                                            <h:commandButton value="Lämna tillbaka" rendered="#{(borrowedItem.collected)}"
                                                              action="userPlusPage?faces-redirect=true"
-                                                             actionListener="#{userPlus.checkInItem(borrowedItem)}"/>                                            
+                                                             actionListener="#{userPlus.checkInItem(borrowedItem)}"
+                                                             style="width: 100px"
+                                                             />                                            
                                         </h:column>
                                     </h:dataTable>
                                     
@@ -359,7 +358,7 @@
                                                         <td width="40px"><h:commandLink class="tab" value="Isbn" action="#{userPlus.action(&quot;content_4&quot;)}" /></td>
                                                         <td width="40px"><h:commandLink class="tab" value="År" action="#{userPlus.action(&quot;content_4&quot;)}" /></td>
                                                     </tr>
-                                                </table><br/>
+                                                </table>
                                             </h:form>
                                             
                                             <table  class="tab">

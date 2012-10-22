@@ -17,6 +17,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
+import sun.misc.Compare;
 
 /**
  * Backing bean for the UserPlusPage.xhtml page.
@@ -81,13 +82,28 @@ public class UserPlusPageBB implements Serializable {
     }
     
     public List<Item> getAll() {
-        return itemCollection.getAll();
+        List<Item> list = itemCollection.getAll();
+        String sortBy="title";
+        switch(sortBy){
+            case "title": 
+                Collections.sort(list,Item.ItemTitleComparator); 
+                break;
+            case "author":
+                Collections.sort(list,Item.ItemAuthorComparator);
+                break;
+            case "year" :
+                Collections.sort(list);
+                break;
+            case "isbn":
+                Collections.sort(list,Item.ItemISBNComparator);
+                break;
+            default:
+                break;
+        }
+        System.out.println("Innan vi returnar i getAll med sort" +sortBy);
+                return list;
     }
-    
-    
-    
-    
-    
+      
     public void createItem() {
         
         List<Creator> cs = new ArrayList<>();
