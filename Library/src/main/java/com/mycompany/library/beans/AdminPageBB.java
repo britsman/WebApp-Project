@@ -17,8 +17,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- * Backing bean for the adminPage.xhtml page.
- * @author estelius
+ * Backing bean for adminPage.xhtml.
  */
 @Named("admin")
 @SessionScoped

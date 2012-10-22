@@ -9,8 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- *
- * @author Eric
+ *  Class representing a certain user's position in a reserveque.
  */
 @Entity
 @Table(name="RESERVEDITEM_QUE")

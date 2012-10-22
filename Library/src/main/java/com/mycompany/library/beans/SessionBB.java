@@ -11,8 +11,8 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 
 /**
- *
- * @author Hannes
+ * Backing bean representing the current "session" (Not real session per se, each
+ * period from a login to a logout/logout to a login is treated as a "session").
  */
 @Named("currentSession")
 @SessionScoped

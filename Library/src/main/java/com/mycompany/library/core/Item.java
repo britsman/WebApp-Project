@@ -16,8 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 /**
- * Superclass for books (and possibly cd, etc. in the future.)
- * @author Eric
+ * Superclass for all item types (Book is currently the only itemtype stored by the library).
  */
 @Entity
 @Table(name="ITEMS")

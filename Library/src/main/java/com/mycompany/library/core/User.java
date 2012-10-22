@@ -13,8 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- *
- * @author Eric
+ *  Class representing library users.
  */
 @Entity
 @Table(name="LIBRARY_USERS")
@@ -110,8 +109,10 @@ public class User implements Serializable{
             }
         }
         return hasIt;
+    }    
+    public void removeBookmarkedItem(Item item) {
+        bookmarkedItems.remove(item);
     }
-    
     public Long getId() {
         return id;
     }
@@ -181,9 +182,5 @@ public class User implements Serializable{
 
     public void setBookmarkedItems(Item item) {
         this.bookmarkedItems.add(item);
-    }
-    
-    public void removeBookmarkedItem(Item item) {
-        bookmarkedItems.remove(item);
     }
 }

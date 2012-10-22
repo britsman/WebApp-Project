@@ -14,8 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- * Backing bean for UserPage.xhtml page.
- * @author estelius
+ * Backing bean for UserPage.xhtml.
  */
 @Named("userPage")
 @RequestScoped
@@ -34,29 +33,23 @@ public class UserPageBB implements Serializable {
     }
     public int getQueuePosition(ReservedItem reservedItem) {        
         return reservedItem.getQuePosition(session.getLoggedInUser());
-    }
-    
-    /* Managing bookarked items */
-    
+    }  
+    /* Managing bookmarked items */   
     public void bookmarkItem(Item item) {
         if (!session.getLoggedInUser().getBookmarkedItems().contains(item)) {
             session.getLoggedInUser().setBookmarkedItems(item);
             session.setLoggedInUser(users.update(session.getLoggedInUser()));
         }
     }
-    
     public void removeBookmakedItem(Item item) {
         session.getLoggedInUser().removeBookmarkedItem(item);
         session.setLoggedInUser(users.update(session.getLoggedInUser()));
-    }
-    
+    }    
     /* Managing resereved items */
-    
     public void reserveItem(Item item) {
         session.getLoggedInUser().tryReserveItem(item);
         session.setLoggedInUser(users.update(session.getLoggedInUser()));
-    }
-    
+    }   
     public void removeReservedItem(ReservedItem reservedItem) {
         QueryProccessor q = WebLib.INSTANCE.getQueryProccessor();
         reservedItem.updatePositions(session.getLoggedInUser());
@@ -65,10 +58,8 @@ public class UserPageBB implements Serializable {
             reservedItem = q.findReservedItem(reservedItem.getItem());
             q.removeReservedItem(reservedItem.getId());
         }
-    }
-    
+    }   
     /* Managing borrowed items */
-    
     public void borrowItem(Item item) {
         session.getLoggedInUser().tryBorrowItem(item);
         session.setLoggedInUser(users.update(session.getLoggedInUser()));
@@ -80,9 +71,7 @@ public class UserPageBB implements Serializable {
         session.setLoggedInUser(users.update(session.getLoggedInUser()));
         }
     }
-
-    /* Managing dates */
-    
+    /* Managing dates */  
     public String returnDate(Date loanDate, BorrowedItem item) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(loanDate);

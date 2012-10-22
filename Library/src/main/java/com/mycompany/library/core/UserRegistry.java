@@ -1,8 +1,7 @@
 package com.mycompany.library.core;
 
 /**
- *
- * @author sjoholmf
+ *Class representing collection of all users. 
  */
 public class UserRegistry extends Controller<User, Long> {
     

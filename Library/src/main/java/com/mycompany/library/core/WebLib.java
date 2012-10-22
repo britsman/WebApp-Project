@@ -5,8 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
- *
- * @author user
+ * "Main" singleton for the online library project.
  */
 public enum WebLib {
 

@@ -5,22 +5,16 @@ import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.Creator;
 import com.mycompany.library.core.Item;
 import com.mycompany.library.core.QueryProccessor;
-import com.mycompany.library.core.User;
-import com.mycompany.library.core.UserRegistry;
 import com.mycompany.library.core.WebLib;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- * Backing bean for the UserPlusPage.xhtml page.
- * @author Fredrik
+ * Backing bean for UserPlusPage.xhtml 
  */
 @Named("userPlus")
 @SessionScoped

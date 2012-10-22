@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 /**
- * @author Eric
+ * Class representing the/one of the creator(s) of one/many items.
  */
 @Entity
 public class Creator implements Serializable{

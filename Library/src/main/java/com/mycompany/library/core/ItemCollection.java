@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author sjoholmf
+ *  Class representing collection of all items.
  */
 public class ItemCollection extends Controller<Item, String> {
     

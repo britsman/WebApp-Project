@@ -9,8 +9,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 /**
- *
- * @author sjoholmf
+ * Class for persistance methods inherited by the collections.
  */
 public class Controller<T, K> implements Serializable {
      

@@ -19,8 +19,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- *
- * @author user
+ *Bean for various Email messages.
  */
 @ApplicationScoped
 public class EmailBean implements Serializable{
