@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.library.core;
 
 import java.util.ArrayList;
@@ -112,8 +108,6 @@ public class QueryProccessor {
         if(language != null){q += " and lower(language) = '" + language.toLowerCase()+"'";}
         if(genre != null){q += " and lower(genre) = '" + genre.toLowerCase()+"'";}
         
-        System.out.println(q);
-        
         try{
             TypedQuery<Item> query = em.createQuery(q, Item.class);
             resultList = query.getResultList();
@@ -138,8 +132,6 @@ public class QueryProccessor {
         
         String q = "SELECT i from Item i where i.id='"+search+"' or lower(i.title) like '%"+search+"%' or lower(i.description) like '%"+search+
                 "%' OR i.id in (select i2.id from Item i2, Creator c where i2.creators=c and lower(c.name) like '%"+search+"%')";
-        
-        System.out.println(q);
         
         try{
             em = emf.createEntityManager();
@@ -220,7 +212,6 @@ public class QueryProccessor {
         }
         catch(Exception e){
            System.err.println("Query exception: " + e.getMessage());
-           e.printStackTrace();
         }
         finally{
             if (em != null) {

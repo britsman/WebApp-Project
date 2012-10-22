@@ -8,9 +8,8 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
 /**
- *
- * @author sjoholmf
  * Validator class used to validate the publisher field
+ * @author sjoholmf
  */
 @FacesValidator("PublisherValidator")
 public class PublisherValidator implements Validator {

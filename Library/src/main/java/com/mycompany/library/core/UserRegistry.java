@@ -1,5 +1,5 @@
-
 package com.mycompany.library.core;
+
 /**
  *
  * @author sjoholmf

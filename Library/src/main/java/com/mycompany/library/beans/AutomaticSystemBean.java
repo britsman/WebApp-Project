@@ -1,23 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.library.beans;
 
 import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.QueryProccessor;
-import com.mycompany.library.core.WebbLib;
+import com.mycompany.library.core.WebLib;
 import java.io.Serializable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import javax.ejb.Asynchronous;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
+ * Class for automatically checking and sending notifications to users about book
+ * reserveations, due dates, etc.
  * @author Eric
  */
 @Named("AutoCheck")
@@ -53,7 +49,7 @@ public class AutomaticSystemBean implements Serializable{
     }
 
     private void checkBorrowedItems() {
-        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
+        QueryProccessor q = WebLib.INSTANCE.getQueryProccessor();
         for (BorrowedItem item : q.getAllBorrowedItems()) {
             if (!item.isCollected()) {
                 item.checkCollectDatePassed();

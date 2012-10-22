@@ -1,16 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.library.beans;
 
 import com.mycompany.library.core.Creator;
 import com.mycompany.library.core.CreatorCollection;
-import com.mycompany.library.core.WebbLib;
+import com.mycompany.library.core.WebLib;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.SessionScoped;
 
 /**
  *
@@ -18,8 +13,8 @@ import javax.enterprise.context.SessionScoped;
  */
 @ApplicationScoped
 public class CreatorBean implements Serializable{
-    CreatorCollection creators = WebbLib.INSTANCE.getCreators();
-      
+    CreatorCollection creators = WebLib.INSTANCE.getCreators();
+    
     public List<Creator> getAll(){
         return creators.getAll();
     }

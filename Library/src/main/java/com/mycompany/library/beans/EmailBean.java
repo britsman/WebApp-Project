@@ -1,22 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.library.beans;
 
 import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.User;
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.ejb.Asynchronous;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.mail.Address;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -57,10 +53,9 @@ public class EmailBean implements Serializable{
                 Address replyTo[] = {new InternetAddress("noreply@onlinebiblo.se")};
                 msg.setReplyTo(replyTo);
                 msg.setText("Inom två dagar så måste du lämna in: " + booksToReturn);
-                System.out.println(msg.getContent() + "\n");
                 Transport.send(msg);
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (MessagingException | UnsupportedEncodingException e) {
+                System.err.println("Send reminder error: " + e.getMessage());
             }
         }
     }
@@ -92,10 +87,9 @@ public class EmailBean implements Serializable{
                 msg.setReplyTo(replyTo);
                 msg.setText("Dessa böcker är försenade: " + lateBooks
                         + "Den totala bötern är: " + totalFee);
-                System.out.println(msg.getContent() + "\n");
                 Transport.send(msg);
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (MessagingException | IOException e) {
+                System.err.println("Send fee error: " + e.getMessage());
             }
         }
     }
@@ -113,8 +107,8 @@ public class EmailBean implements Serializable{
             "nedanför i registreringskodfältet.\n Koden är: " + code);
             Transport.send(msg);
         } 
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (MessagingException | UnsupportedEncodingException e) {
+            System.err.println("Send registration code error: " + e.getMessage());
         } 
     }
 }

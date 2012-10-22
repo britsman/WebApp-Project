@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.library.core;
 
 import java.io.Serializable;
@@ -44,6 +40,19 @@ public class ReservedItem implements Serializable {
         reserve(user);
     }
 
+    private void reserve(User user){ 
+        user.setReservedItems(this);
+    }
+    public int getQuePosition(User user){      
+        QueryProccessor qp = WebLib.INSTANCE.getQueryProccessor();
+        return qp.getQuePosition(user, this);
+    }
+    public void updatePositions(User user) {
+        QueryProccessor qp = WebLib.INSTANCE.getQueryProccessor();
+        qp.updatePositions(user, this);
+        user.updateReservation(this);      
+    }
+    
     public Item getItem() {
         return item;
     }
@@ -66,17 +75,5 @@ public class ReservedItem implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-    private void reserve(User user){ 
-        user.setReservedItems(this);
-    }
-    public int getQuePosition(User user){      
-        QueryProccessor qp = WebbLib.INSTANCE.getQueryProccessor();
-        return qp.getQuePosition(user, this);
-    }
-    public void updatePositions(User user) {
-        QueryProccessor qp = WebbLib.INSTANCE.getQueryProccessor();
-        qp.updatePositions(user, this);
-        user.updateReservation(this);      
     }
 }

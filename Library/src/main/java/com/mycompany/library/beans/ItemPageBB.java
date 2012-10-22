@@ -2,7 +2,6 @@ package com.mycompany.library.beans;
 
 import com.mycompany.library.core.Book;
 import com.mycompany.library.core.Item;
-import com.mycompany.library.core.User;
 import java.io.Serializable;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.Conversation;
@@ -21,16 +20,16 @@ public class ItemPageBB implements Serializable{
     @Inject
     private Conversation convo;
     private UserRegistryBean users;
-    private SessionBB template;
+    private SessionBB session;
     private Book book;
     private String redirectPage;
     
     public ItemPageBB(){}
 
     @Inject
-    public ItemPageBB(UserRegistryBean users, SessionBB template) {
+    public ItemPageBB(UserRegistryBean users, SessionBB session) {
         this.users = users;
-        this.template = template;
+        this.session = session;
     }
     public Book getBook(){
         return book;
@@ -59,29 +58,28 @@ public class ItemPageBB implements Serializable{
     public String buttonValue(){
         if(book.getQuantity() > 0){
             return "Låna";
-        }
-        else{
+        } else {
             return "Reservera";
         }
     }
     
     public boolean buttonVisible(){
-        return template.getLoggedInUser() != null;
+        return session.getLoggedInUser() != null;
     }
     
     public void borrowOrReserve(){
         if(book.getQuantity() > 0){
-            template.getLoggedInUser().tryBorrowItem(book);
+            session.getLoggedInUser().tryBorrowItem(book);
         }
         else{
-            template.getLoggedInUser().tryReserveItem(book);
+            session.getLoggedInUser().tryReserveItem(book);
         }
-        template.setLoggedInUser(users.update(template.getLoggedInUser()));
+        session.setLoggedInUser(users.update(session.getLoggedInUser()));
     }
     public void bookMark(){
-        if(!template.getLoggedInUser().getBookmarkedItems().contains(book)){
-            template.getLoggedInUser().setBookmarkedItems(book);
-            template.setLoggedInUser(users.update(template.getLoggedInUser()));
+        if(!session.getLoggedInUser().getBookmarkedItems().contains(book)){
+            session.getLoggedInUser().setBookmarkedItems(book);
+            session.setLoggedInUser(users.update(session.getLoggedInUser()));
         }
     }
     

@@ -1,19 +1,14 @@
 package com.mycompany.library.beans;
 
-import com.mycompany.library.core.Item;
 import com.mycompany.library.core.User;
-import com.mycompany.library.core.UserRegistry;
-import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.event.ActionEvent;
-import javax.inject.Named;
 import javax.faces.component.UIOutput;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * Backing bean for the findBookPage.xhtml page
@@ -25,7 +20,7 @@ public class LoginPageBB implements Serializable {
 
     private SessionBB loggedUser;
     private UserRegistryBean users;
-    private String userName;
+    private String username;
     private String password;
     private UIOutput txtOutput;
     private boolean accessGranted = false;
@@ -39,7 +34,7 @@ public class LoginPageBB implements Serializable {
         this.users = users;
     }
     public void validateUser() {
-        User user = users.getByUserName(userName);
+        User user = users.getByUserName(username);
         if (user == null) {
             accessGranted = false;
             txtOutput.setValue("Användare inte hittad!");
@@ -87,12 +82,12 @@ public class LoginPageBB implements Serializable {
         this.txtOutput = txtOutput;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String userName) {
+        this.username = userName;
     }
 
     public String getPassword() {
@@ -101,9 +96,5 @@ public class LoginPageBB implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void actionListener(ActionEvent e) {
-        Logger.getAnonymousLogger().log(Level.INFO, "");
     }
 }

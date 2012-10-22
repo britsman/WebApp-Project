@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.library.beans;
 
 import com.mycompany.library.core.Item;
 import com.mycompany.library.core.QueryProccessor;
-import com.mycompany.library.core.WebbLib;
+import com.mycompany.library.core.WebLib;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PreDestroy;
@@ -31,8 +27,6 @@ public class SearchBB implements Serializable {
     private String topSearch;
     private int fromYear, toYear;
     private boolean inStock;
-    private List<Item> result;
-    
         
     @Inject
     private UserRegistryBean users;
@@ -47,7 +41,7 @@ public class SearchBB implements Serializable {
 
     public void searchAll() {
         checkConversation();
-        QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
+        QueryProccessor query = WebLib.INSTANCE.getQueryProccessor();
         if (!topSearch.equals("")) {
             session.setSearchResult(query.searchAll(topSearch));
         }
@@ -55,7 +49,7 @@ public class SearchBB implements Serializable {
 
     public void searchAdvanced() {
         checkConversation();
-        QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
+        QueryProccessor query = WebLib.INSTANCE.getQueryProccessor();
         genre=null;
         language=null;
         type=null;
@@ -81,8 +75,6 @@ public class SearchBB implements Serializable {
         session.setLoggedInUser(users.update(session.getLoggedInUser()));
     }
     
-    
-
     public boolean linkVisible(){  
         return session.getLoggedInUser() != null;
     }
@@ -93,6 +85,41 @@ public class SearchBB implements Serializable {
         }
         return "/resources/img/star_none.png";
     }
+    
+    
+    public void checkConversation(){
+        if (convo.isTransient()) {
+            convo.begin();
+        }
+    }
+    
+    public String redirectToSelf() {
+        try {
+            return "searchPage?faces-redirect=true"; // Go back
+        } catch (Exception e) {
+            // Not implemented
+            //return "error?faces-redirect=true&amp;cause=" + e.getMessage();
+            return null;
+        }
+    }
+    public String redirectToBookPage() {
+        try {
+            return "bookPage?faces-redirect=true"; // Go back
+        } catch (Exception e) {
+            // Not implemented
+            //return "error?faces-redirect=true&amp;cause=" + e.getMessage();
+            return null;
+        }
+    }
+    @PreDestroy  // MUST HAVE back button etc.
+    public void destroy() {
+        if (convo != null) {
+            if (!convo.isTransient()) {
+                convo.end();
+            }
+        }
+    }
+    
     public String getTopSearch() {
         return topSearch;
     }
@@ -121,7 +148,7 @@ public class SearchBB implements Serializable {
         if (title.isEmpty()) {
             this.title = null;
         } else {
-            this.title =title;
+            this.title = title;
         }
     }
 
@@ -190,9 +217,7 @@ public class SearchBB implements Serializable {
     }
 
     public void setLanguage(String language) {
-        
             this.language = language;
-        
     }
 
     public String getGenre() {
@@ -200,9 +225,7 @@ public class SearchBB implements Serializable {
     }
 
     public void setGenre(String genre) {
-        
             this.genre = genre;
-        
     }
 
     public String getType() {
@@ -211,36 +234,5 @@ public class SearchBB implements Serializable {
 
     public void setType(String type) {
         this.type = type;
-    }
-    public void checkConversation(){
-        if (convo.isTransient()) {
-            convo.begin();
-        }
-    }
-    public String redirectToSelf() {
-        try {
-            return "searchPage?faces-redirect=true"; // Go back
-        } catch (Exception e) {
-            // Not implemented
-            //return "error?faces-redirect=true&amp;cause=" + e.getMessage();
-            return null;
-        }
-    }
-    public String redirectToBookPage() {
-        try {
-            return "bookPage?faces-redirect=true"; // Go back
-        } catch (Exception e) {
-            // Not implemented
-            //return "error?faces-redirect=true&amp;cause=" + e.getMessage();
-            return null;
-        }
-    }
-    @PreDestroy  // MUST HAVE back button etc.
-    public void destroy() {
-        if (convo != null) {
-            if (!convo.isTransient()) {
-                convo.end();
-            }
-        }
     }
 }

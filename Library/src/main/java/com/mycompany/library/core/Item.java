@@ -1,11 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.library.core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -21,8 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 /**
- * Superclass for books, CD:S etc. Due to @MappedSuperclass, all attributes
- * that aren't unique to a certain type of item can be placed here.
+ * Superclass for books (and possibly cd, etc. in the future.)
  * @author Eric
  */
 @Entity
@@ -31,20 +25,20 @@ import javax.persistence.Transient;
 @DiscriminatorColumn(name="TYPE", discriminatorType=DiscriminatorType.STRING,length=20)
 @DiscriminatorValue("I")
 public class Item implements Serializable, Comparable<Item> {
-    //Unique identifier (stored as strings since ISBN contains '-' signs).
+    // Unique identifier (stored as strings since ISBN contains '-' signs).
     @Id
     private String id;
     private String title;
     @ManyToMany(mappedBy = "items", cascade=CascadeType.MERGE)
     private List<Creator> creators;
-    //Link to image file.
+    // Link to image file.
     private String image;
-    //Link to text file containing description.
+    // Link to text file containing description.
     private String description;
-    //How many days the item can be loaned.
+    // How many days the item can be loaned.
     private int loan_period;
-    /*How much the "lateness" fee is increased by for each increment. varies
-    between item types.**/
+    /* How much the "lateness" fee is increased by for each increment. varies
+    between item types. */
     private int fee;
     private int year_released;
     private String genre;
@@ -181,7 +175,7 @@ public class Item implements Serializable, Comparable<Item> {
     }
     public String getCreatorNames(){
         creatorNames ="";
-        QueryProccessor qp = WebbLib.INSTANCE.getQueryProccessor();
+        QueryProccessor qp = WebLib.INSTANCE.getQueryProccessor();
         List<String> temp = qp.getCreatorNames(this);
         for (String s : temp) {
             creatorNames += s + ", ";

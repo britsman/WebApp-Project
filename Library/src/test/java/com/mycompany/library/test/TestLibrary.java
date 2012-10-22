@@ -10,7 +10,7 @@ import com.mycompany.library.core.QueryProccessor;
 import com.mycompany.library.core.ReservedItem;
 import com.mycompany.library.core.User;
 import com.mycompany.library.core.UserRegistry;
-import com.mycompany.library.core.WebbLib;
+import com.mycompany.library.core.WebLib;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -36,8 +36,8 @@ public class TestLibrary {
         //testRemove(); 
     }
     public void testAddItem(){
-        ItemCollection items = WebbLib.INSTANCE.getItems();
-        CreatorCollection creators = WebbLib.INSTANCE.getCreators();
+        ItemCollection items = WebLib.INSTANCE.getItems();
+        CreatorCollection creators = WebLib.INSTANCE.getCreators();
         List<Creator> temp = new ArrayList<>();
         Creator creator = creators.getByName(creatorName);
         if (creator == null) {
@@ -49,9 +49,9 @@ public class TestLibrary {
         item = items.update(item);
     }
     public void testAddUser(){
-        UserRegistry users = WebbLib.INSTANCE.getUsers();
-        ItemCollection items = WebbLib.INSTANCE.getItems();
-        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
+        UserRegistry users = WebLib.INSTANCE.getUsers();
+        ItemCollection items = WebLib.INSTANCE.getItems();
+        QueryProccessor q = WebLib.INSTANCE.getQueryProccessor();
         User user = users.getByUsername(userName);
         if(user == null){
             user = new User(userName, "password","test@email", 0.0);
@@ -71,9 +71,9 @@ public class TestLibrary {
         user = users.update(user);
     }
     public void testAlterQue(){
-        UserRegistry users = WebbLib.INSTANCE.getUsers();
-        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
-        ItemCollection items = WebbLib.INSTANCE.getItems();
+        UserRegistry users = WebLib.INSTANCE.getUsers();
+        QueryProccessor q = WebLib.INSTANCE.getQueryProccessor();
+        ItemCollection items = WebLib.INSTANCE.getItems();
         User user = users.getByUsername(userName);
         Item item = items.find(itemId);
         ReservedItem reserve = q.findReservedItem(item);
@@ -88,9 +88,9 @@ public class TestLibrary {
         }
     }
     public void testSearch(){
-        CreatorCollection creators = WebbLib.INSTANCE.getCreators();
+        CreatorCollection creators = WebLib.INSTANCE.getCreators();
         List<Creator> cList = new ArrayList<>();
-        ItemCollection items = WebbLib.INSTANCE.getItems();
+        ItemCollection items = WebLib.INSTANCE.getItems();
         
         Creator c1 = creators.getByName("Herman Melville");
         if (c1 == null) {
@@ -118,7 +118,7 @@ public class TestLibrary {
        item3 = items.update(item3);
        
         //Här börjar sökningen
-        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
+        QueryProccessor q = WebLib.INSTANCE.getQueryProccessor();
         List<Item> foundItems = null;
         
         foundItems = q.searchItem(null, "Moby Dick", null, null, null, 0, 0, false, null, null);
@@ -154,7 +154,7 @@ public class TestLibrary {
     }
     public void testRemove(){
         
-        UserRegistry users = WebbLib.INSTANCE.getUsers();
+        UserRegistry users = WebLib.INSTANCE.getUsers();
         User user = users.getByUsername(userName);
         try {
             user.getBookmarkedItems().remove(0);

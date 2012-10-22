@@ -1,17 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.library.beans;
 
-import com.mycompany.library.core.CreatorCollection;
 import com.mycompany.library.core.Item;
 import com.mycompany.library.core.ItemCollection;
-import com.mycompany.library.core.WebbLib;
+import com.mycompany.library.core.WebLib;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.SessionScoped;
 
 /**
  *
@@ -19,7 +13,7 @@ import javax.enterprise.context.SessionScoped;
  */
 @ApplicationScoped
 public class ItemBean implements Serializable{
-    ItemCollection items = WebbLib.INSTANCE.getItems();
+    ItemCollection items = WebLib.INSTANCE.getItems();
       
     public List<Item> getAll(){
         return items.getAll();

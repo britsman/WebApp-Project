@@ -7,7 +7,7 @@ import com.mycompany.library.core.Item;
 import com.mycompany.library.core.QueryProccessor;
 import com.mycompany.library.core.User;
 import com.mycompany.library.core.UserRegistry;
-import com.mycompany.library.core.WebbLib;
+import com.mycompany.library.core.WebLib;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -199,13 +199,13 @@ public class UserPlusPageBB implements Serializable {
     }
     
     public List<BorrowedItem> getAllBorrowedItems(){
-        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
+        QueryProccessor q = WebLib.INSTANCE.getQueryProccessor();
         return q.getAllBorrowedItems();
     }
     
     public List<BorrowedItem> getAllBorrowedItemByISBN(String isbn){
         List<BorrowedItem> tmp = new ArrayList<BorrowedItem>();
-        QueryProccessor query = WebbLib.INSTANCE.getQueryProccessor();
+        QueryProccessor query = WebLib.INSTANCE.getQueryProccessor();
         for(BorrowedItem b: query.getAllBorrowedItems()){
             
             if(b.getItem().getId().equals(isbn)){

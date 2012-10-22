@@ -10,7 +10,7 @@ import com.mycompany.library.core.QueryProccessor;
 import com.mycompany.library.core.ReservedItem;
 import com.mycompany.library.core.User;
 import com.mycompany.library.core.UserRegistry;
-import com.mycompany.library.core.WebbLib;
+import com.mycompany.library.core.WebLib;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,10 +31,10 @@ public class GenerateTestData {
     
     
     public void generateItemData() {
-        CreatorCollection creators = WebbLib.INSTANCE.getCreators();
+        CreatorCollection creators = WebLib.INSTANCE.getCreators();
         
         List<Creator> cList = new ArrayList<>();
-        ItemCollection items = WebbLib.INSTANCE.getItems();
+        ItemCollection items = WebLib.INSTANCE.getItems();
                 
         Creator c1 = null;
         Creator c2 = null;
@@ -114,9 +114,9 @@ public class GenerateTestData {
     }
     public void generateUserData() {
         // Making some users.
-        UserRegistry ur = WebbLib.INSTANCE.getUsers();
-        ItemCollection ic = WebbLib.INSTANCE.getItems();
-        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
+        UserRegistry ur = WebLib.INSTANCE.getUsers();
+        ItemCollection ic = WebLib.INSTANCE.getItems();
+        QueryProccessor q = WebLib.INSTANCE.getQueryProccessor();
         
         User user1 = ur.getByUsername("user1");
         User user2 = ur.getByUsername("user2");
@@ -138,7 +138,7 @@ public class GenerateTestData {
         user2.setFeesOwed(20.0);
         
         // Making some creators.
-        CreatorCollection cc = WebbLib.INSTANCE.getCreators();
+        CreatorCollection cc = WebLib.INSTANCE.getCreators();
         
         Creator creator1 = cc.getByName("creator1");
         Creator creator2 = cc.getByName("creator2");

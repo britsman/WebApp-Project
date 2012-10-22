@@ -15,14 +15,16 @@ import javax.persistence.Temporal;
  * @author Eric
  */
 @Entity
-public class BorrowedItem implements Serializable{
+public class BorrowedItem implements Serializable {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne(cascade=CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Item item;
-    private @Temporal(javax.persistence.TemporalType.DATE) Date loanDate = new Date();
-    @ManyToOne(cascade=CascadeType.MERGE)
+    private @Temporal(javax.persistence.TemporalType.DATE)
+    Date loanDate = new Date();
+    @ManyToOne(cascade = CascadeType.MERGE)
     private User user;
     private boolean collected;
 
@@ -35,7 +37,29 @@ public class BorrowedItem implements Serializable{
         this.collected = false;
         borrowItem();
     }
-    
+
+    private void borrowItem() {
+        this.user.setBorrowedItems(this);
+        this.item.setQuantity((this.item.getQuantity()) - 1);
+    }
+
+    public void removeFromTable() {
+        QueryProccessor q = WebLib.INSTANCE.getQueryProccessor();
+        q.removeBorrowedItem(this.id);
+    }
+
+    public void checkCollectDatePassed() {
+        ItemCollection items = WebLib.INSTANCE.getItems();
+        Long milliPerDay = 86400000L;
+        Date today = new Date();
+        int daysUncollected = (int) ((today.getTime() - this.loanDate.getTime()) / milliPerDay);
+        if (daysUncollected >= 3) {
+            this.item.setQuantity((this.item.getQuantity()) + 1);
+            this.removeFromTable();
+        }
+        this.item = items.update(this.item);
+    }
+
     public Item getItem() {
         return item;
     }
@@ -74,24 +98,5 @@ public class BorrowedItem implements Serializable{
 
     public void setCollected(boolean collected) {
         this.collected = collected;
-    }
-    private void borrowItem(){
-        this.user.setBorrowedItems(this);
-        this.item.setQuantity((this.item.getQuantity())-1);
-    }
-    public void removeFromTable(){
-        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
-        q.removeBorrowedItem(this.id);
-    }
-    public void checkCollectDatePassed(){
-        ItemCollection items = WebbLib.INSTANCE.getItems();
-        Long milliPerDay = 86400000L;
-        Date today = new Date();
-        int daysUncollected = (int)((today.getTime() - this.loanDate.getTime()) / milliPerDay);
-        if (daysUncollected >= 3){
-            this.item.setQuantity((this.item.getQuantity())+1);
-            this.removeFromTable();
-        }
-        this.item = items.update(this.item);
     }
 }

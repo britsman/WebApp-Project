@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.ejb.Asynchronous;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -90,6 +89,7 @@ public class AdminPageBB implements Serializable {
         user.setIsLibrarian(value);
         users.update(user);
     }
+    
     public void sendEmail() {
         Message msg = new MimeMessage(mailSession);
         mailSession.setDebug(true);
@@ -103,7 +103,7 @@ public class AdminPageBB implements Serializable {
             Transport.send(msg);
         } 
         catch (MessagingException | UnsupportedEncodingException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         } 
     }
     

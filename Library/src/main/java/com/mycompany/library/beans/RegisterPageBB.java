@@ -56,15 +56,12 @@ public class RegisterPageBB implements Serializable {
     }
     public void completeRegistration(){
         if (checkUser() == true && generatedCode.equals(inputCode)) {
-            System.out.println("True");
-                User newUser = new User(username, password, email, 0.0);
-                newUser = users.update(newUser);
-                loggedUser.setLoggedInUser(newUser);              
-                redirect = "userPage?faces-redirect=true";
-        }
-        else{
+            User newUser = new User(username, password, email, 0.0);
+            newUser = users.update(newUser);
+            loggedUser.setLoggedInUser(newUser);              
+            redirect = "userPage?faces-redirect=true";
+        } else {
             //visa att registration failed (koden var fel)
-            System.out.println("False");
             redirect = "login?faces-redirect=true";
         }
         clear();
@@ -89,6 +86,37 @@ public class RegisterPageBB implements Serializable {
 
     }
 
+    public String closeConversation() {
+        if (!convo.isTransient()) {
+            convo.end();
+        }
+        try {
+            return redirect; // Go back
+        } catch (Exception e) {
+            // Not implemented
+            //return "error?faces-redirect=true&amp;cause=" + e.getMessage();
+            return null;
+        }
+    }
+    
+    @PreDestroy  // MUST HAVE back button etc.
+    public void destroy() {
+        if (convo != null) {
+            if (!convo.isTransient()) {
+                convo.end();
+            }
+        }
+    }
+    
+    private void clear() {
+        triedRegister = false;
+        username = "";
+        email = "";
+        password = "";
+        confirmPassword = "";
+        inputCode = null;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -126,33 +154,5 @@ public class RegisterPageBB implements Serializable {
 
     public void setInputCode(Long inputCode) {
         this.inputCode = inputCode;
-    }
-    public String closeConversation() {
-        if (!convo.isTransient()) {
-            convo.end();
-        }
-        try {
-            return redirect; // Go back
-        } catch (Exception e) {
-            // Not implemented
-            //return "error?faces-redirect=true&amp;cause=" + e.getMessage();
-            return null;
-        }
-    }
-    @PreDestroy  // MUST HAVE back button etc.
-    public void destroy() {
-        if (convo != null) {
-            if (!convo.isTransient()) {
-                convo.end();
-            }
-        }
-    }
-    private void clear() {
-        triedRegister = false;
-        username = "";
-        email = "";
-        password = "";
-        confirmPassword = "";
-        inputCode = null;
     }
 }

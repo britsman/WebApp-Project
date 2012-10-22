@@ -4,7 +4,7 @@ import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.Item;
 import com.mycompany.library.core.QueryProccessor;
 import com.mycompany.library.core.ReservedItem;
-import com.mycompany.library.core.WebbLib;
+import com.mycompany.library.core.WebLib;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -15,7 +15,6 @@ import javax.inject.Named;
 
 /**
  * Backing bean for UserPage.xhtml page.
- *
  * @author estelius
  */
 @Named("userPage")
@@ -24,9 +23,9 @@ public class UserPageBB implements Serializable {
     
     private UserRegistryBean users;
     private SessionBB template;
+    
     // Default constructor.
-    public UserPageBB() {
-    }
+    public UserPageBB() {}
     
     @Inject
     public UserPageBB(UserRegistryBean users, SessionBB template) {
@@ -36,6 +35,9 @@ public class UserPageBB implements Serializable {
     public int getQueuePosition(ReservedItem reservedItem) {        
         return reservedItem.getQuePosition(template.getLoggedInUser());
     }
+    
+    /* Managing bookarked items */
+    
     public void bookmarkItem(Item item) {
         if (!template.getLoggedInUser().getBookmarkedItems().contains(item)) {
             template.getLoggedInUser().setBookmarkedItems(item);
@@ -48,13 +50,15 @@ public class UserPageBB implements Serializable {
         template.setLoggedInUser(users.update(template.getLoggedInUser()));
     }
     
+    /* Managing resereved items */
+    
     public void reserveItem(Item item) {
         template.getLoggedInUser().tryReserveItem(item);
         template.setLoggedInUser(users.update(template.getLoggedInUser()));
     }
     
     public void removeReservedItem(ReservedItem reservedItem) {
-        QueryProccessor q = WebbLib.INSTANCE.getQueryProccessor();
+        QueryProccessor q = WebLib.INSTANCE.getQueryProccessor();
         reservedItem.updatePositions(template.getLoggedInUser());
         template.setLoggedInUser(users.update(template.getLoggedInUser()));
         if(reservedItem.getQue().size() == 1){
@@ -62,6 +66,9 @@ public class UserPageBB implements Serializable {
             q.removeReservedItem(reservedItem.getId());
         }
     }
+    
+    /* Managing borrowed items */
+    
     public void borrowItem(Item item) {
         template.getLoggedInUser().tryBorrowItem(item);
         template.setLoggedInUser(users.update(template.getLoggedInUser()));
@@ -73,6 +80,7 @@ public class UserPageBB implements Serializable {
     }
 
     /* Managing dates */
+    
     public String returnDate(Date loanDate, BorrowedItem item) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(loanDate);

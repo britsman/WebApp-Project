@@ -1,13 +1,5 @@
 package com.mycompany.library.core;
 
-import java.util.ArrayList;
-import java.util.List;
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author sjoholmf
@@ -28,5 +20,4 @@ public class CreatorCollection extends Controller<Creator, Long> {
         }
         return found;
     }
-    
 }

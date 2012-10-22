@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.library.core;
 
 import java.io.Serializable;
@@ -22,8 +18,6 @@ public class Creator implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    /*Could be either person or a bandname, no need to divide into first/last 
-     * name, just use whole name for string comparisons.*/
     private String name;
     @ManyToMany(cascade={CascadeType.MERGE})
     private List<Item> items;
