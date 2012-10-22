@@ -20,11 +20,10 @@
 
 body{font-family:Arial, Helvetica, sans-serif;}
  
-/*Remove the lists bullets*/
+
  
 ul,li{list-style:none;}
  
-/*Entire page container, assign a size and center it*/
  
 h1 {
     
@@ -32,13 +31,13 @@ h1 {
     font-weight: bold
 }
  
-/*tab_container is the DIV that contains all the tab area, tab_content is the div that contains each of the tabs' content*/
+
  
 #tab_container{ width:100%; border:1px solid #E0E0E0;}
  
 #tab_content{padding:5px; background:#FFFFFF; border:1px solid #04667f;}
  
-/*The TAB header*/
+
  
 ul.tab_header{margin:0px; padding:0px; margin-top:5px; margin-bottom:6px; }
  
@@ -86,7 +85,6 @@ a.tab{font: bold 12px Arial, Helvetica, sans-serif; text-decoration:none;}
  
 .content ul li a:hover{color:#899fa5;}
  
-/*IMPORTANT, we give display none because with JQuery we show the content when it is clicked*/
 
 
 #content_1, #content_3, #content_2, #content_4 { display:none; }
@@ -125,5 +123,11 @@ a.tab{font: bold 12px Arial, Helvetica, sans-serif; text-decoration:none;}
 
 .borrowedItem{
 font-family: sans-serif;
-font-size: 20px;
+font-size:   14px;
+font-weight: bold;
+
+}
+
+.borrowedItemListHeader{
+    text-align: left;
 }
