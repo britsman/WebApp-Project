@@ -8,6 +8,7 @@ import com.mycompany.library.core.QueryProccessor;
 import com.mycompany.library.core.WebLib;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
