@@ -9,13 +9,14 @@ import com.mycompany.library.core.CreatorCollection;
 import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.util.List;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 
 /**
  *
  * @author user
  */
-@SessionScoped
+@ApplicationScoped
 public class CreatorBean implements Serializable{
     CreatorCollection creators = WebbLib.INSTANCE.getCreators();
       

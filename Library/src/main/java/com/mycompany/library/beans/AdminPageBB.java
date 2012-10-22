@@ -90,8 +90,6 @@ public class AdminPageBB implements Serializable {
         user.setIsLibrarian(value);
         users.update(user);
     }
-    
-    @Asynchronous
     public void sendEmail() {
         Message msg = new MimeMessage(mailSession);
         mailSession.setDebug(true);

@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.Asynchronous;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.mail.Address;
@@ -25,7 +26,7 @@ import javax.mail.internet.MimeMessage;
  *
  * @author user
  */
-@RequestScoped
+@ApplicationScoped
 public class EmailBean implements Serializable{
     
     @Resource(name = "mail/library")
@@ -34,7 +35,6 @@ public class EmailBean implements Serializable{
     
     public EmailBean(){}
     
-    @Asynchronous
     public void sendReminder(User user){
         Message msg = new MimeMessage(mailSession);
         mailSession.setDebug(true);
@@ -64,7 +64,6 @@ public class EmailBean implements Serializable{
             }
         }
     }
-    @Asynchronous
     public void sendFee(User user) {
         Message msg = new MimeMessage(mailSession);
         mailSession.setDebug(true);
@@ -100,7 +99,6 @@ public class EmailBean implements Serializable{
             }
         }
     }
-    @Asynchronous
     public void sendRegCode(String email, Long code){
         System.out.println("\n" + email + " !!!! " + code + "\n");
         Message msg = new MimeMessage(mailSession);

@@ -10,13 +10,14 @@ import com.mycompany.library.core.ItemCollection;
 import com.mycompany.library.core.WebbLib;
 import java.io.Serializable;
 import java.util.List;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 
 /**
  *
  * @author user
  */
-@SessionScoped
+@ApplicationScoped
 public class ItemBean implements Serializable{
     ItemCollection items = WebbLib.INSTANCE.getItems();
       

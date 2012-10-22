@@ -59,12 +59,6 @@ public class AutomaticSystemBean implements Serializable{
                 item.checkCollectDatePassed();
             }
         }
-        try{
-        System.out.println(users);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
     private void sendReminders() {
