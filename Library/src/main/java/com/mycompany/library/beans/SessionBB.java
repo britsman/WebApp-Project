@@ -1,5 +1,6 @@
 package com.mycompany.library.beans;
 
+import com.mycompany.library.core.BorrowedItem;
 import com.mycompany.library.core.Item;
 import com.mycompany.library.core.User;
 import java.io.Serializable;
@@ -57,6 +58,11 @@ public class SessionBB implements Serializable {
         }
     }
 
+    public List<BorrowedItem> updatedBorrowedList(){
+        return loggedInUser.getBorrowedItems();
+    }
+    
+    
     public User getLoggedInUser() {
         return loggedInUser;
     }

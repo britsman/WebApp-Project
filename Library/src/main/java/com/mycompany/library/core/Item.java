@@ -202,8 +202,6 @@ public class Item implements Serializable, Comparable<Item> {
  
 	      return itemName1.compareTo(itemName2);
  
-	      //Vänd ordningen
-	      //return fruitName2.compareTo(fruitName1);
 	    }
  
 	};
@@ -218,8 +216,7 @@ public class Item implements Serializable, Comparable<Item> {
  
 	      return itemName1.compareTo(itemName2);
  
-	      //Vänd ordningen
-	      //return fruitName2.compareTo(fruitName1);
+	     
 	    }
  
 	};
@@ -234,8 +231,6 @@ public class Item implements Serializable, Comparable<Item> {
  
 	      return itemName1.compareTo(itemName2);
  
-	      //Vänd ordningen
-	      //return fruitName2.compareTo(fruitName1);
 	    }
  
 	};

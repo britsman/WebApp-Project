@@ -70,19 +70,7 @@
                                         <br><h1>Här Checkar du in/ut böcker.</h1></br>
                                     </header>
 
-                                    <br>
-                                        <h:outputLabel for="checkInOut" value="ISBN " />
-                                        <h:inputText id="checkInOut"  />
-                                    </br>
-                                    <h:commandButton value="Checka in"/>
-                                    <h:commandButton value="Checka Ut"/>
-                                    <h:dataTable var="item" value="#{userPlus.isbnSearchResult}">
-                                        <h:column>
-                                            <h:outputText value="#{item.user.username}"/>
-                                        </h:column>
-                                    </h:dataTable>
-                                    
-                                    
+                                    <h:form>
                                     <h:dataTable var="borrowedItem" value="#{userPlus.allBorrowedItems}" style="width: 100%" border="1">
                                         <h:column id="loneId">
                                             <f:facet  name="header" class="s">Lån id</f:facet>
@@ -101,20 +89,24 @@
                                             <h:outputText value="#{borrowedItem.item.title}" class="borrowedItem"/>
                                         </h:column>
                                         <h:column>
-                                            <h:commandButton value="Checka In"/>                                            
+                                            <f:facet name="header">Collected</f:facet>
+                                            <h:outputText value="#{borrowedItem.collected}" class="borrowedItem"/>
+                                        </h:column>
+                                        <h:column>
+                                            <h:commandButton value="Checka Out" 
+                                                             action="userPlusPage?faces-redirect=true"
+                                                             actionListener="#{userPlus.checkOutItem(borrowedItem)}">
+                                                <f:attribute name="borrowedItem" value="#{borrowedItem}" />
+                                            </h:commandButton>
+                                        </h:column>
+                                        <h:column>
+                                            <h:commandButton   value="Checka In" 
+                                                             action="userPlusPage?faces-redirect=true"
+                                                             actionListener="#{userPlus.checkInItem(borrowedItem)}"/>                                            
                                         </h:column>
                                     </h:dataTable>
-                                    <h:form>
-                                        <h:outputLabel for="checkInOut" value="Lån id " />
-                                        <h:inputText id="checkInOut" value="" />
-                                        <h:commandButton value="Checka in"
-                                                        
-                                                         actionListener="#{userPlus.checkInItem}" />
-                                        <h:commandButton value="Checka ut"
-                                                         
-                                                         actionListener="#{userPlus.checkOutItem}" />
+                                    
                                     </h:form>
-
                                 </div>
 
                                 <div id="content_2" class="content">

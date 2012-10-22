@@ -75,8 +75,10 @@ public class UserPageBB implements Serializable {
     }
     
     public void removeBorrowedItem(BorrowedItem borrowedItem) {
+        if(!borrowedItem.isCollected()){
         template.getLoggedInUser().removeBorrowedItem(borrowedItem);
         template.setLoggedInUser(users.update(template.getLoggedInUser()));
+        }
     }
 
     /* Managing dates */
