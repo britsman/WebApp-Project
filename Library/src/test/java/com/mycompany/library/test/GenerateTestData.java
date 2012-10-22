@@ -44,7 +44,8 @@ public class GenerateTestData {
         }
         cList.add(c1);
         Item item1 = new Book("978-0140623178", "Moby Dick", cList, "Penguin",
-        "English", 1851, 544, "Horror", "/resources/img/defaultBook.png", "Tuff bok om valar och grejer, inte skriven av Jules Verne", 1, 7, 10);
+        "English", 1851, 544, "Horror", "/resources/img/defaultBook.png", 
+        "Tuff bok om valar och grejer, inte skriven av Jules Verne", 1, 7, 10);
         item1 = items.update(item1);
         
         c1 = creators.getByName("Jules Verne");
@@ -52,15 +53,17 @@ public class GenerateTestData {
             c1 = new Creator("Jules Verne");
         }
         cList.set(0, c1);
-        Item item2 = new Book("978-2080702999", "La tour du Monde en quatre-vingts jours", cList, "Flammarion", "French", 1873, 200,
-        "Adventure", "/resources/img/defaultBook.png", "Tuff bok, inte lika många valar dock.", 1, 7, 10);
+        Item item2 = new Book("978-2080702999", "La tour du Monde en quatre-vingts jours", 
+        cList, "Flammarion", "French", 1873, 200, "Adventure", "/resources/img/defaultBook.png", 
+        "Tuff bok, inte lika många valar dock.", 1, 7, 10);
         item2 = items.update(item2);
         
         c1 = item2.getCreators().get(0);
         cList.set(0, c1);
         
-        Item item3 = new Book("978-0486440880", "Journey to the Center of the Earth", cList, "Dover Thrift", "English", 1864, 200, 
-                "Adventure", "/resources/img/defaultBook.png", "Massa grejer i jorden", 0, 7, 10);
+        Item item3 = new Book("978-0486440880", "Journey to the Center of the Earth", 
+        cList, "Dover Thrift", "English", 1864, 200, "Adventure", "/resources/img/defaultBook.png", 
+        "Massa grejer i jorden", 0, 7, 10);
         item3 = items.update(item3);
         
         c1 = creators.getByName("Jan Skansholm");
@@ -77,8 +80,9 @@ public class GenerateTestData {
         cList.add(c1);
         cList.add(c2);
         
-        Item item4 = new Book("978-9144076065", "Vägen till C", cList, "Studentlitteratur", "Swedish", 2011, 269, "Computers", "/resources/img/defaultBook.png", 
-                "Här står det en massa om C", 1, 10, 20);
+        Item item4 = new Book("978-9144076065", "Vägen till C", cList, "Studentlitteratur", 
+        "Swedish", 2011, 269, "Computers", "/resources/img/defaultBook.png", 
+        "Här står det en massa om C", 1, 10, 20);
         item4 = items.update(item4);
         
         c1 = creators.getByName("JRR Tolkien");
@@ -87,8 +91,9 @@ public class GenerateTestData {
         }
         cList.clear();
         cList.add(c1);
-        Item item5 = new Book("978-0618574957", "The Two Towers", cList, "Mariner Books", "English", 2005, 448, "Fantasy", "/resources/img/defaultBook.png",
-                "Andra boken i LotR", 4, 7, 10);
+        Item item5 = new Book("978-0618574957", "The Two Towers", cList, "Mariner Books", 
+        "English", 2005, 448, "Fantasy", "/resources/img/defaultBook.png", 
+        "Andra boken i LotR", 4, 7, 10);
         item5 = items.update(item5);
         
         c1 = creators.getByName("JRR Tolkien");
@@ -96,8 +101,9 @@ public class GenerateTestData {
             c1 = new Creator("JRR Tolkien");
         }
         cList.set(0, c1);
-        Item item6 = new Book("978-0618574940", "The Fellowship of the Ring", cList, "Mariner Books", "English", 2005, 544, "Fantasy", "/resources/img/defaultBook.png",
-                "Första boken i LotR", 4, 7, 10);
+        Item item6 = new Book("978-0618574940", "The Fellowship of the Ring", cList, 
+        "Mariner Books", "English", 2005, 544, "Fantasy", "/resources/img/defaultBook.png",
+        "Första boken i LotR", 4, 7, 10);
         item6 = items.update(item6);
         
         c1 = creators.getByName("JRR Tolkien");
@@ -105,8 +111,9 @@ public class GenerateTestData {
             c1 = new Creator("JRR Tolkien");
         }
         cList.set(0, c1);
-        Item item7 = new Book("978-0618574971", "The Return of the King", cList, "Mariner Books", "English", 2005, 544, "Fantasy", "/resources/img/defaultBook.png",
-                "Tredje och sista boken i LotR", 4, 7, 10);
+        Item item7 = new Book("978-0618574971", "The Return of the King", cList, 
+        "Mariner Books", "English", 2005, 544, "Fantasy", "/resources/img/defaultBook.png",
+        "Tredje och sista boken i LotR", 4, 7, 10);
         item7 = items.update(item7);
         
         
@@ -158,7 +165,8 @@ public class GenerateTestData {
         creators1.add(creator2);
         creators1.add(creator3); 
         
-        Item item1 = new Book("1", "title1", creators1, "Publisher1", "Language1", 2012, 1337, "Genre1", 5);
+        Item item1 = new Book("1", "title1", creators1, "Publisher1", "Language1", 
+        2012, 1337, "Genre1", 5);
         item1 = ic.update(item1);
         creator1 = item1.getCreators().get(0);
         creator2 = item1.getCreators().get(1);
@@ -166,7 +174,8 @@ public class GenerateTestData {
         creators1.set(0, creator1);
         creators1.set(1, creator2);
         creators1.set(2, creator3);
-        Item item2 = new Book("2", "title2", creators1, "Publisher2", "Language2", 2012, 1337, "Genre2", 5);
+        Item item2 = new Book("2", "title2", creators1, "Publisher2", "Language2", 
+        2012, 1337, "Genre2", 5);
         item2 = ic.update(item2);
         creator1 = item2.getCreators().get(0);
         creator2 = item2.getCreators().get(1);
@@ -174,7 +183,8 @@ public class GenerateTestData {
         creators1.set(0, creator1);
         creators1.set(1, creator2);
         creators1.set(2, creator3);
-        Item item3 = new Book("3", "title3", creators1, "Publisher3", "Language3", 2012, 1337, "Genre3", 5);
+        Item item3 = new Book("3", "title3", creators1, "Publisher3", "Language3", 
+        2012, 1337, "Genre3", 5);
         item3 = ic.update(item3);
         
         // BorrowedItem

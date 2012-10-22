@@ -36,7 +36,8 @@
                             </header>
                             <section>
                                 <h:form>
-                                    <h:dataTable var="item" value="#{currentSession.loggedInUser.borrowedItems}" rendered="#{not empty currentSession.loggedInUser.borrowedItems}" width="100%" rowClasses="even,odd">
+                                    <h:dataTable var="item" value="#{currentSession.loggedInUser.borrowedItems}" 
+                                    rendered="#{not empty currentSession.loggedInUser.borrowedItems}" width="100%" rowClasses="even,odd">
                                         <h:column>
                                             <f:facet name="header">Title</f:facet>
                                             <h:commandLink value="#{item.item.title}"
@@ -73,7 +74,8 @@
                             </header>
                             <section>
                                 <h:form>
-                                    <h:dataTable var="item" value="#{currentSession.loggedInUser.reservedItems}" rendered="#{not empty currentSession.loggedInUser.reservedItems}" width="100%" rowClasses="even,odd">
+                                    <h:dataTable var="item" value="#{currentSession.loggedInUser.reservedItems}" 
+                                    rendered="#{not empty currentSession.loggedInUser.reservedItems}" width="100%" rowClasses="even,odd">
                                         <h:column>
                                             <f:facet name="header">Title</f:facet>
                                             <h:commandLink value="#{item.item.title}"
@@ -94,7 +96,8 @@
                                                            actionListener="#{userPage.removeReservedItem(item)}" />
                                         </h:column>
                                     </h:dataTable>
-                                    <h:outputLabel rendered="#{empty currentSession.loggedInUser.reservedItems}" value="Du har inte reserverat några böcker." />
+                                    <h:outputLabel rendered="#{empty currentSession.loggedInUser.reservedItems}" 
+                                    value="Du har inte reserverat några böcker." />
                                 </h:form>
                             </section>
                         </section>
@@ -105,7 +108,8 @@
                             </header>
                             <section>
                                 <h:form>
-                                    <h:dataTable var="item" value="#{currentSession.loggedInUser.bookmarkedItems}" rendered="#{not empty currentSession.loggedInUser.bookmarkedItems}" width="100%" rowClasses="even,odd">
+                                    <h:dataTable var="item" value="#{currentSession.loggedInUser.bookmarkedItems}" 
+                                    rendered="#{not empty currentSession.loggedInUser.bookmarkedItems}" width="100%" rowClasses="even,odd">
                                         <h:column>
                                             <f:facet name="header">Title</f:facet>
                                             <h:commandLink value="#{item.title}"
@@ -134,7 +138,8 @@
                                                            actionListener="#{userPage.removeBookmakedItem(item)}" />
                                         </h:column>
                                     </h:dataTable>
-                                    <h:outputLabel rendered="#{empty currentSession.loggedInUser.bookmarkedItems}" value="Du har inte lagt till några böcker till din favoritlista." />
+                                    <h:outputLabel rendered="#{empty currentSession.loggedInUser.bookmarkedItems}" 
+                                    value="Du har inte lagt till några böcker till din favoritlista." />
                                 </h:form>
                             </section>
                         </section>

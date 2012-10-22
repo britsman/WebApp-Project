@@ -89,9 +89,10 @@
                                         <f:selectItem itemLabel="Film" itemValue="film"/>
                                     </h:selectOneMenu>
 
-                                    <br><h:outputLabel for="srcFromYear" value="Från år"/><span style="padding-left: 40px"/><h:outputLabel for="srcToYear" value="Till år"/></br>
-                                    <h:inputText  id="srcFromYear" size="5"/><span style="margin-bottom: 0.5em;padding-left: 30px"/><h:inputText  id="srcToYear" size="5"/>
-
+                                    <br><h:outputLabel for="srcFromYear" value="Från år"/><span style="padding-left: 40px"/><h:outputLabel 
+                                    for="srcToYear" value="Till år"/></br>
+                                    <h:inputText  id="srcFromYear" size="5"/><span style="margin-bottom: 0.5em;padding-left: 30px"/>
+                                    <h:inputText  id="srcToYear" size="5"/>
                                     <br><h:outputLabel for="srcDescription" value="Fritext"/></br>
                                     <h:inputTextarea id="srcDescription" style="margin-bottom: 0.5em"/>
 
@@ -120,8 +121,10 @@
                                             <h:outputText id="genre" value="#{item.genre}"/>    
                                          </td>
                                         <td >
-                                            <td><h:commandLink id="resultTableBorrow" action="#{search.redirectToSelf()}" value="Låna" actionListener="#{search.borrowOrReserve(item)}" rendered="#{search.linkVisible()}"/></td>
-                                            <td><h:commandLink id="resultTableBookmark" action="#{search.redirectToSelf()}" actionListener="#{search.bookMark(item)}" rendered="#{search.linkVisible()}">
+                                            <td><h:commandLink id="resultTableBorrow" action="#{search.redirectToSelf()}" value="Låna" 
+                                            actionListener="#{search.borrowOrReserve(item)}" rendered="#{search.linkVisible()}"/></td>
+                                            <td><h:commandLink id="resultTableBookmark" action="#{search.redirectToSelf()}" 
+                                            actionListener="#{search.bookMark(item)}" rendered="#{search.linkVisible()}">
                                                     <h:graphicImage value="#{search.bookMarkImg(item)}"/>   
                                                 </h:commandLink></td>
                                             

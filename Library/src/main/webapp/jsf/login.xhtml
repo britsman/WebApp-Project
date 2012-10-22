@@ -61,7 +61,10 @@
                                     <f:validator validatorId="PasswordValidator" />
                                </h:inputText>
                             <h:message for="txtPasswordRegConfirm" showSummary="true" showDetail="false" style="color: red" /></p>
-                            <p><h:commandButton id="btnOK" value="OK"  actionListener="#{register.registerUser()}" action ="#{register.access()}"/></p>
+                            <p>
+                                <h:commandButton id="btnOK" value="OK"  actionListener="#{register.registerUser()}" 
+                                action ="#{register.access()}"/>
+                            </p>
                             
                             <p><h:outputLabel for="" value ="Skriv in koden du får emailad till dig och tryck sedan ok igen."/></p>
                             <h:inputText id="txtConfirmationcode" value="#{register.inputCode}"/>
