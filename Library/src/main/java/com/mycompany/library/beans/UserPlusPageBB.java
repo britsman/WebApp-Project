@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -28,6 +29,8 @@ public class UserPlusPageBB implements Serializable {
     // Collections
     private CreatorBean creatorCollection;
     private ItemBean itemCollection;
+    private UserRegistryBean users;
+    private SessionBB session;
     
     // Field for adding new items.
     private String id;
@@ -65,53 +68,21 @@ public class UserPlusPageBB implements Serializable {
     private boolean edit = false;
     private String stdSort="";
     
-    
-    
-    
-    
     // Default constructor.
     public UserPlusPageBB() {}
     
     @Inject
-    public UserPlusPageBB(CreatorBean creatorCollection, ItemBean itemCollection) {
+    public UserPlusPageBB(CreatorBean creatorCollection, ItemBean itemCollection, UserRegistryBean users, SessionBB session) {
         this.creatorCollection = creatorCollection;
         this.itemCollection = itemCollection;
-        
+        this.users = users;
+        this.session = session;
         show_content ="content_1";
-        
-        
-
     }
-    
-   
     
     public List<Item> getAll() {
-        
         return itemCollection.getAll();
-        
     }
-    
-//   public List<Item> sortedList(String sort){
-//       sort="author";
-//       if(sort.equals("title")){
-//                Collections.sort(items,Item.ItemTitleComparator); 
-//              
-//        }
-//                
-//           if(sort.equals("year_released"))
-//                Collections.sort(items);
-//                
-//            if(sort.equals("author"))
-//                Collections.sort(items,Item.ItemAuthorComparator); 
-//                
-//            if(sort.equals("isbn"))
-//                Collections.sort(items,Item.ItemISBNComparator);
-//                
-//            System.out.println("Inne i GET ALL med string = " + sort);
-//                return items;
-//          
-//       
-//   }
     
     
     
@@ -223,41 +194,36 @@ public class UserPlusPageBB implements Serializable {
         }
     }
     
-    public void checkInItem() {
-//        List<BorrowedItem> borrowedItems = getAllBorrowedItems();
-//        BorrowedItem borrowedItem = null;
-//        for (BorrowedItem bi : borrowedItems) {
-//            
-//            if (bi.getId() == checkInOut) {
-//                borrowedItem = bi;
-//            }
-//        }
-//        
-//        if (borrowedItem == null) {
-//            // Fixa
-//            return;
-//        }
-//        
-//        User user = borrowedItem.getUser();
-//        List<BorrowedItem> userBorrowedItems = user.getBorrowedItems();
-//        
-//        if (userBorrowedItems.contains(borrowedItem)) {
-//            borrowedItem.removeFromTable();
-//            user.removeBorrowedItem(borrowedItem);
-//        }
-//        
-//        UserRegistry ur = WebbLib.INSTANCE.getUsers();
-//        ur.update(user);
+    public void checkInItem(BorrowedItem borrowedItem) { 
+        Item item = borrowedItem.getItem();
+        //WebLib.INSTANCE.getQueryProccessor().removeBorrowedItem(borrowedItem.getId());
+        borrowedItem.removeFromTable();
+        borrowedItem.getUser().getBorrowedItems().remove(borrowedItem);
+        item.setQuantity(item.getQuantity()+1);
+        itemCollection.update(item);
+        session.setLoggedInUser(users.update(borrowedItem.getUser()));
+        
     }
     
-    public void checkOutItem() {
-        // TODO
+    public void checkOutItem(BorrowedItem borrowedItem) {
+       
+        System.out.println("Inne i checkOut " + borrowedItem.getId());
+        System.out.println("Innan vi sätter collected " + borrowedItem.isCollected());
+        
+        borrowedItem.setCollected(true);
+        System.out.println("" +borrowedItem.getUser().getBorrowedItems().size());
+        
+        
+        
+        //itemCollection.update(borrowedItem.getItem());
+        users.update(borrowedItem.getUser());
+        
+        
+        System.out.println("Efter vi har satt collected " + borrowedItem.isCollected());
+        System.out.println("" +borrowedItem.getUser().getBorrowedItems().size());
+        
     }
     
-
-    
-    
-     
     public String getId() {
         return id;
     }

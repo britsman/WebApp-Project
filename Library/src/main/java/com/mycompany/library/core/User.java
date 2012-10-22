@@ -52,7 +52,8 @@ public class User implements Serializable{
     public void tryBorrowItem(Item item) {
         UserRegistry userRegistry = WebLib.INSTANCE.getUsers();
         if(item.getQuantity() > 0 && !this.hasBorrowed(item.getId())) {
-            new BorrowedItem(item, this);
+           new BorrowedItem(item, this);
+           //userRegistry.update(this);
         }
     }
     
@@ -160,7 +161,7 @@ public class User implements Serializable{
         this.isLibrarian = isLibrarian;
     }
 
-    public List<BorrowedItem> getBorrowedItems() {
+    public List<BorrowedItem> getBorrowedItems() {        
         return borrowedItems;
     }
 

@@ -42,8 +42,8 @@ public class AutomaticSystemBean implements Serializable{
                 public void run() {
                     System.out.println("Schemalagd Kontroll\n");
                     checkBorrowedItems();
-                    //sendReminders(); //Kräver mail server setup.
-                    //sendFees();
+                    sendReminders(); 
+                    sendFees();
                 }
             }, 1, 20, TimeUnit.MINUTES);
     }

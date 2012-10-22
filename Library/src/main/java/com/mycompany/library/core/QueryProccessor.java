@@ -57,7 +57,7 @@ public class QueryProccessor {
             }
         }
     }
-    void removeBorrowedItem(Long id) {
+   public void removeBorrowedItem(Long id) {
         EntityManager em = emf.createEntityManager();
         try {
             String query = "delete from BorrowedItem b where b.id= :id";
