@@ -8,29 +8,25 @@
         <ui:composition template="./../WEB-INF/html/template.xhtml">
             <ui:define name="content">
                 <header id="bookInformationHeader">
-                    <h1>Bokinformation</h1>
+                    <h1>#{SingleItem.book.title}</h1>
                 </header>
                 <section id="bookInformationSection">
-                    <p>
-                        <h:graphicImage value="#{SingleItem.book.image}" width="120" height="100" />
-                    </p>
-                    <!-- Have Image displayed on the left of text? maybe use table.-->
-                    <h5>#{SingleItem.book.title}</h5>
-                    <p>
-                        <dl>
-                            <dd>Författare:</dd> <dt>#{SingleItem.book.creatorNames}</dt>
-                            <dd>Förlag:</dd> <dt>#{SingleItem.book.publisher}</dt>
-                            <dd>Utgivningsår:</dd> <dt>#{SingleItem.book.year}</dt>
-                            <dd>Genre:</dd> <dt>#{SingleItem.book.genre}</dt>
-                            <dd>Språk:</dd> <dt>#{SingleItem.book.language}</dt>
-                            <dd>Antal sidor:</dd> <dt>#{SingleItem.book.pageNum}</dt>
-                            <dd>Antal i lager:</dd> <dt>#{SingleItem.book.quantity}</dt>
-                        </dl>
-                    </p>
-                    <h6>Kort Besrivning</h6>
-                    <p>
-                        <h:outputText value="#{SingleItem.book.description}" />
-                    </p>
+                    <h:graphicImage value="#{SingleItem.book.image}" />
+                    <ul>
+                        <li>Författare: #{SingleItem.book.creatorNames}</li>
+                        <li>Förlag: #{SingleItem.book.publisher}</li>
+                        <li>Utgivningsår: #{SingleItem.book.year}</li>
+                        <li>Genre: #{SingleItem.book.genre}</li>
+                        <li>Språk: #{SingleItem.book.language}</li>
+                        <li>Antal sidor: #{SingleItem.book.pageNum}</li>
+                        <li>Antal i lager: #{SingleItem.book.quantity}</li>
+                    </ul>
+                    
+                    <section id="descriptionSection">
+                        <h6>Kort Besrivning</h6>
+                        <p>#{SingleItem.book.description}</p>
+                    </section>
+                    
                     <h:form>
                         <h:commandButton value="#{SingleItem.buttonValue()}" rendered="#{SingleItem.buttonVisible()}"
                                          action="#{SingleItem.action()}" 
@@ -40,7 +36,7 @@
                                          actionListener="#{SingleItem.bookMark()}" />
                         <h:commandButton action="#{SingleItem.action()}" value="Gå Tillbaka"/>
                     </h:form>
-                    <p><h:outputText value="Logga in för att låna eller reservera" rendered="#{not SingleItem.buttonVisible()}"/></p>
+                    <h:outputText value="Logga in för att låna eller reservera" rendered="#{not SingleItem.buttonVisible()}"/>
                     
                 </section>
             </ui:define>
