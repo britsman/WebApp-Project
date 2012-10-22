@@ -12,6 +12,7 @@ import com.mycompany.library.core.User;
 import com.mycompany.library.core.UserRegistry;
 import com.mycompany.library.core.WebbLib;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.junit.Test;
 
@@ -20,6 +21,7 @@ import org.junit.Test;
  * @author sjoholmf
  */
 public class GenerateTestData {
+    private final Long milliPerDay = 86400000L;
     
     @Test
     public void runTests(){
@@ -124,7 +126,7 @@ public class GenerateTestData {
             user1 = new User("user1", "user1", "user1@user.mail", 0.0);
         }
         if (user2 == null) {
-            user2 = new User("user2", "user2", "user2@user.mail", 0.0);
+            user2 = new User("user2", "user2", "eric_britsman@hotmail.com", 0.0);
         }
         if (user3 == null) {
             user3 = new User("user3", "user3", "user3@user.mail", 0.0);            
@@ -179,6 +181,8 @@ public class GenerateTestData {
         // BorrowedItem
         if(!user2.hasBorrowed(item2.getId())){
             BorrowedItem borrowedItem1 = new BorrowedItem(item2, user2);
+            borrowedItem1.setLoanDate(new Date(borrowedItem1.getLoanDate().getTime()- milliPerDay * 6));
+            borrowedItem1.setCollected(true);
         }
         
         // ReservedItem

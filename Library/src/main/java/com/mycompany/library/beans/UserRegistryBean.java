@@ -41,11 +41,19 @@ public class UserRegistryBean implements Serializable{
     public User getByUserName(String name){
         return users.getByUsername(name);
     }
-    public void sendReminder(User user){
-        emailBean.sendReminder(user);
+    public void sendReminders(){
+        for(User user: users.getAll()){
+            if(user.getBorrowedItems().size()> 0){
+                emailBean.sendReminder(user);
+            }
+        }
     }
-    public void sendFee(User user){
-        emailBean.sendFee(user);
+    public void sendFees(){
+        for (User user : users.getAll()) {
+            if(user.getBorrowedItems().size()> 0){
+                emailBean.sendFee(user);
+            }
+        }
     }
     public void sendRegCode(String email, Long code){
         emailBean.sendRegCode(email, code);

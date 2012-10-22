@@ -132,6 +132,11 @@
                                          actionListener="#{admin.sendEmail()}" /><br />
                         </h:form>
                     </section>
+                    
+        <h:form>
+            <h:commandButton value="Starta autosystem" action="library?faces-redirect=true" 
+            actionListener="#{AutoCheck.tryStart()}"/>
+        </h:form>
                 </section>
             </ui:define>
         </ui:composition>

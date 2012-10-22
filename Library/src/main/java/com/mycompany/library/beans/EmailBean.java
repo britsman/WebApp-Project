@@ -51,12 +51,13 @@ public class EmailBean implements Serializable{
         }
         if(booksToReturn.size() > 0) {
             try {
-                msg.setSubject("Online-Biblioteket: Böter");
+                msg.setSubject("Online-Biblioteket: Påminnelse");
                 msg.setRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
                 msg.setFrom(new InternetAddress("noreply@onlinebiblo.se", "Online-Biblioteket"));
                 Address replyTo[] = {new InternetAddress("noreply@onlinebiblo.se")};
                 msg.setReplyTo(replyTo);
                 msg.setText("Inom två dagar så måste du lämna in: " + booksToReturn);
+                System.out.println(msg.getContent() + "\n");
                 Transport.send(msg);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -92,6 +93,7 @@ public class EmailBean implements Serializable{
                 msg.setReplyTo(replyTo);
                 msg.setText("Dessa böcker är försenade: " + lateBooks
                         + "Den totala bötern är: " + totalFee);
+                System.out.println(msg.getContent() + "\n");
                 Transport.send(msg);
             } catch (Exception e) {
                 e.printStackTrace();
