@@ -4,7 +4,6 @@ import com.mycompany.library.core.Item;
 import com.mycompany.library.core.QueryProccessor;
 import com.mycompany.library.core.WebLib;
 import java.io.Serializable;
-import java.util.List;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;

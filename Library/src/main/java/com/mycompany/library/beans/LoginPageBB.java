@@ -2,11 +2,8 @@ package com.mycompany.library.beans;
 
 import com.mycompany.library.core.User;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIOutput;
-import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
