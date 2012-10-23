@@ -69,13 +69,15 @@ public class User implements Serializable{
     }
     
     public void tryReserveItem(Item item) {
+        if (!this.hasBorrowed(item.getId())) {       
         QueryProccessor q = WebLib.INSTANCE.getQueryProccessor();
         ReservedItem reserve = q.findReservedItem(item);
-        if (reserve == null) {
-            reserve = new ReservedItem(item, this);
-        } else if (!this.hasReserved(reserve.getId())) {
-            reserve.setQue(this);
-            this.setReservedItems(reserve);
+            if (reserve == null) {
+                reserve = new ReservedItem(item, this);
+            } else if (!this.hasReserved(reserve.getId())) {
+                reserve.setQue(this);
+                this.setReservedItems(reserve);
+            }
         }
     }
             
