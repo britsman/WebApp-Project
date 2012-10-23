@@ -133,7 +133,7 @@
                                                 <h1>Ny Bok</h1>
                                                 <p>Här kan man manuellt lägga till en ny bok.</p>
                                             </header>
-                                            <h:form id="addBookForm">
+                                            <h:form>
                                                 <h:outputLabel for="id" value="ID" /><br />
                                                 <h:inputText id="id" value="#{userPlus.id}">
                                                     <f:validator validatorId="IdValidator" />
@@ -198,18 +198,42 @@
 
                                                 <h:message for="pageNum" showSummary="true" showDetail="false" class="message"/><br />
                                            
+                                                 <h:outputLabel for="editGenre" value="Genre" /><br />
+                                                 <h:selectOneMenu id="editGenreTable" value="#{userPlus.genre}" required="true" requiredMessage="Fältet är obligatoriskt." style="margin-bottom: 0.5em">
+                                                                    <f:selectItem  itemLabel="Välj genre" itemValue="" />
+                                                                    <f:selectItem  itemLabel="Antologier" itemValue="Antologier" />
+                                                                    <f:selectItem  itemLabel="Barn" itemValue="Barn" />
+                                                                    <f:selectItem  itemLabel="Deckare &amp; kriminalromaner" itemValue="DeckareKriminal" />
+                                                                    <f:selectItem  itemLabel="Dramatik" itemValue="Dramatik" />
+                                                                    <f:selectItem  itemLabel="Essäer &amp; Reportage" itemValue="EssReportage" />
+                                                                    <f:selectItem  itemLabel="Fantasy" itemValue="Fantasy" />
+                                                                    <f:selectItem  itemLabel="Historiska romaner" itemValue="HistoriskaRomaner" />
+                                                                    <f:selectItem  itemLabel="Klassiker" itemValue="Klassiker" />
+                                                                    <f:selectItem  itemLabel="Modern &amp; samtida skönlitteratur" itemValue="ModernSkönlitteratur" />
+                                                                    <f:selectItem  itemLabel="Poesi" itemValue="Poesi" />
+                                                                    <f:selectItem  itemLabel="Science fiction" itemValue="ScienceFiction" />
+                                                                    <f:selectItem  itemLabel="Serier &amp; Grafiska romaner" itemValue="Serier" />
+                                                                    <f:selectItem  itemLabel="Skräck- &amp; spökhistorier" itemValue="Skräck" />
+                                                                    <f:selectItem  itemLabel="Skönlitteratur" itemValue="Skonlitteratur" />
+                                                                    <f:selectItem  itemLabel="Thrillers" itemValue="Thriller" />
+                                                                    <f:selectItem  itemLabel="Äventyr" itemValue="Äventyr" />
+                                                                </h:selectOneMenu>
+                                                <h:message for="editGenreTable" showSummary="true" showDetail="false" class="message"/><br />
 
-                                                <h:outputLabel for="genre" value="Genre" /><br />
-                                                <h:inputText id="genre" value="#{userPlus.genre}">
-                                                    <f:validator validatorId="GenreValidator" />
-                                                </h:inputText>
-                                                <h:message for="genre" showSummary="true" showDetail="false" class="message"/><br />
-
-                                                <h:outputLabel for="language" value="Språk" /><br />
-                                                <h:inputText id="language" value="#{userPlus.language}">
-                                                    <f:validator validatorId="LanguageValidator" />
-                                                </h:inputText>
-                                                <h:message for="language" showSummary="true" showDetail="false" class="message"/><br />
+                                                <h:outputLabel  value="Språk" /><br />
+                                                <h:selectOneMenu id="editLanguage" value="#{userPlus.language}" required="true" requiredMessage="Fältet är obligatoriskt." style="margin-bottom: 0.5em"> 
+                                                                    <f:selectItem itemLabel="Välj språk" itemValue=""/>
+                                                                    <f:selectItem itemLabel="Svenska" itemValue="swedish"/>
+                                                                    <f:selectItem itemLabel="Engelska" itemValue="english"/>
+                                                                    <f:selectItem itemLabel="Svenska" itemValue="swedish"/>
+                                                                    <f:selectItem itemLabel="Engelska" itemValue="english"/>
+                                                                    <f:selectItem itemLabel="Danska" itemValue="danish"/>
+                                                                    <f:selectItem itemLabel="Norska" itemValue="norwegian"/>
+                                                                    <f:selectItem itemLabel="Tyska" itemValue="germany"/>
+                                                                    <f:selectItem itemLabel="Franska" itemValue="french"/>
+                                                                    <f:selectItem itemLabel="Japanska" itemValue="japanese"/>
+                                                                </h:selectOneMenu>
+                                                <h:message for="editLanguage" showSummary="true" showDetail="false" class="message"/><br />
 
                                                 <h:outputLabel for="quantity" value="Kvantitet" /><br />
                                                 <h:inputText id="quantity" value="#{userPlus.quantity}">
@@ -222,8 +246,7 @@
                                                                  actionListener="#{userPlus.createItem}" 
                                                                  /><br />
                                             </h:form>
-
-
+                                                                 
                                         </section>
                                     </ul>
                                 </div>
@@ -300,12 +323,40 @@
                                                         </tr> 
                                                         <tr>
                                                             <td>
-                                                                <h:outputLabel for="editGenre" value="Genre" /><br />
-                                                                <h:inputText id="editGenre" value="#{userPlus.editGenre}"/><br />
+                                                                 <h:outputLabel for="editGenreTable" value="Genre" /><br />
+                                                                <h:selectOneMenu id="editGenreTable" value="#{userPlus.editGenre}" style="margin-bottom: 0.5em">
+                                                                    <f:selectItem  itemLabel="Antologier" itemValue="Antologier" />
+                                                                    <f:selectItem  itemLabel="Barn" itemValue="Barn" />
+                                                                    <f:selectItem  itemLabel="Deckare &amp; kriminalromaner" itemValue="DeckareKriminal" />
+                                                                    <f:selectItem  itemLabel="Dramatik" itemValue="Dramatik" />
+                                                                    <f:selectItem  itemLabel="Essäer &amp; Reportage" itemValue="EssReportage" />
+                                                                    <f:selectItem  itemLabel="Fantasy" itemValue="Fantasy" />
+                                                                    <f:selectItem  itemLabel="Historiska romaner" itemValue="HistoriskaRomaner" />
+                                                                    <f:selectItem  itemLabel="Klassiker" itemValue="Klassiker" />
+                                                                    <f:selectItem  itemLabel="Modern &amp; samtida skönlitteratur" itemValue="ModernSkönlitteratur" />
+                                                                    <f:selectItem  itemLabel="Poesi" itemValue="Poesi" />
+                                                                    <f:selectItem  itemLabel="Science fiction" itemValue="ScienceFiction" />
+                                                                    <f:selectItem  itemLabel="Serier &amp; Grafiska romaner" itemValue="Serier" />
+                                                                    <f:selectItem  itemLabel="Skräck- &amp; spökhistorier" itemValue="Skräck" />
+                                                                    <f:selectItem  itemLabel="Skönlitteratur" itemValue="Skonlitteratur" />
+                                                                    <f:selectItem  itemLabel="Thrillers" itemValue="Thriller" />
+                                                                    <f:selectItem  itemLabel="Äventyr" itemValue="Äventyr" />
+                                                                </h:selectOneMenu>
+                                                                
                                                             </td>
                                                             <td>
-                                                                <h:outputLabel for="editLanguage" value="Språk" /><br />
-                                                                <h:inputText id="editLanguage" value="#{userPlus.editLanguage}"/><br />
+                                                                 <h:outputLabel for="editLanguageTable" value="Språk" /><br />
+                                                                 <h:selectOneMenu id="editLanguageTable"  value="#{userPlus.editLanguage}" style="margin-bottom: 0.5em"> 
+                                                                    <f:selectItem itemLabel="Svenska" itemValue="swedish"/>
+                                                                    <f:selectItem itemLabel="Engelska" itemValue="english"/>
+                                                                    <f:selectItem itemLabel="Svenska" itemValue="swedish"/>
+                                                                    <f:selectItem itemLabel="Engelska" itemValue="english"/>
+                                                                    <f:selectItem itemLabel="Danska" itemValue="danish"/>
+                                                                    <f:selectItem itemLabel="Norska" itemValue="norwegian"/>
+                                                                    <f:selectItem itemLabel="Tyska" itemValue="germany"/>
+                                                                    <f:selectItem itemLabel="Franska" itemValue="french"/>
+                                                                    <f:selectItem itemLabel="Japanska" itemValue="japanese"/>
+                                                                </h:selectOneMenu>
                                                             </td>
                                                         </tr>                                                                
                                                         <tr>
@@ -403,15 +454,16 @@
                                                 <h:column>
                                                       
                                                     <table width="100%" class="itemTable">
-                                                        <tr>
+                                                        <tr style="height: 60px">
                                                             <td>
                                                                 
                                                                 <h:graphicImage id="image" value="#{items.image}" class="listItem" width="30px" 
                                                                 height="30px"/>
                                                             </td>
-                                                            <td>
-
-                                                                <h:outputText id="title" value="#{items.title}" class="listItem"/>
+                                                            <td width="500px"><h:commandLink id="listItemTitle" value="#{items.title}" 
+                                                                                                 style="color: black" action="#{search.redirectToBookPage()}" 
+                                                                                                 actionListener="#{SingleItem.bookListener(items, &quot;userPlusPage&quot;)}"/>
+                                                                
                                                             </td>
                                                             <td>
 

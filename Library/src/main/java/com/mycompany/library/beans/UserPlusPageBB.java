@@ -255,20 +255,11 @@ public class UserPlusPageBB implements Serializable {
     }
 
     public void checkOutItem(BorrowedItem borrowedItem) {
-       
-        System.out.println("Inne i checkOut " + borrowedItem.getId());
-        System.out.println("Innan vi sätter collected " + borrowedItem.isCollected());
-        
         borrowedItem.setCollected(true);
-        System.out.println("" +borrowedItem.getUser().getBorrowedItems().size());
-        
         borrowedItem.setUser(users.update(borrowedItem.getUser()));
         if(borrowedItem.getUser().getId() == session.getLoggedInUser().getId()){
             session.setLoggedInUser(users.find(session.getLoggedInUser().getId()));
         }
-        System.out.println("Efter vi har satt collected " + borrowedItem.isCollected());
-        System.out.println("" +borrowedItem.getUser().getBorrowedItems().size());
-        
     }
     
     public String getId() {

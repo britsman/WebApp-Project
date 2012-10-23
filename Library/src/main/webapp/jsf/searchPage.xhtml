@@ -39,6 +39,9 @@
                             } 
                         </script>
 
+                        
+                        
+                        
                         <div id="searchForm" style="display: none;background-color: lightgoldenrodyellow">
                             <div style="margin-left: 1em">
                                 <h:form>
@@ -73,14 +76,19 @@
                                         <f:selectItem  itemLabel="Äventyr" itemValue="Äventyr" />
                                     </h:selectOneMenu>
                                     <h:outputLabel value="#{search.genre}"/>
-
+                                    
                                     <br><h:outputLabel value="Språk"/></br> 
                                     <h:selectOneMenu id="laguageTable" value="#{search.language}" style="margin-bottom: 0.5em">
                                         <f:selectItem itemLabel="Alla" itemValue=""/>
                                         <f:selectItem itemLabel="Svenska" itemValue="swedish"/>
                                         <f:selectItem itemLabel="Engelska" itemValue="english"/>
+                                        <f:selectItem itemLabel="Danska" itemValue="danish"/>
+                                        <f:selectItem itemLabel="Norska" itemValue="norwegian"/>
+                                        <f:selectItem itemLabel="Tyska" itemValue="germany"/>
+                                        <f:selectItem itemLabel="Franska" itemValue="french"/>
+                                        <f:selectItem itemLabel="Japanska" itemValue="japanese"/>
                                     </h:selectOneMenu>
-
+                                    
                                     <br><h:outputLabel value="Typ"/></br>                          
                                     <h:selectOneMenu id="typeTable" value="#{search.type}" style="margin-bottom: 0.5em">
                                         <f:selectItem itemLabel="Alla" itemValue=""/>
