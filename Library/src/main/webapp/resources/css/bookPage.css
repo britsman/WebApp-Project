@@ -1,8 +1,42 @@
 
-#bookInformationHeader {
+#bookInformationHeader h1 {
+    font-family: sans-serif;
+    font-size: 18px;
     margin: 10px;
 }
 
 #bookInformationSection {
     margin: 10px;
+    overflow: hidden;
+}
+
+#bookInformationSection img {
+    float: left;
+    width: 140px;
+    height: 140px;
+}
+
+#bookInformationSection ul {
+    clear: both;
+    margin-bottom: 10px;
+}
+
+#bookInformationSection li {
+    padding: 5px;
+}
+
+#bookInformationSection li:nth-of-type(even) {
+    background-color: #fff;
+}
+
+#bookInformationSection li:nth-of-type(odd) {
+    background-color: #acf;
+}
+
+#descriptionSection {
+    margin-bottom: 10px;
+}
+
+#bookInformationSection h6 {
+    font-size: 16px;
 }
