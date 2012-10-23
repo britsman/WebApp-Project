@@ -12,22 +12,23 @@
             <ui:define name="content">
                 <section id="userPage">
                     <header id="userPageHeader">
-                        <h1>Min sida</h1>
+                        <h1 id="headerH1">Välkommen #{currentSession.loggedInUser.username}</h1>
+                       <h:form id="headerForm">
+                            <h:commandButton action="userPlusPage?faces-redirect=true" 
+                                           actionListener="#{currentSession.clearSearch()}" value="Hantera böcker" 
+                                           rendered="#{currentSession.loggedInUser.isLibrarian}" />
+                        </h:form>
                     </header>
-                    <h:form>
-                        <h:commandLink action="userPlusPage?faces-redirect=true" 
-                        actionListener="#{currentSession.clearSearch()}" value="Hantera böcker" 
-                        rendered="#{currentSession.loggedInUser.isLibrarian}" />
-                    </h:form>
-                    <section class="userPageSection">
-                        <section class="userPageSubSection">
+                    
+                   
+                    <section class="userPageSection" >
+                        <section class="userPageSubSectionProfile">
                             <header class="sectionHeader">
                                 <h1>Profil</h1>
                             </header>
-                            <section>
-                                <p>Användarnamn: #{currentSession.loggedInUser.username}</p>
-                                <p>Email: #{currentSession.loggedInUser.email}</p>
+                            <section>                                
                                 <p>Skuld: #{currentSession.loggedInUser.feesOwed} kr</p>
+                                
                             </section>
                         </section>
                         <section class="userPageSubSection">

@@ -185,57 +185,6 @@ public class Item implements Serializable, Comparable<Item> {
         return creatorNames;
     }
 
-    @Override
-    public int compareTo(Item o) {
-        return this.year_released - o.year_released;
-        
-    }
-    
-  	public static Comparator<Item> ItemTitleComparator 
-                          = new Comparator<Item>() {
- 
-	    public int compare(Item item_1, Item item_2) {
- 
-	      String itemName1 = item_1.getTitle().toUpperCase();
-	      String itemName2 = item_2.getTitle().toUpperCase();
- 
-	      return itemName1.compareTo(itemName2);
- 
-	    }
- 
-	};
-        
-        public static Comparator<Item> ItemISBNComparator 
-                          = new Comparator<Item>() {
- 
-	    public int compare(Item item_1, Item item_2) {
- 
-	      String itemName1 = item_1.getId().replace("-","");
-	      String itemName2 = item_2.getId().replace("-","");
- 
-	      return itemName1.compareTo(itemName2);
- 
-	     
-	    }
- 
-	};
-        
-        public static Comparator<Item> ItemAuthorComparator 
-                          = new Comparator<Item>() {
- 
-	    public int compare(Item item_1, Item item_2) {
- 
-	      String itemName1 = item_1.getCreatorNames().toUpperCase();
-	      String itemName2 = item_2.getCreatorNames().toUpperCase();
- 
-	      return itemName1.compareTo(itemName2);
- 
-	    }
- 
-	};
-        
-        
-        
         
         
 }

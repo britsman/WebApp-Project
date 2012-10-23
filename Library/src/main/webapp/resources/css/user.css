@@ -3,6 +3,11 @@
     margin: 10px;
 }
 
+#userPageHeader{
+    overflow: auto;
+}
+    
+
 #userPageNav ul {
     list-style-type: none;
 }
@@ -20,10 +25,30 @@
     text-decoration: underline;
 }
 
+
 .userPageSubSection {
     border: solid 1px black;
     margin: 10px 0px;
 }
 
+.userPageSubSectionProfile{
+    font-size: 14;
+    font-weight: bold;
+}
+
 .even{background-color: orange; }
 .odd{background-color: white;}
+
+.userPageSection{
+    clear: both;
+    
+}
+
+
+#headerH1{
+     float: left;
+}
+
+#headerForm{
+    float: right;
+}
