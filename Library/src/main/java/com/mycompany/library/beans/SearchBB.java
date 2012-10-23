@@ -48,9 +48,7 @@ public class SearchBB implements Serializable {
     public void searchAdvanced() {
         checkConversation();
         QueryProccessor query = WebLib.INSTANCE.getQueryProccessor();
-        genre=null;
-        language=null;
-        type=null;
+        
         session.setSearchResult(query.searchItem(id, title, creator, publisher, description, fromYear, toYear, inStock, language, genre));
 
     }
