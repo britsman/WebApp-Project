@@ -119,7 +119,7 @@ public class TestLibrary {
        
         //Här börjar sökningen
         QueryProccessor q = WebLib.INSTANCE.getQueryProccessor();
-        List<Book> foundItems = null;
+        List<Item> foundItems = null;
         
         foundItems = q.searchItem(null, "Moby Dick", null, null, null, 0, 0, false, null, null);
         System.out.println("Results for title Moby Dick: " + foundItems.get(0).getId());

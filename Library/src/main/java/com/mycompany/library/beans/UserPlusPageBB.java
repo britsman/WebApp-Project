@@ -84,16 +84,16 @@ public class UserPlusPageBB implements Serializable {
         String sortBy="title";
         switch(sortBy){
             case "title": 
-                Collections.sort(list,Item.ItemTitleComparator); 
+                //Collections.sort(list,Item.ItemTitleComparator); 
                 break;
             case "author":
-                Collections.sort(list,Item.ItemAuthorComparator);
+                //Collections.sort(list,Item.ItemAuthorComparator);
                 break;
             case "year" :
-                Collections.sort(list);
+                //Collections.sort(list);
                 break;
             case "isbn":
-                Collections.sort(list,Item.ItemISBNComparator);
+                //Collections.sort(list,Item.ItemISBNComparator);
                 break;
             default:
                 break;

@@ -23,7 +23,7 @@ import javax.persistence.Transient;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="TYPE", discriminatorType=DiscriminatorType.STRING,length=20)
 @DiscriminatorValue("I")
-public class Item implements Serializable, Comparable<Item> {
+public class Item implements Serializable {
     // Unique identifier (stored as strings since ISBN contains '-' signs).
     @Id
     private String id;
