@@ -129,7 +129,7 @@
                                             <h:outputText id="genre" value="#{item.genre}"/>    
                                          </td>
                                         <td >
-                                            <td><h:commandLink id="resultTableBorrow" action="#{search.redirectToSelf()}" value="Låna" 
+                                            <td><h:commandLink id="resultTableBorrow" action="#{search.redirectToSelf()}" value="Låna/Reservera" 
                                             actionListener="#{search.borrowOrReserve(item)}" rendered="#{search.linkVisible()}"/></td>
                                             <td><h:commandLink id="resultTableBookmark" action="#{search.redirectToSelf()}" 
                                             actionListener="#{search.bookMark(item)}" rendered="#{search.linkVisible()}">
