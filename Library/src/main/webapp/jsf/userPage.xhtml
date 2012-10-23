@@ -15,8 +15,9 @@
                         <h1>Min sida</h1>
                     </header>
                     <h:form>
-                    <h:commandLink action="userPlusPage?faces-redirect=true" 
-                    value="Hantera böcker" rendered="#{currentSession.loggedInUser.isLibrarian}" />
+                        <h:commandLink action="userPlusPage?faces-redirect=true" 
+                        actionListener="#{currentSession.clearSearch()}" value="Hantera böcker" 
+                        rendered="#{currentSession.loggedInUser.isLibrarian}" />
                     </h:form>
                     <section class="userPageSection">
                         <section class="userPageSubSection">
@@ -135,7 +136,7 @@
                                         <h:column>
                                             <h:commandLink value="Ta bort"
                                                            action="userPage?faces-redirect=true"
-                                                           actionListener="#{userPage.removeBookmakedItem(item)}" />
+                                                           actionListener="#{userPage.removeBookmakedItem(item.id)}" />
                                         </h:column>
                                     </h:dataTable>
                                     <h:outputLabel rendered="#{empty currentSession.loggedInUser.bookmarkedItems}" 

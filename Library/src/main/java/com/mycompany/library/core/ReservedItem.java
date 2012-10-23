@@ -51,6 +51,18 @@ public class ReservedItem implements Serializable {
         qp.updatePositions(user, this);
         user.updateReservation(this);      
     }
+    public void firstInQueBorrow() {
+        UserRegistry users = WebLib.INSTANCE.getUsers();
+        QueryProccessor query = WebLib.INSTANCE.getQueryProccessor();        
+        User tempUser = query.getUserAtPosition(1, this);
+        this.updatePositions(tempUser);
+        tempUser = users.update(tempUser);
+        if (this.que.size() == 1) {
+            query.removeReservedItem(this.id);
+        }
+        tempUser.tryBorrowItem(this.item);
+        users.update(tempUser);
+    }
     
     public Item getItem() {
         return item;

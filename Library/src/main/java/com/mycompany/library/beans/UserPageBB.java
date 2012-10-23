@@ -36,13 +36,13 @@ public class UserPageBB implements Serializable {
     }  
     /* Managing bookmarked items */   
     public void bookmarkItem(Item item) {
-        if (!session.getLoggedInUser().getBookmarkedItems().contains(item)) {
+        if (!session.getLoggedInUser().hasBookmarked(item.getId())) {
             session.getLoggedInUser().setBookmarkedItems(item);
             session.setLoggedInUser(users.update(session.getLoggedInUser()));
         }
     }
-    public void removeBookmakedItem(Item item) {
-        session.getLoggedInUser().removeBookmarkedItem(item);
+    public void removeBookmakedItem(String id) {
+        session.getLoggedInUser().removeBookmarkedItem(id);
         session.setLoggedInUser(users.update(session.getLoggedInUser()));
     }    
     /* Managing resereved items */
@@ -55,7 +55,6 @@ public class UserPageBB implements Serializable {
         reservedItem.updatePositions(session.getLoggedInUser());
         session.setLoggedInUser(users.update(session.getLoggedInUser()));
         if(reservedItem.getQue().size() == 1){
-            reservedItem = q.findReservedItem(reservedItem.getItem());
             q.removeReservedItem(reservedItem.getId());
         }
     }   
@@ -66,9 +65,17 @@ public class UserPageBB implements Serializable {
     }
     
     public void removeBorrowedItem(BorrowedItem borrowedItem) {
-        if(!borrowedItem.isCollected()){
-        session.getLoggedInUser().removeBorrowedItem(borrowedItem);
-        session.setLoggedInUser(users.update(session.getLoggedInUser()));
+        if (!borrowedItem.isCollected()) {
+            session.getLoggedInUser().removeBorrowedItem(borrowedItem);
+            session.setLoggedInUser(users.update(session.getLoggedInUser()));
+            QueryProccessor query = WebLib.INSTANCE.getQueryProccessor();
+            ReservedItem tempReserved = query.findReservedItem(borrowedItem.getItem());
+            if (tempReserved != null) {
+                tempReserved.firstInQueBorrow();
+                if(session.getLoggedInUser().hasReserved(tempReserved.getId())){
+                    session.setLoggedInUser(users.find(session.getLoggedInUser().getId()));
+                }
+            }           
         }
     }
     /* Managing dates */  

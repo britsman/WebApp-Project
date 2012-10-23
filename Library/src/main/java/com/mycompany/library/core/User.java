@@ -110,8 +110,23 @@ public class User implements Serializable{
         }
         return hasIt;
     }    
-    public void removeBookmarkedItem(Item item) {
-        bookmarkedItems.remove(item);
+        public boolean hasBookmarked(String id) {
+        boolean hasIt = false;
+        for (int i = 0; i < this.bookmarkedItems.size(); i++) {
+            if (id.equals(this.bookmarkedItems.get(i).getId())){
+                hasIt = true;
+                break;
+            }
+        }
+        return hasIt;
+    }
+    public void removeBookmarkedItem(String id) {
+        for (int i = 0; i < this.bookmarkedItems.size(); i++) {
+            if (id.equals(this.bookmarkedItems.get(i).getId())){
+                this.bookmarkedItems.remove(i);
+                break;
+            }
+        }
     }
     public Long getId() {
         return id;

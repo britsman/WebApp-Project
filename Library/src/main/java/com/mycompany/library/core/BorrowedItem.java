@@ -48,16 +48,20 @@ public class BorrowedItem implements Serializable {
         q.removeBorrowedItem(this.id);
     }
 
-    public void checkCollectDatePassed() {
-        ItemCollection items = WebLib.INSTANCE.getItems();
+    public void checkCollectDatePassed() {    
+        QueryProccessor query = WebLib.INSTANCE.getQueryProccessor();
+        UserRegistry users = WebLib.INSTANCE.getUsers();
         Long milliPerDay = 86400000L;
         Date today = new Date();
         int daysUncollected = (int) ((today.getTime() - this.loanDate.getTime()) / milliPerDay);
         if (daysUncollected >= 3) {
-            this.item.setQuantity((this.item.getQuantity()) + 1);
-            this.removeFromTable();
+            this.user.removeBorrowedItem(this);
+            users.update(this.user);      
+            ReservedItem tempReserved = query.findReservedItem(this.item);
+            if (tempReserved != null) {
+                tempReserved.firstInQueBorrow();
+            }
         }
-        this.item = items.update(this.item);
     }
 
     public Item getItem() {

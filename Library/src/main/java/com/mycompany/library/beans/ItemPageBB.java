@@ -39,7 +39,7 @@ public class ItemPageBB implements Serializable {
         session.setLoggedInUser(users.update(session.getLoggedInUser()));
     }
     public void bookMark() {
-        if (!session.getLoggedInUser().getBookmarkedItems().contains(book)) {
+        if (!session.getLoggedInUser().hasBookmarked(book.getId())) {
             session.getLoggedInUser().setBookmarkedItems(book);
             session.setLoggedInUser(users.update(session.getLoggedInUser()));
         }

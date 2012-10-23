@@ -189,6 +189,26 @@ public class QueryProccessor {
         }       
         return position;
     }
+    public User getUserAtPosition(int position, ReservedItem reservation) {
+        User user = null;
+        EntityManager em = emf.createEntityManager();
+        try {
+            String query = "select q.user from ReservedItem" + 
+            " ri inner join ri.que q where ri= :reservation AND q.position = :position";
+            TypedQuery<User> q = em.createQuery(query, User.class);
+            q.setParameter("reservation", reservation);
+            q.setParameter("position", position);
+            user = q.getSingleResult();
+
+        } catch (Exception e) {
+            System.err.println("Query exception: " + e.getMessage());
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return user;
+    }
     public void updatePositions(User user, ReservedItem reserved){
         EntityManager em = emf.createEntityManager();
         try {

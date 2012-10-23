@@ -67,7 +67,7 @@ public class SearchBB implements Serializable {
     }
     
      public void bookMark(Item item){
-        if(!session.getLoggedInUser().getBookmarkedItems().contains(item)){
+        if(!session.getLoggedInUser().hasBookmarked(item.getId())){
             session.getLoggedInUser().setBookmarkedItems(item);
         }        
         session.setLoggedInUser(users.update(session.getLoggedInUser()));
@@ -78,7 +78,7 @@ public class SearchBB implements Serializable {
     }
     
     public String bookMarkImg(Item item){
-        if(session.getLoggedInUser().getBookmarkedItems().contains(item)){
+        if(session.getLoggedInUser().hasBookmarked(item.getId())){
             return "/resources/img/star_full.png";
         }
         return "/resources/img/star_none.png";

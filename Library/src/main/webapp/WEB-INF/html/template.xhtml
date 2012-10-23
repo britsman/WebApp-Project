@@ -32,7 +32,12 @@
                 <ul>
                     <li><a href="library.xhtml">Startsidan</a></li>
                     <li><h:link outcome="#{currentSession.myPage()}" value="#{currentSession.myPageLinkName()}" /></li>
-                    <li><a href="searchPage.xhtml">Hitta böcker</a></li>
+                    <li>
+                        <h:form>
+                            <h:commandLink value="Hitta Böcker" action="searchPage?faces-redirect=true" 
+                            actionListener="#{currentSession.clearSearch()}"/>
+                        </h:form>
+                    </li>
                     <li><a href="faqPage.xhtml">Frågor &amp; Svar</a></li>                    
                 </ul>
             </nav>
