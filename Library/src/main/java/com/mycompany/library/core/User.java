@@ -27,7 +27,7 @@ public class User implements Serializable{
     private String email;
     private Double feesOwed;
     private boolean isLibrarian;
-    @OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     private List<BorrowedItem> borrowedItems;
     @OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
     private List<ReservedItem> reservedItems;
