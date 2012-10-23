@@ -165,11 +165,27 @@ public class UserPlusPageBB implements Serializable {
         b.setDescription(editDescription);
         b.setPageNum(editPageNum);
         b.setLoan_period(editLoan_period);
-        b.setFee(editFee);
-        b.setYear(editYear_release);
+        if(editFee > 0){
+            b.setFee(editFee);
+        }       
+        if(editYear_release > 0){
+            b.setYear(editYear_release);
+        }
         b.setGenre(editGenre);
         b.setLanguage(editLanguage);
-        b.setQuantity(editQuantity);
+        if(editQuantity > b.getQuantity() && b.getQuantity() == 0){
+            QueryProccessor query = WebLib.INSTANCE.getQueryProccessor();
+            ReservedItem tempReserved = query.findReservedItem(b);
+            while(tempReserved != null && editQuantity > 0){
+                tempReserved.firstInQueBorrow();
+                tempReserved = query.findReservedItem(b);
+                editQuantity--;
+            }                              
+            b.setQuantity(editQuantity);
+        }
+        else if(editQuantity >= 0){
+            b.setQuantity(editQuantity);
+        }
         itemCollection.update(b);
         edit=false;
         session.setLoggedInUser(users.find(session.getLoggedInUser().getId()));
