@@ -41,7 +41,7 @@ public class UserPageBB implements Serializable {
             session.setLoggedInUser(users.update(session.getLoggedInUser()));
         }
     }
-    public void removeBookmakedItem(String id) {
+    public void removeBookmarkedItem(String id) {
         session.getLoggedInUser().removeBookmarkedItem(id);
         session.setLoggedInUser(users.update(session.getLoggedInUser()));
     }    
