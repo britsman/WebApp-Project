@@ -151,7 +151,7 @@ public class TestLibrary {
         foundItems= q.searchItem(null, null, null, "Penguin", null, 0, 0, false, null, null);
         System.out.println("Böcker utgivna via Penguin: " + foundItems);
         
-        foundItems = q.searchItem(null, null, null, null, null, 0, 0, false, null, "Horror");
+        foundItems = q.searchItem(null, null, null, null, null, 0, 0, false, null, "Skräck");
         System.out.println("Skräckböcker: " + foundItems);
         
     }

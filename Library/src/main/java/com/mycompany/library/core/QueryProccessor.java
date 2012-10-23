@@ -104,8 +104,8 @@ public class QueryProccessor {
         else if(fromYear == 0 && toYear != 0){q += " and i.year_released <"+toYear;}
         else if(fromYear != 0 && toYear == 0){q += " and i.year_released >"+fromYear;}
         if(inStock){q += " AND i.quantity > 0";}
-        if(language != null){q += " and lower(language) = '" + language.toLowerCase()+"'";}
-        if(genre != null){q += " and lower(genre) = '" + genre.toLowerCase()+"'";}
+        if(language != null){q += " and lower(i.language) = '" + language.toLowerCase()+"'";}
+        if(genre != null){q += " and lower(i.genre) = '" + genre.toLowerCase()+"'";}
         
         try{
             TypedQuery<Item> query = em.createQuery(q, Item.class);
