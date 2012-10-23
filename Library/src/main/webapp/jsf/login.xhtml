@@ -52,14 +52,14 @@
                                </h:inputText>
                             <h:message for="txtEmailReg" showSummary="true" showDetail="false" style="color: red" /></p>
                             <p><h:outputLabel for="txtPasswordReg" value ="Lösenord"/></p>
-                            <p><h:inputText id="txtPasswordReg" value="#{register.password}">
+                            <p><h:inputSecret id="txtPasswordReg" value="#{register.password}">
                                     <f:validator validatorId="PasswordValidator" />
-                               </h:inputText>
+                               </h:inputSecret>
                             <h:message for="txtPasswordReg" showSummary="true" showDetail="false" style="color: red" /></p>
                             <p><h:outputLabel for="txtPasswordReg" value ="Upprepa lösenord"/></p>
-                            <p><h:inputText id="txtPasswordRegConfirm" value="#{register.confirmPassword}">
+                            <p><h:inputSecret id="txtPasswordRegConfirm" value="#{register.confirmPassword}">
                                     <f:validator validatorId="PasswordValidator" />
-                               </h:inputText>
+                               </h:inputSecret>
                             <h:message for="txtPasswordRegConfirm" showSummary="true" showDetail="false" style="color: red" /></p>
                             <p>
                                 <h:commandButton id="btnOK" value="OK"  actionListener="#{register.registerUser()}" 
