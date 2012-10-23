@@ -55,17 +55,16 @@ public class User implements Serializable{
     }
     
     public void removeBorrowedItem(BorrowedItem borrowedItem) {
-        if (borrowedItems.contains(borrowedItem)) {
-            ItemCollection ic = WebLib.INSTANCE.getItems();
-            
-            borrowedItem.removeFromTable();
-            borrowedItems.remove(borrowedItem);
-            
-            Item item = borrowedItem.getItem();
-            int quantity = item.getQuantity();
-            item.setQuantity(quantity + 1);
-            
-            ic.update(item);
+        for (int i = 0; i < this.borrowedItems.size(); i++) {
+            if (borrowedItem.getId().equals(this.borrowedItems.get(i).getId())) {
+                ItemCollection ic = WebLib.INSTANCE.getItems();
+                borrowedItem.removeFromTable();
+                this.borrowedItems.remove(i);
+                Item item = ic.find(borrowedItem.getItem().getId());
+                item.setQuantity((item.getQuantity()) + 1);
+                ic.update(item);
+                break;
+            }
         }
     }
     

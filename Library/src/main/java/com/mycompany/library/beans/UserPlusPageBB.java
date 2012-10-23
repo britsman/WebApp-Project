@@ -205,11 +205,8 @@ public class UserPlusPageBB implements Serializable {
             }
         }
         for (User user : users.getAll()) {
-            System.out.println(user.getBookmarkedItems().size());
             user.removeBookmarkedItem(id);
-            System.out.println(user.getBookmarkedItems().size());
             user = users.update(user);
-            System.out.println(user.getBookmarkedItems().size());
             if (user.getId() == session.getLoggedInUser().getId()) {
                 currentUserUpdated = true;
             }
@@ -220,10 +217,8 @@ public class UserPlusPageBB implements Serializable {
                 users.update(que.getUser());
             }
             query.removeReservedItem(tempReserved.getId());
-        }
-        if(currentUserUpdated){
-            session.setLoggedInUser(users.find(session.getLoggedInUser().getId()));
-        }
+        }       
+        session.setLoggedInUser(users.find(session.getLoggedInUser().getId()));
         itemCollection.remove(id);
     }
 
@@ -265,17 +260,13 @@ public class UserPlusPageBB implements Serializable {
         if (tempReserved != null) {
             tempReserved.firstInQueBorrow();
         }       
-        if (borrowedItem.getUser().getId() == session.getLoggedInUser().getId()) {
-            session.setLoggedInUser(users.find(session.getLoggedInUser().getId()));
-        }
+        session.setLoggedInUser(users.find(session.getLoggedInUser().getId()));
     }
 
     public void checkOutItem(BorrowedItem borrowedItem) {
         borrowedItem.setCollected(true);
         users.update(borrowedItem.getUser());
-        if(borrowedItem.getUser().getId() == session.getLoggedInUser().getId()){
-            session.setLoggedInUser(users.find(session.getLoggedInUser().getId()));
-        }
+        session.setLoggedInUser(users.find(session.getLoggedInUser().getId()));
         System.out.println("Checka ut: " + borrowedItem.isCollected());
     }
     

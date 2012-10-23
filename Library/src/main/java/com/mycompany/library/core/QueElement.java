@@ -2,6 +2,7 @@ package com.mycompany.library.core;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ public class QueElement implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)        
     Long id;
     private int position;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     private User user;
 
     public QueElement() {

@@ -137,7 +137,7 @@
                                         <h:column>
                                             <h:commandLink value="Ta bort"
                                                            action="userPage?faces-redirect=true"
-                                                           actionListener="#{userPage.removeBookmakedItem(item.id)}" />
+                                                           actionListener="#{userPage.removeBookmarkedItem(item.id)}" />
                                         </h:column>
                                     </h:dataTable>
                                     <h:outputLabel rendered="#{empty currentSession.loggedInUser.bookmarkedItems}" 

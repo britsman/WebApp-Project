@@ -8,6 +8,7 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -28,7 +29,7 @@ public class Item implements Serializable {
     @Id
     private String id;
     private String title;
-    @ManyToMany(mappedBy = "items", cascade=CascadeType.MERGE)
+    @ManyToMany(mappedBy = "items", cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
     private List<Creator> creators;
     // Link to image file.
     private String image;

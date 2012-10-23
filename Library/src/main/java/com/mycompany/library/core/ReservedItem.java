@@ -22,7 +22,7 @@ public class ReservedItem implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     //OneToOne since one item can either be reserved or not reserved
-    @OneToOne
+    @OneToOne(fetch=FetchType.EAGER)
     private Item item;   
     //Que of users waiting to borrow
     @OneToMany(cascade={CascadeType.MERGE, CascadeType.REMOVE}, 
