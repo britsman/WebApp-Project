@@ -68,8 +68,7 @@ public class User implements Serializable{
         }
     }
     
-    public void tryReserveItem(Item item) {
-        if (!this.hasBorrowed(item.getId())) {       
+    public void tryReserveItem(Item item) {  
         QueryProccessor q = WebLib.INSTANCE.getQueryProccessor();
         ReservedItem reserve = q.findReservedItem(item);
             if (reserve == null) {
@@ -78,7 +77,6 @@ public class User implements Serializable{
                 reserve.setQue(this);
                 this.setReservedItems(reserve);
             }
-        }
     }
             
     public void updateReservation(ReservedItem reserved){

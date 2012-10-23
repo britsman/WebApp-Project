@@ -192,32 +192,26 @@ public class UserPlusPageBB implements Serializable {
     }
     
     public void removeItem(String id) {
-        boolean currentUserUpdated = false;
         QueryProccessor query = WebLib.INSTANCE.getQueryProccessor();
         ReservedItem tempReserved = query.findReservedItem(itemCollection.find(id));
-        for (BorrowedItem item : getAllBorrowedItems()) {
-            if (item.getItem().getId().equals(id)) {
-                item.getUser().removeBorrowedItem(item);
-                users.update(item.getUser());
-                if(item.getUser().getId() == session.getLoggedInUser().getId()){
-                    currentUserUpdated = true;
-                }
-            }
-        }
-        for (User user : users.getAll()) {
-            user.removeBookmarkedItem(id);
-            user = users.update(user);
-            if (user.getId() == session.getLoggedInUser().getId()) {
-                currentUserUpdated = true;
-            }
-        }
+        
         if (tempReserved != null) {
             for (QueElement que : tempReserved.getQue()) {
                 tempReserved.updatePositions(que.getUser());
                 users.update(que.getUser());
             }
             query.removeReservedItem(tempReserved.getId());
-        }       
+        }   
+        for (BorrowedItem item : getAllBorrowedItems()) {
+            if (item.getItem().getId().equals(id)) {
+                item.getUser().removeBorrowedItem(item);
+                users.update(item.getUser());
+            }
+        }
+        for (User user : users.getAll()) {
+            user.removeBookmarkedItem(id);
+            user = users.update(user);
+        }    
         session.setLoggedInUser(users.find(session.getLoggedInUser().getId()));
         itemCollection.remove(id);
     }
