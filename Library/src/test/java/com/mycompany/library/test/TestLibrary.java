@@ -20,9 +20,8 @@ import org.junit.Test;
  * @author user
  */
 public class TestLibrary {
-    private String creatorName = "Author";
-    private String itemId = "0975-523";
     private String userName = "Eric1";
+    private String itemId = "978-1452106557";
     
     @Test
     public void orderedTest(){//Tests were being done async, causing bugs.
@@ -36,6 +35,7 @@ public class TestLibrary {
         //testRemove(); 
     }
     public void testAddItem(){
+        String creatorName = "Jeffrey Brown";
         ItemCollection items = WebLib.INSTANCE.getItems();
         CreatorCollection creators = WebLib.INSTANCE.getCreators();
         List<Creator> temp = new ArrayList<>();
@@ -44,8 +44,8 @@ public class TestLibrary {
             creator = new Creator(creatorName);
         }
         temp.add(creator);
-        Item item = new Book(itemId, "testbook", temp, "publisher",
-        "English", 2012, 200, "comedy", "/resources/img/defaultBook.png", "desc", 1, 7, 10);
+        Item item = new Book(itemId, "Darth Vader & Son", temp, "Chronicle",
+        "English", 2012, 64, "Komedi", "/resources/img/defaultBook.png", "desc", 1, 7, 10);
         item = items.update(item);
     }
     public void testAddUser(){
@@ -98,7 +98,7 @@ public class TestLibrary {
         }
         cList.add(c1);
         Item item1 = new Book("978-0140623178", "Moby Dick", cList, "Penguin",
-        "English", 1851, 544, "Horror", "/resources/img/defaultBook.png", "Tuff bok om valar och grejer, inte skriven av Jules Verne", 1, 7, 10);
+        "English", 1851, 544, "Skräck", "/resources/img/defaultBook.png", "Tuff bok om valar och grejer, inte skriven av Jules Verne", 1, 7, 10);
         item1 = items.update(item1);
         
         c1 = creators.getByName("Jules Verne");
@@ -107,14 +107,14 @@ public class TestLibrary {
         }
         cList.set(0, c1);
         Item item2 = new Book("978-2080702999", "La tour du Monde en quatre-vingts jours", cList, "Flammarion", "French", 1873, 200,
-        "Adventure", "/resources/img/defaultBook.png", "Tuff bok, inte lika många valar dock.", 1, 7, 10);
+        "Äventyr", "/resources/img/defaultBook.png", "Tuff bok, inte lika många valar dock.", 1, 7, 10);
         item2 = items.update(item2);
         
         c1 = item2.getCreators().get(0);
         cList.set(0, c1);
         
         Item item3 = new Book("978-0486440880", "Journey to the Center of the Earth", cList, "Dover Thrift", "English", 1864, 200, 
-                "Adventure", "/resources/img/defaultBook.png", "Massa grejer i jorden", 0, 7, 10);
+                "Äventyr", "/resources/img/defaultBook.png", "Massa grejer i jorden", 0, 7, 10);
         item3 = items.update(item3);
        
         //Här börjar sökningen

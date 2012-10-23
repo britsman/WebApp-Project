@@ -44,7 +44,7 @@ public class GenerateTestData {
         }
         cList.add(c1);
         Item item1 = new Book("978-0140623178", "Moby Dick", cList, "Penguin",
-        "English", 1851, 544, "Horror", "/resources/img/defaultBook.png", 
+        "English", 1851, 544, "Skräck", "/resources/img/defaultBook.png", 
         "Tuff bok om valar och grejer, inte skriven av Jules Verne", 1, 7, 10);
         item1 = items.update(item1);
         
@@ -54,7 +54,7 @@ public class GenerateTestData {
         }
         cList.set(0, c1);
         Item item2 = new Book("978-2080702999", "La tour du Monde en quatre-vingts jours", 
-        cList, "Flammarion", "French", 1873, 200, "Adventure", "/resources/img/defaultBook.png", 
+        cList, "Flammarion", "French", 1873, 200, "Äventyr", "/resources/img/defaultBook.png", 
         "Tuff bok, inte lika många valar dock.", 1, 7, 10);
         item2 = items.update(item2);
         
@@ -62,7 +62,7 @@ public class GenerateTestData {
         cList.set(0, c1);
         
         Item item3 = new Book("978-0486440880", "Journey to the Center of the Earth", 
-        cList, "Dover Thrift", "English", 1864, 200, "Adventure", "/resources/img/defaultBook.png", 
+        cList, "Dover Thrift", "English", 1864, 200, "Äventyr", "/resources/img/defaultBook.png", 
         "Massa grejer i jorden", 0, 7, 10);
         item3 = items.update(item3);
         
@@ -81,7 +81,7 @@ public class GenerateTestData {
         cList.add(c2);
         
         Item item4 = new Book("978-9144076065", "Vägen till C", cList, "Studentlitteratur", 
-        "Swedish", 2011, 269, "Computers", "/resources/img/defaultBook.png", 
+        "Swedish", 2011, 269, "EssReportage", "/resources/img/defaultBook.png", 
         "Här står det en massa om C", 1, 10, 20);
         item4 = items.update(item4);
         
@@ -146,15 +146,15 @@ public class GenerateTestData {
         // Making some creators.
         CreatorCollection cc = WebLib.INSTANCE.getCreators();
         
-        Creator creator1 = cc.getByName("creator1");
-        Creator creator2 = cc.getByName("creator2");
+        Creator creator1 = cc.getByName("Greg Stones");
+        Creator creator2 = cc.getByName("Homeros");
         Creator creator3 = cc.getByName("creator3");
         
         if (creator1 == null) {
-            creator1 = new Creator("creator1");
+            creator1 = new Creator("Greg Stones");
         }
         if (creator2 == null) {
-            creator2 = new Creator("creator2");
+            creator2 = new Creator("Homeros");
         }
         if (creator3 == null) {
             creator3 = new Creator("creator3");
@@ -163,10 +163,10 @@ public class GenerateTestData {
         
         creators1.add(creator1);
         creators1.add(creator2);
-        creators1.add(creator3); 
+        creators1.add(creator3);
         
-        Item item1 = new Book("1", "title1", creators1, "Publisher1", "Language1", 
-        2012, 1337, "Genre1", 5);
+        Item item1 = new Book("978-1452107400", "Zombies hate stuff", creators1, "Chronicle", "english", 
+        2012, 64, "Skräck", 5);
         item1 = ic.update(item1);
         creator1 = item1.getCreators().get(0);
         creator2 = item1.getCreators().get(1);
@@ -174,8 +174,8 @@ public class GenerateTestData {
         creators1.set(0, creator1);
         creators1.set(1, creator2);
         creators1.set(2, creator3);
-        Item item2 = new Book("2", "title2", creators1, "Publisher2", "Language2", 
-        2012, 1337, "Genre2", 5);
+        Item item2 = new Book("978-0977626991", "Odysseus", creators1, "Richer Resources Publications", "english", 
+        2, 500, "Klassiker", 5);
         item2 = ic.update(item2);
         creator1 = item2.getCreators().get(0);
         creator2 = item2.getCreators().get(1);
@@ -183,8 +183,8 @@ public class GenerateTestData {
         creators1.set(0, creator1);
         creators1.set(1, creator2);
         creators1.set(2, creator3);
-        Item item3 = new Book("3", "title3", creators1, "Publisher3", "Language3", 
-        2012, 1337, "Genre3", 5);
+        Item item3 = new Book("978-0977626908", "The Iliad", creators1, "Richer Resources Publications", "english", 
+        3, 1000, "Klassiker", 5);
         item3 = ic.update(item3);
         
         // BorrowedItem
