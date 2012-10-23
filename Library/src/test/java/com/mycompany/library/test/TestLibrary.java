@@ -115,11 +115,11 @@ public class TestLibrary {
         
         Item item3 = new Book("978-0486440880", "Journey to the Center of the Earth", cList, "Dover Thrift", "English", 1864, 200, 
                 "Adventure", "/resources/img/defaultBook.png", "Massa grejer i jorden", 0, 7, 10);
-       item3 = items.update(item3);
+        item3 = items.update(item3);
        
         //Här börjar sökningen
         QueryProccessor q = WebLib.INSTANCE.getQueryProccessor();
-        List<Item> foundItems = null;
+        List<Book> foundItems = null;
         
         foundItems = q.searchItem(null, "Moby Dick", null, null, null, 0, 0, false, null, null);
         System.out.println("Results for title Moby Dick: " + foundItems.get(0).getId());
@@ -150,6 +150,9 @@ public class TestLibrary {
         
         foundItems= q.searchItem(null, null, null, "Penguin", null, 0, 0, false, null, null);
         System.out.println("Böcker utgivna via Penguin: " + foundItems);
+        
+        foundItems = q.searchItem(null, null, null, null, null, 0, 0, false, null, "Horror");
+        System.out.println("Skräckböcker: " + foundItems);
         
     }
     public void testRemove(){

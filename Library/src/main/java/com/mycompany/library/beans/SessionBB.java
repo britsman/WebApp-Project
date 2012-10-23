@@ -39,7 +39,7 @@ public class SessionBB implements Serializable {
             return ("Inloggad som "+loggedInUser.getUsername());
         }
     }
-    
+
     public String myPage(){
         if(loggedInUser == null){
             return "login.xhtml";
