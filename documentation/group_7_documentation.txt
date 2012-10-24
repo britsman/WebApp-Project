@@ -1,0 +1,30 @@
+Group name:
+	Jeff (group 7)
+
+Group members:
+	Eric Britsman 9007191373 gusbriter@student.gu.se
+	Fredrik Estelius 881008-4999 fredrik.estelius@gmail.com (dargar on github)
+	Fredrik Sjöholm 880709-4878 frsjoholm@gmail.com
+	Johannes Weschke 840829-5015 johwesc@student.chalmers.se
+
+Overview:
+	This is a simple library page for browsing, reserving, bookmarking and borrowing books.
+	
+	The web application is supposed to be able to handle regular users who are browsing
+	books (and possibly items) and reserving, bookmarking or borrowing them.
+	
+	Another type of user (user plus) can manage the items in the system (CRUD) and is responsible
+	for checking in and out items that users wish to borrow/return.
+	
+	There is an automated system in place that can notify users about the expiry of the 
+	alloted time to borrow an item (for example).
+	
+Users/Roles:
+	User:
+		Allowed to browse, bookmark, reserve and borrow items in the library database (using
+		the web page interface).
+
+	User plus (librarian):
+		Allowed to manage all the items checked into the library (database). Can check in and
+		out books and items that the regular users wishes to borrow or return.
+		All done through a section of the web interface.

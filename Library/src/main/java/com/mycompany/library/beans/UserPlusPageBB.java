@@ -11,12 +11,10 @@ import com.mycompany.library.core.User;
 import com.mycompany.library.core.WebLib;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import sun.misc.Compare;
 
 /**
  * Backing bean for UserPlusPage.xhtml 
@@ -98,8 +96,7 @@ public class UserPlusPageBB implements Serializable {
             default:
                 break;
         }
-        System.out.println("Innan vi returnar i getAll med sort" +sortBy);
-                return list;
+        return list;
     }
       
     public void createItem() {
@@ -261,7 +258,6 @@ public class UserPlusPageBB implements Serializable {
         borrowedItem.setCollected(true);
         users.update(borrowedItem.getUser());
         session.setLoggedInUser(users.find(session.getLoggedInUser().getId()));
-        System.out.println("Checka ut: " + borrowedItem.isCollected());
     }
     
     public String getId() {
