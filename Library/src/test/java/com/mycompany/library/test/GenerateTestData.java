@@ -132,13 +132,13 @@ public class GenerateTestData {
             user1 = new User("user1", "user1", "user1@user.mail", 0.0);
         }
         if (user2 == null) {
-            user2 = new User("user2", "user2", "eric_britsman@hotmail.com", 0.0);
+            user2 = new User("user2", "user2", "jeff.dit126@gmail.com", 0.0);
         }
         if (user3 == null) {
             user3 = new User("user3", "user3", "user3@user.mail", 0.0);            
         }
         if (user4 == null) {           
-            user4 = new User("user4", "user4", "user4@user.mail", 0.0);
+            user4 = new User("user4", "user4", "jeff.dit126@gmail.com", 0.0);
         }           
         user1.setIsLibrarian(true);
         user2.setFeesOwed(20.0);
@@ -191,6 +191,11 @@ public class GenerateTestData {
         if(!user2.hasBorrowed(item2.getId())){
             BorrowedItem borrowedItem1 = new BorrowedItem(item2, user2);
             borrowedItem1.setLoanDate(new Date(borrowedItem1.getLoanDate().getTime()- milliPerDay * 6));
+            borrowedItem1.setCollected(true);
+        }
+        if(!user4.hasBorrowed(item2.getId())){
+            BorrowedItem borrowedItem1 = new BorrowedItem(item2, user4);
+            borrowedItem1.setLoanDate(new Date(borrowedItem1.getLoanDate().getTime()- milliPerDay * 9));
             borrowedItem1.setCollected(true);
         }
         

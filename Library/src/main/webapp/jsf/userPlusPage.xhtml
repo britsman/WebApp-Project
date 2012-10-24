@@ -14,66 +14,40 @@
                     <link href="./../resources/css/userPlus.css" rel="stylesheet" type="text/css" />
                 </head>
                 <section id="userPlusPage">
-                    <script type="text/javascript">
-                        // <![CDATA[
-                        // When the Document loads
-                        
+                    <script type="text/javascript">                        
                         $(document).ready(function(){
-                            // When a tab link is clicked
-                            
-                             var variableFromServer = '${userPlus.show_content}'
-                        $("#"+variableFromServer ).show();
-                            
+                            var show_content = '${userPlus.show_content}'
+                            $("#"+show_content ).show();
                             $("a.tab").click(function () {
-                                // Remove old active class
                                 $(".active").removeClass("active");
-                                // Give active class to actual tab link
                                 $(this).addClass("active");
-                                // Hide the content
                                 $(".content").hide();
-                               // Show the content obtaining the title atribute of current link
                                 var title = $(this).attr("title");
                                 $("#"+title).show();
                             });
                         });
-                        // ]]>
                     </script>
-                    
-                                        <script language="javascript"> 
-                                            function toggle() {
-                                                var settings = document.getElementById("editForm");
-                                                                
-                                                if(settings.style.display == "block") {
-                                                    settings.style.display = "none";
-                                                                    
-                                                }
-                                                else {
-                                                    settings.style.display = "block";
-                                                                    
-                                                }
-                                            } 
-                                        </script>
-                    
+
                     <div id="content">
                         <div id="tab_container">
                             <ul class="tab_header">
                                 <h:form>
-                                <li>
-                                    <h:commandLink class="tab" title="content_1" value="In/Ut checknig" 
-                                    action="#{userPlus.action(&quot;content_1&quot;)}"/>
-                                </li>
-                                <li>
-                                    <h:commandLink class="tab" title="content_2" value="Lägg till bok" 
-                                    action="#{userPlus.action(&quot;content_2&quot;)}"/>
-                                </li>
-                                <li>
-                                    <h:commandLink class="tab" title="content_3" value="Lånade böcker" 
-                                    action="#{userPlus.action(&quot;content_3&quot;)}"/>
-                                </li>
-                                <li>
-                                    <h:commandLink class="tab" title="content_4" value="Ändra böcker" 
-                                    action="#{userPlus.action(&quot;content_4&quot;)}"/>
-                                </li>
+                                    <li>
+                                        <h:commandLink class="tab" title="content_1" value="In/Ut checknig" 
+                                                       action="#{userPlus.action(&quot;content_1&quot;)}"/>
+                                    </li>
+                                    <li>
+                                        <h:commandLink class="tab" title="content_2" value="Lägg till bok" 
+                                                       action="#{userPlus.action(&quot;content_2&quot;)}"/>
+                                    </li>
+                                    <li>
+                                        <h:commandLink class="tab" title="content_3" value="Lånade böcker" 
+                                                       action="#{userPlus.action(&quot;content_3&quot;)}"/>
+                                    </li>
+                                    <li>
+                                        <h:commandLink class="tab" title="content_4" value="Ändra böcker" 
+                                                       action="#{userPlus.action(&quot;content_4&quot;)}"/>
+                                    </li>
                                 </h:form>
                             </ul>
                             <div id="tab_content">
@@ -85,39 +59,39 @@
                                     <h:outputLabel value="Id" style="margin-left: 14px; font-size: 16px; font-weight: bold"/>
                                     <h:outputLabel  value="Namn" style="margin-left: 20px; font-size: 16px; font-weight: bold"/>
                                     <h:form >
-                                        
+
                                         <h:dataTable var="borrowedItem" value="#{userPlus.allBorrowedItems}" style="width: 100%"  cellspacing="10px">
-                                        
+
                                             <h:outputLabel for="loneId" value="Id"/>
-                                            
-                                       <h:column id="loneId">
-                                            
-                                            <h:outputText value="#{borrowedItem.id}" class="borrowedItem"/>
-                                        </h:column>
-                                        <h:column id="username">
-                                            
-                                            <h:outputText value="#{borrowedItem.user.username}" class="borrowedItem"/>
-                                        </h:column>
-                                        <h:column>
-                                            
-                                            <h:outputText value="#{borrowedItem.item.title}" class="borrowedItem"/>
-                                        </h:column>
-                                        <h:column>
-                                            <h:commandButton value="Lämna ut" rendered="#{not(borrowedItem.collected)}"
-                                                             action="userPlusPage?faces-redirect=true"
-                                                             actionListener="#{userPlus.checkOutItem(borrowedItem)}"
-                                                             style="width: 100px">
-                                                
-                                            </h:commandButton>
-                                        
-                                            <h:commandButton value="Lämna tillbaka" rendered="#{(borrowedItem.collected)}"
-                                                             action="userPlusPage?faces-redirect=true"
-                                                             actionListener="#{userPlus.checkInItem(borrowedItem)}"
-                                                             style="width: 100px"
-                                                             />                                            
-                                        </h:column>
-                                    </h:dataTable>
-                                    
+
+                                            <h:column id="loneId">
+
+                                                <h:outputText value="#{borrowedItem.id}" class="borrowedItem"/>
+                                            </h:column>
+                                            <h:column id="username">
+
+                                                <h:outputText value="#{borrowedItem.user.username}" class="borrowedItem"/>
+                                            </h:column>
+                                            <h:column>
+
+                                                <h:outputText value="#{borrowedItem.item.title}" class="borrowedItem"/>
+                                            </h:column>
+                                            <h:column>
+                                                <h:commandButton value="Lämna ut" rendered="#{not(borrowedItem.collected)}"
+                                                                 action="userPlusPage?faces-redirect=true"
+                                                                 actionListener="#{userPlus.checkOutItem(borrowedItem)}"
+                                                                 style="width: 100px">
+
+                                                </h:commandButton>
+
+                                                <h:commandButton value="Lämna tillbaka" rendered="#{(borrowedItem.collected)}"
+                                                                 action="userPlusPage?faces-redirect=true"
+                                                                 actionListener="#{userPlus.checkInItem(borrowedItem)}"
+                                                                 style="width: 100px"
+                                                                 />                                            
+                                            </h:column>
+                                        </h:dataTable>
+
                                     </h:form>
                                 </div>
 
@@ -125,7 +99,7 @@
                                     <ul>
                                         <header>
                                             <br><h1>Här kan du lägga till böcker.</h1></br>
-                                           
+
                                         </header>
 
                                         <section>
@@ -151,7 +125,7 @@
                                                     <f:validator validatorId="CreatorsValidator" />
                                                 </h:inputText>
                                                 <h:message for="creators" showSummary="true" showDetail="false" class="message" /><br />
-                                                
+
                                                 <h:outputLabel for="publisher" value="Förlag" /><br />
                                                 <h:inputText id="publisher" value="#{userPlus.publisher}">
                                                     <f:validator validatorId="PublisherValidator" />
@@ -166,7 +140,7 @@
 
                                                 <h:outputLabel for="description" value="Beskrivning" /><br />
                                                 <h:inputTextarea id="description" value="#{userPlus.description}" 
-                                                style="min-width: 80%; max-width: 80%;min-height: 200px; max-height: 200px">
+                                                                 style="min-width: 80%; max-width: 80%;min-height: 200px; max-height: 200px">
                                                     <f:validator validatorId="DescriptionValidator" />
                                                 </h:inputTextarea>
                                                 <h:message for="description" showSummary="true" showDetail="false" class="message" /><br />
@@ -189,7 +163,7 @@
                                                 </h:inputText>
 
                                                 <h:message for="year_release" showSummary="true" showDetail="false" class="message"/><br />
-                                                
+
 
                                                 <h:outputLabel for="pageNum" value="Antal sidor" /> <br />
                                                 <h:inputText id="pageNum" value="#{userPlus.pageNum}">
@@ -197,42 +171,42 @@
                                                 </h:inputText>
 
                                                 <h:message for="pageNum" showSummary="true" showDetail="false" class="message"/><br />
-                                           
-                                                 <h:outputLabel for="editGenre" value="Genre" /><br />
-                                                 <h:selectOneMenu id="editGenreTable" value="#{userPlus.genre}" required="true" requiredMessage="Fältet är obligatoriskt." style="margin-bottom: 0.5em">
-                                                                    <f:selectItem  itemLabel="Välj genre" itemValue="" />
-                                                                    <f:selectItem  itemLabel="Antologier" itemValue="Antologier" />
-                                                                    <f:selectItem  itemLabel="Barn" itemValue="Barn" />
-                                                                    <f:selectItem  itemLabel="Deckare &amp; kriminalromaner" itemValue="DeckareKriminal" />
-                                                                    <f:selectItem  itemLabel="Dramatik" itemValue="Dramatik" />
-                                                                    <f:selectItem  itemLabel="Essäer &amp; Reportage" itemValue="EssReportage" />
-                                                                    <f:selectItem  itemLabel="Fantasy" itemValue="Fantasy" />
-                                                                    <f:selectItem  itemLabel="Historiska romaner" itemValue="HistoriskaRomaner" />
-                                                                    <f:selectItem  itemLabel="Klassiker" itemValue="Klassiker" />
-                                                                    <f:selectItem  itemLabel="Modern &amp; samtida skönlitteratur" itemValue="ModernSkönlitteratur" />
-                                                                    <f:selectItem  itemLabel="Poesi" itemValue="Poesi" />
-                                                                    <f:selectItem  itemLabel="Science fiction" itemValue="ScienceFiction" />
-                                                                    <f:selectItem  itemLabel="Serier &amp; Grafiska romaner" itemValue="Serier" />
-                                                                    <f:selectItem  itemLabel="Skräck- &amp; spökhistorier" itemValue="Skräck" />
-                                                                    <f:selectItem  itemLabel="Skönlitteratur" itemValue="Skonlitteratur" />
-                                                                    <f:selectItem  itemLabel="Thrillers" itemValue="Thriller" />
-                                                                    <f:selectItem  itemLabel="Äventyr" itemValue="Äventyr" />
-                                                                </h:selectOneMenu>
+
+                                                <h:outputLabel for="editGenreTable" value="Genre" /><br />
+                                                <h:selectOneMenu id="editGenreTable" value="#{userPlus.genre}" required="true" requiredMessage="Fältet är obligatoriskt." style="margin-bottom: 0.5em">
+                                                    <f:selectItem  itemLabel="Välj genre" itemValue="" />
+                                                    <f:selectItem  itemLabel="Antologier" itemValue="Antologier" />
+                                                    <f:selectItem  itemLabel="Barn" itemValue="Barn" />
+                                                    <f:selectItem  itemLabel="Deckare &amp; kriminalromaner" itemValue="DeckareKriminal" />
+                                                    <f:selectItem  itemLabel="Dramatik" itemValue="Dramatik" />
+                                                    <f:selectItem  itemLabel="Essäer &amp; Reportage" itemValue="EssReportage" />
+                                                    <f:selectItem  itemLabel="Fantasy" itemValue="Fantasy" />
+                                                    <f:selectItem  itemLabel="Historiska romaner" itemValue="HistoriskaRomaner" />
+                                                    <f:selectItem  itemLabel="Klassiker" itemValue="Klassiker" />
+                                                    <f:selectItem  itemLabel="Modern &amp; samtida skönlitteratur" itemValue="ModernSkönlitteratur" />
+                                                    <f:selectItem  itemLabel="Poesi" itemValue="Poesi" />
+                                                    <f:selectItem  itemLabel="Science fiction" itemValue="ScienceFiction" />
+                                                    <f:selectItem  itemLabel="Serier &amp; Grafiska romaner" itemValue="Serier" />
+                                                    <f:selectItem  itemLabel="Skräck- &amp; spökhistorier" itemValue="Skräck" />
+                                                    <f:selectItem  itemLabel="Skönlitteratur" itemValue="Skonlitteratur" />
+                                                    <f:selectItem  itemLabel="Thrillers" itemValue="Thriller" />
+                                                    <f:selectItem  itemLabel="Äventyr" itemValue="Äventyr" />
+                                                </h:selectOneMenu>
                                                 <h:message for="editGenreTable" showSummary="true" showDetail="false" class="message"/><br />
 
                                                 <h:outputLabel  value="Språk" /><br />
                                                 <h:selectOneMenu id="editLanguage" value="#{userPlus.language}" required="true" requiredMessage="Fältet är obligatoriskt." style="margin-bottom: 0.5em"> 
-                                                                    <f:selectItem itemLabel="Välj språk" itemValue=""/>
-                                                                    <f:selectItem itemLabel="Svenska" itemValue="swedish"/>
-                                                                    <f:selectItem itemLabel="Engelska" itemValue="english"/>
-                                                                    <f:selectItem itemLabel="Svenska" itemValue="swedish"/>
-                                                                    <f:selectItem itemLabel="Engelska" itemValue="english"/>
-                                                                    <f:selectItem itemLabel="Danska" itemValue="danish"/>
-                                                                    <f:selectItem itemLabel="Norska" itemValue="norwegian"/>
-                                                                    <f:selectItem itemLabel="Tyska" itemValue="germany"/>
-                                                                    <f:selectItem itemLabel="Franska" itemValue="french"/>
-                                                                    <f:selectItem itemLabel="Japanska" itemValue="japanese"/>
-                                                                </h:selectOneMenu>
+                                                    <f:selectItem itemLabel="Välj språk" itemValue=""/>
+                                                    <f:selectItem itemLabel="Svenska" itemValue="swedish"/>
+                                                    <f:selectItem itemLabel="Engelska" itemValue="english"/>
+                                                    <f:selectItem itemLabel="Svenska" itemValue="swedish"/>
+                                                    <f:selectItem itemLabel="Engelska" itemValue="english"/>
+                                                    <f:selectItem itemLabel="Danska" itemValue="danish"/>
+                                                    <f:selectItem itemLabel="Norska" itemValue="norwegian"/>
+                                                    <f:selectItem itemLabel="Tyska" itemValue="germany"/>
+                                                    <f:selectItem itemLabel="Franska" itemValue="french"/>
+                                                    <f:selectItem itemLabel="Japanska" itemValue="japanese"/>
+                                                </h:selectOneMenu>
                                                 <h:message for="editLanguage" showSummary="true" showDetail="false" class="message"/><br />
 
                                                 <h:outputLabel for="quantity" value="Kvantitet" /><br />
@@ -246,7 +220,7 @@
                                                                  actionListener="#{userPlus.createItem}" 
                                                                  /><br />
                                             </h:form>
-                                                                 
+
                                         </section>
                                     </ul>
                                 </div>
@@ -288,18 +262,18 @@
                                             <table width="100%">
                                                 <tr>
                                                     <td>
-                                                    <br><h1>Här kan du ändra böcker.</h1></br>
+                                                        <br><h1>Här kan du ändra böcker.</h1></br>
                                                     </td>
                                                     <td>
                                                         <br><h1><h:outputLabel value="Sök efter bok "/></h1>
-                                                        <h:inputText id="editSerch"  /> 
-                                                        <h:commandButton id="editSerchButton" value="Sök" />
-                                                    </br>
+                                                            <h:inputText id="editSerch"  /> 
+                                                            <h:commandButton id="editSerchButton" value="Sök" />
+                                                        </br>
                                                     </td>    
                                                 </tr>
                                             </table>
                                         </header>
-                                        
+
                                         <h:form id="editForm" style="background-color: lightgoldenrodyellow" rendered="#{userPlus.edit}">
                                             <section>
                                                 <h:form>
@@ -323,7 +297,7 @@
                                                         </tr> 
                                                         <tr>
                                                             <td>
-                                                                 <h:outputLabel for="editGenreTable" value="Genre" /><br />
+                                                                <h:outputLabel for="editGenreTable" value="Genre" /><br />
                                                                 <h:selectOneMenu id="editGenreTable" value="#{userPlus.editGenre}" style="margin-bottom: 0.5em">
                                                                     <f:selectItem  itemLabel="Antologier" itemValue="Antologier" />
                                                                     <f:selectItem  itemLabel="Barn" itemValue="Barn" />
@@ -342,11 +316,11 @@
                                                                     <f:selectItem  itemLabel="Thrillers" itemValue="Thriller" />
                                                                     <f:selectItem  itemLabel="Äventyr" itemValue="Äventyr" />
                                                                 </h:selectOneMenu>
-                                                                
+
                                                             </td>
                                                             <td>
-                                                                 <h:outputLabel for="editLanguageTable" value="Språk" /><br />
-                                                                 <h:selectOneMenu id="editLanguageTable"  value="#{userPlus.editLanguage}" style="margin-bottom: 0.5em"> 
+                                                                <h:outputLabel for="editLanguageTable" value="Språk" /><br />
+                                                                <h:selectOneMenu id="editLanguageTable"  value="#{userPlus.editLanguage}" style="margin-bottom: 0.5em"> 
                                                                     <f:selectItem itemLabel="Svenska" itemValue="swedish"/>
                                                                     <f:selectItem itemLabel="Engelska" itemValue="english"/>
                                                                     <f:selectItem itemLabel="Svenska" itemValue="swedish"/>
@@ -364,7 +338,7 @@
                                                                 <h:outputLabel for="editImage" value="Bild" /><br />
                                                                 <h:inputText id="editImage" value="#{userPlus.editImage}"/>
                                                             </td>
-                                                                
+
                                                             <td>
                                                                 <h:outputLabel for="editLoan_period" value="Låne Period" /><br />
                                                                 <h:inputText id="editLoan_period" value="#{userPlus.editLoan_period}"/>
@@ -379,9 +353,9 @@
                                                                 <h:outputLabel for="editYear_release" value="Årtal" /><br />
                                                                 <h:inputText id="editYear_release" value="#{userPlus.editYear_release}"/><br />
                                                             </td>
-                                                                        </tr>
+                                                        </tr>
                                                         <tr>
-                                                            
+
                                                             <td>
                                                                 <h:outputLabel for="editQuantity" value="Antal exemplar" /><br />
                                                                 <h:inputText id="editQuantity" value="#{userPlus.editQuantity}"/><br />
@@ -395,23 +369,23 @@
                                                             <td>
                                                                 <h:outputLabel for="editDescription" value="Beskrivning" /><br />
                                                                 <h:inputTextarea id="editDescription" value="#{userPlus.editDescription}" 
-                                                                style="max-width: 200px;min-width: 200px;max-height: 150px;min-height: 150px"/>
+                                                                                 style="max-width: 200px;min-width: 200px;max-height: 150px;min-height: 150px"/>
                                                             </td>
                                                         </tr>
                                                     </table>    
-                                                   <h:commandButton id="btnEdit" value="Ändra"
+                                                    <h:commandButton id="btnEdit" value="Ändra"
                                                                      action="#{userPlus.action(&quot;content_4&quot;)}"
                                                                      actionListener="#{userPlus.updateItem(userPlus.editId)}"/>
-                                                   <h:commandButton id="btnCancelEdit" value="avbryt"
-                                                                    action="#{userPlus.setEdit(false)}"
+                                                    <h:commandButton id="btnCancelEdit" value="avbryt"
+                                                                     action="#{userPlus.setEdit(false)}"
                                                                      /><br/>
-                                                   
+
                                                     <h:messages showSummary="true" showDetail="false" />
                                                 </h:form>
                                             </section>
                                         </h:form>
-                                        
-                                        
+
+
 
                                         <h:form>
 
@@ -423,47 +397,44 @@
                                                         </td>
                                                         <td width="40px">
                                                             <h:commandLink class="tab" value="Titel"  
-                                                            action="#{userPlus.action(&quot;content_4&quot;)}"/>
+                                                                           action="#{userPlus.action(&quot;content_4&quot;)}"/>
                                                         </td>
                                                         <td width="40px">
                                                             <h:commandLink class="tab" value="Författare" 
-                                                            action="#{userPlus.action(&quot;content_4&quot;)}"/>
+                                                                           action="#{userPlus.action(&quot;content_4&quot;)}"/>
                                                         </td>
                                                         <td width="40px">
                                                             <h:commandLink class="tab" value="Isbn" 
-                                                            action="#{userPlus.action(&quot;content_4&quot;)}" />
+                                                                           action="#{userPlus.action(&quot;content_4&quot;)}" />
                                                         </td>
                                                         <td width="40px">
                                                             <h:commandLink class="tab" value="År" 
-                                                            action="#{userPlus.action(&quot;content_4&quot;)}" />
+                                                                           action="#{userPlus.action(&quot;content_4&quot;)}" />
                                                         </td>
                                                     </tr>
                                                 </table>
                                             </h:form>
-                                            
+
                                             <table  class="tab">
-                                                    <tr>
-                                                        <td width="40px"></td>
-                                                        <td width="60px">Titel</td>
-                                                        <td width="60px">Författare</td>
-                                                        <td width="60px">Isbn</td>
-                                                        <td width="60px">Antal</td></tr>
-                                                </table>
+                                                <tr>
+                                                    <td width="40px"></td>
+                                                    <td width="60px">Titel</td>
+                                                    <td width="60px">Författare</td>
+                                                    <td width="60px">Isbn</td>
+                                                    <td width="60px">Antal</td></tr>
+                                            </table>
                                             <h:dataTable var="items" value="#{userPlus.all}" border="0" rowClasses="even,odd" width="100%">
-                                               
                                                 <h:column>
-                                                      
                                                     <table width="100%" class="itemTable">
                                                         <tr style="height: 60px">
                                                             <td>
-                                                                
                                                                 <h:graphicImage id="image" value="#{items.image}" class="listItem" width="30px" 
-                                                                height="30px"/>
+                                                                                height="30px"/>
                                                             </td>
                                                             <td width="500px"><h:commandLink id="listItemTitle" value="#{items.title}" 
-                                                                                                 style="color: black" action="#{search.redirectToBookPage()}" 
-                                                                                                 actionListener="#{SingleItem.bookListener(items, &quot;userPlusPage&quot;)}"/>
-                                                                
+                                                                                             style="color: black" action="#{search.redirectToBookPage()}" 
+                                                                                             actionListener="#{SingleItem.bookListener(items, &quot;userPlusPage&quot;)}"/>
+
                                                             </td>
                                                             <td>
 
@@ -480,51 +451,13 @@
                                                                 <h:commandLink id="editButton" value="Edit" 
                                                                                action="#{userPlus.action(&quot;content_4&quot;)}"
                                                                                actionListener="#{userPlus.prepareEdit(items)}"/><br/>
-                                                                
-                                                                
-                                                            
                                                                 <h:commandLink value="Remove"
                                                                                action="#{userPlus.action(&quot;content_4&quot;)}"
                                                                                actionListener="#{userPlus.removeItem(items.id)}" 
                                                                                /> 
                                                             </td>
-
                                                         </tr>       
-                                                    </table>
-                                                    <h:form>
-
-                                                        <div id="editForm" style="display: none;background-color: lightgoldenrodyellow">
-                                                            <section>
-                                                                <h:form>
-                                                                    <h:outputLabel for="editId" value="ID" /><br />
-                                                                    <h:inputText id="editId" disabled="true" value="#{userPlus.editId}"/><br />
-                                                                    <h:outputLabel for="editTitle" value="Title" /><br />
-                                                                    <h:inputText id="editTitle" value="#{userPlus.editTitle}"/><br />
-                                                                    <h:outputLabel for="editCreators" value="Creators" /><br />
-                                                                    <h:inputText id="editCreators" value="#{userPlus.editCreators}"/><br />
-                                                                    <h:outputLabel for="editImage" value="Image" /><br />
-                                                                    <h:inputText id="editImage" value="#{userPlus.editImage}"/><br />
-                                                                    <h:outputLabel for="editDescription" value="Description" /><br />
-                                                                    <h:inputText id="editDescription" value="#{userPlus.editDescription}"/><br />
-                                                                    <h:outputLabel for="editLoan_period" value="Loan period" /><br />
-                                                                    <h:inputText id="editLoan_period" value="#{userPlus.editLoan_period}"/><br />
-                                                                    <h:outputLabel for="editFee" value="Fee" /><br />
-                                                                    <h:inputText id="editFee" value="#{userPlus.editFee}"/><br />
-                                                                    <h:outputLabel for="editYear_release" value="Year released" /><br />
-                                                                    <h:inputText id="editYear_release" value="#{userPlus.editYear_release}"/><br />
-                                                                    <h:outputLabel for="editGenre" value="Genre" /><br />
-                                                                    <h:inputText id="editGenre" value="#{userPlus.editGenre}"/><br />
-                                                                    <h:outputLabel for="editLanguage" value="Language" /><br />
-                                                                    <h:inputText id="editLanguage" value="#{userPlus.editLanguage}"/><br />
-                                                                    <h:outputLabel for="editQuantity" value="Quantity" /><br />
-                                                                    <h:inputText id="editQuantity" value="#{userPlus.editQuantity}"/><br />
-                                                                    <h:commandButton id="btnEdit" value="Ändra"
-                                                                    actionListener="#{userPlus.updateItem(userPlus.editId)}" /><br />
-                                                                    <h:messages showSummary="true" showDetail="false" />
-                                                                </h:form>
-                                                            </section>
-                                                        </div>
-                                                    </h:form>
+                                                    </table>                                                    
                                                 </h:column>
                                             </h:dataTable>
                                         </h:form>
