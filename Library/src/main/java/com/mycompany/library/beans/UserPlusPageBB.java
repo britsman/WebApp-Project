@@ -173,9 +173,10 @@ public class UserPlusPageBB implements Serializable {
         if(editQuantity > b.getQuantity() && b.getQuantity() == 0){
             QueryProccessor query = WebLib.INSTANCE.getQueryProccessor();
             ReservedItem tempReserved = query.findReservedItem(b);
-            while(tempReserved != null && editQuantity > 0){
+            while(tempReserved != null && editQuantity > 0){                   
+                tempReserved.getItem().setQuantity(editQuantity);
                 tempReserved.firstInQueBorrow();
-                tempReserved = query.findReservedItem(b);
+                tempReserved = query.findReservedItem(tempReserved.getItem());
                 editQuantity--;
             }                              
             b.setQuantity(editQuantity);
