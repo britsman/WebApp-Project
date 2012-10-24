@@ -40,8 +40,10 @@ public class EmailBean implements Serializable{
         for (int i = 0; i < temp.size(); i++) {
             Long lastDay = (temp.get(i).getLoanDate().getTime()
             + (temp.get(i).getItem().getLoan_period() * milliPerDay));
-            if ((lastDay - tempDate.getTime()) / milliPerDay < 2) {
-                booksToReturn.add(temp.get(i).getItem().getTitle() + "\n");
+            Long diff = (lastDay - tempDate.getTime()) / milliPerDay;
+            if (diff <= 2 && diff >= 0) {
+                booksToReturn.add(temp.get(i).getItem().getTitle() + " Ska in " +
+                new Date(lastDay));
             }
         }
         if(booksToReturn.size() > 0) {
@@ -51,7 +53,7 @@ public class EmailBean implements Serializable{
                 msg.setFrom(new InternetAddress("noreply@onlinebiblo.se", "Online-Biblioteket"));
                 Address replyTo[] = {new InternetAddress("noreply@onlinebiblo.se")};
                 msg.setReplyTo(replyTo);
-                msg.setText("Inom två dagar så måste du lämna in: " + booksToReturn);
+                msg.setText("" + booksToReturn + "");
                 Transport.send(msg);
             } catch (MessagingException | UnsupportedEncodingException e) {
                 System.err.println("Send reminder error: " + e.getMessage());
@@ -73,7 +75,7 @@ public class EmailBean implements Serializable{
                 int fee = (int) ((tempDate.getTime() - lastDay) / milliPerDay)
                         * temp.get(i).getItem().getFee();
                 lateBooks.add(temp.get(i).getItem().getTitle()
-                        + " är försenad. bötern är: " + fee + "\n");
+                        + " Böter: " + fee);
                 totalFee += fee;
             }
         }
@@ -85,7 +87,7 @@ public class EmailBean implements Serializable{
                 Address replyTo[] = {new InternetAddress("noreply@onlinebiblo.se")};
                 msg.setReplyTo(replyTo);
                 msg.setText("Dessa böcker är försenade: " + lateBooks
-                        + "Den totala bötern är: " + totalFee);
+                        + " Den totala bötern är: " + totalFee);
                 Transport.send(msg);
             } catch (MessagingException | IOException e) {
                 System.err.println("Send fee error: " + e.getMessage());
